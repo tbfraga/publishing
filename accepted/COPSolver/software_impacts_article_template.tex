@@ -1,0 +1,197 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{titlesec}
+\usepackage{tabu}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\newlist{selectlist}{itemize}{2}
+\setlist[selectlist]{label=$\square$,leftmargin=*,noitemsep,topsep=0pt}
+
+\usepackage{lmodern}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+ 
+\urlstyle{same}
+
+% Set up the section label formatting
+\titleformat{\section}[block]{\hspace{1em}\bfseries}{\thesection.}{0.5em}{} 
+\titleformat{\subsection}[block]{\hspace{1em}}{\thesubsection}{0.5em}{}
+
+
+
+
+
+%% 
+%% Copyright 2007, 2008, 2009 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+
+%\documentclass[preprint,12pt, a4paper]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+%\usepackage{amssymb}
+%\usepackage{hyperref}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%\usepackage{lineno}
+
+%\journal{Software Impacts}
+
+\begin{document}
+\noindent
+{\Large {\textbf{\textit {Software Impacts} article template}}} \textit{Version 2 (July 2021)}
+\vskip0.5cm
+\noindent
+\textbf{Before you complete this template}, a few important points to note:
+\begin{itemize}
+\item[$\bullet$]{This template is for an Original Software Publication (OSP). If you are submitting an update to a software article that has already been published in \textit{Software Impacts}, please use the \underline{software update template}.}
+\item[$\bullet$]{The format of a software article is very different to a traditional research article. To help you write yours, we have created this template. \textbf{\textit{Software Impacts} will only consider articles submitted using this template.}}
+\item[$\bullet$]{It is mandatory to {\bf publicly share the code/software} referred to in your software article. You’ll find information on our software sharing criteria in the \textit{Software Impacts} \href{https://www.elsevier.com/journals/software-impacts/2665-9638/guide-for-authors}{\underline{Guide for Authors}}.}  
+\item[$\bullet$]{It’s important to consult the \href{https://www.elsevier.com/journals/software-impacts/2665-9638/guide-for-authors}{\underline{Guide for Authors}} when preparing your manuscript; it highlights mandatory requirements and is packed with useful advice.}
+\end{itemize}
+\vskip0.5cm
+\noindent
+\textbf{Still got questions?}
+\begin{itemize}
+\item[$\triangleright$]{Email our editorial team at \href{mailto:Software.Impacts@elsevier.com}{\underline{Software.Impacts@elsevier.com}}}
+\end{itemize}
+
+\noindent
+Now you are ready to fill in the template below. As you complete each section, please carefully read the associated instructions. All sections are mandatory, unless marked optional.\newline
+\vskip0.5cm
+\begin{center}
+\colorbox{yellow}{\textbf{ \textit{ Once you have completed the template, delete this line and everything above it before} }}
+\colorbox{yellow}{\textbf{ \textit{ submitting your article. In addition, please delete the instructions in the template}}} 
+\colorbox{yellow}{\textbf{ \textit{  (the text written in italics).}}}
+\colorbox{yellow}{- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - }
+\end{center}
+
+
+\noindent
+\textbf{\textit{Title / name of your software}}
+\vskip0.5cm
+\noindent
+\textbf{\textit{Names of authors / main developers (incl. affiliations, addresses, email)}}\\
+
+\noindent
+\textbf{Abstract}\\
+\textit{(ca. 100 words)}
+\vskip0.5cm
+
+\noindent
+\textbf{Keywords}\\
+\textit{(maximum of six)}
+\vskip0.5cm
+\newpage
+\noindent
+\textbf{Code metadata}\\
+\textit{Please replace the italicized text in the right column with the correct information about your code/software and leave the left column untouched.}\\
+
+%\begin{table}[!h]
+\noindent
+\begin{tabular}{|l|p{6.5cm}|p{9.5cm}|}
+\hline
+\textbf{Nr.} & \textbf{Code metadata description} & \textbf{Please fill in this column} \\
+\hline
+C1 & Current code version & \textit{For example: v42} \\
+\hline
+C2 & Permanent link to code/repository used for this code version & \textit{For example: \underline{$https://github.com/mozart/mozart2$}} \\
+\hline
+C3  & Permanent link to Reproducible Capsule & \\
+\hline
+C4 & Legal Code License   & \textit{All software and code must be released under one of the pre-approved licenses listed in the \href{https://www.elsevier.com/journals/software-impacts/2665-9638/guide-for-authors}{\underline{Guide for Authors}}, such as Apache License, GNU General Public License (GPL) or MIT License. Write the name of the license you’ve chosen here.} \\
+\hline
+C5 & Code versioning system used & \textit{For example svn, git, mercurial, etc. (put ‘none’ if none used)} \\
+\hline
+C6 & Software code languages, tools, and services used & \textit{For example C++, python, r, MPI, OpenCL, etc. }\\
+\hline
+C7 & Compilation requirements, operating environments \& dependencies & \\
+\hline
+C8 & If available Link to developer documentation/manual & \textit{For example: \underline{$http://mozart.github.io/documentation/$} }\\
+\hline
+C9 & Support email for questions & \\
+\hline
+\end{tabular}\\
+%\caption{Code metadata (mandatory)}
+%\label{} 
+%\end{table}
+\vskip0.5cm
+\noindent
+\textit{\textbf{Body of the article} (excluding metadata, tables, figures, references)}\\
+\textit{You are welcome to write up to three pages of text that describes your software. Include points such as:}
+\noindent
+\begin{itemize}
+\item \textit{A short description of the high-level functionality and purpose of the software for a diverse, non-specialist audience}
+\item \textit{An Impact overview that illustrates the purpose of your software and its achieved results. For example:}
+{\it \begin{itemize}
+\item[$\circ$]Any new research questions that can be pursued as a result of your software.
+\item[$\circ$]In what way, and to what extent, your software improves the pursuit of existing research questions.
+\item[$\circ$]Any ways in which your software has changed the daily practice of its users.
+\item[$\circ$]How widespread the use of the software is within and outside the intended user group.
+\item[$\circ$]How the software is being used in commercial settings and/or how it has led to the creation of spin-off companies.
+\end{itemize}}
+\vskip -0.7cm
+\textit{\item Mentions (if applicable) any ongoing research projects using your software. }
+\textit{\item Limitations and future improvements/applications of your software}
+\textit{\item List of all scholarly publications enabled by your software.}
+\end{itemize}
+\vskip0.3cm
+\textbf{Acknowledgements}\\
+\textit{Optional. You can use this section to acknowledge colleagues who do not qualify as a co-author but helped you in some way. }\\
+
+\noindent
+\textbf{References}\\
+\textit{If the software repository you used supplied a DOI, please add a reference for your software here.}\\
+
+\noindent
+\textit{\textbf{Illustrative examples}}\\
+\textit{Optional. You may submit an explanatory video or screencast that will appear to the right of your published article on ScienceDirect. Only one MP4 formatted video (max. size 150MB) is possible per article and this should be uploaded as a single supplementary file with your submission. Recommended video dimensions are 640 x 480 at a maximum of 30 frames / second. %Prior to submission, please test and validate your .mp4 file at  \url{http://elsevier-apps.sciverse.com/GadgetVideoPodcastPlayerWeb/verification}. This tool will display your video in exactly the same way as it will appear on ScienceDirect.
+}
+
+\vskip 1.5cm
+\begin{center}
+{\huge \it Reminder: Before you submit, please delete all 
+the instructions in this document (the text in italics), including this paragraph.\\
+Thank you!}
+\end{center}
+
+
+\end{document}
+%\endinput
+%%
+%% End of file `SoftwareX_article_template.tex'.

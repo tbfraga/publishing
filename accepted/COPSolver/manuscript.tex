@@ -1,0 +1,167 @@
+\documentclass[11pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{titlesec}
+\usepackage{tabu}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\newlist{selectlist}{itemize}{2}
+\setlist[selectlist]{label=$\square$,leftmargin=*,noitemsep,topsep=0pt}
+
+\usepackage{lmodern}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+ 
+\urlstyle{same}
+
+% Set up the section label formatting
+\titleformat{\section}[block]{\hspace{1em}\bfseries}{\thesection.}{0.5em}{} 
+\titleformat{\subsection}[block]{\hspace{1em}}{\thesubsection}{0.5em}{}
+
+
+
+
+
+%% 
+%% Copyright 2007, 2008, 2009 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+
+%\documentclass[preprint,12pt, a4paper]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+%\usepackage{amssymb}
+%\usepackage{hyperref}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%\usepackage{lineno}
+
+%\journal{Software Impacts}
+
+\begin{document}
+\noindent
+\textbf{COPSolver}
+\vskip0.5cm
+\noindent
+\textbf{Tatiana Balbi Fraga, Federal University of Pernambuco, Avenida Marielle
+Franco, Bairro Nova Caruaru, Caruaru, 55014-900, PE, Brazil, tatiana.balbi@ufpe.br}\\
+
+\noindent
+\textbf{Abstract}\\
+This paper presents the software COPSolver, originally developed to solve decision and/or optimization problems, especially from the combinatory optimization area. The first version of COPSolver has an application of the Fraga's exact method for solving the multi-product batch processing time maximization problem. This paper address the application of the current version of COPSolver and the next steps that will be implemented for software development and applications.
+\vskip0.5cm
+
+\noindent
+\textbf{combinatorial optimization problem; exact method; multi-product batch problem; processing time maximization.}\\
+\vskip0.5cm
+\newpage
+\noindent
+\textbf{Code metadata}\\
+
+%\begin{table}[!h]
+\noindent
+\begin{tabular}{|l|p{6.5cm}|p{9.5cm}|}
+\hline
+\textbf{Nr.} & \textbf{Code metadata description} & \textbf{Please fill in this column} \\
+\hline
+C1 & Current code version & COPSolver\_1.0-1 \\
+\hline
+C2 & Permanent link to code/repository used for this code version & \underline{$https://github.com/tbfraga/COPSolver$} \\
+\hline
+C3  & Permanent link to Reproducible Capsule & \underline{$https://github.com/tbfraga/COPSolver$}\\
+\hline
+C4 & Legal Code License   & Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International Public License \\
+\hline
+C5 & Code versioning system used & git \\
+\hline
+C6 & Software code languages, tools, and services used & c++, CodeBlocks, LINGO, Ubuntu 22.04.1, GitHub\\
+\hline
+C7 & Compilation requirements, operating environments \& dependencies & elementary OS (can be adapted to Ubuntu) \\
+\hline
+C8 & If available Link to developer documentation/manual & \underline{$http://tbfraga.github.io/COPSolver/documentation/$} \\
+\hline
+C9 & Support email for questions & tbfraga@proton.me\\
+\hline
+\end{tabular}\\
+%\caption{Code metadata (mandatory)}
+%\label{} 
+%\end{table}
+\vskip0.5cm
+\noindent
+
+A decision problem arises when we need to choose an option from a set of known options so that the chosen decision meets a set of pre-established constraints. This problem is configured as an optimization problem when the decision taken must, in addition to meeting the constraints, be the one that best contributes to the achievement of a given group of objectives.
+
+Decision and/or optimization problems are frequent in industrial and organizational environments, as well as in our daily lives. Usually the resolution of these problems brings great benefits, such as improving the efficiency of industrial processes, reducing costs, increasing productivity, increasing the useful life of equipments, helping to make better choices, bringing better cost-effectiveness, improving customer satisfaction, etc.
+
+Given the enormous variety of decision-making and/or optimization problems and the complexity of such problems, the scientific literature brings numerous scientific materials that deal with the various problems and propose different solution methodologies for these problems.
+
+Fraga et al. (2023) address the problem of maximizing the processing time of batches of various products. This problem arises in production process operations where a set of products are processed simultaneously on the same machine, but with production rates that can be different for each product. There is a production limit for each product and also for the products group, as well as a limit for the batch processing time. The problem consists of defining the maximum processing time of the multi-product batch respecting the known production limits. The authors also present an exact analytical method based on the batch processing time partitioning. This method is extremely efficient, proposing solutions very quickly and with low computational cost. This method was applied using COPSolver.
+
+The COPSolver software was (and is being) developed by Dr. Tatiana Balbi Fraga with the purpose of solving several decision and optimization problems, mainly combinatory optimization problems, in the most efficient and robust way possible.
+
+The first version of the software, COPSolver\_1.0-1, applies the analytical solution method developed by Fraga et al. (2023) to solve the multi-product batch processing time maximization problem. COPSolver package also contains the MBPTM.lng file, which is a code written in LINGO language to solve the model proposed by Fraga et al. (2023) for the multi-product batch processing time maximization problem. When run, COPSolver automatically generates a data.ldt file to be used with this LINGO code. However, the MBPTM.lng file can only be used through the LINGO software. More details about the LINGO software are available at https://www.lindo.com.
+
+As future works, we will be applying COPSolver to assist in planning the production of extruders, in companies of the plastic bag production sector.
+
+We will also include new solution methods for other decision and/or optimization problems. As the multi-product batch processing time maximization problem considers the planning period of just one day, in the next solver version, we will be considering a multi-period scenario.
+
+Professor Fraga, author of this paper, and, more generally, her research group GAMOS (Group of Analysis, Modeling and Optimization of Systems), have developed many works focused on the identification, modeling and solution/optimization of real problems in industrial/organizational environments. Therefore, the development of COPSolver will be done in conjunction with the development of these works. Our intention is that the software can, in the near future, cover a wide range of methodologies to solve real problems and standard problems found in the literature. Thus, COPsolver can be used to solve real problems, or teaching and research. Later we intend to develop a pattern identification method (possibly based on neural networks) to recognize model patterns and solve different problems automatically.
+
+In the future, we will also be developing extension projects to train micro and small companies to use COPSolver. We hope that COPSolver can help to improve several processes and, in particular, the productive and administrative processes of micro and small companies, offering them a tool to improve their competitive potential.
+
+\vskip0.3cm
+\noindent
+\textbf{Acknowledgements}\\
+Huge thanks to the teams responsible for developing elementary OS, as well as google translator, gummi, CodeBlocks, LINGO, GitHub, gcc, c++, and TeXLive libraries. Without the availability of these tools, COPSolver could never have been developed. I am also very grateful to my co-workers Regilda da Costa e Silva Menêzes and Marcos Luiz Henrique for their constant support to the projects I develop and to my dear advisees Aldênia Karla Barrêto Candido, Lays Cristiane Cavalcante de Alcântara Aguiar, Edwedja de Lima Silva and Ítalo Ruan Barbosa de Aquino, among others, for having participated so enthusiastically in the projects that gave rise to this software, in particular for having made the effort to describe real processes in such detail. I would also like to thank the company in the plastic bag sector and other companies that made the studies possible as well as the identification of the new optimization problem addressed in the first version of COPSolver. \\
+
+\noindent
+\textbf{References}\\
+Fraga, T.B., Aquino, Í.R.B. and Menêzes, R.C.S. (2023). Multi-product Batch Processing Time Maximization
+Problem. Manuscript submitted for publication.  \\
+
+\noindent
+\textit{\textbf{Illustrative examples}}\\
+\textit{Optional. You may submit an explanatory video or screencast that will appear to the right of your published article on ScienceDirect. Only one MP4 formatted video (max. size 150MB) is possible per article and this should be uploaded as a single supplementary file with your submission. Recommended video dimensions are 640 x 480 at a maximum of 30 frames / second. %Prior to submission, please test and validate your .mp4 file at  \url{http://elsevier-apps.sciverse.com/GadgetVideoPodcastPlayerWeb/verification}. This tool will display your video in exactly the same way as it will appear on ScienceDirect.
+}
+
+\vskip 1.5cm
+
+\end{document}
+%\endinput
+%%
+%% End of file `SoftwareX_article_template.tex'.
