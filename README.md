@@ -9,3 +9,7 @@ Under this license, it is allowed to download and share the documents made avail
 The full license can be found in the LICENSE.md document available in this directory, or through the website: https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.
 
 The license adopted may be modified (only by me) as long as this does not cause any harm to the authors.
+
+This directory contains manuscripts that are being submitted for publication. 
+All content presented in this directory is original. Therefore, the intellectual property as well as the copyright belongs to the authors expressly cited in the works. 
+Please respect the rights of the authors. If you use any information or ideas obtained from this material, please cite the source correctly.
