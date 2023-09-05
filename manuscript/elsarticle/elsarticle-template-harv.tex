@@ -17,18 +17,7 @@
 %% Template article for Elsevier's document class `elsarticle'
 %% with harvard style bibliographic references
 
-\documentclass[authoryear,manuscript,12pt]{elsarticle}
-\usepackage{setspace}
-\doublespacing
-
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\newtheorem{theorem}{Theorem}
-\newtheorem{corollary}{Corollary}[theorem]
-\newtheorem{lemma}[theorem]{Lemma}
-
-%% The `ecrc' package must be called to make the CRC functionality available
-%\usepackage{ecrc}
+\documentclass[preprint,12pt,authoryear]{elsarticle}
 
 %% Use the option review to obtain double line spacing
 %% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
@@ -56,11 +45,12 @@
 %% for the whole article with \linenumbers.
 %% \usepackage{lineno}
 
-%\journal{Computers \& Industrial Engineering}
+\journal{Nuclear Physics B}
 
 \begin{document}
 
 \begin{frontmatter}
+
 %% Title, authors and addresses
 
 %% use the tnoteref command within \title for footnotes;
@@ -86,7 +76,7 @@
 %%            country={}}
 %% \fntext[label3]{}
 
-\title{COPSolver: open source software for solving combinatorial optimization and other decision problems - library for solving the multi-product batch processing time maximization problem}
+\title{}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -104,29 +94,48 @@
 %%             state={},
 %%             country={}}
 
-%\affiliation[label1]{
-%			 organization={Centro Acadêmico do Agreste - Universidade Federal de Pernambuco},
-%             addressline={Avenida Marielle Franco, Bairro Nova Caruaru},
-%             city={Caruaru},
-%             postcode={55014-900},
-%             state={PE},
-%             country={Brasil} }
+\author{}
 
+%\affiliation{organization={},%Department and Organization
+%            addressline={}, 
+ %           city={},
+ %           postcode={}, 
+ %           state={},
+ %           country={}}
+
+\begin{abstract}
+%% Text of abstract
+
+\end{abstract}
+
+%%Graphical abstract
+\begin{graphicalabstract}
+%\includegraphics{grabs}
+\end{graphicalabstract}
 
 %%Research highlights
 \begin{highlights}
-\item decision and optimization problem solving software;
-\item very efficient to solve the MBPTM problem;
-\item important tool for inventory control in some industries;
-\item can also be used for teaching and research;
-\item open source software.
+\item Research highlight 1
+\item Research highlight 2
 \end{highlights}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
 
 \end{frontmatter}
 
 %% \linenumbers
 
 %% main text
+\section{}
+\label{}
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
@@ -143,6 +152,15 @@
 
 %% else use the following coding to input the bibitems directly in the
 %% TeX file.
+
+\begin{thebibliography}{00}
+
+%% \bibitem[Author(year)]{label}
+%% Text of bibliographic item
+
+\bibitem[ ()]{}
+
+\end{thebibliography}
 \end{document}
 
 \endinput
