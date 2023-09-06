@@ -23,6 +23,8 @@
 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{rotating}
+\usepackage{multirow}
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -158,7 +160,26 @@ multiproduct batch \sep processing time maximization \sep mathematical model \se
 \section{Introduction}
 \label{sec:intro}
 
-The term muti-product batch is usually applied to designate a type of industrial process in which the productions of different products batches share the same production facilities, but such facilities can process only a single products batch (or a limited set of products batches) at a time. The scientific literature address some different problems related to such industrial enviroment. Among these problems we have the multi-product batch plant design problem witch is concerned to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998). Another important problem is the multi-product batch scheduling (MPBS), in which it is necessary to determine the production sequence of the products and the ideal batch size for each product based on the known demand \citep{Eilon1985}. Since a single product (or a limited set of products) is (are) processed at a time, it is necessary that the quantity produced of each product is sufficient to meet the demand during the period in which other products batches are being processed. Also, the solution must be determined in such a way that both setup and storage costs are minimized \citep{Eilon1985, Omega1993, LiuEtAl2020}. Some cientific works impose additional constraints on the MPBS problem - such as release times and due dates for each products batch production, and sequencing constraints due to mismatched product colors sequences - and focus on other goals - such as optimize customer satisfaction and/or the plant performance \citep{MendezEtAll2000, ShiEtAll2017}. Also, the cientific works consider MPBS problems within different manufacturing plants - such as single unit or serial flowshop plant, in which all products follow a linear flow through the production stages; parallel plants in which production units of the same type are arranged in parallel, forming each production stage \citep{MendezEtAll2000, ShiEtAll2017}; and networked processes, in wich production units are not arranged in lines, and the connection between the units may or may not exist so that the production paths in the flowshop network can be different for each product and the passing of previous batch can be possible so that the final sequence of the production at the last stage units can be different from the initial sequence \citep{KimEtAl1996}. In parallel MPBS as well as in networked processes, it can also be necessary to define in which units each product will be processed. 
+The term muti-product batch is usually applied to designate an intermittent production system in which different products batches are processed sharing the same production facilities, but in a way that such facilities process only one batch at a time. The scientific literature address some different problems related to such industrial enviroment. Among these problems we have the multi-product batch plant design witch is concerned to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998). The less complex multi-product batch problem is the batches sizing. Since a single products batch is processed at a time, it is necessary that the batches are dimensioned in such a way that the quantity produced of each product is sufficient to meet the demand during the period in which other products batches are being processed. Another important problem, however a little more complex, is the multi-product batch scheduling (MPBS), in which it is necessary to determine the ideal batch size for each product and also the production sequence of the products batches based on the known demand \citep{Eilon1985}. Here, the solution must be determined in such a way that both setup and storage costs are minimized \citep{Eilon1985, Omega1993, LiuEtAl2020}. Some cientific works impose additional constraints on the MPBS problem - such as release times and due dates for each products batch production, and sequencing constraints due to mismatched product colors sequences - and focus on other goals - such as optimize customer satisfaction and/or the plant performance \citep{MendezEtAll2000, ShiEtAll2017}. Also, the cientific works consider MPBS problems within different manufacturing plants - such as single unit or serial flowshop plant, in which all products follow a linear flow through the production stages; parallel plants in which production units of the same type are arranged in parallel, forming each production stage \citep{MendezEtAll2000, ShiEtAll2017}; and networked processes, in wich production units are not arranged in lines, and the connection between the units may or may not exist so that the production paths in the flowshop network can be different for each product and the passing of previous batch can be possible so that the final sequence of the production at the last stage units can be different from the initial sequence \citep{KimEtAl1996}. In parallel MPBS as well as in networked processes, it can also be necessary to define in which units each product will be processed. 
+
+\begin{sidewaystable}[h]
+\begin{center}
+\begin{small}
+\begin{tabular}[c]{|c|c|c|c|c|c|c|c|c|}
+reference & problem & period & stage & units & int. stor. & constraints & objectives & method \\
+\hline
+\multirow{2}{*}{\cite{Eilon1985}} & \multirow{2}{*}{scheduling} & \multirow{2}{*}{single} & \multirow{2}{*}{single} & \multirow{2}{*}{single} & & & minimize total setup;  \\
+ & & & & & & & minimize daily holding cost;  \\
+\multirow{3}{*}{\cite{ShiEtAll2017}} & \multirow{3}{*}{scheduling} & \multirow{3}{*}{single} & non-identical & \multirow{3}{*}{unlimited} & release time \\
+ & & & & parallel & & due date \\
+ & & & & & \\
+ & & & & \\
+\end{tabular}
+\label{tab:MBPTax}
+\caption{Multi-product batch problems taxonomy}
+\end{small}
+\end{center}
+\end{sidewaystable}
 
 In all papers presented above, each batch contains only one product type, and each machine can process only one batch (or product type) at a time. \cite{LiEtAl2022} deal with a PMPBS problem involving incompatible families with different job sizes and capacity constraints. In this problem, solutions are accepted in which two or more batches are processed simultaneously on the same machine. However, there are no production limitations for the production of each product group. The paper of \cite{LiEtAl2022} also presente an extensive literature review on production batch scheduling problems. Other important works deal with the problem of a multi-product batch plant design (MPBPD). In this case the problem is to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998).
 
