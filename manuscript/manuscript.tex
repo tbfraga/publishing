@@ -29,6 +29,10 @@
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,shapes.misc,shapes.symbols,arrows.meta,graphs,fit,positioning,shadows}
+
 %% The `ecrc' package must be called to make the CRC functionality available
 %\usepackage{ecrc}
 
@@ -160,17 +164,69 @@ multiproduct batch \sep processing time maximization \sep mathematical model \se
 \section{Introduction}
 \label{sec:intro}
 
-The term multi-product batch production is usually applied to designate an intermittent production system in which batches of different products and sizes are processed one at a time, sharing the same production facilities. A multi-product batch plant basically consists of one or more units, grouped into one or more stages, and possibly, intermediate storage locations. At each stage some distinct operations are performed and the batches are processed sequentially over the stages. However, the plant layout can take on different formats, such as: single unit; serial flowshop plant, in which all products follow a linear flow through the production stages; parallel plants in which production units of the same type are arranged in parallel, forming each production stage \citep{MendezEtAll2000, ShiEtAll2017}; and networked processes, in which production units are not arranged in lines, and the connection between the units may or may not exist so that the production paths in the flowshop network can be different for each product and the passing of previous batch can be possible so that the final sequence of the production at the last stage units can be different from the initial sequence \citep{KimEtAl1996}.
+The term multi-product batch production is usually applied to designate an intermittent production system in which batches of different products and sizes are processed one at a time, sharing the same production facilities. A multi-product batch plant basically consists of one or more units, grouped into one or more stages, and possibly, intermediate storage locations. At each stage some distinct operations are performed and the batches are processed sequentially over the stages (serial batching). As stated by \cite{PetkovMaranas1998} the batch plant can operate under a single-product campaign (SPC) production mode, where all the batches of a given product are manufactured before production of the next product begins, or under mixed-product campaign (MPC) production modes where more batches are produced per unit time at the expense of increased changeover times and cleanup costs. Also the plant layout can take on different formats, such as: single unit, where all batches are processed at a single stage; serial flowshop plant, in which all products follow a linear flow through the production stages; parallel plants in which production units of the same type are arranged in parallel, forming each production stage \citep{MendezEtAll2000, ShiEtAll2017}; and networked processes, in which units are not arranged in lines, and the connection between the units may or may not exist so that the production paths in the flowshop network can be different for each product and the passing of previous batch can be possible so that the final sequence of the production at the last stage units can be different from the initial sequence \citep{KimEtAl1996}.
 
-The scientific literature address many different problems related to such industrial enviroment, including the design, sizing, scheduling and balancing problems. The multi-product batch plant design problem is concerned to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998). The configuration of the plant basically consists of defining how many stages, how many units at each stage, and what capacity for intermediate storages will be necessary, as well as the best factory layout. 
+The scientific literature address many different problems related to such industrial enviroment, including the design, planning, sizing, scheduling and balancing problems. The multi-product batch plant design problem is concerned to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998). The configuration of the plant basically consists of defining the number of stages, the number of units and their capacity per stage, and the capacity for intermediate storages, as well as the best factory layout. 
 
-Since a single products batch is processed at a time, it is also necessary that the batches are dimensioned in such a way that the quantity produced of each product is sufficient to meet the demand during the period in which other products batches are being processed. This problem is named multi-product batch sizing.
+The multi-product batch planning problem is basically determining the needs of materials and resources based on known demands and demand forecasts. 
 
-We also have the multi-product batch scheduling (MPBS) problems, in which it is necessary to determine the ideal batch size for each product and also the production sequence of the products batches based on the known demand \citep{Eilon1985}. Here, the solution must be determined in such a way that both setup and storage costs are minimized \citep{Eilon1985, Omega1993, LiuEtAl2020}. Some cientific works impose additional constraints on the MPBS problem - such as release times and due dates for each products batch production, and sequencing constraints due to mismatched product colors sequences - and focus on other goals - such as optimize customer satisfaction and/or the plant performance \citep{MendezEtAll2000, ShiEtAll2017}. Also, some cientific works consider MPBS problems within different layouts and multiperiod scenario. In parallel MPBS as well as in networked processes, it can also be necessary to define in which units each batch will be processed, and constraints that limit the units that can process each batch can also be imposed.
+Since a single batch is processed at a time, it is necessary that the batches are dimensioned in such a way that the quantity produced of each product is sufficient to meet the demand during the period in which other batches are being processed \citep{Eilon1985}. This problem is named multi-product batch sizing. \cite{Eilon1985} gives a detailed explanation of the inadequacy of the use of the well-know EBQ (economic batch quantity) square-root formula for multi-product batch production and \cite{LiuEtAl2020} present a mixed-integer quadratic programming model and an exact optimization algorithm for a multi-stage multi-product s-batch sizing problem in a networked plant of a steel industry (Fig. \ref{fig:networkdPlantSteelIndustry}). 
+
+\begin{figure}[h]
+\label{fig:networkdPlantSteelIndustry}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily,every label/.append style={font=\small\sffamily,align=center}]
+
+\node[cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIP00){};
+\node[rectangle, draw, right=0.5cm of WIP00, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unit00){};
+\node[draw,dashed,rounded corners,fit=(WIP00) (unit00),inner sep=25pt,label={above:{stage (0,0)}}](stage00){};
+
+\node[above right=2cm and 4cm of WIP00, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIP11){};
+\node[rectangle, draw, right=0.5cm of WIP11, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unit11){};
+\node[draw,dashed,rounded corners,fit=(WIP11) (unit11),inner sep=25pt,label={above:{stage (1,1)}}](stage11){};
+
+\draw[-latex] (stage00.east) -- (stage11.west);
+
+\node[right=2.5cm of stage00, minimum width=1cm, minimum height=1.4cm](WIP1){.....};
+
+\node[right=0.3cm of WIP1, minimum width=1cm, minimum height=1.4cm](WIP1a){};
+
+\draw[-latex] (stage00.east) -- (WIP1.west);
+
+\node[below right=2cm and 4cm of WIP00, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIPp1){};
+\node[rectangle, draw, right=0.5cm of WIPp1, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unitp1){};
+\node[draw,dashed,rounded corners,fit=(WIPp1) (unitp1),inner sep=25pt,label={above:{stage (p,1)}}](stagep1){};
+
+\draw[-latex] (stage00.east) -- (stagep1.west);
+
+\node[right=4cm of WIP11, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIP1m){};
+\node[rectangle, draw, right=0.5cm of WIP1m, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unit1m){};
+\node[draw,dashed,rounded corners,fit=(WIP1m) (unit1m),inner sep=25pt,label={above:{stage (1,m$_1$)}}](stage1m){};
+
+\draw[-latex] (stage11.east) -- (stage1m.west);
+
+\node[right=4cm of WIPp1, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIPpm){};
+\node[rectangle, draw, right=0.5cm of WIPpm, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unitpm){};
+\node[draw,dashed,rounded corners,fit=(WIPpm) (unitpm),inner sep=25pt,label={above:{stage (p,m$_p$)}}](stagepm){};
+
+\draw[-latex] (stagep1.east) -- (stagepm.west);
+
+\node[right=3.5cm of WIP1, minimum width=1cm, minimum height=1.4cm](WIPm){.....};
+
+\node[left=0.5cm of WIPm, minimum width=1cm, minimum height=1.4cm](WIPma){};
+
+\draw[-latex] (WIP1a.east) -- (WIPma.west);
+
+\end{tikzpicture}
+\end{center}
+\caption{Multi-product s-batch networked plant of a steel industry. Source: adapted from \cite{LiuEtAl2020} * stage $(i, j)$ means stage $j$ of production line $i$.}
+\end{figure}
+
+In multi-product batch scheduling (MPBS) problems it is necessary to determine the ideal batch size for each product and also the production sequence of the products batches based on the known demand. Here, the solution must be determined in such a way that both setup and storage costs are minimized \citep{Eilon1985, Omega1993, LiuEtAl2020}. Some cientific works impose additional constraints on the MPBS problem - such as release times and due dates for each products batch production, and sequencing constraints due to mismatched product colors sequences - and focus on other goals - such as optimize customer satisfaction and/or the plant performance \citep{MendezEtAll2000, ShiEtAll2017}. Also, some cientific works consider MPBS problems within different layouts and multiperiod scenario. In parallel MPBS as well as in networked processes, it can also be necessary to define in which units each batch will be processed, and constraints that limit the units that can process each batch can also be imposed.
 
 It is importante to note that some production units are capable of processing multiple jobs at the same time. In such a case batches of different products and sizes can be grouped and processed by these units as a single batch. It is therefore necessary to determine the set of "batches" that each new grouped batch will contain. The multi-product balancing problem consists of determining these groupings, seeking to minimize the overall makespan. \cite{KashanOzturk2022} name this problem \emph{p-batch} (parallel batching) in contradiction with the \emph{s-batch} (serial batching) problem where jobs are processed one by one over production facilities, as described before.
 
-As normally, in a real production environment, some of these problems arise in a connected way, many authors work with mixed multi-product batch problems.
+In a real production environment, some of these problems arise in a connected way, so many cientific works adress mixed multi-product batch problems. \cite{FumeroEtAl2016} developed a multi-period mixed-integer linear programming model for MPCs multistage multi-product batch problems, which integrates design, production planning, and scheduling decisions. 
 
 \cite{LiEtAl2022} deal with a PMPBS problem involving incompatible families with different job sizes and capacity constraints. In this problem, solutions are accepted in which two or more batches are processed simultaneously on the same machine. However, there are no production limitations for the production of each product group. The paper of \cite{LiEtAl2022} also presente an extensive literature review on production batch scheduling problems. Other important works deal with the problem of a multi-product batch plant design (MPBPD). In this case the problem is to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998).
 
@@ -195,13 +251,9 @@ reference & problem & period & stage & units & int. stor. & constraints & object
 
 About the solution method many papers propose mathmatical models which are solved using IBM ILOG CPLEX or another constraint programming solver.
 
-Another not very common definition for multi-product batch production is a type of process in which several products are processed simultaneously in the same production unit.
+In this work we are interested in a sub problem of the \emph{p-batch} scheduling problem described by \cite{KashanOzturk2022}, named multi-product batch processing time maximization (MBPTM) problem. When appliyng some local search heuristic for solving the \emph{p-batch} scheduling problem it is necessary to solve the MBPTM problem on each iteration, so it has a direct impact on the overall efficiency of any local search heuristc for solving the \emph{p-batch} scheduling problem. As scientific contributions, in this paper we present a mathematical model and a polynomial time complexity optmization method for solving this problem.
 
-In this work, we are concerned with determining the ideal processing time for a single batch consisting of a set of products, each product being or not different from the other products of the same batch. That is, we consider a specific case where different products are processed simultaneously on the same processor. This case occurs, for example, during the processing of plastic bags in extruders, where the resins are melted, then pass through a cylinder forming a balloon and this balloon, after cooling, is stored in a coil which, in turn, is cut into several smaller coils with different models of plastic bags.
-
-As scientific contributions, in this paper we define a new multi-product batch problem, named multi-product batch processing time maximization (MBPTM) problem, as well as a mathematical model and a polynomial time complexity analytical solution optmization method for solving this problem.
-
-In the next sections, a presentation of problem is made along with an application example. Section \ref{sec:mathModel} presents an interger linear mathematical model for the problem and section \ref{sec:analyticalSol} presents an analytical method for its solution. Section \ref{sec:results} presents the tests and results obtained by a solver in C++ applying the analytical solution and a solver developed in LINGO to new proposed benchmarks. In sections \ref{sec:contributions} and \ref{sec:acknowledgments}, the contributions to this work are informed and acknowledgments are given, respectively. Finally, section \ref{sec:conclusions} presents the paper's conclusions and suggestions for future works.
+The rest of the paper is organized as follows. In the next sections, a presentation of problem is made along with an application example. Section \ref{sec:mathModel} presents an interger linear mathematical model for the problem and section \ref{sec:analyticalSol} presents an analytical method for its solution. Section \ref{sec:results} presents the tests and results obtained by a solver in C++ applying the analytical solution and a solver developed in LINGO to new proposed benchmarks. In sections \ref{sec:contributions} and \ref{sec:acknowledgments}, the contributions to this work are informed and acknowledgments are given, respectively. Finally, section \ref{sec:conclusions} presents the paper's conclusions and suggestions for future works.
 
 \section{Multi-product batch processing time maximization problem}
 \label{sec:MBPTMP}
@@ -728,6 +780,9 @@ We are enormously grateful to Coordenação de Aperfeiçoamento de Pessoal de N�
 \bibitem[\protect\citeauthoryear{Eilon}{1985}]{Eilon1985}
 Eilon. (1985). Multi-product batch production on a single machine - A problem revisited. {\it OMEGA Int. J. of Mgmt Sci.}, Vol. 13 (5), pp. 453--468.
 
+\bibitem[\protect\citeauthoryear{Fumero \emph{et al.}}{2016}]{FumeroEtAl2016}
+Fumero Y., Moreno M. S., Corsano, G., Montagna, J. M. (2016). A multiproduct batch plant design model incorporating production planning and scheduling decisions under a multiperiod scenario. {\it Applied Mathematical Modelling}, Vol. 40, pp. 3498--3515.
+
 \bibitem[\protect\citeauthoryear{Kashan and Ozturk}{2022}]{KashanOzturk2022}
 Kashan, A. H., and Ozturk, O. (2022). Improved MILP formulation equipped with valid inequalities for scheduling a batch processing machine with non-identical job sizes. {\it  Omega}, Vol. 112, pp. 102673.
 
@@ -746,6 +801,9 @@ orders with different due-dates. {\it Computers and Chemical Engineering}, Vol. 
 
 \bibitem[\protect\citeauthoryear{Omega Journal}{1993}]{Omega1993}
 OMEGA Journal. (1993). Single Machine Multi-product Batch Scheduling: Testing Several Solution Methods. {\it  OMEGA Int. J. of Mgmt Sci.}, Vol. 21 (6), pp. 709--711.
+
+\bibitem[\protect\citeauthoryear{Petkov and Maranas}{1998}]{PetkovMaranas1998}
+Petkov, S. B., and Maranas, C. D. (1998). Design of Single-Product Campaign Batch Plants under Demand Uncertainty. {\it  AIChE Journal}, Vol. 44 (4), pp. 896--911.
 
 \bibitem[\protect\citeauthoryear{Ravemark and Rippin}{1998}]{RavemarkAndRippin1998}
 Ravemark, D. E., and Rippin, D. W. T. (1998). Optimal design of a multi-product batch plant. {\it Computers chem. Engng}, Vol. 22 (1-2), pp. 177--183.
