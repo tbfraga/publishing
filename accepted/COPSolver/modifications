@@ -1,0 +1,6 @@
+2023/09/27
+
+I changed the name of Section 3: old: "Economic, technological, scientific and educational impact"; new: "Impacts".
+
+
+Some industrial equipment process a set of jobs (batches) simultaneously. For production scheduling in these equipment, in addition to the sequencing and determination of the batches sizes, it is also necessary to define the set of batches that will be processed simultaneously in each time interval. These compound batches are called p-batch (parallel batching). Asstatet by , there is a strong need to survey the literature for scheduling with parallel batching. 
