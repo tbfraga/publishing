@@ -20,7 +20,6 @@
 \documentclass[authoryear,manuscript,12pt]{elsarticle}
 \usepackage{setspace}
 \doublespacing
-
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{rotating}
@@ -32,6 +31,8 @@
 \usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric,shapes.misc,shapes.symbols,arrows.meta,graphs,fit,positioning,shadows}
+
+
 
 %% The `ecrc' package must be called to make the CRC functionality available
 %\usepackage{ecrc}
@@ -164,11 +165,9 @@ multiproduct batch \sep processing time maximization \sep mathematical model \se
 \section{Introduction}
 \label{sec:intro}
 
-The term multi-product batch production is usually applied to designate an intermittent production system in which batches of different products and sizes are processed one at a time, sharing the same production facilities. A multi-product batch plant basically consists of one or more production units, grouped into one or more stages, and possibly, intermediate storage locations. At each stage some distinct operations are performed and the batches are processed sequentially over the stages (serial batching). As stated by \cite{PetkovMaranas1998} the batch plant can operate under a single-product campaign (SPC) production mode, where all the batches of a given product are manufactured before production of the next product begins, or under mixed-product campaign (MPC) production modes where more batches are produced per unit time at the expense of increased changeover times and cleanup costs. Also the plant layout can take on different formats, such as: single unit, where all batches are processed at a single stage; serial flowshop plant, in which all products follow a linear flow through the production stages; parallel plants in which production units of the same type are arranged in parallel, forming each production stage \citep{ShiEtAll2017}; and networked processes, in which units are not arranged in lines, and the connection between the units may or may not exist so that the production paths in the flowshop network can be different for each product and the passing of previous batch can be possible so that the final sequence of the production at the last stage units can be different from the initial sequence \citep{KimEtAl1996}. Also networked plant can be divergent, convergent or both.
+The term multi-product batch production is usually applied to designate an intermittent production system in which batches of different products and sizes are processed one at a time, sharing the same production facilities. A multi-product batch plant basically consists of one or more production units, grouped into one or more stages, and possibly, intermediate storage locations. At each stage some distinct operations are performed and the batches are processed sequentially over the stages (serial batching). As stated by \cite{PetkovMaranas1998} the batch plant can operate under a single-product campaign (SPC) production mode, where all the batches of a given product are manufactured before production of the next product begins, or under mixed-product campaign (MPC) production modes where more batches are produced per unit time at the expense of increased changeover times and cleanup costs. Also the plant layout can take on different formats, such as: single unit, where all operations needed to process the batches are performed by a single processor; serial flowshop plant, in which all products follow the same linear flow through the production stages; parallel plants in which production units of the same type are arranged in parallel, forming each production stage \citep{ShiEtAll2017}; and networked processes, in which units are not arranged in lines, and the connection between the units may or may not exist so that the production paths in the flowshop network can be different for each product and the passing of previous batch can be possible so that the final sequence of the production at the last stage units can be different from the initial sequence \citep{KimEtAl1996}. Also networked plant can be divergent, convergent or both.
 
-The scientific literature address many different problems related to such industrial enviroment, including the design, planning, sizing, scheduling and balancing problems. The multi-product batch plant design problem is concerned to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998). The configuration of the plant basically consists of defining the number of stages, the number of units and their capacity per stage, and the capacity for intermediate storages, as well as the best factory layout. 
-
-The multi-product batch planning problem is basically determining the needs of materials and resources based on known demands and demand forecasts. 
+The scientific literature address many different problems related to such industrial enviroment, including the design, planning, sizing, scheduling and balancing problems. The multi-product batch plant design problem is concerned to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998). The configuration of the plant basically consists of defining the number of stages, the number of units and their capacity per stage, and the capacity for intermediate storages, as well as the best factory layout. The multi-product batch planning problem is basically determining the needs of materials and resources based on known demands and demand forecasts. 
 
 Since a single batch is processed at a time, it is necessary that the batches are dimensioned in such a way that the quantity produced of each product is sufficient to meet the demand during the period in which other batches are being processed \citep{Eilon1985}. This problem is named multi-product batch sizing. \cite{Eilon1985} gives a detailed explanation of the inadequacy of the use of the well-know EBQ (economic batch quantity) square-root formula for multi-product batch production, and \cite{LiuEtAl2020} present a mixed-integer quadratic programming model and an exact optimization algorithm for a multi-stage multi-product serial batching sizing problem in a divergent networked plant of a steel industry (Fig. \ref{fig:networkdPlantSteelIndustry}). 
 
@@ -224,11 +223,90 @@ Since a single batch is processed at a time, it is necessary that the batches ar
 
 In multi-product batch scheduling (MPBS) problems it is necessary to determine the ideal batch size for each product and also the production sequence of the batches based on the known demand. Here, the solution must be determined in such a way that both setup and storage costs are minimized \citep{Eilon1985, Omega1993, LiuEtAl2020}. Some cientific works impose additional constraints on the MPBS problem - such as release times and due dates for each batch, and sequencing constraints due to mismatched product colors sequences - and focus on other goals - such as optimize customer satisfaction and/or the plant performance \citep{MendezEtAll2000, ShiEtAll2017}. Also, some cientific works consider MPBS problems within different layouts as well as dinamic and multiperiod scenarios. In parallel MPBS as well as in networked processes, it can also be necessary to define in which units each batch will be processed, and constraints that limit the units that can process each batch can also be imposed. Many cientifc works propose mixed-integer linear programming (MILP) formulations to solve MPBS problems. As example, we can mention the work of \cite{MendezEtAll2000} that presents a MILP continuous-time model and a two-step systematic methodology for a single-stage multi-product batch scheduling problem with different due-dates. Later, \cite{MendezCerda2003} also proposed another MILP formulation for reactive scheduling. As observerd by \cite{HeHui2008}, with the problem size increasing, the computational effort of MILP increases greatly so it is very difﬁcult for MILP to obtain acceptable solutions to large-size problems within reasonable time. Citing some works that use other approaches, \cite {KimEtAl1996} propose a Gantt chart mapping method and a modified genetic algorithm for solving a networked flowshop multi-product batch scheduling problem as well as a rule-based reactive rescheduling scheme for dinamicaly overcoming in-process deviation from the initial optimized schedule and \cite{HeHui2008} present a rule-based genetic algorithm for the scheduling of single-stage multi-product batch plants with parallel units.
 
-It is importante to note that some production units are capable of processing multiple jobs at the same time. In such a case batches of different products and sizes can be grouped and processed by these units as a single batch. It is therefore necessary to determine the set of "batches" that each new grouped batch will contain. The multi-product balancing problem consists of determining these groupings, seeking to minimize the overall makespan. \cite{KashanOzturk2022} name this problem \emph{p-batch} (parallel batching) in contradiction with the \emph{s-batch} (serial batching) problem where jobs are processed one by one over production facilities, as described before.  \cite{FowlerMonch2022} present a taxonomy and an extensive literature review for the p-batch problems. Not mentioned by \cite{FowlerMonch2022}, \cite{LiEtAl2022} deal with a multi-product \emph{p-batch} \emph{s-batch} problem involving incompatible families with different job sizes and capacity constraints. 
+It is importante to note that some production units are capable of processing multiple jobs at the same time. In such a case batches of different products and sizes can be grouped and processed by these units as a single batch. It is therefore necessary to determine the set of "batches" that each new grouped batch will contain. The multi-product balancing problem consists of determining these groupings, seeking to minimize the overall makespan. \cite{KashanOzturk2022} name this problem \emph{p-batch} (parallel batching) in contradiction with the \emph{s-batch} (serial batching) problem where jobs are processed one by one over production facilities, as described before.  \cite{FowlerMonch2022} present a taxonomy and an extensive literature review for the p-batch problems. According to the authors, a p-batch problem can be classified as compatible setting - where there is no restriction on which jobs can be used to form a batch - and incompatible family case - where only jobs belonging to the same family can be used to form a batch. Not mentioned by \cite{FowlerMonch2022}, \cite{LiEtAl2022} deal with a multi-product \emph{s-batch} problem involving incompatible families with different job sizes and capacity constraints. 
 
 In a real production environment, some of these problems arise in a connected way, so many cientific works adress mixed multi-product batch problems. As example, \cite{FumeroEtAl2016} developed a multi-period mixed-integer linear programming model for MPCs multistage multi-product batch problems, which integrates design, production planning, and scheduling decisions.
 
-Summarized, it is possible to propose the following taxonomy for the multi-product batch problems: 1) layout: flowshop, parallel or networked (coonvergent and /or divergent); 2) number of stages: single stage or multistage; 3) planning horizon: single period or multiperiod; 4) scenario: static or dynamic; 5) production mode: single-product campaing, mixed-product campaign, s-batch and/or p-batch; and 6) problem: design, planning, sizing, scheduling and/or balancing.
+Fig. \label{fig:taxonomy} presents a taxonomy for the multi-product batch problems cited in this paper
+
+
+Summarized, it is possible to propose the following taxonomy for the multi-product batch problems: 1) layout: single unit, flowshop, parallel or networked (coonvergent and /or divergent); 2) number of stages: single stage or multistage; 3) planning horizon: single period or multiperiod; 4) scenario: static or dynamic; 5) production mode: single-product campaing, mixed-product campaign, s-batch and/or p-batch; 6) problem: design, planning, sizing, scheduling and/or balancing (with compatible or incompatible jobs); 7) restrictions: ; and 8) performance measure: makespan ($C_{max}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness ($TT$), the total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$), weighted $E/T$ ($wE/T$), and multiple criteria.
+
+\begin{figure}[h]
+\label{fig:taxonomy}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily,every label/.append style={font=\small\sffamily,align=center}]
+
+\node[draw](SS){single stage};
+\node[right=0.3cm of SS, draw](MS){multi-stage};
+\node[draw,dashed,rounded corners,fit=(SS) (MS),inner sep=12pt,label={above:{number of stages}}](stages){};
+
+\node[right=1.2cm of MS, draw](SP){single period};
+\node[right=0.3cm of SP, draw](MP){multi-period};
+\node[right=0.3cm of MP, draw](CP){cyclic};
+\node[draw,dashed,rounded corners,fit=(SP) (MP) (CP),inner sep=12pt,label={above:{periods}}](periods){};
+
+\node[below left=1.5cm and -1.2cm of stages.south east, draw](L2){flowshop};
+\node[left=0.5cm of L2, draw](L1){single unit};
+\node[right=0.5cm of L2, draw](L3){parallel};
+\node[right=0.5cm of L3, draw](L4){networked};
+\node[draw,dashed,rounded corners,fit=(L1) (L2) (L3) (L4),inner sep=15pt,label={west:\rotatebox{90}{layout}}](layout){};
+
+\node[below left=1.5cm and 0cm of layout.south, draw](P3){sizing};
+\node[left=0.5cm of P3, draw](P2){planning};
+\node[left=0.5cm of P2, draw](P1){design};
+\node[right=0.5cm of P3, draw](P4){scheduling};
+\node[right=0.5cm of P4, draw](P5){balancing};
+\node[draw,dashed,rounded corners,fit=(P1) (P2) (P3) (P4) (P5),inner sep=15pt,label={west:\rotatebox{90}{problem}}](problem){};
+
+\node[below left=1.5cm and 0cm of problem.south, draw](O1){s-batch};
+\node[right=0.5cm of O1, draw](O2){p-batch};
+\node[draw,dashed,rounded corners,fit=(O1) (O2),inner sep=15pt,label={west:\rotatebox{90}{mode}}](mode){};
+
+\node[below left=3.5cm and 6cm of mode.south, draw, rotate=90](M1){makespan};
+\node[right=1cm of M1.south west, draw, rotate=90](M2){setup/holding cost};
+\node[right=1cm of M2.south west, draw, rotate=90](M3){customer satisfaction};
+\node[right=1cm of M3.south west, draw, rotate=90](M4){plant performance};
+\node[draw,dashed,rounded corners,fit=(M1) (M2) (M3) (M4),inner sep=15pt,label={west:\rotatebox{90}{performance measure}}](measure){};
+
+\node[right=2.5cm of M4.south west, draw, rotate=90](R1){family incompatibility};
+\node[right=1cm of R1.south west, draw, rotate=90](R2){capacity constrained};
+\node[right=1cm of R2.south west, draw, rotate=90](R3){color incompatibility};
+\node[right=1cm of R3.south west, draw, rotate=90](R4){work-in-process storage};
+\node[draw,dashed,rounded corners,fit=(R1) (R2) (R3) (R4),inner sep=15pt,label={west:\rotatebox{90}{restriction}}](restriction){};
+
+\node[below right =1cm and 0cm of measure.south west](N1){};
+\node[right =1cm of N1](N2){};
+\draw[blue, very thick] (N1.east) -- (N2.west);
+
+\node[right =0cm of N2](A1){\cite{Eilon1985}};
+\draw[blue, very thick] (SS.south) -- (L1.north);
+\draw[blue, very thick] (CP.south) -- (L1.north);
+\draw[blue, very thick] (L1.south) -- (P4.north);
+\draw[blue, very thick] (P4.south) -- (O1.north);
+\draw[blue, very thick] (O1.south) -- (M2.east);
+
+\node[right=4cm of N1](N3){};
+\node[right =1cm of N3](N4){};
+\draw[red, very thick] (N3.east) -- (N4.west);
+
+\node[right =0cm of N4](A2){\cite{LiuEtAl2020}};
+\draw[red, very thick] (MS.south) -- (L4.north);
+\draw[red, very thick] (MP.south) -- (L4.north);
+\draw[red, very thick] (L4.south) -- (P3.north);
+\draw[red, very thick] (P3.south) -- (O1.north);
+
+\node[below right =-2.5mm and 1mm of O1.south](N5){};
+\node[above right =-2.5mm and -1.5mm of M2.east](N6){};
+
+\draw[red, very thick] (N5) -- (N6);
+\draw[red, very thick] (O1.south) -- (R2.east);
+\draw[red, very thick] (O1.south) -- (R4.east);
+
+\end{tikzpicture}
+\end{center}
+\caption{Taxonomy of multi-product batch problems cited in this paper.}
+\end{figure}
 
 In this work we are interested in the multiperiod multi-product batch scheduling problem in a networked plant that arises in a plastic bag industry. The industrial plant of this company is very similar to the multi-product s-batch networked plant of the steel industry presented by \cite{LiuEtAl2020} (Fig. \ref{fig:networkdPlantSteelIndustry}), however, the production process in this plastic bags industry begins in extruders, which are production units capable of processing different batches simultaneously. Therefore the problem we are interested is a multi-product \emph{p-batch} \emph{s-batch} problem in a networked plant close to the problem addressed by \cite{LiEtAl2022}. Thus, part of the problem solving process consists of solving a multi-product p-batch problem into extruders. Also, in the problem we study, in addition to demand, we must consider the factory and outlets' storage capacity, which is individually defined for products, but also for the set of products. 
 
@@ -243,8 +321,6 @@ The rest of the paper is organized as follows. In the next sections, a presentat
 \label{sec:MBPTMP}
 
 The multi-product p-batch processing time maximization problem arises when a set of different products are processed simultaneously in a same production batch. In this problem, it is considered that the quantity produced of each product is directly proportional to the processing time, however, with a different constant of proportionality (production rate) for each product. In addition, there is a maximum quantity allowed for the production of batch products, defined both individually and for the set. The production quantity of each product is mainly defined according to the demand for the product. However, it is still possible to stock the products and/or send them to the outlets. In both cases, there is a stocking/shipping limit for each product and a stocking/shipping limit for the set of products in the batch. Also, there is a time limit available for processing the batch. About the production, the industry manager has as priority to meet demand and he prefer to send the remaining production to outlets rather then stock it in the factory. 
-
-\emph{Example:} A certain machine must process a batch containing 2 different products: A and B. The production rate of A is 60 g/min while the production rate of B is 40 g/min. The factory has free stock for a maximum of 3000 g of any product, and, according to the company's inventory policy, a maximum of 3000 g of product A and 2000 g of product B can be stocked at the factory. There is a demand for 1000 g of product A and 500 g of product B. The factory has an outlet that has free space in stock of 1000 g, which can receive a maximum of 600 g of each product. A maximum time of 100 minutes of this machine can be allocated for processing this batch. When distributing production the priority is to meet demand, then send to outlets and finily stock in factory. What is the maximum possible time for processing this batch and how production must be distributed ? 
 
 \section{Mathematical model}
 \label{sec:mathModel}
@@ -478,7 +554,9 @@ step 2: calculate $T$, where:
 T = \min \{T^* , \textrm{Z}\}
 \end{equation}
 
-This simplification of the method demonstrates that the great value calculated to $T$ does not depend on the way the production of the product $i$, $P_i$, is distributed between service to demand, $D_i$, outlets, $O_i$, and  factory's stock $I_i$.
+This simplification of the method demonstrates that the value calculated to $T$ does not depend on the way the production of the product $i$, $P_i$, is distributed between service to demand, $D_i$, outlets, $O_i$, and  factory's stock $I_i$.
+
+\noindent \emph{Full solution:} 
 
 We can determine now the values of $D_i$, $O_i$ and $I_i$, $\forall i$, simply attending the priorities for distribution. The following three algorithms can be used to find a complete solution.
 
@@ -516,7 +594,7 @@ Then an initial production distribution can be done by the Algorithm (\ref{alg:p
 \end{algorithmic}
 \end{algorithm}
 
-Assim, after applying Algorithm (\ref{alg:part02}), if $SO \geq 0$ and $SI \geq 0$, solution found is an optimal solution. However, if $SO < 0$ or $SI <0$, solution is not yet feasible. But as the solution found to $T$ is feasible to the problem defined in (\ref{MBPTMP01}) to (\ref{MBPTMP10}), we have the following statements:
+So, after applying Algorithm (\ref{alg:part02}), if $SO \geq 0$ and $SI \geq 0$, solution found is an optimal solution. However, if $SO < 0$ or $SI <0$, solution is not yet feasible. But as the solution found to $T$ is feasible to the problem defined in (\ref{MBPTMP01}) to (\ref{MBPTMP10}), we have the following statements:
 
 $if \quad SO < 0 \quad then \quad SI > 0 \quad and  \quad |SO| < SI$
 
@@ -556,7 +634,7 @@ Therefore it is possible to meet the restrictions by applying the Agorithm (\ref
 \section{Tests and results}
 \label{sec:results}
 
-To test the developed model and analytical solution method, we created a solver in C++ named COPSolver (V01\_20230814, lib multiproduct-batch-processing-time-maximization-problem) and a solver in LINGO named MBPTM.lng both available at https://github.com/tbfraga/COPSolver \citep{Fraga2023}. The tests were performed on a notebook with an Intel i7 processor. We tested the solvers developed for the benchmarks presented on Tables \ref{tab:MBPTMP001}, \ref{tab:MBPTMP002} and \ref{tab:MBPTMP003}, and for randon benchmarks generated by the following functions: \\
+To test the developed model and analytical solution method, we created a solver in C++ named COPSolver: library for solving the multi-product p-batch processing time maximization problem and also a solver in LINGO named MBPTM.lng both available at https://github.com/tbfraga/COPSolver \citep{Fraga2023}. The tests were performed on a notebook with an Intel i7 processor. We tested the solvers developed for the benchmarks presented on Tables \ref{tab:MBPTMP001}, \ref{tab:MBPTMP002} and \ref{tab:MBPTMP003}, and for randon benchmarks generated by the following functions: \\
 
 \begin{equation}
 \textrm{p}_i = \textrm{rand}()\%30 + 10
