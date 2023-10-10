@@ -261,22 +261,25 @@ Summarized, it is possible to propose the following taxonomy for the multi-produ
 
 \node[below left=1.5cm and 0cm of problem.south, draw](O1){s-batch};
 \node[right=0.5cm of O1, draw](O2){p-batch};
-\node[draw,dashed,rounded corners,fit=(O1) (O2),inner sep=15pt,label={west:\rotatebox{90}{mode}}](mode){};
+\node[left=0.5cm of O1, draw](O3){MPC};
+\node[draw,dashed,rounded corners,fit=(O1) (O2) (O3),inner sep=15pt,label={west:\rotatebox{90}{mode}}](mode){};
 
 \node[below left=3.5cm and 6cm of mode.south, draw, rotate=90](M1){makespan};
-\node[right=1cm of M1.south west, draw, rotate=90](M2){setup/holding cost};
-\node[right=1cm of M2.south west, draw, rotate=90](M3){customer satisfaction};
-\node[right=1cm of M3.south west, draw, rotate=90](M4){plant performance};
-\node[draw,dashed,rounded corners,fit=(M1) (M2) (M3) (M4),inner sep=15pt,label={west:\rotatebox{90}{performance measure}}](measure){};
+\node[right=0.7cm of M1.south west, draw, rotate=90](M2){setup/holding cost};
+\node[right=0.7cm of M2.south west, draw, rotate=90](M3){customer satisfaction};
+\node[right=0.7cm of M3.south west, draw, rotate=90](M4){plant performance};
+\node[right=0.7cm of M4.south west, draw, rotate=90](M5){net profit};
+\node[draw,dashed,rounded corners,fit=(M1) (M2) (M3) (M4) (M5),inner sep=15pt,label={west:\rotatebox{90}{performance measure}}](measure){};
 
-\node[right=2.5cm of M4.south west, draw, rotate=90](R1){family incompatibility};
-\node[right=1cm of R1.south west, draw, rotate=90](R2){capacity constrained};
-\node[right=1cm of R2.south west, draw, rotate=90](R3){color incompatibility};
-\node[right=1cm of R3.south west, draw, rotate=90](R4){work-in-process storage};
-\node[draw,dashed,rounded corners,fit=(R1) (R2) (R3) (R4),inner sep=15pt,label={west:\rotatebox{90}{restriction}}](restriction){};
+\node[right=3.5cm of M4.south west, draw, rotate=90](R1){family incompatibility};
+\node[right=0.7cm of R1.south west, draw, rotate=90](R2){capacity constrained};
+\node[right=0.7cm of R2.south west, draw, rotate=90](R3){color incompatibility};
+\node[right=0.7cm of R3.south west, draw, rotate=90](R4){work-in-process storage};
+\node[right=0.7cm of R4.south west, draw, rotate=90](R5){product storage capacity};
+\node[draw,dashed,rounded corners,fit=(R1) (R2) (R3) (R4) (R5),inner sep=15pt,label={west:\rotatebox{90}{restriction}}](restriction){};
 
-\node[below right =1cm and 0cm of measure.south west](N1){};
-\node[right =1cm of N1](N2){};
+\node[below right =1cm and -0.7cm of measure.south west](N1){};
+\node[right =0.5cm of N1](N2){};
 \draw[blue, very thick] (N1.east) -- (N2.west);
 
 \node[right =0cm of N2](A1){\cite{Eilon1985}};
@@ -286,20 +289,36 @@ Summarized, it is possible to propose the following taxonomy for the multi-produ
 \draw[blue, very thick] (P4.south) -- (O1.north);
 \draw[blue, very thick] (O1.south) -- (M2.east);
 
-\node[right=4cm of N1](N3){};
-\node[right =1cm of N3](N4){};
-\draw[red, very thick] (N3.east) -- (N4.west);
+\node[right=3.5cm of N1](N3){};
+\node[right =0.5cm of N3](N4){};
+\draw[green, very thick] (N3.east) -- (N4.west);
 
-\node[right =0cm of N4](A2){\cite{LiuEtAl2020}};
+\node[right =0cm of N4](A1){\cite{FumeroEtAl2016}};
+\draw[green, very thick] (MS.south) -- (L3.north);
+\draw[green, very thick] (CP.south) -- (L3.north);
+\draw[green, very thick] (L3.south) -- (P1.north);
+\draw[green, very thick] (L3.south) -- (P2.north);
+\draw[green, very thick] (L3.south) -- (P4.north);
+\draw[green, very thick] (P1.south) -- (O3.north);
+\draw[green, very thick] (P2.south) -- (O3.north);
+\draw[green, very thick] (P4.south) -- (O3.north);
+\draw[green, very thick] (O3.south) -- (M5.east);
+\draw[green, very thick] (O3.south) -- (R5.east);
+
+\node[right=5cm of N3](N5){};
+\node[right =0.5cm of N5](N6){};
+\draw[red, very thick] (N5.east) -- (N6.west);
+
+\node[right =0cm of N6](A2){\cite{LiuEtAl2020}};
 \draw[red, very thick] (MS.south) -- (L4.north);
 \draw[red, very thick] (MP.south) -- (L4.north);
 \draw[red, very thick] (L4.south) -- (P3.north);
 \draw[red, very thick] (P3.south) -- (O1.north);
 
-\node[below right =-2.5mm and 1mm of O1.south](N5){};
-\node[above right =-2.5mm and -1.5mm of M2.east](N6){};
+\node[below right =-2.5mm and 1mm of O1.south](N7){};
+\node[above right =-2.5mm and -1.5mm of M2.east](N8){};
 
-\draw[red, very thick] (N5) -- (N6);
+\draw[red, very thick] (N7) -- (N8);
 \draw[red, very thick] (O1.south) -- (R2.east);
 \draw[red, very thick] (O1.south) -- (R4.east);
 
