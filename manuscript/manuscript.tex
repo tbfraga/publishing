@@ -27,6 +27,7 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
+\usepackage{enumitem}
 
 \usepackage{xcolor}
 \usepackage{tikz}
@@ -93,7 +94,7 @@
 %%            country={}}
 %% \fntext[label3]{}
 
-\title{Exact method for the multi-product p-batch processing time maximization problem}
+\title{An exact method for the multi-product p-batch processing time maximization problem}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -229,103 +230,25 @@ In a real production environment, some of these problems arise in a connected wa
 
 Fig. \label{fig:taxonomy} presents a taxonomy for the multi-product batch problems cited in this paper
 
+\subsection{Taxonomy and notation}
 
-Summarized, it is possible to propose the following taxonomy for the multi-product batch problems: 1) layout: single unit, flowshop, parallel or networked (coonvergent and /or divergent); 2) number of stages: single stage or multistage; 3) planning horizon: single period or multiperiod; 4) scenario: static or dynamic; 5) production mode: single-product campaing, mixed-product campaign, s-batch and/or p-batch; 6) problem: design, planning, sizing, scheduling and/or balancing (with compatible or incompatible jobs); 7) restrictions: ; and 8) performance measure: makespan ($C_{max}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness ($TT$), the total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$), weighted $E/T$ ($wE/T$), and multiple criteria.
+In short, based on the bibliographic survey conducted for the preparation of this paper, we identify that the multi-product batch problems can differentiate with the following aspects:
 
-\begin{figure}[h]
-\label{fig:taxonomy}
-\begin{center}
-\begin{tikzpicture}[font=\sffamily,every label/.append style={font=\small\sffamily,align=center}]
+\begin{enumerate}[label=\arabic*)]
+\item \textbf{number of stages ($\sigma$)}: single stage (SS) or multistage (MS);
+\item \textbf{layout($\lambda$)}: single unit (SU), flowshop (Fl), parallel (Pl), or networked (Nt) (convergent (CN) and /or divergent (DN));
+\item \textbf{production mode ($\mu$)}: single-product campaing (SPC), mixed-product campaign (MPC), serial batching (s-batch) and/or parallel batching (p-batch);
+\item \textbf{problem:($\pi$)}  : design (D), planning (P), sizing (Sz), scheduling (Sc) and/or balancing (B); 
+\item \textbf{planning horizon ($\eta$)}: single period (SP) or multiperiod (MP);
+\item \textbf{scenario ($\gamma$)}: static (St) or dynamic (Dn);
+\item \textbf{input ($\iota$)}: deterministic (Dt) and/or stochastic (St);
+\item \textbf{performance measure ($\delta$)}: capital cost ($C$), makespan ($C_{max}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness ($TT$), the total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$) and/or weighted $E/T$ ($wE/T$);
+\item \textbf{restrictions ($\rho$)}: incompatible jobs (IJ).
+\end{enumerate}
 
-\node[draw](SS){single stage};
-\node[right=0.3cm of SS, draw](MS){multi-stage};
-\node[draw,dashed,rounded corners,fit=(SS) (MS),inner sep=12pt,label={above:{number of stages}}](stages){};
+So, to describe a speciﬁc multi-product batch problem, we propose the notation $\sigma|\lambda|\mu|\pi|\eta|\gamma|\iota|\delta|\rho$. The multi-product batch problems and solution approaches discussed in the references cited in this paper are summarized in Tab. . 
 
-\node[right=1.2cm of MS, draw](SP){single period};
-\node[right=0.3cm of SP, draw](MP){multi-period};
-\node[right=0.3cm of MP, draw](CP){cyclic};
-\node[draw,dashed,rounded corners,fit=(SP) (MP) (CP),inner sep=12pt,label={above:{periods}}](periods){};
-
-\node[below left=1.5cm and -1.2cm of stages.south east, draw](L2){flowshop};
-\node[left=0.5cm of L2, draw](L1){single unit};
-\node[right=0.5cm of L2, draw](L3){parallel};
-\node[right=0.5cm of L3, draw](L4){networked};
-\node[draw,dashed,rounded corners,fit=(L1) (L2) (L3) (L4),inner sep=15pt,label={west:\rotatebox{90}{layout}}](layout){};
-
-\node[below left=1.5cm and 0cm of layout.south, draw](P3){sizing};
-\node[left=0.5cm of P3, draw](P2){planning};
-\node[left=0.5cm of P2, draw](P1){design};
-\node[right=0.5cm of P3, draw](P4){scheduling};
-\node[right=0.5cm of P4, draw](P5){balancing};
-\node[draw,dashed,rounded corners,fit=(P1) (P2) (P3) (P4) (P5),inner sep=15pt,label={west:\rotatebox{90}{problem}}](problem){};
-
-\node[below left=1.5cm and 0cm of problem.south, draw](O1){s-batch};
-\node[right=0.5cm of O1, draw](O2){p-batch};
-\node[left=0.5cm of O1, draw](O3){MPC};
-\node[draw,dashed,rounded corners,fit=(O1) (O2) (O3),inner sep=15pt,label={west:\rotatebox{90}{mode}}](mode){};
-
-\node[below left=3.5cm and 6cm of mode.south, draw, rotate=90](M1){makespan};
-\node[right=0.7cm of M1.south west, draw, rotate=90](M2){setup/holding cost};
-\node[right=0.7cm of M2.south west, draw, rotate=90](M3){customer satisfaction};
-\node[right=0.7cm of M3.south west, draw, rotate=90](M4){plant performance};
-\node[right=0.7cm of M4.south west, draw, rotate=90](M5){net profit};
-\node[draw,dashed,rounded corners,fit=(M1) (M2) (M3) (M4) (M5),inner sep=15pt,label={west:\rotatebox{90}{performance measure}}](measure){};
-
-\node[right=3.5cm of M4.south west, draw, rotate=90](R1){family incompatibility};
-\node[right=0.7cm of R1.south west, draw, rotate=90](R2){capacity constrained};
-\node[right=0.7cm of R2.south west, draw, rotate=90](R3){color incompatibility};
-\node[right=0.7cm of R3.south west, draw, rotate=90](R4){work-in-process storage};
-\node[right=0.7cm of R4.south west, draw, rotate=90](R5){product storage capacity};
-\node[draw,dashed,rounded corners,fit=(R1) (R2) (R3) (R4) (R5),inner sep=15pt,label={west:\rotatebox{90}{restriction}}](restriction){};
-
-\node[below right =1cm and -0.7cm of measure.south west](N1){};
-\node[right =0.5cm of N1](N2){};
-\draw[blue, very thick] (N1.east) -- (N2.west);
-
-\node[right =0cm of N2](A1){\cite{Eilon1985}};
-\draw[blue, very thick] (SS.south) -- (L1.north);
-\draw[blue, very thick] (CP.south) -- (L1.north);
-\draw[blue, very thick] (L1.south) -- (P4.north);
-\draw[blue, very thick] (P4.south) -- (O1.north);
-\draw[blue, very thick] (O1.south) -- (M2.east);
-
-\node[right=3.5cm of N1](N3){};
-\node[right =0.5cm of N3](N4){};
-\draw[green, very thick] (N3.east) -- (N4.west);
-
-\node[right =0cm of N4](A1){\cite{FumeroEtAl2016}};
-\draw[green, very thick] (MS.south) -- (L3.north);
-\draw[green, very thick] (CP.south) -- (L3.north);
-\draw[green, very thick] (L3.south) -- (P1.north);
-\draw[green, very thick] (L3.south) -- (P2.north);
-\draw[green, very thick] (L3.south) -- (P4.north);
-\draw[green, very thick] (P1.south) -- (O3.north);
-\draw[green, very thick] (P2.south) -- (O3.north);
-\draw[green, very thick] (P4.south) -- (O3.north);
-\draw[green, very thick] (O3.south) -- (M5.east);
-\draw[green, very thick] (O3.south) -- (R5.east);
-
-\node[right=5cm of N3](N5){};
-\node[right =0.5cm of N5](N6){};
-\draw[red, very thick] (N5.east) -- (N6.west);
-
-\node[right =0cm of N6](A2){\cite{LiuEtAl2020}};
-\draw[red, very thick] (MS.south) -- (L4.north);
-\draw[red, very thick] (MP.south) -- (L4.north);
-\draw[red, very thick] (L4.south) -- (P3.north);
-\draw[red, very thick] (P3.south) -- (O1.north);
-
-\node[below right =-2.5mm and 1mm of O1.south](N7){};
-\node[above right =-2.5mm and -1.5mm of M2.east](N8){};
-
-\draw[red, very thick] (N7) -- (N8);
-\draw[red, very thick] (O1.south) -- (R2.east);
-\draw[red, very thick] (O1.south) -- (R4.east);
-
-\end{tikzpicture}
-\end{center}
-\caption{Taxonomy of multi-product batch problems cited in this paper.}
-\end{figure}
+\subsection{Contributions of this paper}
 
 In this work we are interested in the multiperiod multi-product batch scheduling problem in a networked plant that arises in a plastic bag industry. The industrial plant of this company is very similar to the multi-product s-batch networked plant of the steel industry presented by \cite{LiuEtAl2020} (Fig. \ref{fig:networkdPlantSteelIndustry}), however, the production process in this plastic bags industry begins in extruders, which are production units capable of processing different batches simultaneously. Therefore the problem we are interested is a multi-product \emph{p-batch} \emph{s-batch} problem in a networked plant close to the problem addressed by \cite{LiEtAl2022}. Thus, part of the problem solving process consists of solving a multi-product p-batch problem into extruders. Also, in the problem we study, in addition to demand, we must consider the factory and outlets' storage capacity, which is individually defined for products, but also for the set of products. 
 
