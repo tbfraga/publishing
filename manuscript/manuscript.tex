@@ -29,6 +29,8 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \usepackage{enumitem}
 
+\usepackage{array, makecell}
+
 \usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric,shapes.misc,shapes.symbols,arrows.meta,graphs,fit,positioning,shadows}
@@ -149,8 +151,8 @@ In the plastic bag extrusion process, it is necessary to determine the optimal p
 
 %%Research highlights
 \begin{highlights}
-\item brief bibliographic review on multi-product batch problems;
-\item Multi-product Batch Processing Time Maximization (MBPTM) problem definition;
+\item taxonomy and notation for the multi-product batch problems;
+\item multi-product p-batch processing time maximization (MBPTM) problem definition;
 \item linear integer programming model for the MBPTM problem;
 \item exact optimization method for solving the MBPTM problem.
 \end{highlights}
@@ -168,7 +170,7 @@ multiproduct batch \sep processing time maximization \sep mathematical model \se
 
 The term multi-product batch production is usually applied to designate an intermittent production system in which batches of different products and sizes are processed one at a time, sharing the same production facilities. A multi-product batch plant basically consists of one or more production units, grouped into one or more stages, and possibly, intermediate storage locations. At each stage some distinct operations are performed and the batches are processed sequentially over the stages (serial batching). As stated by \cite{PetkovMaranas1998} the batch plant can operate under a single-product campaign (SPC) production mode, where all the batches of a given product are manufactured before production of the next product begins, or under mixed-product campaign (MPC) production modes where more batches are produced per unit time at the expense of increased changeover times and cleanup costs. Also the plant layout can take on different formats, such as: single unit, where all operations needed to process the batches are performed by a single processor; serial flowshop plant, in which all products follow the same linear flow through the production stages; parallel plants in which production units of the same type are arranged in parallel, forming each production stage \citep{ShiEtAll2017}; and networked processes, in which units are not arranged in lines, and the connection between the units may or may not exist so that the production paths in the flowshop network can be different for each product and the passing of previous batch can be possible so that the final sequence of the production at the last stage units can be different from the initial sequence \citep{KimEtAl1996}. Also networked plant can be divergent, convergent or both.
 
-The scientific literature address many different problems related to such industrial enviroment, including the design, planning, sizing, scheduling and balancing problems. The multi-product batch plant design problem is concerned to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998). The configuration of the plant basically consists of defining the number of stages, the number of units and their capacity per stage, and the capacity for intermediate storages, as well as the best factory layout. The multi-product batch planning problem is basically determining the needs of materials and resources based on known demands and demand forecasts. 
+The scientific literature address many different problems related to such industrial enviroment, including the design, planning, sizing, scheduling and balancing problems. The multi-product batch plant design problem is concerned to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998). The configuration of the plant basically consists of defining the number of stages, the number of units and their capacity per stage, and the capacity for intermediate storages, as well as the best factory layout. The multi-product batch planning problem is basically determining the quantities to be produced, the number of batches and their sizes, the needs of materials and the total sales during each time period \citep{FumeroEtAl2016}.
 
 Since a single batch is processed at a time, it is necessary that the batches are dimensioned in such a way that the quantity produced of each product is sufficient to meet the demand during the period in which other batches are being processed \citep{Eilon1985}. This problem is named multi-product batch sizing. \cite{Eilon1985} gives a detailed explanation of the inadequacy of the use of the well-know EBQ (economic batch quantity) square-root formula for multi-product batch production, and \cite{LiuEtAl2020} present a mixed-integer quadratic programming model and an exact optimization algorithm for a multi-stage multi-product serial batching sizing problem in a divergent networked plant of a steel industry (Fig. \ref{fig:networkdPlantSteelIndustry}). 
 
@@ -228,25 +230,58 @@ It is importante to note that some production units are capable of processing mu
 
 In a real production environment, some of these problems arise in a connected way, so many cientific works adress mixed multi-product batch problems. As example, \cite{FumeroEtAl2016} developed a multi-period mixed-integer linear programming model for MPCs multistage multi-product batch problems, which integrates design, production planning, and scheduling decisions.
 
-Fig. \label{fig:taxonomy} presents a taxonomy for the multi-product batch problems cited in this paper
-
 \subsection{Taxonomy and notation}
 
 In short, based on the bibliographic survey conducted for the preparation of this paper, we identify that the multi-product batch problems can differentiate with the following aspects:
 
 \begin{enumerate}[label=\arabic*)]
 \item \textbf{number of stages ($\sigma$)}: single stage (SS) or multistage (MS);
-\item \textbf{layout($\lambda$)}: single unit (SU), flowshop (Fl), parallel (Pl), or networked (Nt) (convergent (CN) and /or divergent (DN));
+\item \textbf{layout($\lambda$)}: single unit (SU), flowshop (Fl), parallel (Pl), or networked (Nt) (convergent (CNt) and /or divergent (DNt));
 \item \textbf{production mode ($\mu$)}: single-product campaing (SPC), mixed-product campaign (MPC), serial batching (s-batch) and/or parallel batching (p-batch);
 \item \textbf{problem:($\pi$)}  : design (D), planning (P), sizing (Sz), scheduling (Sc) and/or balancing (B); 
-\item \textbf{planning horizon ($\eta$)}: single period (SP) or multiperiod (MP);
+\item \textbf{time horizon ($\eta$)}: single period (SP) or multiperiod (MP), cyclic (Cc);
 \item \textbf{scenario ($\gamma$)}: static (St) or dynamic (Dn);
 \item \textbf{input ($\iota$)}: deterministic (Dt) and/or stochastic (St);
-\item \textbf{performance measure ($\delta$)}: capital cost ($C$), makespan ($C_{max}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness ($TT$), the total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$) and/or weighted $E/T$ ($wE/T$);
-\item \textbf{restrictions ($\rho$)}: incompatible jobs (IJ).
+\item \textbf{performance measure ($\delta$)}: capital cost (C), setup cost (SC), holding cost (HC), work-in-process cost (WIPC), net profit (NP), makespan (C$_{\textrm{max}}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness (TT), the total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$) and/or weighted $E/T$ ($wE/T$);
+\item \textbf{others ($\rho$)}: capacited (UC), storage capacity (SC), work-in-process storage (WIP), due dates (DD), incompatible jobs (IJ). $\textrm{Z}$ 
 \end{enumerate}
 
-So, to describe a speciﬁc multi-product batch problem, we propose the notation $\sigma|\lambda|\mu|\pi|\eta|\gamma|\iota|\delta|\rho$. The multi-product batch problems and solution approaches discussed in the references cited in this paper are summarized in Tab. . 
+So, to describe a speciﬁc multi-product batch problem, we propose the notation $\sigma|\lambda|\mu|\pi|\eta|\gamma|\iota|\delta|\rho$. The multi-product batch problems and solution approaches discussed in the references cited in this paper are summarized in Tab. \ref{tab:review}.
+
+\begin{table}[thb]
+\begin{center}
+\begin{small}
+\begin{tabular}[c]{l l l}
+reference & problem & contributions  \\
+\cline {1-3} \\
+\cite{Eilon1985} & $SS|SU|s\textrm{-}batch|Sc|SP$ &  analysis of the effect\\
+& $St|Dt|SC, HC|-$  & of splitting batches \\
+\cline {1-3} \\
+Ravemark and & $MS|Pl|SPC|D|Cc|$ & convex mixed-integer\\
+Rippin (1998) & $St|Dt|C|WIP$ & linear programming \\
+& & model solved with \\
+& & DICOPT++ \\
+\cline {1-3} \\
+Petkov and & $MS|Pl|SPC|D|Cc|$ & exact method\\
+Maranas (1998)  & $St|St|NP|-$ & \\
+\cline {1-3} \\
+\cite{HeHui2008} & $SS|Pl|MPC|Sc|SP|$ & rule-based genetic \\
+& $St|Dt|C_{\textrm{max}}, TT|UC, DD$ & algorithm \\
+\cline {1-3} \\
+\cite{FumeroEtAl2016} & $MS|Pl|MPC|D,P,Sc|Cc|$ & mixed-integer linear  \\
+& $St|Dt|NP|UC,SC$ & programming model \\
+& & solved with CPLEX \\
+\cline {1-3} \\
+\cite{LiuEtAl2020} & $MS|DNt|s\textrm{-}batch|Sz|MP$ & mixed-integer quadratic \\
+& $|St|Dt|SC,WIPC|UC,WIP$ & programming model  \\
+& & and exact algorithm \\
+\cline {1-3} \\
+\end{tabular}
+\caption{Some contributions on the multi-product batch problems}
+\label{tab:review}
+\end{small}
+\end{center}
+\end{table} 
 
 \subsection{Contributions of this paper}
 
