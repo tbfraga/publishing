@@ -142,8 +142,10 @@
            state={PE},
            country={Brazil}}
 
-\begin{abstract}
-In the plastic bag extrusion process, it is necessary to determine the optimal processing time for batches formed by different products, which are processed simultaneously by the same extruder, but with different processing rates. The batch processing time must be determined in order to meet a series of known constraints, such as the limitation for the quantity produced for each product and for the quantity produced for the set of all products in the same batch. In this paper we present this problem as a new combinatorial optimization problem named Multi-product Batch Processing Time Maximization (MBPTM) problem. We also present a mathematical model for the MBPTM problem and an analytical solution method with polynomial time complexity, which proved to be able to obtain optimal solutions for several benchmarks in a very short time, even for very large instances.
+\begin{abstract} 
+The multi-product batch (MPB) problems have been widely studied by the researchers. Among the most complex MPB problems are the multi-product p-batch scheduling (MPPBS) problems, where jobs must be scheduled on parallel batch processing machines. When applying some local search heuristics to solve a MPPBS problem, it can be necessary to determine, in each iteration, the maximum processing time for batches of compound products considering that the products that make up the batches have different processing rates, and that there are limitations for the amount produced for each product, as well as for the set of products of the compound  batch. Using the denominations present in the literature, this sub-problem can be simply referred as a single stage multi-product p-batch sizing problem. 
+
+In the plastic bag extrusion process, it is necessary to determine the optimal processing time for batches formed by different products, which are processed simultaneously by the same extruder, but with different processing rates. The batch processing time must be determined in order to meet a series of known constraints, such as the limitation for the quantity produced for each product and for the quantity produced for the set of all products in the same batch. In this paper we present the multi-product batch processing time maximization (MBPTM) problem. We also present a mathematical model for the MBPTM problem and an analytical solution method with polynomial time complexity, which proved to be able to obtain optimal solutions for several benchmarks in a very short time, even for very large instances.
 \end{abstract}
 %%Graphical abstract
 %\begin{graphicalabstract}
@@ -242,11 +244,11 @@ In short, based on the bibliographic survey conducted for the preparation of thi
 \item \textbf{time horizon ($\eta$)}: single period (SP) or multiperiod (MP), cyclic (Cc);
 \item \textbf{scenario ($\gamma$)}: static (St) or dynamic (Dn);
 \item \textbf{input ($\iota$)}: deterministic (Dt) and/or stochastic (St);
-\item \textbf{performance measure ($\delta$)}: capital cost (C), setup cost (SC), holding cost (HC), work-in-process cost (WIPC), net profit (NP), makespan (C$_{\textrm{max}}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness (TT), the total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$), weighted $E/T$ ($wE/T$), and processing time (PT);
-\item \textbf{others ($\rho$)}: limited capacity units (LCU), storage capacity by product (PSC), storage capacity (SC), work-in-process storage (WIP), release time (RT), due dates (DD), incompatible families (IF), different processing rates (DPR).
+\item \textbf{performance measure ($\delta$)}: capital cost (C), setup cost (SC), holding cost (HC), work-in-process cost (WIPC), net profit (NP), makespan (C$_{\textrm{max}}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness (TT), the total weighted earliness (TWE), total weighted tardiness (TWT), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$), weighted $E/T$ ($wE/T$), and processing time (PT);
+\item \textbf{others ($\rho$)}: limited capacity units (LCU), storage capacity by product (PSC), storage capacity (SC), work-in-process storage (WIP), release time (RT), due dates (DD), incompatible families (IF), different processing rates (DPR), sequence-dependent setup times (SDST).
 \end{enumerate}
 
-So, to describe a speciﬁc multi-product batch problem, we propose the notation $\sigma|\lambda|\mu|\pi|\eta|\gamma|\iota|\delta|\rho$. The multi-product batch problems and solution approaches discussed in the references cited in this paper are summarized in Tab. \ref{tab:review}.
+So, to describe a speciﬁc multi-product batch problem, we propose the notation $\sigma|\lambda|\mu|\pi|\eta|\gamma|\iota|\delta|\rho$. Some of the multi-product batch problems and solution approaches discussed in the references cited in this paper are summarized in Tab. \ref{tab:review}.
 
 \begin{table}[h!]
 \begin{center}
@@ -257,32 +259,31 @@ reference & problem & contributions  \\
 \cite{Eilon1985} & $SS|SU|s\textrm{-}batch|Sc|SP$ &  analysis of the effect\\
 & $St|Dt|SC, HC|-$  & of splitting batches \\
 \cline {1-3} \\
-Ravemark and & $MS|Pl|SPC|D|Cc|$ & convex mixed-integer\\
-Rippin (1998) & $St|Dt|C|WIP$ & linear programming \\
-& & model solved with \\
-& & DICOPT++ \\
+Ravemark and & $MS|Pl|SPC|D|Cc|$ & convex MILP model \\
+Rippin (1998) & $St|Dt|C|WIP$ & solved with DICOPT++ \\
 \cline {1-3} \\
 Petkov and & $MS|Pl|SPC|D|Cc|$ & exact method\\
 Maranas (1998)  & $St|St|NP|-$ & \\
 \cline {1-3} \\
-\cite{MendezEtAll2000} & $SS|\lambda|p,s\textrm{-}batch|P,Sc|\eta|\gamma|$ & two-step systematic \\
-& $Dt|WIPC|RT, DD$& methodology \\
+\cite{MendezEtAll2000} & $SS|Pl|MPC|P,Sc|SP|St|$ & MILP continuous-time  \\
+& $Dt|WIPC|RT, DD$ & model and a two-step  \\
+& & systematic methodology \\
+\cline {1-3} \\
+Méndez and & $SS|Pl|MPC|Sc|SP|Dn|Dt|$ & MIPL model and \\
+Cerdá (2003) &$TWE, TWT|RT, DD, SDST$ & a rescheduling algorithm\\
 \cline {1-3} \\
 \cite{HeHui2008} & $SS|Pl|MPC|Sc|SP|$ & rule-based genetic \\
 & $St|Dt|C_{max}, TT|LCU, DD$ & algorithm \\
 \cline {1-3} \\
-\cite{FumeroEtAl2016} & $MS|Pl|MPC|D,P,Sc|Cc|$ & mixed-integer linear  \\
-& $St|Dt|NP|LCU,USC$ & programming model \\
-& & solved with CPLEX \\
+\cite{FumeroEtAl2016} & $MS|Pl|MPC|D,P,Sc|Cc|$ & MILP model \\
+& $St|Dt|NP|LCU,USC$ & solved with CPLEX \\
 \cline {1-3} \\
 \cite{LiuEtAl2020} & $MS|DNt|s\textrm{-}batch|Sz|MP|St|$ & mixed-integer quadratic \\
 & $Dt|SC,WIPC|LCU,WIP$ & programming model  \\
 & & and exact algorithm \\
 \cline {1-3} \\
-\cite{LiEtAl2022} & $SS|Pl|p\textrm{-}batch|Sc,B|SP|$ & mixed-
-integer linear \\
-& $St|Dt|C_{max}|LCU, RT, IF$ & programming and \\
- & & a constraint-guided \\
+\cite{LiEtAl2022} & $SS|Pl|p\textrm{-}batch|Sc,B|SP|$ & MILP model \\
+& $St|Dt|C_{max}|LCU, RT, IF$ & and a constraint-guided \\
  & & artificial immune \\
  & & system based algorithm \\ 
 \cline {1-3} \\
