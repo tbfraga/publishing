@@ -226,9 +226,9 @@ Since a single batch is processed at a time, it is necessary that the batches ar
 
 In multi-product batch scheduling (MPBS) problems it is necessary to determine the ideal batch size for each product and also the production sequence of the batches based on the known demand. Here, the solution must be determined in such a way that both setup and storage costs are minimized \citep{Eilon1985, Omega1993, LiuEtAl2020}. Some cientific works impose additional constraints on the MPBS problem - such as release times and due dates for each batch, and sequencing constraints due to mismatched product colors sequences - and focus on other goals - such as optimize customer satisfaction and/or the plant performance \citep{MendezEtAll2000, ShiEtAll2017}. Also, some cientific works consider MPBS problems within different layouts as well as dinamic and multiperiod scenarios. In parallel MPBS as well as in networked processes, it can also be necessary to define in which units each batch will be processed, and constraints that limit the units that can process each batch can also be imposed. Many cientifc works propose mixed-integer linear programming (MILP) formulations to solve MPBS problems. As example, we can mention the work of \cite{MendezEtAll2000} that presents a MILP continuous-time model and a two-step systematic methodology for a single-stage multi-product batch scheduling problem with different due-dates. Later, \cite{MendezCerda2003} also proposed another MILP formulation for reactive scheduling. As observerd by \cite{HeHui2008}, with the problem size increasing, the computational effort of MILP increases greatly so it is very difﬁcult for MILP to obtain acceptable solutions to large-size problems within reasonable time. Citing some works that use other approaches, \cite {KimEtAl1996} propose a Gantt chart mapping method and a modified genetic algorithm for solving a networked flowshop multi-product batch scheduling problem as well as a rule-based reactive rescheduling scheme for dinamicaly overcoming in-process deviation from the initial optimized schedule and \cite{HeHui2008} present a rule-based genetic algorithm for the scheduling of single-stage multi-product batch plants with parallel units.
 
-It is importante to note that some production units are capable of processing multiple jobs at the same time. In such a case batches of different products and sizes can be grouped and processed by these units as a single batch. It is therefore necessary to determine the set of "batches" that each new grouped batch will contain. The multi-product balancing problem consists of determining these groupings, seeking to minimize the overall makespan. \cite{KashanOzturk2022} name this problem \emph{p-batch} (parallel batching) in contradiction with the \emph{s-batch} (serial batching) problem where jobs are processed one by one over production facilities, as described before.  \cite{FowlerMonch2022} present a taxonomy and an extensive literature review for the p-batch problems. According to the authors, a p-batch problem can be classified as compatible setting - where there is no restriction on which jobs can be used to form a batch - and incompatible family case - where only jobs belonging to the same family can be used to form a batch. Not mentioned by \cite{FowlerMonch2022}, \cite{LiEtAl2022} deal with a multi-product \emph{s-batch} problem involving incompatible families with different job sizes and capacity constraints. 
+It is importante to note that some production units are capable of processing multiple jobs at the same time. In such a case batches of different products and sizes can be grouped and processed by these units as a single batch. It is therefore necessary to determine the set of "batches" that each new grouped batch will contain. The multi-product balancing problem consists of determining these groupings, seeking to minimize the overall makespan. \cite{KashanOzturk2022} name this problem \emph{p-batch} (parallel batching) in contradiction with the \emph{s-batch} (serial batching) problem where jobs are processed one by one over production facilities, as described before.  \cite{FowlerMonch2022} present a taxonomy and an extensive literature review for the p-batch problems. According to the authors, a p-batch problem can be classified as compatible setting - where there is no restriction on which jobs can be used to form a batch - and incompatible family case - where only jobs belonging to the same family can be used to form a batch. Not mentioned by \cite{FowlerMonch2022}, \cite{LiEtAl2022} deal with a multi-product p-batch problem involving identical parallel units, capacity constraints, and incompatible families with different job sizes. 
 
-In a real production environment, some of these problems arise in a connected way, so many cientific works adress mixed multi-product batch problems. As example, \cite{FumeroEtAl2016} developed a multi-period mixed-integer linear programming model for MPCs multistage multi-product batch problems, which integrates design, production planning, and scheduling decisions.
+In a real production environment, some of these problems arise in a connected way, so many cientific works adress mixed multi-product batch problems. As example, \cite{FumeroEtAl2016} developed a multi-period mixed-integer linear programming model for MPCs multistage multi-product batch problems, which integrates design, production planning, and scheduling decisions. Also, de work of \cite{MendezEtAll2000}, previously mentioned, considers planning as an integrated part of solution in real-world multi-product batch plant scheduling and therefore includes the product batching problem in its proposed MILP continuous-time models and two-step systematic methodology.
 
 \subsection{Taxonomy and notation}
 
@@ -242,13 +242,13 @@ In short, based on the bibliographic survey conducted for the preparation of thi
 \item \textbf{time horizon ($\eta$)}: single period (SP) or multiperiod (MP), cyclic (Cc);
 \item \textbf{scenario ($\gamma$)}: static (St) or dynamic (Dn);
 \item \textbf{input ($\iota$)}: deterministic (Dt) and/or stochastic (St);
-\item \textbf{performance measure ($\delta$)}: capital cost (C), setup cost (SC), holding cost (HC), work-in-process cost (WIPC), net profit (NP), makespan (C$_{\textrm{max}}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness (TT), the total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$) and/or weighted $E/T$ ($wE/T$);
-\item \textbf{others ($\rho$)}: capacited (UC), storage capacity (SC), work-in-process storage (WIP), due dates (DD), incompatible jobs (IJ). $\textrm{Z}$ 
+\item \textbf{performance measure ($\delta$)}: capital cost (C), setup cost (SC), holding cost (HC), work-in-process cost (WIPC), net profit (NP), makespan (C$_{\textrm{max}}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness (TT), the total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$), weighted $E/T$ ($wE/T$), and processing time (PT);
+\item \textbf{others ($\rho$)}: limited capacity units (LCU), storage capacity by product (PSC), storage capacity (SC), work-in-process storage (WIP), release time (RT), due dates (DD), incompatible families (IF), different processing rates (DPR).
 \end{enumerate}
 
 So, to describe a speciﬁc multi-product batch problem, we propose the notation $\sigma|\lambda|\mu|\pi|\eta|\gamma|\iota|\delta|\rho$. The multi-product batch problems and solution approaches discussed in the references cited in this paper are summarized in Tab. \ref{tab:review}.
 
-\begin{table}[thb]
+\begin{table}[h!]
 \begin{center}
 \begin{small}
 \begin{tabular}[c]{l l l}
@@ -265,16 +265,26 @@ Rippin (1998) & $St|Dt|C|WIP$ & linear programming \\
 Petkov and & $MS|Pl|SPC|D|Cc|$ & exact method\\
 Maranas (1998)  & $St|St|NP|-$ & \\
 \cline {1-3} \\
+\cite{MendezEtAll2000} & $SS|\lambda|p,s\textrm{-}batch|P,Sc|\eta|\gamma|$ & two-step systematic \\
+& $Dt|WIPC|RT, DD$& methodology \\
+\cline {1-3} \\
 \cite{HeHui2008} & $SS|Pl|MPC|Sc|SP|$ & rule-based genetic \\
-& $St|Dt|C_{\textrm{max}}, TT|UC, DD$ & algorithm \\
+& $St|Dt|C_{max}, TT|LCU, DD$ & algorithm \\
 \cline {1-3} \\
 \cite{FumeroEtAl2016} & $MS|Pl|MPC|D,P,Sc|Cc|$ & mixed-integer linear  \\
-& $St|Dt|NP|UC,SC$ & programming model \\
+& $St|Dt|NP|LCU,USC$ & programming model \\
 & & solved with CPLEX \\
 \cline {1-3} \\
-\cite{LiuEtAl2020} & $MS|DNt|s\textrm{-}batch|Sz|MP$ & mixed-integer quadratic \\
-& $|St|Dt|SC,WIPC|UC,WIP$ & programming model  \\
+\cite{LiuEtAl2020} & $MS|DNt|s\textrm{-}batch|Sz|MP|St|$ & mixed-integer quadratic \\
+& $Dt|SC,WIPC|LCU,WIP$ & programming model  \\
 & & and exact algorithm \\
+\cline {1-3} \\
+\cite{LiEtAl2022} & $SS|Pl|p\textrm{-}batch|Sc,B|SP|$ & mixed-
+integer linear \\
+& $St|Dt|C_{max}|LCU, RT, IF$ & programming and \\
+ & & a constraint-guided \\
+ & & artificial immune \\
+ & & system based algorithm \\ 
 \cline {1-3} \\
 \end{tabular}
 \caption{Some contributions on the multi-product batch problems}
@@ -285,9 +295,9 @@ Maranas (1998)  & $St|St|NP|-$ & \\
 
 \subsection{Contributions of this paper}
 
-In this work we are interested in the multiperiod multi-product batch scheduling problem in a networked plant that arises in a plastic bag industry. The industrial plant of this company is very similar to the multi-product s-batch networked plant of the steel industry presented by \cite{LiuEtAl2020} (Fig. \ref{fig:networkdPlantSteelIndustry}), however, the production process in this plastic bags industry begins in extruders, which are production units capable of processing different batches simultaneously. Therefore the problem we are interested is a multi-product \emph{p-batch} \emph{s-batch} problem in a networked plant close to the problem addressed by \cite{LiEtAl2022}. Thus, part of the problem solving process consists of solving a multi-product p-batch problem into extruders. Also, in the problem we study, in addition to demand, we must consider the factory and outlets' storage capacity, which is individually defined for products, but also for the set of products. 
+In this work we are interested in the multiperiod multi-product batch scheduling problem in a networked plant that arises in a plastic bag industry. The industrial plant of this company is very similar to the multi-product s-batch networked plant of the steel industry presented by \cite{LiuEtAl2020} (Fig. \ref{fig:networkdPlantSteelIndustry}), however, the production process in this plastic bags industry begins in extruders, which are production units capable of processing different batches simultaneously. Therefore the problem we are interested is a multi-product \emph{p-batch} \emph{s-batch} problem in a networked plant close to the problem addressed by \cite{LiEtAl2022}. Thus, part of the problem solving process consists of solving a multi-product p-batch problem into extruders. Also, in the problem we study, in addition to demand, we must consider the factory and outlets' storage capacity, which is individually defined for products, but also for the set of products.
 
-When we began to propose an algorithm to solve the studied problem through a local search method, we identified the need to determine, at each iteration, a maximum processing time for predefined multi-product \emph{p-batches}, based on known restrictions, so that the new solution built was a feasible solution and at the same time with the best fitness. We named this problem multi-product p-batch processing time maximization (MBPTM) problem. 
+When we began to propose an algorithm to solve the studied problem through a local search method, we identified the need to determine, at each iteration, a maximum processing time for predefined multi-product \emph{p-batches}, based on known restrictions, so that the new solution built was a feasible solution and at the same time with the best fitness. This problem can be classified as a multi-product $SS|SU|p\textrm{-}batch|Sz|SP|St|Dt|PT|LCU, PSC, SC, DPR$ batch problem. For simplification purposes, we named this problem multi-product p-batch processing time maximization (MBPTM) problem. 
 
 It is important to note that, since the MBPTM problem need to be solved at each iteration, it has a direct impact on the overall efficiency of the local search method proposed for solving the multi-product \emph{p-batch} \emph{s-batch} problem in the plastic bag networked plant of the industry studied. In a future work, we intend to present the mathematical model and solution algorithm we are developing for this last problem. As scientific contributions of this paper, we present a mathematical model and a very efficient polynomial optmization method for solving the MBPTM problem.
 
