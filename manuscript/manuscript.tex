@@ -143,7 +143,7 @@
            country={Brazil}}
 
 \begin{abstract} 
-The multi-product batch (MPB) problems have been widely studied by the researchers. Among the most complex MPB problems are the multi-product p-batch scheduling (MPPBS) problems, where jobs must be scheduled on parallel batch processing machines. When applying some local search heuristics to solve a MPPBS problem, it can be necessary to determine, in each iteration, the maximum processing time for batches of compound jobs considering that the jobs that make up the batches have different processing rates, and that there are limitations for the amount produced for each product, as well as for the set of products of the compound  batch. Using the denominations present in the literature, this sub-problem can be simply referred as a single stage multi-product p-batch sizing (SSMPPBS) problem . Once a SSMPPBS problem needs to be solved in each iteration, the efficiency of the method developed for solving a SSMPPBS problem has a huge impact on the computational cost of the local search algorithm. In addition, for some industries, efficiently solving an SSMPPBS problem can have a significant impact on storage costs and customer satisfaction. In this paper we presente a mathematical model and an exact method with polynomial time complexity for the SSMPPBS problem. We developed a LINGO solver for solving the mathematic model, and a C ++ solver for application of the proposed exact method. We tested both solvers, comparing the results for a series of benchmarks with sizes varying between small and very large. As result, we find that the exact method can obtain optimal solutions in a very short time (just few seconds), even when solving very large instances. 
+Among the most complex multi-product batch problems are the multi-product p-batch scheduling (MPPBS) problems, where jobs must be scheduled on parallel batch processing machines. When applying some local search heuristics to solve a MPPBS problem, it can be necessary to iteratively solve a single stage multi-product p-batch sizing problem with different processing rates for different products, limited capacity units, and storage capacity defined both for each product and for all products. In this paper we name this problem multi-product p-batch processing time maximization (MPBPTM) problem. Once a MPBPTM problem needs to be solved in each iteration, the efficiency of the method developed for solving it has a huge impact on the computational cost of the local search algorithm used to solve some MPPBS problems. In addition, for some industries, efficiently solving a MPBPTM problem can have a significant impact on storage costs and customer satisfaction. In this paper we presente a mathematical model and an exact method with polynomial time complexity for the MPBPTM problem. We developed a LINGO solver for solving the mathematic model, and a C ++ solver for application of the proposed exact method. We tested both solvers, comparing the results for a series of benchmarks with sizes varying between small and very large. As result, we find that the exact method can obtain optimal solutions in a very short time (just few seconds), even when solving very large instances. 
 \end{abstract}
 %%Graphical abstract
 %\begin{graphicalabstract}
@@ -158,7 +158,7 @@ The multi-product batch (MPB) problems have been widely studied by the researche
 \end{highlights}
 
 \begin{keyword}
-multiproduct batch \sep processing time maximization \sep mathematical model \sep analytical solution \sep LINGO
+multi-product batch \sep processing time maximization \sep mathematical model \sep analytical solution \sep LINGO
 \end{keyword}
 \end{frontmatter}
 
@@ -235,15 +235,15 @@ In a real production environment, some of these problems arise in a connected wa
 In short, based on the bibliographic survey conducted for the preparation of this paper, we identify that the multi-product batch problems can differentiate with the following aspects:
 
 \begin{enumerate}[label=\arabic*)]
-\item \textbf{number of stages ($\sigma$)}: single stage (SS) or multistage (MS);
-\item \textbf{layout($\lambda$)}: single unit (SU), flowshop (Fl), parallel (Pl), or networked (Nt) (convergent (CNt) and /or divergent (DNt));
-\item \textbf{production mode ($\mu$)}: single-product campaing (SPC), mixed-product campaign (MPC), serial batching (s-batch) and/or parallel batching (p-batch);
-\item \textbf{problem:($\pi$)}  : design (D), planning (P), sizing (Sz), scheduling (Sc) and/or balancing (B); 
-\item \textbf{time horizon ($\eta$)}: single period (SP) or multiperiod (MP), cyclic (Cc);
-\item \textbf{scenario ($\gamma$)}: static (St) or dynamic (Dn);
-\item \textbf{input ($\iota$)}: deterministic (Dt) and/or stochastic (St);
-\item \textbf{performance measure ($\delta$)}: capital cost (C), setup cost (SC), holding cost (HC), work-in-process cost (WIPC), net profit (NP), makespan (C$_{\textrm{max}}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness (TT), the total weighted earliness (TWE), total weighted tardiness (TWT), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$), weighted $E/T$ ($wE/T$), and processing time (PT);
-\item \textbf{others ($\rho$)}: limited capacity units (LCU), storage capacity by product (PSC), storage capacity (SC), work-in-process storage (WIP), release time (RT), due dates (DD), incompatible families (IF), different processing rates (DPR), sequence-dependent setup times (SDST).
+\item \textbf{number of stages ($\sigma$)}: single stage ($SS$) or multistage ($MS$);
+\item \textbf{layout($\lambda$)}: single unit ($SU$), flowshop ($Fl$), parallel ($Pl$), or networked ($Nt$) (convergent ($CNt$) and /or divergent ($DNt$));
+\item \textbf{production mode ($\mu$)}: single-product campaing ($SPC$), mixed-product campaign ($MPC$), serial batching ($s\textrm{-}batch$) and/or parallel batching ($p\textrm{-}batch$);
+\item \textbf{problem:($\pi$)}  : design ($D$), planning ($P$), sizing ($Sz$), scheduling ($Sc$) and/or balancing ($B$); 
+\item \textbf{time horizon ($\eta$)}: single period ($SP$), multiperiod ($MP$) or cyclic ($Cc$);
+\item \textbf{scenario ($\gamma$)}: static ($St$) or dynamic ($Dn$);
+\item \textbf{input ($\iota$)}: deterministic ($Dt$) and/or stochastic ($St$);
+\item \textbf{performance measure ($\delta$)}: capital cost ($C$), setup cost ($SC$), holding cost ($HC$), work-in-process cost ($WIPC$), net profit ($NP$), makespan ($C_{max}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness (TT), total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$), weighted $E/T$ ($wE/T$), and processing time ($PT$);
+\item \textbf{others ($\rho$)}: limited capacity units ($LCU$), storage capacity by product ($PSC$), storage capacity ($SC$), work-in-process storage ($WIP$), release time ($RT$), due dates ($DD$), incompatible families ($IF$), different processing rates ($DPR$), sequence-dependent setup times ($SDST$).
 \end{enumerate}
 
 So, to describe a speciﬁc multi-product batch problem, we propose the notation $\sigma|\lambda|\mu|\pi|\eta|\gamma|\iota|\delta|\rho$. Some of the multi-product batch problems and solution approaches discussed in the references cited in this paper are summarized in Tab. \ref{tab:review}.
@@ -268,7 +268,7 @@ Maranas (1998)  & $St|St|NP|-$ & \\
 & & systematic methodology \\
 \cline {1-3} \\
 Méndez and & $SS|Pl|MPC|Sc|SP|Dn|Dt|$ & MIPL model and \\
-Cerdá (2003) &$TWE, TWT|RT, DD, SDST$ & a rescheduling algorithm\\
+Cerdá (2003) &$wE/T|RT, DD, SDST$ & a rescheduling algorithm\\
 \cline {1-3} \\
 \cite{HeHui2008} & $SS|Pl|MPC|Sc|SP|$ & rule-based genetic \\
 & $St|Dt|C_{max}, TT|LCU, DD$ & algorithm \\
