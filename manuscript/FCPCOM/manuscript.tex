@@ -1,0 +1,266 @@
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+
+\documentclass[authoryear,manuscript,12pt]{elsarticle}
+\usepackage{setspace}
+\doublespacing
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{rotating}
+\usepackage{multirow}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\usepackage{enumitem}
+
+\usepackage{array, makecell}
+
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,shapes.misc,shapes.symbols,arrows.meta,graphs,fit,positioning,shadows}
+
+
+
+%% The `ecrc' package must be called to make the CRC functionality available
+%\usepackage{ecrc}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+\journal{Computers \& Industrial Engineering}
+
+\begin{document}
+
+\begin{frontmatter}
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \affiliation for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \affiliation{organization={},
+%%            addressline={}, 
+%%            city={},
+%%            postcode={}, 
+%%            state={},
+%%            country={}}
+%% \fntext[label3]{}
+
+\title{Analytic Hierarchy Process: how to force consistency of pairwise comparisons matrix}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \affiliation[label1]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%
+%% \affiliation[label2]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+
+%\author{Tatiana Balbi Fraga, Ítalo Ruan Barbosa de Aquino and Regilda da Costa e Silva Menêzes}
+
+\author{Tatiana Balbi Fraga\corref{cor1}\fnref{label1}}
+\ead{tatiana.balbi@ufpe.br}
+\cortext[cor1]{corresponding author}
+
+\author{Ítalo Ruan Barbosa de Aquino\fnref{label1}}
+\ead{italo_ruan_@hotmail.com}
+
+\author{Regilda da Costa e Silva Menêzes\fnref{label1}}
+\ead{regilda.smenezes@ufpe.br}
+
+%\affiliation[label1]{
+%			 organization={Centro Acadêmico do Agreste - Universidade Federal de Pernambuco},
+%             addressline={Avenida Marielle Franco, Bairro Nova Caruaru},
+%             city={Caruaru},
+%             postcode={55014-900},
+%             state={PE},
+%             country={Brasil} }
+
+\affiliation[label1]{
+		   organization={Agreste Academic Center - Federal University of Pernambuco},%Department and Organization
+           addressline={Avenida Marielle Franco, Nova Caruaru}, 
+           city={Caruaru},
+           postcode={55014-900}, 
+           state={PE},
+           country={Brazil}}
+
+\begin{abstract} 
+Saaty's Analytic Hierarchy Process is an important method for assigning weight to multiple criteria. The logic of this method is not complicated. First a pairwise comparisons matrix is generated for the multiple criteria, and the normalized eigenvector of this pairwise matrix is used as the weight of the criteria. Despite this method represents an important inovation, its logic is not complicated at all. First a pairwise comparisons matrix is generated for the multiple criteria, and the normalized eigenvector of this matrix is used as the weight of criteria. But, since pairwise matrixes are usually generated manually and based only on some employee knowhow, there is a huge complexity on generating a consistent pairwise matrix. Especially when many criteria are used. This paper presents two algorithms that can be used to adjust inconsistent matrices, forcing such matrices to have a better consistency rate. The first method is a constructive method that uses the data inserted in the matrix to build a new improved one. The second method iteratively identifies inconsistencies, making minor changes in order to improve the matrix consistency rate. 
+\end{abstract}
+%%Graphical abstract
+%\begin{graphicalabstract}
+%\end{graphicalabstract}
+
+%%Research highlights
+\begin{highlights}
+\item generative method for forcing consistenc ;
+\item multi-product p-batch processing time maximization (MPBPTM) problem definition;
+\item linear integer programming model for the MPBPTM problem;
+\item exact optimization method for solving the MPBPTM problem.
+\end{highlights}
+
+\begin{keyword}
+multi-product batch \sep processing time maximization \sep mathematical model \sep analytical solution \sep LINGO
+\end{keyword}
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+\section{Introduction}
+\label{sec:intro}
+
+
+
+\section{Tests and results}
+\label{sec:results}
+
+
+
+\section{Conclusions and suggestions for future works}
+\label{sec:conclusions}
+
+In this paper we presented ...
+
+\section{CRediT authorship contribution statement} 
+\label{sec:contributions}
+
+T.B. Fraga: Conceptualization, Project administration, Supervision, Software, Methodology, Validation, Formal analysis, Writing – original draft, Writing – review \& editing. Í.R.B. Aquino: Data curation. R.C.S. Menêzes: Data curation.
+
+\section{Acknowledgments}
+\label{sec:acknowledgments}
+
+We are enormously grateful to Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (CAPES) and to Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) for the financial support provided to our projects. We also thank LINDO systems team for the LINGO software license, without which this work would not have been possible and the to the owner of the company in the plastics sector, who allowed us to learn about his company's production process. Finally, we would like to thank Pró-reitoria de Extensão e Cultura da UFPE (PROExC) and the Research Director of Propesqi (Pró-reitoria de Pesquisa e Inovação da UFPE) for their support and recognition of our work, and dear Professors Antônio José da Silva Neto and João Flávio Vieira de Vasconcellos from IPRJ/UERJ, who contributed significantly to the formation of essential skills for the development of our projects. We also thank my co-worker Marcos Luiz Henrique, for having helped by evaluating the mathematical model and solution method proposed in this paper.
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%% \section{}
+%% \label{}
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+%%  \bibliographystyle{elsarticle-harv} 
+%%  \bibliography{<your bibdatabase>}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+
+\begin{thebibliography}{1}
+
+%% \bibitem[Author(year)]{label}
+%% Text of bibliographic item
+
+\bibitem[\protect\citeauthoryear{Eilon}{1985}]{Eilon1985}
+Eilon. (1985). Multi-product batch production on a single machine - A problem revisited. {\it OMEGA Int. J. of Mgmt Sci.}, Vol. 13 (5), pp. 453--468.
+
+\bibitem[\protect\citeauthoryear{Fowler and Mönch}{2022}]{FowlerMonch2022}
+Fowler, J.W. and Mönch, L. (2022). A survey of scheduling with parallel batch (p-batch) processing. {\it European Journal of Operational Research}, Vol. 298, pp. 1--24.
+
+\bibitem[\protect\citeauthoryear{Fraga}{2023}]{Fraga2023}
+Fraga, T.B. (2023). COPSolver: open source software for solving combinatorial optimization and other decision prob-
+lems - library for solving the multi-product p-batch processing time maximization problem {\it Software Impacts}, invited paper, in press.
+
+\bibitem[\protect\citeauthoryear{Fumero \emph{et al.}}{2016}]{FumeroEtAl2016}
+Fumero Y., Moreno M. S., Corsano, G., Montagna, J. M. (2016). A multiproduct batch plant design model incorporating production planning and scheduling decisions under a multiperiod scenario. {\it Applied Mathematical Modelling}, Vol. 40, pp. 3498--3515.
+
+\bibitem[\protect\citeauthoryear{He and Hui}{2008}]{HeHui2008}
+He, Y., Hui, C-W. (2008). A rule-based genetic algorithm for the scheduling of single-stage multi-product batch plants with parallel units. {\it  Computers and Chemical Engineering}, Vol. 32, pp. 3067--3083.
+
+\bibitem[\protect\citeauthoryear{Kashan and Ozturk}{2022}]{KashanOzturk2022}
+Kashan, A. H., and Ozturk, O. (2022). Improved MILP formulation equipped with valid inequalities for scheduling a batch processing machine with non-identical job sizes. {\it  Omega}, Vol. 112, pp. 102673.
+
+\bibitem[\protect\citeauthoryear{Kim \emph{et al.}}{1996}]{KimEtAl1996}
+Kim, M., Jung, J. H. and Lee, I. (1996). Intelligent scheduling and monitoring for multi-product networked batch processes. {\it  Computers chem. Engn}, Vol. 20 (Suppl.), pp. 1149--1154.
+
+\bibitem[\protect\citeauthoryear{Li et al.}{2022}]{LiEtAl2022}
+Li, C., Wang, F., Gupta, J.N.D., Chung, T. (2022). Scheduling identical parallel batch processing machines involving incompatible families with different job sizes and capacity constraints. {\it Computers \& Industrial Engineering}, Vol. 169, pp. 108115.
+
+\bibitem[\protect\citeauthoryear{Liu \emph{et al.}}{2020}]{LiuEtAl2020}
+Liu, G., Li, F., Yang, X., and Qiu. S. (2020). The multi-stage multi-product batch-sizing problem in the steel industry. {\it  Applied Mathematics and Computation}, Vol. 369, 124830.
+
+\bibitem[\protect\citeauthoryear{Méndez \emph{et al.}}{2000}]{MendezEtAll2000}
+Méndez, C.A., Henning, G.P., Cerdá, J. (2000). Optimal scheduling of batch plants satisfying multiple product
+orders with different due-dates. {\it Computers and Chemical Engineering}, Vol. 24, pp. 2223--2245.
+
+\bibitem[\protect\citeauthoryear{Méndez and Cerdá}{2003}]{MendezCerda2003}
+Méndez, C.A., Cerdá, J. (2003). Dynamic scheduling in multiproduct batch plants. {\it Computers and Chemical Engineering}, Vol. 27, pp. 1247--1259.
+
+\bibitem[\protect\citeauthoryear{Omega Journal}{1993}]{Omega1993}
+OMEGA Journal. (1993). Single Machine Multi-product Batch Scheduling: Testing Several Solution Methods. {\it  OMEGA Int. J. of Mgmt Sci.}, Vol. 21 (6), pp. 709--711.
+
+\bibitem[\protect\citeauthoryear{Petkov and Maranas}{1998}]{PetkovMaranas1998}
+Petkov, S. B., and Maranas, C. D. (1998). Design of Single-Product Campaign Batch Plants under Demand Uncertainty. {\it  AIChE Journal}, Vol. 44 (4), pp. 896--911.
+
+\bibitem[\protect\citeauthoryear{Ravemark and Rippin}{1998}]{RavemarkAndRippin1998}
+Ravemark, D. E., and Rippin, D. W. T. (1998). Optimal design of a multi-product batch plant. {\it Computers chem. Engng}, Vol. 22 (1-2), pp. 177--183.
+
+\bibitem[\protect\citeauthoryear{Shi \emph{et al.}}{2017}]{ShiEtAll2017}
+Shi, B., Qian, X., Sun, S., Yan, L. (2017). Rule-based scheduling of multi-stage multi-product batch plants with parallel units. {\it Chinese Journal of Chemical Engineering}, in press.
+
+\end{thebibliography}
+\end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-harv.tex'.
