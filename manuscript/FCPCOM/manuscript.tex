@@ -22,6 +22,7 @@
 \doublespacing
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+%\usepackage{algorithm2e}
 \usepackage{rotating}
 \usepackage{multirow}
 \newtheorem{theorem}{Theorem}
@@ -168,7 +169,88 @@ multi-product batch \sep processing time maximization \sep mathematical model \s
 \section{Introduction}
 \label{sec:intro}
 
+\section{Forcing matrix consistency}
+\begin{algorithm}
+\caption{function $consistencyRate()$}\label{alg:CA}
+\begin{algorithmic}
+\Require $[a_{ij}]_{i,j=1}^{n}, RI[x]_{x=1}^{10}$
+\State{$\lambda_{max} = mainEigenvalue([a_{ij}]_{i,j=1}^{n})$ \footnote{main eigenvalue can be found using "Eigen/Eigenvalues library.}}
+\State{$CI = (\lambda_{max} - n) / (n-1)$}
+\State{$CR \gets CI/RI[n]$}
+\State{\Return {$CR$}}
+\end{algorithmic}
+\end{algorithm}
 
+\begin{algorithm}
+\caption{function forcingConsistency()}\label{alg:CA}
+\begin{algorithmic}
+\Require $[a_{ij}]_{i,j=1}^{n} \quad | \quad consistencyRate([a_{ij}]_{i,j=1}^{n-1}) \leq 0.1 $
+\Ensure $consistencyRate([b_{ij}]_{i,j=1}^{n}) \leq 0.1$
+\For{$j \leq n-1$}
+	\For{$j+1 \leq k \leq n-1 $}
+		\If{$a_{jk} = 1$}
+			\If{$a_{nj} \neq a_{nk}$}
+			\State 
+			\EndIf
+		\Else
+		\EndIf
+		\If{$a_{nj} > a_{nk} \textrm{ and } a_{jk} < 0 $}
+		\ElsIf{$a_{nj} < a_{nk} \textrm{ and } a_{jk} > 0 $}
+		\EndIf
+	\EndFor
+\EndFor
+\State{\Return {$[b_{ij}]_{i,j=1}^{n}, CR([b_{ij}]_{i,j=1}^{n})$}}
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Constructive algorithm}
+
+\begin{algorithm}
+\caption{function constructivelyForcingConsistency()}\label{alg:CA}
+\begin{algorithmic}
+\Require $\textrm{M}[a_{ij}]_{i,j=1}^{n}$
+\Ensure $consistencyRate([b_{ij}]_{i,j=1}^{n}) \leq 0.1$
+\State $\textrm{test consistency for } \textrm{M}[a_{ij}]_{i,j=1}^{n}$
+\If {$\textrm{M}[a_{ij}]_{i,j=1}^{n} \textrm{ is consistent} $}
+	\State {$\textrm{M}[b_{ij}]_{i,j=1}^{n}  \gets \textrm{M}[a_{ij}]_{i,j=1}^{n} $}
+	\State{\Return {$\textrm{M}[b_{ij}]_{i,j=1}^{n}$}}
+\Else
+	\State {$\textrm{M}[b_{ij}]_{i,j=1}^{2} = M[a_{ij}]_{i,j=1}^{2} $}
+	\State {$\textrm{M}[c_{ij}]_{i,j=1}^{2} = M[a_{ij}]_{i,j=1}^{2} $}
+\EndIf
+
+\For{$ 3 \leq k \leq n $}
+	\For{$l \leq k$}
+		\If{$k = l$}
+			\State{$c_{kl} \gets 1$}
+		\Else
+			\State {$c_{kl} \gets a_{kl} $}
+			\State {$c_{lk} \gets a_{lk} $}
+		\EndIf
+	\EndFor
+	\State $\textrm{test consistency for } \textrm{M}[c_{ij}]_{i,j=1}^{k}$
+	\If {$\textrm{M}[c_{ij}]_{i,j=1}^{k} \textrm{ is inconsistent} $}
+		\State {find and adjust inconsistency on $M[c_{ij}]_{i,j=1}^{k}$}
+	\EndIf
+	\State {$\textrm{M}[b_{ij}]_{i,j=1}^{k} = M[c_{ij}]_{i,j=1}^{k} $}
+\EndFor
+\State $\textrm{test consistency for } \textrm{M}[b_{ij}]_{i,j=1}^{n}$
+\State{\Return {$\textrm{M}[b_{ij}]_{i,j=1}^{n}$}}
+
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Iterative algorithm}
+
+\begin{algorithm}
+\caption{function iterativelyForcingConsistency()}\label{alg:CA}
+\begin{algorithmic}
+\Require $\textrm{M}[a_{ij}]_{i,j=1}^{n}$
+\Ensure $consistencyRate([b_{ij}]_{i,j=1}^{n}) \leq 0.1$
+
+\State{\Return {$\textrm{M}[b_{ij}]_{i,j=1}^{n}$}}
+\end{algorithmic}
+\end{algorithm}
 
 \section{Tests and results}
 \label{sec:results}
