@@ -169,7 +169,7 @@ multi-product batch \sep processing time maximization \sep mathematical model \s
 \section{Introduction}
 \label{sec:intro}
 
-\section{Forcing matrix consistency}
+\section{Algorithms for forcing matrix consistency}
 \begin{algorithm}
 \caption{function $consistencyRate()$}\label{alg:CA}
 \begin{algorithmic}
@@ -177,7 +177,7 @@ multi-product batch \sep processing time maximization \sep mathematical model \s
 \State{$\lambda_{max} = mainEigenvalue([a_{ij}]_{i,j=1}^{n})$ \footnote{main eigenvalue can be found using "Eigen/Eigenvalues library.}}
 \State{$CI = (\lambda_{max} - n) / (n-1)$}
 \State{$CR \gets CI/RI[n]$}
-\State{\Return {$CR$}}
+\State{\Return {$CR$}}	
 \end{algorithmic}
 \end{algorithm}
 
@@ -186,16 +186,21 @@ multi-product batch \sep processing time maximization \sep mathematical model \s
 \begin{algorithmic}
 \Require $[a_{ij}]_{i,j=1}^{n} \quad | \quad consistencyRate([a_{ij}]_{i,j=1}^{n-1}) \leq 0.1 $
 \Ensure $consistencyRate([b_{ij}]_{i,j=1}^{n}) \leq 0.1$
-\For{$j \leq n-1$}
+\State{$CR \gets consistencyRate([a_{ij}]_{i,j=1}^{n})$}
+\State{$[b_{ij}]_{i,j=1}^{n} \gets [a_{ij}]_{i,j=1}^{n}$}
+\For{$j \leq n-2$}
 	\For{$j+1 \leq k \leq n-1 $}
-		\If{$a_{jk} = 1$}
+		\If{$a_{nj} > a_{nk} \textrm{ and } a_{jk} < 0 $}
+			\While{$CR > 0.1$}
+				\State{$aux_j \gets  b_{nj}$}
+				\State{$aux_k \gets  b_{nk}$}
+			\EndWhile
+			\State{$a_{nj} $}
+		\ElsIf{$a_{nj} < a_{nk} \textrm{ and } a_{jk} > 0 $}
+		\ElsIf{$a_{jk} = 1$}
 			\If{$a_{nj} \neq a_{nk}$}
 			\State 
 			\EndIf
-		\Else
-		\EndIf
-		\If{$a_{nj} > a_{nk} \textrm{ and } a_{jk} < 0 $}
-		\ElsIf{$a_{nj} < a_{nk} \textrm{ and } a_{jk} > 0 $}
 		\EndIf
 	\EndFor
 \EndFor
