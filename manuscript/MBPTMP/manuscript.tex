@@ -116,15 +116,15 @@
 
 %\author{Tatiana Balbi Fraga, Ítalo Ruan Barbosa de Aquino and Regilda da Costa e Silva Menêzes}
 
-\author{Tatiana Balbi Fraga\corref{cor1}\fnref{label1}}
-\ead{tatiana.balbi@ufpe.br}
-\cortext[cor1]{corresponding author}
+%\author{Tatiana Balbi Fraga\corref{cor1}\fnref{label1}}
+%\ead{tatiana.balbi@ufpe.br}
+%\cortext[cor1]{corresponding author}
 
-\author{Ítalo Ruan Barbosa de Aquino\fnref{label1}}
-\ead{italo_ruan_@hotmail.com}
+%\author{Ítalo Ruan Barbosa de Aquino\fnref{label1}}
+%\ead{italo_ruan_@hotmail.com}
 
-\author{Regilda da Costa e Silva Menêzes\fnref{label1}}
-\ead{regilda.smenezes@ufpe.br}
+%\author{Regilda da Costa e Silva Menêzes\fnref{label1}}
+%\ead{regilda.smenezes@ufpe.br}
 
 %\affiliation[label1]{
 %			 organization={Centro Acadêmico do Agreste - Universidade Federal de Pernambuco},
@@ -134,16 +134,16 @@
 %             state={PE},
 %             country={Brasil} }
 
-\affiliation[label1]{
-		   organization={Agreste Academic Center - Federal University of Pernambuco},%Department and Organization
-           addressline={Avenida Marielle Franco, Nova Caruaru}, 
-           city={Caruaru},
-           postcode={55014-900}, 
-           state={PE},
-           country={Brazil}}
+%\affiliation[label1]{
+%		   organization={Agreste Academic Center - Federal University of Pernambuco},%Department and Organization
+%           addressline={Avenida Marielle Franco, Nova Caruaru}, 
+%           city={Caruaru},
+%           postcode={55014-900}, 
+%           state={PE},
+%           country={Brazil}}
 
 \begin{abstract} 
-Among the most complex multi-product batch problems are the multi-product p-batch scheduling (MPBS) problems, where jobs must be scheduled on parallel batch processing machines. When applying some local search heuristics to solve a MPBS problem, it can be necessary to iteratively solve a single stage multi-product p-batch sizing problem with different processing rates for different products, limited capacity units, and storage capacity defined both for each product and for all products. In this paper we name this problem multi-product p-batch processing time maximization (MBPTM) problem. Once a MBPTM problem needs to be solved in each iteration, the efficiency of the method developed for solving it has a huge impact on the computational cost of the local search algorithm used to solve some MPPBS problems. In addition, for some industries, efficiently solving a MBPTM problem can have a significant impact on storage costs and customer satisfaction. In this paper we presente a mathematical model and an exact method with polynomial time complexity for the MBPTM problem. We developed a LINGO solver for solving the mathematic model, and a C ++ solver for application of the proposed exact method. We tested both solvers, comparing the results for a series of benchmarks with sizes varying between small and very large. As result, we find that the exact method can obtain optimal solutions in a very short time (just few seconds), even when solving very large instances. 
+Among the most complex multi-product batch problems are the multi-product p-batch scheduling (MPBS) problems, where jobs must be scheduled on parallel batch processing machines. When applying some local search heuristics to solve a MPBS problem, it can be necessary to iteratively solve a single stage multi-product p-batch sizing problem with different processing rates for different products, limited capacity units, and storage capacity defined both for each product and for all products. In this paper we name this problem multi-product p-batch processing time maximization (MBPTM) problem. Once a MBPTM problem needs to be solved in each iteration, the efficiency of the method developed for solving it has a huge impact on the computational cost of the local search algorithm used to solve some MPPBS problems. In addition, for some industries, efficiently solving a MBPTM problem can have a significant impact on storage costs and customer satisfaction. In this paper we present a mathematical model and an exact method with polynomial time complexity for the MBPTM problem. We developed a LINGO solver for solving the mathematic model, and a C ++ solver for application of the proposed exact method. We tested both solvers, comparing the results for a series of benchmarks with sizes varying between small and very large. As result, we find that the exact method can obtain optimal solutions in a very short time (just few seconds), even when solving very large instances. 
 \end{abstract}
 %%Graphical abstract
 %\begin{graphicalabstract}
@@ -154,11 +154,12 @@ Among the most complex multi-product batch problems are the multi-product p-batc
 \item taxonomy and notation for the multi-product batch problems;
 \item multi-product p-batch processing time maximization (MBPTM) problem definition;
 \item integer programming model for the MBPTM problem;
-\item exact optimization method for solving the MBPTM problem.
+\item exact optimization method for solving the MBPTM problem;
+\item important inventory control support for some industries.
 \end{highlights}
 
 \begin{keyword}
-multi-product p-batch \sep processing time maximization \sep mathematical model \sep exact method \sep LINGO
+multi-product batch problem\sep p-batch problem \sep processing time maximization \sep integer programming model \sep analytical solution \sep LINGO
 \end{keyword}
 \end{frontmatter}
 
@@ -243,7 +244,7 @@ In short, based on the bibliographic survey conducted for the preparation of thi
 \item \textbf{scenario ($\gamma$)}: static ($St$) or dynamic ($Dn$);
 \item \textbf{input ($\iota$)}: deterministic ($Dt$) and/or stochastic ($St$);
 \item \textbf{performance measure ($\delta$)}: capital cost ($C$), setup cost ($SC$), holding cost ($HC$), work-in-process cost ($WIPC$), net profit ($NP$), makespan ($C_{max}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness (TT), total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$), weighted $E/T$ ($wE/T$), customer satisfaction($CS$), plant performance ($PP$) and/or processing time ($PT$);
-\item \textbf{others ($\rho$)}: limited capacity units ($LCU$), storage capacity by product ($PSC$), storage capacity ($SC$), work-in-process storage ($WIP$), release time ($RT$), due dates ($DD$), incompatible families ($IF$), different processing rates ($DPR$), sequence-dependent setup times ($SDST$).
+\item \textbf{others ($\rho$)}: limited capacity units ($LCU$), storage capacity by product ($PSC$), storage capacity ($SC$), work-in-process storage ($WIP$), release time ($RT$), due dates ($DD$), incompatible families ($IF$), different processing rates ($DPR$), sequence-dependent setup times ($SDST$), sequencing constraints($SqC$).
 \end{enumerate}
 
 So, to describe a speciﬁc multi-product batch problem, we propose the notation $\sigma|\lambda|\mu|\pi|\eta|\gamma|\iota|\delta|\rho$. Some of the multi-product batch problems and solution approaches discussed in the references cited in this paper are summarized in Tab. \ref{tab:review}.
@@ -795,12 +796,16 @@ In this paper we presented the multi-product p-batch processing time maximizatio
 \section{CRediT authorship contribution statement} 
 \label{sec:contributions}
 
-T.B. Fraga: Conceptualization, Project administration, Supervision, Software, Methodology, Validation, Formal analysis, Writing – original draft, Writing – review \& editing. Í.R.B. Aquino: Data curation. R.C.S. Menêzes: Data curation.
+Blinded.
+
+%T.B. Fraga: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data Curation, Writing – original draft, Writing – review \& editing, Supervision, Project administration. Í.R.B. Aquino: Investigation. R.C.S. Menêzes: Investigation.
 
 \section{Acknowledgments}
 \label{sec:acknowledgments}
 
-We are enormously grateful to Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (CAPES) and to Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) for the financial support provided to our projects. We also thank LINDO systems team for the LINGO software license, without which this work would not have been possible and the to the owner of the company in the plastics sector, who allowed us to learn about his company's production process. Finally, we would like to thank Pró-reitoria de Extensão e Cultura da UFPE (PROExC) and the Research Director of Propesqi (Pró-reitoria de Pesquisa e Inovação da UFPE) for their support and recognition of our work, and dear Professors Antônio José da Silva Neto and João Flávio Vieira de Vasconcellos from IPRJ/UERJ, who contributed significantly to the formation of essential skills for the development of our projects. We also thank my co-worker Marcos Luiz Henrique, for having helped by evaluating the mathematical model and solution method proposed in this paper.
+Blinded.
+
+%We are enormously grateful to Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (CAPES) and to Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) for the financial support provided to our projects. We also thank LINDO systems team for the LINGO software license, without which this work would not have been possible and the to the owner of the company in the plastics sector, who allowed us to learn about his company's production process. Finally, we would like to thank Pró-reitoria de Extensão e Cultura da UFPE (PROExC) and the Research Director of Propesqi (Pró-reitoria de Pesquisa e Inovação da UFPE) for their support and recognition of our work, and dear Professors Antônio José da Silva Neto and João Flávio Vieira de Vasconcellos from IPRJ/UERJ, who contributed significantly to the formation of essential skills for the development of our projects. We also thank my co-worker Marcos Luiz Henrique, for having helped by evaluating the mathematical model and solution method proposed in this paper.
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
@@ -824,7 +829,10 @@ We are enormously grateful to Coordenação de Aperfeiçoamento de Pessoal de N�
 %% Text of bibliographic item
 
 \bibitem[\protect\citeauthoryear{COPSolver}{2023}]{COPSolver2023}
-COPSolver (2023). COPSolver: open source software for solving combinatorial optimization and other decision problems - library for solving the multi-product batch processing time maximization problem. {\it codeocean and GitHub}, codeocean.com/capsule/4837209/tree/v1, github.com/tbfraga/COPSolver/releases/tag/v1.0-1.
+Blinded.
+
+%\bibitem[\protect\citeauthoryear{COPSolver}{2023}]{COPSolver2023}
+%COPSolver (2023). COPSolver: open source software for solving combinatorial optimization and other decision problems - library for solving the multi-product p-batch processing time maximization problem. {\it codeocean and GitHub}, codeocean.com/capsule/4837209/tree/v1, github.com/tbfraga/COPSolver/releases/tag/v1.0-1.
 
 \bibitem[\protect\citeauthoryear{Eilon}{1985}]{Eilon1985}
 Eilon. (1985). Multi-product batch production on a single machine - A problem revisited. {\it OMEGA Int. J. of Mgmt Sci.}, Vol. 13 (5), pp. 453--468.
@@ -833,8 +841,7 @@ Eilon. (1985). Multi-product batch production on a single machine - A problem re
 Fowler, J.W. and Mönch, L. (2022). A survey of scheduling with parallel batch (p-batch) processing. {\it European Journal of Operational Research}, Vol. 298, pp. 1--24.
 
 \bibitem[\protect\citeauthoryear{Fraga}{2023}]{Fraga2023}
-Fraga, T.B. (2023). COPSolver: open source software for solving combinatorial optimization and other decision prob-
-lems - library for solving the multi-product p-batch processing time maximization problem {\it Software Impacts}, invited paper, in press.
+Fraga, T.B. (2023). COPSolver: Open source software for solving combinatorial optimization and other decision problems — Library for solving the multi-product p-batch processing time maximization problem {\it Software Impacts}, invited paper, Vol. 18, pp. 100592.
 
 \bibitem[\protect\citeauthoryear{Fumero \emph{et al.}}{2016}]{FumeroEtAl2016}
 Fumero Y., Moreno M. S., Corsano, G., Montagna, J. M. (2016). A multiproduct batch plant design model incorporating production planning and scheduling decisions under a multiperiod scenario. {\it Applied Mathematical Modelling}, Vol. 40, pp. 3498--3515.
