@@ -97,7 +97,7 @@
 %%            country={}}
 %% \fntext[label3]{}
 
-\title{ABC multi-criteria classification with analytical hierarchy process: how to force consistency of pairwise comparisons matrix}
+\title{A study on multicriteria ABC classification with analytical hierarchy process}
 
 %% use optional labels to link authors explicitly to addresses:
 %% \author[label1,label2]{}
@@ -144,7 +144,7 @@
            country={Brazil}}
 
 \begin{abstract} 
-Multicriteria classification is usualy very important to the decision-making in manufacturing management process. For such classification, the attribution of weights to the criteria strongly influences the coherence of the results found. Saaty's Analytic Hierarchy Process (AHP) is an important method for assigning weights to multiple criteria.  AHP's logic is not complicated at all but, since matrices of pairwise comparisons of criteria  are usually generated manually and based only on some employee know-how, there is a huge complexity on generating a consistent pairwise matrix. Especially when many criteria are used. This paper presents a constructive algorithm that can be used to adjust inconsistent matrices, forcing such matrices to have a better consistency rate. We tested this algorithm by applying the AHP method, for ABC multicriteria classification, to companies in two sectors. As a result we observed that the algorithm can adjust the pairwise matrices in just a few seconds, avoiding the manual work that would be done in weeks, therefore showing that it is an important resource for applying the AHP method. 
+Multicriteria classification is usualy very important to the decision-making in manufacturing management process. For such classification, the attribution of weights to the criteria strongly influences the coherence of the results found. Saaty's Analytic Hierarchy Process (AHP) is an important method for assigning weights to multiple criteria.  AHP's logic is not complicated at all but, since matrices of pairwise comparisons of criteria  are usually generated manually and based only on some employee know-how, there is a huge complexity on generating a consistent pairwise matrix. Especially when many criteria are used. This paper presents a constructive algorithm that can be used to adjust inconsistent matrices, forcing such matrices to have a better consistency rate. We tested this algorithm by applying the AHP method, for multicriteria ABC classification, to companies in two sectors. As a result we observed that the algorithm can adjust the pairwise matrices in just a few seconds, avoiding the manual work that would be done in weeks, therefore showing that it is an important resource for applying the AHP method. We also present in this paper an analysis of the importance of the attribution of the weights to the criteria and show how the multicriteria classification may influence the decision on the choice of the appropriate forecasting method.
 \end{abstract}
 %%Graphical abstract
 %\begin{graphicalabstract}
@@ -152,10 +152,9 @@ Multicriteria classification is usualy very important to the decision-making in 
 
 %%Research highlights
 \begin{highlights}
-\item generative method for forcing consistenc ;
-\item multi-product p-batch processing time maximization (MPBPTM) problem definition;
-\item linear integer programming model for the MPBPTM problem;
-\item exact optimization method for solving the MPBPTM problem.
+\item generative method for force consistency of pairwise comparisons matrix;
+\item importance of the correct balance of weights assigned to the criteria;
+\item evidence of the importance of ABC multicriteria clssf for forecasting.
 \end{highlights}
 
 \begin{keyword}
@@ -169,7 +168,12 @@ multi-product batch \sep processing time maximization \sep mathematical model \s
 \section{Introduction}
 \label{sec:intro}
 
-\section{Algorithms for forcing matrix consistency}
+\section{Algorithm for forcing pairwise matrix consistency}
+
+The algorithm is not represented correctly. 
+
+Changes will be made during the preparation of the article according to the module of software COPSolver: library for solving classification problems.
+
 \begin{algorithm}
 \caption{function $consistencyRate()$}\label{alg:CA}
 \begin{algorithmic}
@@ -311,17 +315,6 @@ multi-product batch \sep processing time maximization \sep mathematical model \s
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Iterative algorithm}
-
-\begin{algorithm}
-\caption{function iterativelyForcingConsistency()}\label{alg:CA}
-\begin{algorithmic}
-\Require $\textrm{M}[a_{ij}]_{i,j=1}^{n}$
-\Ensure $consistencyRate([b_{ij}]_{i,j=1}^{n}) \leq 0.1$
-
-\State{\Return {$\textrm{M}[b_{ij}]_{i,j=1}^{n}$}}
-\end{algorithmic}
-\end{algorithm}
 
 \section{Tests and results}
 \label{sec:results}
@@ -336,12 +329,10 @@ In this paper we presented ...
 \section{CRediT authorship contribution statement} 
 \label{sec:contributions}
 
-T.B. Fraga: Conceptualization, Project administration, Supervision, Software, Methodology, Validation, Formal analysis, Writing – original draft, Writing – review \& editing. Í.R.B. Aquino: Data curation. R.C.S. Menêzes: Data curation.
+T.B. Fraga: Conceptualization, Project administration, Supervision, Software, Methodology, Validation, Formal analysis, Writing – original draft, Writing – review \& editing.
 
 \section{Acknowledgments}
 \label{sec:acknowledgments}
-
-We are enormously grateful to Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (CAPES) and to Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) for the financial support provided to our projects. We also thank LINDO systems team for the LINGO software license, without which this work would not have been possible and the to the owner of the company in the plastics sector, who allowed us to learn about his company's production process. Finally, we would like to thank Pró-reitoria de Extensão e Cultura da UFPE (PROExC) and the Research Director of Propesqi (Pró-reitoria de Pesquisa e Inovação da UFPE) for their support and recognition of our work, and dear Professors Antônio José da Silva Neto and João Flávio Vieira de Vasconcellos from IPRJ/UERJ, who contributed significantly to the formation of essential skills for the development of our projects. We also thank my co-worker Marcos Luiz Henrique, for having helped by evaluating the mathematical model and solution method proposed in this paper.
 
 %% The Appendices part is started with the command \appendix;
 %% appendix sections are then done as normal sections
