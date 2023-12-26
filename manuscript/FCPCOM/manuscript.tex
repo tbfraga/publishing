@@ -182,7 +182,46 @@ demand pattern identitification \sep multicriteria ABC classification \sep analy
 \section{Tests and results}
 \label{sec:results}
 
-To test the two developed COPSolver libraries (COPSolver: library for solving the multi-criteria classification problem and COPSolver: library for solving the demand pattern classification problem), we used data from three companies in three different sectors (plastic packaging manufacturers, furniture retailers and car mechanics). In the case of the company in the car mechanics sector, only the data relating to truck repairs was used; in the case of the other two companies, all the data obtained from all the products sold over the last 5 years was used. The files containing the formatted data used for all the tests can be found at tbfraga.github.io/COPSolver/benchmarks.
+To test the two developed COPSolver libraries (COPSolver: library for solving the multi-criteria classification problem and COPSolver: library for solving the demand pattern classification problem), we used data from three companies in three different sectors (plastic packaging manufacturers, furniture trades and car mechanics). In the case of the company in the car mechanics sector, only the data relating to truck repairs was used; in the case of the other two companies, all the data obtained from all the products sold over the last 5 years was used. The files containing the formatted data used for all the tests and the results can be found at tbfraga.github.io/COPSolver/benchmarks. \\
+
+\begin{table}[h!]
+\begin{center}
+\begin{small}
+\begin{tabular}[c]{l r r | l r r r r}
+ \multicolumn{8}{l}{plastic packaging manufacturing company} \\
+\cline {1-8} \\
+\multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern}\\
+\multicolumn{3}{l |}{} &\\
+& & & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
+A &  26 & 10.24 \% & smooth & 31.98 \% &  73.08 \% & 30.38 \% & 25.35 \%\\
+B &  80 & 31.50 \% & slow-moving & 18.22 \% & 19.23 \% & 34.18 \% & 9.15 \%\\
+C & 148 & 58.27 \% & sporadic & 49.80 \% & 7.69 \% & 35.44 \% & 65.49 \% \\
+\cline {1-8} \\
+\multicolumn{8}{l}{furniture trades company} \\
+\cline {1-8} \\
+\multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern}\\
+\multicolumn{3}{l |}{} &\\
+& & & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
+A &  26 & 10.24 \% & smooth & 31.98 \% &  73.08 \% & 30.38 \% & 25.35 \%\\
+B &  80 & 31.50 \% & slow-moving & 18.22 \% & 19.23 \% & 34.18 \% & 9.15 \%\\
+C & 148 & 58.27 \% & sporadic & 49.80 \% & 7.69 \% & 35.44 \% & 65.49 \% \\
+\cline {1-8} \\
+\multicolumn{8}{l}{car mechanics company} \\
+\cline {1-8} \\
+\multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern}\\
+\multicolumn{3}{l |}{} &\\
+& & & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
+A &  26 & 10.24 \% & smooth & 31.98 \% &  73.08 \% & 30.38 \% & 25.35 \%\\
+B &  80 & 31.50 \% & slow-moving & 18.22 \% & 19.23 \% & 34.18 \% & 9.15 \%\\
+C & 148 & 58.27 \% & sporadic & 49.80 \% & 7.69 \% & 35.44 \% & 65.49 \% \\
+\end{tabular}
+\caption{Multicriteria ABC and demand pattern classifications for three companies (results found by COPSolver)}
+\label{tab:results}
+\end{small}
+\end{center}
+\end{table} 
+
+
 
 \section{Conclusions and suggestions for future works}
 \label{sec:conclusions}
