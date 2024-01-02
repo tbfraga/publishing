@@ -32,7 +32,7 @@
 
 \usepackage{array, makecell}
 
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric,shapes.misc,shapes.symbols,arrows.meta,graphs,fit,positioning,shadows}
 
@@ -178,42 +178,103 @@ demand pattern identitification \sep multicriteria ABC classification \sep analy
 
 \section{Algorithm for forcing pairwise matrix consistency}
 
+\section{COPSolver}
+
+\section{Data collected}
+\label{sec:data}
+
+To test the two developed COPSolver libraries (COPSolver: library for solving the multicriteria classification problem and COPSolver: library for solving the demand pattern classification problem), we used data from three companies from three different sectors (plastic packaging manufacturing, furniture trades and car mechanics). In the case of the company from the car mechanics sector, only the data relating to truck repairs was used; in the case of the other two companies, all the data obtained from all the products sold over 5 years (last 60 months prior to the data collection date) was used. One year's data (last 12 months prior to the data collection date) was used for the ABC multicriteria classification. The files containing the formatted data used for all the tests and the results can be found at tbfraga.github.io/COPSolver/benchmarks. 
 
 \section{Tests and results}
 \label{sec:results}
 
-To test the two developed COPSolver libraries (COPSolver: library for solving the multicriteria classification problem and COPSolver: library for solving the demand pattern classification problem), we used data from three companies in three different sectors (plastic packaging manufacturering, furniture trades and car mechanics). In the case of the company in the car mechanics sector, only the data relating to truck repairs was used; in the case of the other two companies, all the data obtained from all the products sold over the last 5 years was used. One year's data (last 12 months prior to the data collection date) was used for the ABC multicriteria classification. The files containing the formatted data used for all the tests and the results can be found at tbfraga.github.io/COPSolver/benchmarks. \\
+\subsection{Pairwise comparisons matrix and consistency rate}
+
+Table \ref{tab:pairwiseMatrix} presents the modifications made by the software 'COPSolver: library for solving the multicriteria classification problem' in the pairwise comparisons matrix and the consequent change in the consistency rate (CR) for the data colected from the three companies selected for this study.
+
+\begin{table}[h!]
+\begin{center}
+\begin{small}
+\begin{tabular}[l]{p{0.4cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm}}
+ \multicolumn{1}{l}{} & \multicolumn{14}{l}{car mechanics company} \\
+\cline {2-15} \\
+ & \multicolumn{7}{c | }{CR = 0.216}  & \multicolumn{7}{c}{CR = 0.085} \\
+   & sb & lt & rp & cr & ob & np & cm & sb & lt & rp & cr & ob & co & cm \\
+sb & 1.00 & 3.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 7.00 & 9.00 & 9.00 & 1.00 & 3.00 & 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 7.00 & 9.00 & 9.00 \\
+lt & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 7.00 & 9.00 & 9.00 & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 9.00 \\
+rp & 0.33 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 9.00 & 9.00 & 0.33 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 \\
+cr & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 9.00 & 9.00 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 \\
+ob & 0.14 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 0.14 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 \\
+np & 0.11 & 0.11 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & 9.00 & 0.11 & 0.11 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 9.00 \\
+cm & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 1.00 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 1.00 \\
+\cline {2-15} \\
+ & \multicolumn{14}{l}{furniture trades company} \\
+\cline {2-15} \\
+   & \multicolumn{7}{c | }{CR = 0.151}  & \multicolumn{7}{c}{CR = 0.096} \\
+   & lt & sb & rp & cr & cm & np & ob & lt & sb & rp & cr & cm & np & ob \\
+lt & 1.00 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.20 & 7.00 & \cellcolor[HTML]{ACE600} 0.11 & 5.00 & 1.00 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 7.00 & \cellcolor[HTML]{ACE600} 0.20 & 5.00 \\
+sb & 5.00 & 1.00 & 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 5.00 &\cellcolor[HTML]{ACE600}  0.14 & 7.00 & 5.00 & 1.00 & 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 5.00 & \cellcolor[HTML]{ACE600} 0.33 & 7.00 \\
+rp & 7.00 & 3.00 & 1.00 & \cellcolor[HTML]{ACE600} 0.33 & 5.00 & \cellcolor[HTML]{ACE600} 0.14 & 3.00 & 7.00 & 3.00 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 7.00 & \cellcolor[HTML]{ACE600} 1.00 & 3.00 \\
+cr & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 1.00 & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 0.33 & 9.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 \\
+cm & 0.14 & 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.11 & 1.00 & 0.11 & 1.00 & 0.14 & 0.20 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 0.14 & 1.00 & 0.11 & 1.00 \\
+np & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 & 1.00 & 9.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 & 1.00 & 9.00 \\
+ob & 0.20 & 0.14 & 0.33 & 0.11 & 1.00 & 0.11 & 1.00 & 0.20 & 0.14 & 0.33 & 0.11 & 1.00 & 0.11 & 1.00 \\
+\cline {2-15} \\
+ & \multicolumn{14}{l}{plastic packaging manufacturing company} \\
+\cline {2-15} \\
+   & \multicolumn{7}{c | }{CR = 0.625}  & \multicolumn{7}{c}{CR = 0.085} \\
+   & np & cr & lt & ob & sb & rp & & np & cr & lt & ob & sb & rp & \\
+np & 1.00 & 3.00 & 7.00 & \cellcolor[HTML]{ACE600} 7.00 & 5.00 & \cellcolor[HTML]{ACE600} 5.00 & & 1.00 & 3.00 & 7.00 & \cellcolor[HTML]{ACE600} 9.00 & 5.00 & \cellcolor[HTML]{ACE600} 9.00 \\
+cr & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 5.00 \\
+lt & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 7.00 & 7.00 & & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 7.00 \\
+ob & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 0.33 & 3.00 & & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 3.00 \\
+sb & 0.20 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 3.00 & 1.00 & 3.00 & & 0.20 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 3.00 \\
+rp & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 5.00 & 0.14 & 0.33 & 0.33 & 1.00 & & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 0.14 & 0.33 & 0.33 & 1.00
+\end{tabular}
+\caption{Pairwise comparisons matrix and consistency rate changes for three companies (results found by COPSolver) - legend: sb = substitutability; lt = lead-time; rp = repairability; cr = criticality; ob = obsolescence; np = net-profit; cm = commonality;}
+\label{tab:pairwiseMatrix}
+\end{small}
+\end{center}
+\end{table} 
+
+As we can see in this table, the pairwise comparison weights are adjusted primarily according to the  weights assigned to the first three criteria. Thus, although there is a change in the pairwise comparison weights, which may be significant, the weights assigned to the first three criteria will be preserved. The change will be made in the weights of the other criteria in order to force the consistency of the pairwise comparisons matrix. Another important point to note in the method is that the algorithm stops when the desired consistency rate is reached. So, it is more likely that there will be significant changes in the fourth criterion and the next ones. Therefore, it is important that the criteria are ordered in such a way that the three most relevant criteria for the company are among the first. Then the next most relevant criteria can be ordered from last to fourth position.
+
+\subsection{Analysis of the ABC multicriterio classification}
+
+\subsection{Analysis of the demand pattern classification}
 
 \begin{table}[h!]
 \begin{center}
 \begin{small}
 \begin{tabular}[c]{l r r | l r r r r}
- \multicolumn{8}{l}{plastic packaging manufacturing company} \\
+\multicolumn{8}{l}{car mechanics company} \\
 \cline {1-8} \\
 \multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern classification}\\
-\multicolumn{3}{l |}{} &\\
-& & & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
-A &  26 & 10.24 \% & smooth & 31.98 \% &  73.08 \% & 30.38 \% & 25.35 \%\\
-B &  80 & 31.50 \% & slow-moving & 18.22 \% & 19.23 \% & 34.18 \% & 9.15 \%\\
-C & 148 & 58.27 \% & sporadic & 49.80 \% & 7.69 \% & 35.44 \% & 65.49 \% \\
+\multicolumn{3}{c |}{cutoff}  & \multicolumn{5}{c}{75 sales between October 2020 and July 2023} \\
+\multicolumn{3}{c |}{0.35 \%; 0.70 \%} & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
+A &  10 & 23.81 \% & smooth & 18.75 \% &  20.00 \% & 16.67 \% & 0 \%\\
+B &  15 & 35.71 \% & slow-moving & 6.25 \% & 10.00 \% & 0.00 \% & 0 \%\\
+C &  17 & 40.48 \% & sporadic & 75.00 \% & 70.00 \% & 83.33 \% & 0 \% \\
 \cline {1-8} \\
 \multicolumn{8}{l}{furniture trades company} \\
 \cline {1-8} \\
 \multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern classification}\\
-\multicolumn{3}{l |}{} &\\
-& & & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
-A &  26 & 10.24 \% & smooth & 31.98 \% &  73.08 \% & 30.38 \% & 25.35 \%\\
-B &  80 & 31.50 \% & slow-moving & 18.22 \% & 19.23 \% & 34.18 \% & 9.15 \%\\
-C & 148 & 58.27 \% & sporadic & 49.80 \% & 7.69 \% & 35.44 \% & 65.49 \% \\
+\multicolumn{3}{c |}{cutoff:} &\\
+\multicolumn{3}{c |}{0.35 \%; 0.70 \%}& & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
+A &  26 & 10.24 \% & smooth & 31.58 \% &  73.08 \% & 30.00 \% & 24.82 \%\\
+B &  80 & 31.50 \% & slow-moving & 18.62 \% & 19.23 \% & 33.75 \% & 9.93 \%\\
+C & 148 & 58.27 \% & sporadic & 49.80 \% & 7.69 \% & 36.25 \% & 65.25 \% \\
 \cline {1-8} \\
-\multicolumn{8}{l}{car mechanics company} \\
+ \multicolumn{8}{l}{plastic packaging manufacturing company}\\
 \cline {1-8} \\
 \multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern classification}\\
-\multicolumn{3}{l |}{} &\\
-& & & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
-A &  26 & 10.24 \% & smooth & 31.98 \% &  73.08 \% & 30.38 \% & 25.35 \%\\
-B &  80 & 31.50 \% & slow-moving & 18.22 \% & 19.23 \% & 34.18 \% & 9.15 \%\\
-C & 148 & 58.27 \% & sporadic & 49.80 \% & 7.69 \% & 35.44 \% & 65.49 \% \\
+\multicolumn{3}{c |}{cutoff:} & \multicolumn{5}{c}{5,967 sales between November 2019 and February 2023}\\
+\multicolumn{3}{c |}{0.35 \%; 0.70 \%} & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
+A &   128 &  5.49 \% & smooth & 15.31 \% & 22.66 \% & 23.97 \% & 10.42 \%\\
+B &   726 & 31.12 \% & slow-moving & 5.53 \% & 1.56 \% & 8.68 \% & 4.33 \%\\
+C & 1,479 & 63.39 \% & sporadic & 79.16 \% & 75.78 \% & 67.36 \% & 85.25 \% \\
+\cline {1-8} \\
+
 \end{tabular}
 \caption{Multicriteria ABC and demand pattern classifications for three companies (results found by COPSolver)}
 \label{tab:results}
