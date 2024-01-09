@@ -147,7 +147,10 @@
            country={Brazil}}
 
 \begin{abstract} 
+
 Multicriteria classification is usualy very important to the decision-making in manufacturing management process. For such classification, the attribution of weights to the criteria strongly influences the coherence of the results found. Saaty's Analytic Hierarchy Process (AHP) is an important method for assigning weights to multiple criteria.  AHP's logic is not complicated at all but, since matrices of pairwise comparisons of criteria  are usually generated manually and based only on some employee know-how, there is a huge complexity on generating a consistent pairwise matrix. Especially when many criteria are used. This paper presents a constructive algorithm that can be used to adjust inconsistent matrices, forcing such matrices to have a better consistency rate. We tested this algorithm by applying the AHP method, for multicriteria ABC classification, to companies in two sectors. As a result we observed that the algorithm can adjust the pairwise matrices in just a few seconds, avoiding the manual work that would be done in weeks, therefore showing that it is an important resource for applying the AHP method. We also present in this paper an analysis of the importance of the attribution of the weights to the criteria and show how the multicriteria and demand pattern classifications may influence the decision on the choice of the appropriate forecasting method.
+
+
 \end{abstract}
 %%Graphical abstract
 %\begin{graphicalabstract}
@@ -174,6 +177,20 @@ demand pattern identitification \sep multicriteria ABC classification \sep analy
 %% main text
 \section{Introduction}
 \label{sec:intro}
+
+Decades of experience in applying the philosophy of lean production eventually popularized the famous saying: "stock is a necessary evil" \citep{Younkin2021}. Apresentar desvantagens e vantagens (citar livro produção enxuta). Briefly, it is safe to say that stock is unavoidable and must be kept up with in suitable amount \citep{Nirmala2022}.
+
+Apresentar definição de contole de estoque. 
+
+As stated by \citep{Nirmala2022}, inventory control means well-organized management of raw materials and supplies, semi-finished goods and finished goods.
+
+Falar sobre técnicas de controle de estoque (classificação ABC (multicriterio) e identificação de padrão de demanda).
+
+Referências sobre classificação ABC multicriteŕio. (revisões da literatura). Dar enfoque ao ABC multicritério com AHP. \cite{FloresEtAl1992} suggest the use of Analytic Hierarchy Process (AHP) to integrate the use of several criteria and rank inventory items. Dezde então, diversos trabalhos tem utilizado esta técnica. Falar sobre o artigo que compara AHP e algoritmos genéticos.
+
+Referências sobre identificação de padrão de demanda. (revisão da literatura). Dar enfoque ao método de Willians.
+
+Apresentar as contribuições científicas deste artigo.
 
 
 \section{Algorithm for forcing pairwise matrix consistency}
@@ -318,11 +335,20 @@ T.B. Fraga: Conceptualization, Project administration, Supervision, Software, Me
 %% \bibitem[Author(year)]{label}
 %% Text of bibliographic item
 
+\bibitem[\protect\citeauthoryear{Flores et al.}{1992}]{FloresEtAl1992}
+Flores, B. E., Olson, D. L., Dorai V. K. (1992). Management of multicriteria inventory classification. {\it Mathematical and Computer Modelling}, Vol. 16 (12), pp. 71--82.
+
 \bibitem[\protect\citeauthoryear{Flores and Whybark}{1987}]{FloresWhybark1987}
 Flores, B. E., Whybark, D. C. (1987). Implementing Multiple Criteria ABC Analysis. {\it Journal of Operations Management}, Vol. 7 (1,2), pp. 79--85.
 
 \bibitem[\protect\citeauthoryear{Fraga}{2023}]{Fraga2023}
 Fraga, T.B. (2023). COPSolver: open source software for solving combinatorial optimization and other decision problems - library for solving the multicriteria classification problem, in press.
+
+\bibitem[\protect\citeauthoryear{Younkin}{2021}]{Younkin2021}
+Younkin, K. (2021). The Effect of Lean Inventory and Policies during COVID-19. {\it linkedin}, https://www.linkedin.com/pulse/effect-lean-inventory-policies-during-covid-19-kyle-younkin (last accessed on 09/01/2024).
+
+\bibitem[\protect\citeauthoryear{Nirmala}{2022}]{Nirmala2022}
+Nirmala, D. A. R., Kannan, V., Thanalakshmi, M., Gnanaraj, S. J. P., Appadurai, M. (2022). Inventory management and control system using ABC and VED analysis. {\it Materials Today: Proceedings}, Vol. 60 (2), pp. 922--925.
 
 \end{thebibliography}
 \end{document}
