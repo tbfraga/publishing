@@ -148,8 +148,7 @@
 
 \begin{abstract} 
 
-Multicriteria classification is usualy very important to the decision-making in manufacturing management process. For such classification, the attribution of weights to the criteria strongly influences the coherence of the results found. Saaty's Analytic Hierarchy Process (AHP) is an important method for assigning weights to multiple criteria.  AHP's logic is not complicated at all but, since matrices of pairwise comparisons of criteria  are usually generated manually and based only on some employee know-how, there is a huge complexity on generating a consistent pairwise matrix. Especially when many criteria are used. This paper presents a constructive algorithm that can be used to adjust inconsistent matrices, forcing such matrices to have a better consistency rate. We tested this algorithm by applying the AHP method, for multicriteria ABC classification, to companies in two sectors. As a result we observed that the algorithm can adjust the pairwise matrices in just a few seconds, avoiding the manual work that would be done in weeks, therefore showing that it is an important resource for applying the AHP method. We also present in this paper an analysis of the importance of the attribution of the weights to the criteria and show how the multicriteria and demand pattern classifications may influence the decision on the choice of the appropriate forecasting method.
-
+Multicriteria classification and demand pattern identification are two very important techniques that can be used for decision-making in manufacturing management process. Although there are many studies that address different multicriteria techniques, few publications associate the use of multicriteria classification with the identification of demand patterns. They are complementary techniques, which however are rarely addressed together. In this article we present a case study in which we designed product portfolios applying the ABC / Saaty's Analytic Hierarchy Process (AHP) multicriteria classification, in conjunction with the Willians demand pattern identification method, to support the inventory control process and sales strategy in three small and medium-sized companies, from three different sectors. Based on the results found, we present an analysis of the impact of the identified patterns on production and inventory planning, and present inventory management decisions and sales strategies that can be taken based on the portfolio built to mitigate the impact of product demand behavior on production efficiency and lead times. In carrying out this work, the matrices of pairwise comparisons of criteria were generated manually and based only on employees know-how, so we identified a strong difficulty in the construction of consistent matrices, so we also present a constructive algorithm that can be used to adjust inconsistent matrices when applying AHP, forcing such matrices to have a better consistency rate.  As a result we observed that this algorithm could adjust the pairwise matrices in just a few seconds, avoiding the manual work that would be done in weeks, showing, therefore, that it is an important resource when applying the AHP method.
 
 \end{abstract}
 %%Graphical abstract
@@ -178,7 +177,7 @@ demand pattern identitification \sep multicriteria ABC classification \sep analy
 \section{Introduction}
 \label{sec:intro}
 
-Decades of experience in applying the philosophy of lean production eventually popularized the famous saying: "stock is a necessary evil" \citep{Younkin2021}. Apresentar desvantagens e vantagens (citar livro produção enxuta). Briefly, it is safe to say that stock is unavoidable and must be kept up with in suitable amount \citep{Nirmala2022}.
+Decades of experience in applying the philosophy of lean production eventually popularized the famous saying: "stock is a necessary evil" \citep{Younkin2021}. Apresentar desvantagens e vantagens (citar livro produção enxuta). Briefly, it is safe to say that stock is unavoidable and must be kept up with in suitable amount \citep{Nirmala2022}. 
 
 Apresentar definição de contole de estoque. 
 
@@ -191,6 +190,9 @@ Referências sobre classificação ABC multicriteŕio. (revisões da literatura)
 Referências sobre identificação de padrão de demanda. (revisão da literatura). Dar enfoque ao método de Willians.
 
 Apresentar as contribuições científicas deste artigo.
+
+Also, in multicriteria ABC classification, the attribution of weights to the criteria strongly influences the coherence of the results found. Saaty's Analytic Hierarchy Process (AHP) is an important method for assigning weights to multiple criteria.  AHP's logic is not complicated at all but, since matrices of pairwise comparisons of criteria  are usually generated manually and based only on some employee know-how, there is a huge complexity on generating a consistent pairwise matrix. Especially when many criteria are used. This paper presents a constructive algorithm that can be used to adjust inconsistent matrices, forcing such matrices to have a better consistency rate. We tested this algorithm by applying the AHP method, for multicriteria ABC classification, to companies in two sectors. As a result we observed that the algorithm can adjust the pairwise matrices in just a few seconds, avoiding the manual work that would be done in weeks, therefore showing that it is an important resource for applying the AHP method. We also present in this paper an analysis of the importance of the attribution of the weights to the criteria and show how the multicriteria and demand pattern classifications may influence the decision on the choice of the appropriate forecasting method.
+
 
 
 \section{Algorithm for forcing pairwise matrix consistency}
