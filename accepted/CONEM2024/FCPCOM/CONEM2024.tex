@@ -4,8 +4,14 @@
 %
 \documentclass[10pt,fleqn,a4paper,twoside]{article}
 \usepackage{abcm}
-\def\shortauthor{P. Autor, S. Autor e T. Autor \textcolor[rgb]{0.98,0.00,0.00}{(Atualize o cabeçalho de acordo)}}
-\def\shorttitle{Versão Reduzida do Título do Artigo \textcolor[rgb]{0.98,0.00,0.00}{(Letras Iniciais em Caixa Alta, certifique que não ultrapasse uma linha)}}
+\def\shortauthor{T. B. Fraga, B. M. Cavalcanti, A. M. D. Silva e E. L. R. Silva \textcolor[rgb]{0.98,0.00,0.00}}
+\def\shorttitle{ABC Multicriteria Classification with Analytical Hierarchy Process: How to Force Consistency of Paiwise Comparisons Matrix \textcolor[rgb]{0.98,0.00,0.00}}
+
+\usepackage{array, makecell}
+
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,shapes.misc,shapes.symbols,arrows.meta,graphs,fit,positioning,shadows}
 
 \begin{document}
     
@@ -23,29 +29,84 @@
     \vspace{-.6cm}
     %
     % Digitar o título
-    \title{CONEM2024-XXXX \textcolor{red}{(XXXX é a identificação do artigo final)} \\ INSTRUÇÕES PARA A FORMATAÇÃO DE TRABALHOS SUBMETIDOS PARA PUBLICAÇÃO NOS ANAIS DO XII CONGRESSO NACIONAL DE ENGENHARIA MECÂNICA}
+    \title{CONEM2024-0025\\ ABC  MULTICRITERIA CLASSIFICATION WITH ANALYTICAL HIERARCHY PROCESS: HOW TO FORCE CONSISTENCY OF PAIRWISE COMPARISONS MATRIX} 
     %
     \end{center}
 	%
 	% Digitar os nomes dos autores/instituição
-    \authors{Nome do primeiro autor, e-mail$^1$} \\
-    \authors{Nome do segundo autor, e-mail$^1$} \\
-    \authors{Nome do terceiro autor, e-mail$^2$} \\\\
+    \authors{Tatiana Balbi Fraga, tatiana.balbi@ufpe.br$^1$} \\
+    \authors{Beatriz Marinho Cavacanti, beatriz.marinhocavalcanti@ufpe.br$^1$} \\
+    \authors{Alexia Maria Duque Silva, alexia.duque@ufpe.br$^1$} \\
+    \authors{Erika Leticia Rodrigues Silva, erika.leticias@ufpe.br$^1$} \\\\
     \institution{$^1$Nome da instituição, endereço para correspondência (institucional, se houver)} \\
-    \institution{$^2$Nome da instituição, endereço para correspondência (institucional, se houver)} \\
-    \\
-    \authors{\textcolor[rgb]{0.98,0.00,0.00}{Mesmo  formato para outros autores e instituições, se houver. (\textit{Esta orientação deve ser retirada no texto final.})}} \\
     \\
     %
     % Digitar o resumo
-    \abstract{\textbf{Resumo:} O resumo deve descrever os objetivos, o contexto e a importância da pesquisa, os métodos, os resultados e as principais conclusões do artigo. {\bf Não deve conter} fórmulas nem referências bibliográficas. Deve ser escrito em apenas um parágrafo e conter de 300 a 400 palavras.}\\
+    \abstract{\textbf{Resumo:} Multicriteria classification is usually a crucial step in the decision-making in the manufacturing management process. For such classification, the attribution of weights to the criteria strongly influences the coherence of the categorization. Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria. AHP's logic is not complicated at all. However, since criteria's pairwise comparison matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. This paper presents a constructive algorithm that can adjust inconsistent matrices, forcing such matrices to have a better consistency rate. We tested this algorithm by applying the AHP method for ABC multicriteria classification to companies in three sectors. As a result, we observed that the algorithm adjusts the pairwise matrices in just a few seconds, avoiding the manual work of several hours, then showing that it is an essential resource for applying the AHP method.}\\
     %
     % Digitar as palavras-chave
    \\
-    \keywords{\textbf{Palavras-chave:} palavra 1, palavra 2, palavra 3 (até 5 palavras, separadas  por vírgulas) }\\
+    \keywords{\textbf{Palavras-chave:} ABC multicriteria classification, analytic hierarchy process, consistency rate,  constructive algorithm, COPSolver library}\\
     %
     \end{tabular}
     
+    \section{INTRODUCTION}
+    
+    \subsection{Pairwise Comparisons Matrix and Consistency Rate}
+    
+    
+    
+    \section{RESULTS AND DISCUSSIONS}
+    
+    \subsection{Algorithm for forcing low consistency rate}
+    
+    Table \ref{tab:pairwiseMatrix} presents the modifications made by the software 'COPSolver: library for solving the multicriteria classification problem' in the pairwise comparisons matrix and the consequent changes in the consistency rate (CR) for the data colected from the three companies selected for this study.
+
+	\begin{table}[ht]
+            \begin{center}
+                \caption{\textbf{Pairwise comparisons matrix and consistency rate changes for three companies 					(results found by COPSolver) - legend: sb = substitutability; lt = lead-time; rp = repairability; cr = criticality; ob = obsolescence; np = net-profit; cm = commonality.}}
+                    \begin{tabular}[l]{p{0.4cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm}}
+						\multicolumn{14}{l}{car mechanics company} \\
+						\cline {1-15} \\
+						& \multicolumn{7}{c | }{CR = 0.216}  & \multicolumn{7}{c}{CR = 0.085} \\
+   						& sb & lt & rp & cr & ob & np & cm & sb & lt & rp & cr & ob & co & cm \\
+						sb & 1.00 & 3.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 7.00 & 9.00 & 9.00 & 1.00 & 3.00 								& 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 7.00 & 9.00 & 9.00 \\
+						lt & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 7.00 & 9.00 & 9.00 & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 9.00 \\
+						rp & 0.33 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 9.00 & 9.00 & 0.33 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 \\
+						cr & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 9.00 & 9.00 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 \\
+						ob & 0.14 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 0.14 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 \\
+						np & 0.11 & 0.11 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & 9.00 & 0.11 & 0.11 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 9.00 \\
+						cm & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 1.00 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 1.00 \\
+						\cline {1-15} \\
+						\multicolumn{14}{l}{furniture trades company} \\
+						\cline {1-15} \\
+  						& \multicolumn{7}{c | }{CR = 0.151}  & \multicolumn{7}{c}{CR = 0.096} \\
+   						& lt & sb & rp & cr & cm & np & ob & lt & sb & rp & cr & cm & np & ob \\
+						lt & 1.00 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.20 & 7.00 & \cellcolor[HTML]{ACE600} 0.11 & 5.00 & 1.00 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 7.00 & \cellcolor[HTML]{ACE600} 0.20 & 5.00 \\
+						sb & 5.00 & 1.00 & 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 5.00 &\cellcolor[HTML]{ACE600}  0.14 & 7.00 & 5.00 & 1.00 & 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 5.00 & \cellcolor[HTML]{ACE600} 0.33 & 7.00 \\
+						rp & 7.00 & 3.00 & 1.00 & \cellcolor[HTML]{ACE600} 0.33 & 5.00 & \cellcolor[HTML]{ACE600} 0.14 & 3.00 & 7.00 & 3.00 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 7.00 & \cellcolor[HTML]{ACE600} 1.00 & 3.00 \\
+						cr & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]		{ACE600} 3.00 & 1.00 & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 0.33 & 9.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 \\
+						cm & 0.14 & 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.11 & 1.00 & 0.11 & 1.00 & 0.14 & 0.20 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 0.14 & 1.00 & 0.11 & 1.00 \\
+						np & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 & 1.00 & 9.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 & 1.00 & 9.00 \\
+						ob & 0.20 & 0.14 & 0.33 & 0.11 & 1.00 & 0.11 & 1.00 & 0.20 & 0.14 & 0.33 & 0.11 & 1.00 & 0.11 & 1.00 \\
+						\cline {1-15} \\
+						\multicolumn{14}{l}{plastic packaging manufacturing company} \\
+						\cline {1-15} \\
+   						& \multicolumn{7}{c | }{CR = 0.625}  & \multicolumn{7}{c}{CR = 0.085} \\
+   						& np & cr & lt & ob & sb & rp & & np & cr & lt & ob & sb & rp & \\
+						np & 1.00 & 3.00 & 7.00 & \cellcolor[HTML]{ACE600} 7.00 & 5.00 & \cellcolor[HTML]{ACE600} 5.00 & & 1.00 & 3.00 & 7.00 & \cellcolor[HTML]{ACE600} 9.00 & 5.00 & \cellcolor[HTML]{ACE600} 9.00 \\
+						cr & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 5.00 \\
+						lt & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 7.00 & 7.00 & & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 7.00 \\
+						ob & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 0.33 & 3.00 & & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 3.00 \\
+						sb & 0.20 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 3.00 & 1.00 & 3.00 & & 0.20 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 3.00 \\
+						rp & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 5.00 & 0.14 & 0.33 & 0.33 & 1.00 & & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 0.14 & 0.33 & 0.33 & 1.00
+				\end{tabular} \label{tab:pairwiseMatrix}
+            \end{center}
+	\end{table}
+
+As we can see in this table, the pairwise comparison weights are adjusted primarily according to the  weights assigned to the first three criteria. Thus, although there is a change in the pairwise comparison weights, which may be significant, the weights assigned to the first three criteria will be preserved. The change will be made in the weights of the other criteria in order to force the consistency of the pairwise comparisons matrix. Another important point to note is that the algorithm stops when the desired consistency rate is reached. So, it is more likely that there will be significant changes in the fourth criterion and the next ones. Therefore, it is important that the criteria are ordered in such a way that the three most relevant criteria for the company are among the first. Then the next most relevant criteria can be ordered from last to fourth position.
+
+Initially there was no concern in the construction of the files with the input data, with the correct ordering of the criteria. Based on the results and observations previously presented, the students were asked to order the criteria in descending order according to their importance. Based on this ordering, the input files were readjusted. The following table presents the modifications made after the correct ordering of the criteria.
 
     \section{INTRODUÇÃO}
         
