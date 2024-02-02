@@ -54,21 +54,20 @@
     
     \subsection{Pairwise Comparisons Matrix and Consistency Rate}
     
-    
-    
     \section{RESULTS AND DISCUSSIONS}
     
     \subsection{Algorithm for forcing low consistency rate}
     
-    Table \ref{tab:pairwiseMatrix} presents the modifications made by the software 'COPSolver: library for solving the multicriteria classification problem' in the pairwise comparisons matrix and the consequent changes in the consistency rate (CR) for the data colected from the three companies selected for this study.
+    Table \ref{tab:pairwiseMatrix} presents the modifications made by the software 'COPSolver: library for solving the multicriteria classification problem' in the pairwise comparisons matrix and the consequent changes in the consistency rate (CR) for the data collected from the three companies selected for this study.
 
 	\begin{table}[ht]
             \begin{center}
-                \caption{\textbf{Pairwise comparisons matrix and consistency rate changes for three companies 					(results found by COPSolver) - legend: sb = substitutability; lt = lead-time; rp = repairability; cr = criticality; ob = obsolescence; np = net-profit; cm = commonality.}}
+                \caption{\textbf{Pairwise comparisons matrix and consistency rate changes for three companies 					(results found by COPSolver) - legend: sb = substitutability; lt = lead-time; rp = repairability; cr = criticality; ob = obsolescence; np = net-profit; cm = commonality; CR = consistence rate; w = normalized weights vector.}}
                     \begin{tabular}[l]{p{0.4cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm}}
 						\multicolumn{14}{l}{car mechanics company} \\
 						\cline {1-15} \\
 						& \multicolumn{7}{c | }{CR = 0.216}  & \multicolumn{7}{c}{CR = 0.085} \\
+						& \multicolumn{7}{c | }{$w=(0.35, 0.26, 0.18, 0.11, 0.05, 0.03, 0.01)$}  & \multicolumn{7}{c}{$w = (0.37, 0.26, 0.12, 0.12, 0.06, 0.05, 0.02)$} \\
    						& sb & lt & rp & cr & ob & np & cm & sb & lt & rp & cr & ob & co & cm \\
 						sb & 1.00 & 3.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 7.00 & 9.00 & 9.00 & 1.00 & 3.00 								& 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 7.00 & 9.00 & 9.00 \\
 						lt & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 7.00 & 9.00 & 9.00 & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 9.00 \\
@@ -81,6 +80,7 @@
 						\multicolumn{14}{l}{furniture trades company} \\
 						\cline {1-15} \\
   						& \multicolumn{7}{c | }{CR = 0.151}  & \multicolumn{7}{c}{CR = 0.096} \\
+  						& \multicolumn{7}{c | }{$w=(0.05, 0.10, 0.14, 0.21, 0.02, 0.45, 0.02\underline{})$}  & \multicolumn{7}{c}{$w = (0.07, 0.16, 0.25, 0.20, 0.02, 0.26, 0.03)$} \\
    						& lt & sb & rp & cr & cm & np & ob & lt & sb & rp & cr & cm & np & ob \\
 						lt & 1.00 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.20 & 7.00 & \cellcolor[HTML]{ACE600} 0.11 & 5.00 & 1.00 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 7.00 & \cellcolor[HTML]{ACE600} 0.20 & 5.00 \\
 						sb & 5.00 & 1.00 & 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 5.00 &\cellcolor[HTML]{ACE600}  0.14 & 7.00 & 5.00 & 1.00 & 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 5.00 & \cellcolor[HTML]{ACE600} 0.33 & 7.00 \\
@@ -93,6 +93,7 @@
 						\multicolumn{14}{l}{plastic packaging manufacturing company} \\
 						\cline {1-15} \\
    						& \multicolumn{7}{c | }{CR = 0.625}  & \multicolumn{7}{c}{CR = 0.085} \\
+   						& \multicolumn{7}{c | }{$w=(0.39, 0.10, 0.22, 0.09, 0.12, 0.07)$}  & \multicolumn{7}{c}{$w = (0.50, 0.18, 0.14, 0.06, 0.09, 0.03)$} \\
    						& np & cr & lt & ob & sb & rp & & np & cr & lt & ob & sb & rp & \\
 						np & 1.00 & 3.00 & 7.00 & \cellcolor[HTML]{ACE600} 7.00 & 5.00 & \cellcolor[HTML]{ACE600} 5.00 & & 1.00 & 3.00 & 7.00 & \cellcolor[HTML]{ACE600} 9.00 & 5.00 & \cellcolor[HTML]{ACE600} 9.00 \\
 						cr & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 5.00 \\
@@ -104,9 +105,18 @@
             \end{center}
 	\end{table}
 
-As we can see in this table, the pairwise comparison weights are adjusted primarily according to the  weights assigned to the first three criteria. Thus, although there is a change in the pairwise comparison weights, which may be significant, the weights assigned to the first three criteria will be preserved. The change will be made in the weights of the other criteria in order to force the consistency of the pairwise comparisons matrix. Another important point to note is that the algorithm stops when the desired consistency rate is reached. So, it is more likely that there will be significant changes in the fourth criterion and the next ones. Therefore, it is important that the criteria are ordered in such a way that the three most relevant criteria for the company are among the first. Then the next most relevant criteria can be ordered from last to fourth position.
+As we can see in this table, the pairwise comparison weights are adjusted primarily according to the weights assigned to the first three criteria. Thus, although there is a change in the pairwise comparison weights, which may be significant, the weights assigned to the first three criteria are preserved. The algorithm will change the weights of the other criteria to force the consistency of the pairwise comparisons matrix. Another significant observation is that the algorithm stops when it reaches the desired consistency rate. So, it is more likely that the algorithm changes the weights related to the fourth criterion and the next ones. Therefore, the ordering of criteria in the matrix must follow the following rules:
 
-Initially there was no concern in the construction of the files with the input data, with the correct ordering of the criteria. Based on the results and observations previously presented, the students were asked to order the criteria in descending order according to their importance. Based on this ordering, the input files were readjusted. The following table presents the modifications made after the correct ordering of the criteria.
+\begin{itemize}
+\item the three most relevant criteria for the company are among the first;
+\item the other criteria are ordered from the last to fourth position, in descending order of relevance.
+\end{itemize}
+
+For the data presented in Table 1, there was no concern with the correct ordering of the criteria. Based on the results and previous observations,  we requested the criteria classification according to its relevance to each company. Table 2 presents the modification of results after altering the criteria ordination on the input data.
+
+Speaking about the CR, Tab. 1 clearly shows the inconsistencies before the modification and how the weight modifications made by the algorithm reflect the adjustments
+of these inconsistencies. For example, in the case of the plastic bag manufacturing company, the net profit criterion is more important than the criticality criterion and much more valuable than the lead time criterion. Also, the criticality criterion is more important than the lead time criterion. These statements are coherent. However, the vector of the weights of this matrix clearly shows that the criticality criterion is less relevant than the lead time criterion, which is inconsistent with the two first statements. The assignment of the other weights related to criteria criticality and lead time causes this inconsistency. We can see from the input data matrix that the obsolescence, replaceability, and repairability criteria are more important than the criticality criterion but less valuable than the lead-time criterion. According to the initial statement (that criticality is more relevant than lead time), this new statement generates the inconsistency of the pairwise comparisons matrix. As we can see in the adjusted matrix, the algorithm quickly corrects these inconsistencies and then the weight vector.
+
 
     \section{INTRODUÇÃO}
         
