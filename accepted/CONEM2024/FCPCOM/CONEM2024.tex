@@ -131,12 +131,13 @@ The question is: is the difference between the importance of a product with a 30
 	
 	\citet{Odu2019} cites CRITIC as one of the methods applied for weight assignment in multicriteria classification. This method starts with normalizing the weights using the following equations:
 	
-	The problem with this normalization method is that the largest values of the different criteria will have the same importance. In the case of the companies studied, this may not correspond to the assessment of experts. However, it is possible to make a comparative analysis of amounts using different criteria. And use this analysis for normalization. For this purpose, we propose the following procedure:
+	The problem with this normalization method is that the largest values of the different criteria will have the same weight. In the case of the companies studied, this may not correspond to the assessment of experts. However, it is possible to make a comparative analysis of amounts using different criteria. And use this analysis for normalization. For this purpose, we propose the following procedure:
 
 \begin{itemize}
 \item classification of products in descending order according to a first criterion;
 \item identification of the product with the highest weight, according to a second criterion;
-\item peer-to-peer comparison with the products ordered according to the first criterion, answering the following question: the degree of importance of this product according to the second criterion is equivalent to what degree of importance of the other product evaluated according to the first criterion?
+\item peer-to-peer comparison with the products ordered according to the first criterion, answering the following question: the degree of importance of this product according to the second criterion is equivalent to what degree of importance of the other product evaluated according to the first criterion?;
+\item use of the first criterion normalized weight of correspondent product for normalization.
 \end{itemize}
 
 Using this procedure, we can identify, for example, that the lead time weight of a product that has a lead time of 30 days is equivalent to the annual turnover weight of a product with an annual turnover of 68,380.00 reais.
