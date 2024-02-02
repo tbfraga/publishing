@@ -54,9 +54,11 @@
     
     \subsection{Pairwise Comparisons Matrix and Consistency Rate}
     
+    \section{ALGORITHM FOR FORCING LOW CONSISTENCY RATE}
+    
     \section{RESULTS AND DISCUSSIONS}
     
-    \subsection{Algorithm for forcing low consistency rate}
+    \subsection{Analysis on the Algorithm for Adjusting Inconsistencies}
     
     Table \ref{tab:pairwiseMatrix} presents the modifications made by the software 'COPSolver: library for solving the multicriteria classification problem' in the pairwise comparisons matrix and the consequent changes in the consistency rate (CR) for the data collected from the three companies selected for this study.
 
@@ -116,6 +118,18 @@ For the data presented in Table 1, there was no concern with the correct orderin
 
 Speaking about the CR, Tab. 1 clearly shows the inconsistencies before the modification and how the weight modifications made by the algorithm reflect the adjustments
 of these inconsistencies. For example, in the case of the plastic bag manufacturing company, the net profit criterion is more important than the criticality criterion and much more valuable than the lead time criterion. Also, the criticality criterion is more important than the lead time criterion. These statements are coherent. However, the vector of the weights of this matrix clearly shows that the criticality criterion is less relevant than the lead time criterion, which is inconsistent with the two first statements. The assignment of the other weights related to criteria criticality and lead time causes this inconsistency. We can see from the input data matrix that the obsolescence, replaceability, and repairability criteria are more important than the criticality criterion but less valuable than the lead-time criterion. According to the initial statement (that criticality is more relevant than lead time), this new statement generates the inconsistency of the pairwise comparisons matrix. As we can see in the adjusted matrix, the algorithm quickly corrects these inconsistencies and then the weight vector.
+
+\subsection{Reflections on the Correct Application of the Multicriteria Classification}
+
+In our study, we observed that one of the crucial points for correctly applying multicriteria ABC classification is correctly attributing the weights for the initial ABC classification.
+
+When we built the input data file, we considered two types of criteria for ABC analysis, cumulative sum (for the net profit and lead time criteria) and qualitative criteria measured by weights (0 and 1, in the case of the criticality criterion, and 1, 2, 3, in the case of the other criteria). As a result, we had a bias in the multicriteria classification. The criterion with the top percentage difference (turnover) was dominant.
+
+In the case of the criticality criterion, the choice of a binary parameter results in a distribution of the probability among the criteria that are critical. This seems to be consistent with the desired goal. However, in the case of the other criteria, the consistency is no longer so clear. For example, in the company, the product with the highest turnover (242,280.00 reais) has a turnover corresponding to 12\% of the total turnover. A product with a longer lead time (30 days) represents 0.46\% of the total lead time, that is, a percentage 0.25\% higher than products with a lead time of 20 days (0.31\%) and 0.35\% higher than products with a lead time of 7 days (0.11\%).  
+
+The question is: is the difference between the importance of a product with a 30-day lead time and a product with a 7-day lead time really only 0.35\%. This importance can only really be appreciated when put in comparison with the difference in importance of 12\% between the product with the highest turnover and the product with the lowest turnover. 
+
+Analyzing these values, we come to the conclusion that it seems coherent to adopt as a measure for the weights not gross values, but comparative values. This conclusion gave rise to the idea of assigning comparative weights.
 
 
     \section{INTRODUÇÃO}
