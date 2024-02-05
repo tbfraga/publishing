@@ -56,6 +56,87 @@
     
     \section{ALGORITHM FOR FORCING LOW CONSISTENCY RATE}
     
+    \section{ON MULTICRITERIA ABC CLASSIFICATION}
+
+In our study, we observed that one of the crucial points for correctly applying multicriteria ABC classification is correctly attributing the weights for the initial ABC classification.
+
+When we built the input data file, we considered three types of criteria for ABC analysis, cumulative sum (for billing and lead time criteria), qualitative, and binary criteria. While we were testing the solver, we noticed that an incorrect assignment of the weights can generate a strong bias in the multicriteria classification, since the criterion with the top percentage difference will always be dominant.
+
+Therefore, to assign the weights, three procedures were adopted, according to the different nature of each type of criterion used.
+
+In the case of the binary criteria, the choice of a binary parameters (0 and 1) results in a distribution of the percentage among the criteria that are critical. This seems to be consistent with the desired goal. However, in the case of the other criteria types, the consistency is no longer so clear. 
+
+We can verify this inconsistency through a brief analysis of the two criteria classified according to the cumulative sum. For the data collected from the furniture trades company, the product with the highest billing (242,280.00 reais) has a billing corresponding to 12\% of the total amount; and a product with a longer lead time (30 days) represents 0.46\% of the total lead time, that is, a percentage 0.25\% higher than products with a lead time of 20 days (0.31\%) and 0.35\% higher than products with a lead time of 7 days (0.11\%).  
+
+The question is: is the difference between the importance of a product with a 30-day lead time and a product with a 7-day lead time only 0.35\%? This value can only be appreciated when compared with the difference in importance of 12\% between the product with the highest and the product with the lowest billing. 
+
+Make a multicriteria classification for the billing and lead time criteria based only on the accumulated sum is like calculate a weighted average of the annual sales of vehicles and bananas, hoping that this average will have some meaning. For there to be real meaning in the weighted average found by the multicriteria method, it is necessary to apply some procedure to balance the weights assigned to each criterion.
+	
+	\citet{Odu2019} cites CRITIC as one of the methods applied for weight assignment in multicriteria classification. This method starts with normalizing the weights using the following equations:
+	
+	\begin{equation}
+		\rho_{ij} = \frac{w_{ij} - w_{j}^{\min}}{w_{j}^{\max} - w_{j}^{\min}} \qquad i=1,...,m; j = 1, ..., n \qquad \textrm{for benefit criteria}
+	\end{equation}
+	
+	\begin{equation}
+		\rho_{ij} = \frac{w_{j}^{\max} - w_{ij}}{w_{j}^{\max} - w_{j}^{\min}} \qquad i=1,...,m; j = 1, ..., n \qquad \textrm{for cost criteria}
+	\end{equation}
+	
+	Where $w_{j}^{\min}$ and $w_{j}^{\max}$ are, respectively, the lowest and highest weights assigned to criterion $j$, $w_{ij}$ is the weight and $\rho_{ij}$ is the normalized weight of criteria $j$ for product $i$. 
+	 
+	The problem with this normalization method is that the largest values of the different criteria will have exactly the same weight. In the case of the companies studied, this may not correspond to the assessment of experts. 
+	
+	The solution that we adopted in this work for multicriteria classification with lead time and billing criteria, was based on the work of Willians. A single measure was adopted for these two criteria (lead time billing) dividing the billing by the lead time.
+
+In the case of qualitative criteria, the initial ABC classification was made using three weights, one weight assigned to products A, pa, a second weight assigned to products B, pb, and a third weight assigned to products C, pc, where pa > pb > pc. For qualitative criteria, pa, pb and pc must be assigned using the following steps:
+	
+\begin{itemize}
+\item order the products, in descending order, according to their respective values for lead time billing;
+\item classify products into three groups, A, B and C, for each qualitative criterion;
+\item do pc = 0 for all group C products, for each qualitative criterion;
+\item for each qualitative criterion, do peer-to-peer comparison with the groups A and B and the products ordered according to the lead time billing criterion, answering the following question: the degree of importance of the products of this group to the qualitative criterion is equivalent to what degree of importance of the other product evaluated according to the lead time billing criterion ?;
+\item assign to pa and pb the value of the lead time billing of the product with corresponding importance.
+\end{itemize}
+
+Then, the equation can be used for calculation of multicriteria classification weights of each product, $\rho_{p}$:
+
+\begin{equation}
+	\rho_{p} = (wb + wlt) * \frac{b_p}{lt_p} + \sum{w_{\sigma_q}*\frac{b_{e_p}}{lt_{e_p}}} + \sum{w_{\beta_b}*w_{p\beta_b}}
+\end{equation}
+
+where:
+
+$\textrm{NP}$ is the number of products;
+
+$\textrm{NQ}$ is the number of qualitative criteria;
+
+$\textrm{NB}$ is the number of binary criteria;
+
+$\Sigma$ is the set of qualitative criteria, \quad $\Sigma = \{\sigma_q\}_{q=1}^{NQ}$;
+
+$\textrm{B}$ is the set of binary criteria, \quad $\textrm{B} = \{\beta_b\}_{b=NQ+1}^{NQ+NB}$;
+
+$p$ is the index used to represent each product, \quad $p= 1,...,\textrm{NP}$;
+
+$e_p$ is the lead time billing equivalent to product $p$;
+
+$c$ is the index used to represent each criterion of qualitative or binary type , \quad $c \in \Sigma \cup \textrm{B}$;
+ 
+$b_p$ is the billing of product $p$;
+
+$lt_p$ is the lead time of product $p$;
+
+$\frac{b_p}{lt_p}$ is the lead time billing of product $p$;
+
+$w_{pc}$ is the weight of the product $p$ according to criterion $c$;
+
+$wb$ is the weight of criterion billing.
+
+$wlt$ is the weight of criterion lead time.
+
+$w_{c}$ is the weight of criterion $c$.
+
+    
     \section{RESULTS AND DISCUSSIONS}
     
     \subsection{Analysis on the Algorithm for Adjusting Inconsistencies}
@@ -119,47 +200,7 @@ For the data presented in Table 1, there was no concern with the correct orderin
 Speaking about the CR, Tab. 1 clearly shows the inconsistencies before the modification and how the weight modifications made by the algorithm reflect the adjustments
 of these inconsistencies. For example, in the case of the plastic bag manufacturing company, the billing criterion is more important than the criticality criterion and much more valuable than the lead time criterion. Also, the criticality criterion is more important than the lead time criterion. These statements are coherent. However, the vector of the weights of this matrix clearly shows that the criticality criterion is less relevant than the lead time criterion, which is inconsistent with the two first statements. The assignment of the other weights related to criteria criticality and lead time causes this inconsistency. We can see from the input data matrix that the obsolescence, replaceability, and repairability criteria are more important than the criticality criterion but less valuable than the lead-time criterion. According to the initial statement (that criticality is more relevant than lead time), this new statement generates the inconsistency of the pairwise comparisons matrix. As we can see in the adjusted matrix, the algorithm quickly corrects these inconsistencies and then the weight vector.
 
-\subsection{On Multicriteria ABC Classification}
 
-In our study, we observed that one of the crucial points for correctly applying multicriteria ABC classification is correctly attributing the weights for the initial ABC classification.
-
-When we built the input data file, we considered three types of criteria for ABC analysis, cumulative sum (for billing and lead time criteria), qualitative, and binary criteria. While we were testing the solver, we noticed that an incorrect assignment of the weights can generate a strong bias in the multicriteria classification, since the criterion with the top percentage difference will always be dominant.
-
-Therefore, to assign the weights, three procedures were adopted, according to the different nature of each type of criterion used.
-
-In the case of the binary criteria, the choice of a binary parameters (0 and 1) results in a distribution of the percentage among the criteria that are critical. This seems to be consistent with the desired goal. However, in the case of the other criteria, the consistency is no longer so clear. 
-
-We can verify this inconsistency through a brief analysis of the two criteria classified according to the cumulative sum. For the data collected from the furniture trades company, the product with the highest billing (242,280.00 reais) has a turnover corresponding to 12\% of the total turnover; and a product with a longer lead time (30 days) represents 0.46\% of the total lead time, that is, a percentage 0.25\% higher than products with a lead time of 20 days (0.31\%) and 0.35\% higher than products with a lead time of 7 days (0.11\%).  
-
-The question is: is the difference between the importance of a product with a 30-day lead time and a product with a 7-day lead time only 0.35\%? This value can only be appreciated when compared with the difference in importance of 12\% between the product with the highest and the product with the lowest billing. 
-
-Make a multicriteria classification for the billing and lead time criteria based only on the accumulated sum is like calculate a weighted average of the annual sales of vehicles and bananas, hoping that this average will have some meaning. For there to be real meaning in the weighted average found by the multicriteria method, it is necessary to apply some procedure to balance the weights assigned to each criterion.
-	
-	\citet{Odu2019} cites CRITIC as one of the methods applied for weight assignment in multicriteria classification. This method starts with normalizing the weights using the following equations:
-	
-	\begin{equation}
-		\rho_{ij} = \frac{w_{ij} - w_{j}^{\min}}{w_{j}^{\max} - w_{j}^{\min}} \qquad i=1,...,m; j = 1, ..., n \qquad \textrm{for benefit criteria}
-	\end{equation}
-	
-	\begin{equation}
-		\rho_{ij} = \frac{w_{j}^{\max} - w_{ij}}{w_{j}^{\max} - w_{j}^{\min}} \qquad i=1,...,m; j = 1, ..., n \qquad \textrm{for cost criteria}
-	\end{equation}
-	
-	Where $w_{j}^{\min}$ and $w_{j}^{\max}$ are, respectively, the lowest and highest weights assigned to criterion $j$, $w_{ij}$ is the weight and $\rho_{ij}$ is the normalized weight of criteria $j$ for product $i$. 
-	 
-	The problem with this normalization method is that the largest values of the different criteria will have exactly the same weight. In the case of the companies studied, this may not correspond to the assessment of experts. 
-	
-	The solution that we adopted this work for multicriteria classification with lead time and billing criteria, was based on the work of Willians. A single measure was adopted for these two criteria (billing per lead time) dividing the billing by the lead time.
-
-In the case of qualitative criteria (substitutability, obsolescence and commonality), the initial ABC classification was made using three weights, one weight assigned to products A, pa, a second weight assigned to products B, pb, and a third weight assigned to products C, pc, where pa > pb > pc. For qualitative criteria, pa, pb and pc must be assigned using the following steps:
-	
-\begin{itemize}
-\item order the products, in descending order, according to their respective values for lead time billing;
-\item classify products into three groups, A, B and C, for each qualitative criterion;
-\item do pc = 0 for all group C products, for each qualitative criterion;
-\item for each qualitative criterion, do peer-to-peer comparison with the groups A and B and the products ordered according to the lead time billing criterion, answering the following question: the degree of importance of the products of this group to the qualitative criterion is equivalent to what degree of importance of the other product evaluated according to the lead time billing criterion ?;
-\item assign to pa and pb the value of the lead time billing of the product with corresponding importance.
-\end{itemize}
 
 
     \section{REFERENCES}
