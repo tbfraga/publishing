@@ -88,7 +88,7 @@ Make a multicriteria classification for the billing and lead time criteria based
 	 
 	The problem with this normalization method is that the largest values of the different criteria will have exactly the same weight. In the case of the companies studied, this may not correspond to the assessment of experts. 
 	
-	The solution that we adopted in this work for multicriteria classification with lead time and billing criteria, was based on the work of Willians. A single measure was adopted for these two criteria (lead time billing) dividing the billing by the lead time.
+	The solution that we adopted in this work for multicriteria classification with lead time and billing criteria, was inspired on the work of Willians. A single measure was adopted for these two criteria (lead time billing) dividing the billing by the complement of the lead time percentage.
 
 In the case of qualitative criteria, the initial ABC classification was made using three weights, one weight assigned to products A, pa, a second weight assigned to products B, pb, and a third weight assigned to products C, pc, where pa > pb > pc. For qualitative criteria, pa, pb and pc must be assigned using the following steps:
 	
@@ -104,7 +104,7 @@ Equation (\ref{eq:weight}) can be used for calculation of multicriteria classifi
 
 \begin{equation}
 	\label{eq:weight}
-	\rho_{p} = (wb + wlt) * \frac{b_p}{lt_p} + \sum_{q=1}^{\textrm{NQ}}{w_{\sigma_q}*\frac{b_{e_{p\sigma_q}}}{lt_{e_{p\sigma_q}}}} + \sum_{b=1}^{\textrm{NB}}{w_{\beta_b}*w_{p\beta_b}}, \quad p= 1,...,\textrm{NP}
+	\rho_{p} = (wb + wlt) * \frac{b_p}{1 + (lt^{\max} - lt_p)} + \sum_{q=1}^{\textrm{NQ}}{w_{\sigma_q}*\frac{b_{e_{p\sigma_q}}}{1 + (lt^{\max} - lt_{e_{p\sigma_q}})}} + \sum_{b=1}^{\textrm{NB}}{w_{\beta_b}*w_{p\beta_b}}, \quad p= 1,...,\textrm{NP}
 \end{equation}
 
 where:
@@ -129,7 +129,7 @@ $b_p$ is the billing of product $p$;
 
 $lt_p$ is the lead time of product $p$;
 
-$\frac{b_p}{lt_p}$ is the lead time billing of product $p$;
+$\frac{b_p}{1 + (lt^{\max} - lt_p)}$ is the lead time billing of product $p$;
 
 $w_{pc}$ is the weight of the product $p$ according to criterion $c$;
 
