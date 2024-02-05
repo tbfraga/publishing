@@ -7,6 +7,8 @@
 \def\shortauthor{T. B. Fraga, B. M. Cavalcanti, A. M. D. Silva e E. L. R. Silva \textcolor[rgb]{0.98,0.00,0.00}}
 \def\shorttitle{ABC Multicriteria Classification with Analytical Hierarchy Process: How to Force Consistency of Paiwise Comparisons Matrix \textcolor[rgb]{0.98,0.00,0.00}}
 
+\usepackage{algpseudocode}
+
 \usepackage{array, makecell}
 
 \usepackage[table]{xcolor}
@@ -96,12 +98,12 @@ In the case of qualitative criteria, the initial ABC classification was made usi
 \item do pc = 0 for all group C products, for each qualitative criterion;
 \item for each qualitative criterion, do peer-to-peer comparison with the groups A and B and the products ordered according to the lead time billing criterion, answering the following question: the degree of importance of the products of this group to the qualitative criterion is equivalent to what degree of importance of the other product evaluated according to the lead time billing criterion ?;
 \item assign to pa and pb the value of the lead time billing of the product with corresponding importance.
-\end{itemize}
+\end{itemize}	
 
 Then, the equation can be used for calculation of multicriteria classification weights of each product, $\rho_{p}$:
 
 \begin{equation}
-	\rho_{p} = (wb + wlt) * \frac{b_p}{lt_p} + \sum{w_{\sigma_q}*\frac{b_{e_p}}{lt_{e_p}}} + \sum{w_{\beta_b}*w_{p\beta_b}}
+	\rho_{p} = (wb + wlt) * \frac{b_p}{lt_p} + \sum{w_{\sigma_q}*\frac{b_{e_{p\sigma_q}}}{lt_{e_{p\sigma_q}}}} + \sum{w_{\beta_b}*w_{p\beta_b}}
 \end{equation}
 
 where:
@@ -114,11 +116,11 @@ $\textrm{NB}$ is the number of binary criteria;
 
 $\Sigma$ is the set of qualitative criteria, \quad $\Sigma = \{\sigma_q\}_{q=1}^{NQ}$;
 
-$\textrm{B}$ is the set of binary criteria, \quad $\textrm{B} = \{\beta_b\}_{b=NQ+1}^{NQ+NB}$;
+$\textrm{B}$ is the set of binary criteria, \quad $\textrm{B} = \{\beta_b\}_{b=1}^{NB}$;
 
 $p$ is the index used to represent each product, \quad $p= 1,...,\textrm{NP}$;
 
-$e_p$ is the lead time billing equivalent to product $p$;
+$e_{p\sigma_q}$ is the product lead time billing equivalent to product $p$ on the criterion $\sigma_q$;
 
 $c$ is the index used to represent each criterion of qualitative or binary type , \quad $c \in \Sigma \cup \textrm{B}$;
  
