@@ -100,10 +100,11 @@ In the case of qualitative criteria, the initial ABC classification was made usi
 \item assign to pa and pb the value of the lead time billing of the product with corresponding importance.
 \end{itemize}	
 
-Then, the equation can be used for calculation of multicriteria classification weights of each product, $\rho_{p}$:
+Equation (\ref{eq:weight}) can be used for calculation of multicriteria classification weights of each product, $\rho_{p}$:
 
 \begin{equation}
-	\rho_{p} = (wb + wlt) * \frac{b_p}{lt_p} + \sum{w_{\sigma_q}*\frac{b_{e_{p\sigma_q}}}{lt_{e_{p\sigma_q}}}} + \sum{w_{\beta_b}*w_{p\beta_b}}
+	\label{eq:weight}
+	\rho_{p} = (wb + wlt) * \frac{b_p}{lt_p} + \sum_{q=1}^{\textrm{NQ}}{w_{\sigma_q}*\frac{b_{e_{p\sigma_q}}}{lt_{e_{p\sigma_q}}}} + \sum_{b=1}^{\textrm{NB}}{w_{\beta_b}*w_{p\beta_b}}, \quad p= 1,...,\textrm{NP}
 \end{equation}
 
 where:
