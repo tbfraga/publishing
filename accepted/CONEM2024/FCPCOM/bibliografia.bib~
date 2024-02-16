@@ -1,0 +1,64 @@
+@article{Odu2019,
+	AUTHOR =     {G. O. Odu},
+	TITLE =      {Weighting Methods for Multi-Criteria Decision Making Techniquex},
+	JOURNAL =    {J. Appl. Sci. Environ. Manage.},
+	YEAR =       {2019},
+	volume =     {23},
+	number =     {8},
+	pages =      {1449-1457},
+	doi =        {10.4314/jasem.v23i8.7}
+}
+
+@article{MinwooShamim13,
+	AUTHOR =     {Minwoo Chang and Shamim N. Pakzad},
+	TITLE =      {Modified Natural Excitation Technique for Stochastic Modal Identification},
+	JOURNAL =    {Journal of Structural Engineering},
+	YEAR =       {2013},
+	volume =     {139},
+	number =     {10},
+	pages =      {1753-1762},
+	doi =        {10.1061/(ASCE)ST.1943-541X.0000559}
+}
+
+@INPROCEEDINGS{Bordalo89,
+  AUTHOR =       {S N Bordalo and J H Ferziger and S J Kline},
+  TITLE =        {The Development of Zonal Models for Turbulence},
+  BOOKTITLE =    {Proceedings of the 10th Brazilian Congress of Mechanical Engineering},
+  YEAR =         {1989},
+  volume =       {1},
+  address =      {Rio de Janeiro, Brazil},
+  organization = {ABCM},
+  pages =        {41-44},
+
+}
+
+@BOOK{Coimbra78,
+  AUTHOR =       {A L Coimbra},
+  TITLE =        {Lessons of Continuum Mechanics},
+  PUBLISHER =    {Ed. Edgard Bl\"{u}cher},
+  YEAR =         {1978},
+  address =      {S\~{a}o Paulo, Brazil},
+  note =         {428 p}
+}
+
+@TECHREPORT{Clark86,
+  AUTHOR =       {J A Clark},
+  INSTITUTION =  {University of Michigan},
+  YEAR =         {1986},
+  type =         {Private Communication},
+  address =      {Ann Harbor},
+}
+
+@ARTICLE{Sparrow80,
+  AUTHOR =       {E M Sparrow},
+  TITLE =        {Forced Convection Heat Transfer in a Duct Having Spanwise-Periodic Rectangular Protuberances},
+  JOURNAL =      {Numerical Heat Transfer},
+  YEAR =         {1980},
+  volume =       {3},
+  pages =        {149-167},
+}
+
+
+
+
+
