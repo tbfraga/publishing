@@ -45,7 +45,7 @@
     \\
     %
     % Digitar o resumo
-    \abstract{\textbf{Resumo:} Multicriteria classification is usually a crucial step in the decision-making in the manufacturing management process. For such classification, the attribution of weights to the criteria strongly influences the coherence of the categorization. Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria. AHP's logic is not complicated at all. However, since criteria's pairwise comparison matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. This paper presents a constructive algorithm that can adjust inconsistent matrices, forcing such matrices to have a better consistency rate. We tested this algorithm by applying the AHP method for ABC multicriteria classification to companies in three sectors. As a result, we observed that the algorithm adjusts the pairwise matrices in just a few seconds, avoiding the manual work of several hours, then showing that it is an essential resource for applying the AHP method.}\\
+    \abstract{\textbf{Resumo:} Multicriteria classification is usually a crucial step in the decision-making in the manufacturing management process. For such classification, the attribution of weights to the criteria, as well as the attribution of weights for the products according to each criterion, strongly influences the coherence of the categorization. Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria. AHP's logic is not complicated at all. However, since criteria's pairwise comparison matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. This paper presents a constructive algorithm that can adjust inconsistent matrices, forcing such matrices to have a better consistency rate, and a new procedure and equation for ABC multicriteria classification. We tested the proposed solutions by applying the AHP method for ABC multicriteria classification to companies in three sectors. As a result, we observed that the algorith for forcing consistency adjusts the pairwise matrices in just a few seconds, avoiding the manual work of several hours, and that the procedures develop for multicriteria classification provided consistent results according to analysis of company managers, showing to be essential resources for applying the AHP and ABC multicriteria classification methods.}\\
     %
     % Digitar as palavras-chave
    \\
@@ -69,7 +69,7 @@ up, maintenance routines, and inventory control rules, drive the day to day acti
     Algorithm (\ref{alg:forceConsistency}) illustrates the method developed to reduce the consistency rate ($CR$). This algorithm takes as input the pairwise comparison matrix ($M[m_{ij}]$) and the tolerance ($tol$) defined for the consistency rate and returns the matrix adjusted as well as the $CR$ of this new matrix (see \cite{Saaty1987} for more information on calculating the consistency rate).
     
 \begin{algorithm}
-\caption{forceConsistency($tol, M[m_{ij}]$)}\label{alg:forceConsistency}
+\caption{forceConsistency()}\label{alg:forceConsistency}
 	\begin{algorithmic}
 	\Require $tol, M[m_{ij}]$
 	\Ensure $CR < tol$
@@ -86,7 +86,7 @@ up, maintenance routines, and inventory control rules, drive the day to day acti
 \end{algorithmic}
 \end{algorithm}
 
-The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-peer comparison of each element of the pairwise matrix starting from the third row, $M[m_{\{sz\}j}]_{sz=3}^{n}$, with each element of the matrix $M[m_{jk}]_{j=1, k=j+1}^{n-1,n}$. In this comparison, the consistency of each pair is verified according to alg. (\ref{alg:consistencyCheck}). If any inconsistency is found, the value of one of the elements is reduced or increased, seeking to improve the consistency rate. Initially, the reduction of values is done through the reduce() function.  If, after the reduction, the convergence rate is still greater than the tolerance, the increment of values is made through the increase() function.
+The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-peer comparison of each element of the pairwise matrix starting from the third row, $M[m_{\{sz\}j}]_{sz=3}^{n}$, with each element of the matrix $M[m_{jk}]_{j=1, k=j+1}^{n-1,n}$. In this comparison, the consistency of each pair is verified according to Alg. (\ref{alg:consistencyCheck}). If any inconsistency is found, the value of one of the elements is reduced or increased, seeking to improve the consistency rate. Initially, the reduction of values is done through the reduce() function.  If, after the reduction, the convergence rate is still greater than the tolerance, the increment of values is made through the increase() function.
 
 \begin{algorithm}
 \caption{consistency checking}\label{alg:consistencyCheck}
@@ -105,7 +105,7 @@ The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-p
 \end{algorithm}
 
 \begin{algorithm}
-\caption{topLeftCorner( $CR, tol, M[m_{ij}]$)}\label{alg:topLeftCorner}
+\caption{topLeftCorner()}\label{alg:topLeftCorner}
 	\begin{algorithmic}
 	\Require $CR, tol, M[m_{ij}]$
 	
@@ -153,7 +153,7 @@ The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-p
 \end{algorithm}
 
 \begin{algorithm}
-\caption{reduce($CR, tol, n, g, s, M[m_{ij}]$)}\label{alg:reduce}
+\caption{reduce()}\label{alg:reduce}
 	\begin{algorithmic}
 	\Require $CR, tol, n, g, s, M[m_{ij}]$
 	
@@ -181,7 +181,7 @@ The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-p
 \end{algorithm}
 
 \begin{algorithm}
-\caption{increase($CR, tol, n, g, s, M[m_{ij}], it(M[m_{ij}])$)}\label{alg:increase}
+\caption{increase()}\label{alg:increase}
 	\begin{algorithmic}
 	\Require $CR, tol, n, g, s, M[m_{ij}], it(M[m_{ij}])$
 	
@@ -211,7 +211,7 @@ The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-p
 The bottomLeftCorner() function is similar to the topLeftCorner() function. In the topLeftCorner() function, the peer-to-peer comparison starts with the elements of the third row ($M[m_{\{sz\}j}]_{sz=3}$), and then the elements of the next rows are evaluated, following the order from top to bottom. In the case of the bottomLeftCorner() function, on the other hand, the pair-by-pair comparison is made starting with the elements of the anti-penultimate row ($sz = n-3$), then the elements of the previous rows are evaluated, following the order from bottom to top.
 
 \begin{algorithm}
-\caption{bottomLeftCorner( $CR, tol, M[m_{ij}]$)}\label{alg:bottomLeftCorner}
+\caption{bottomLeftCorner()}\label{alg:bottomLeftCorner}
 	\begin{algorithmic}
 	\Require $CR, tol, M[m_{ij}]$
 	
