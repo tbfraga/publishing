@@ -7,6 +7,7 @@
 \def\shortauthor{T. B. Fraga, B. M. Cavalcanti, A. M. D. Silva e E. L. R. Silva \textcolor[rgb]{0.98,0.00,0.00}}
 \def\shorttitle{ABC Multicriteria Classification with Analytical Hierarchy Process: How to Force Consistency of Paiwise Comparisons Matrix \textcolor[rgb]{0.98,0.00,0.00}}
 
+\usepackage{algorithm}
 \usepackage{algpseudocode}
 
 \usepackage{array, makecell}
@@ -65,6 +66,198 @@ up, maintenance routines, and inventory control rules, drive the day to day acti
     
     \section{ALGORITHM FOR FORCING LOW CONSISTENCY RATE}
     
+    Algorithm (\ref{alg:forceConsistency}) illustrates the method developed to reduce the consistency rate ($CR$). This algorithm takes as input the pairwise comparison matrix ($M[m_{ij}]$) and the tolerance ($tol$) defined for the consistency rate and returns the matrix adjusted as well as the $CR$ of this new matrix (see \cite{Saaty1987} for more information on calculating the consistency rate).
+    
+\begin{algorithm}
+\caption{forceConsistency($tol, M[m_{ij}]$)}\label{alg:forceConsistency}
+	\begin{algorithmic}
+	\Require $tol, M[m_{ij}]$
+	\Ensure $CR < tol$
+		
+	\State $n \gets size(M[m_{ij}])$
+	\State $CR \gets$ consistencyRate($M[m_{ij}]$)
+	
+	\State topLeftCorner( $CR, tol, M[m_{ij}]$)
+	
+	\State bottomLeftCorner( $CR, tol, M[m_{ij}]$)
+	
+	\State \textbf{return} $CR, tol, M[m_{ij}]$
+	
+\end{algorithmic}
+\end{algorithm}
+
+The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-peer comparison of each element of the pairwise matrix starting from the third row, $M[m_{\{sz\}j}]_{sz=3}^{n}$, with each element of the matrix $M[m_{jk}]_{j=1, k=j+1}^{n-1,n}$. In this comparison, the consistency of each pair is verified according to alg. (\ref{alg:consistencyCheck}). If any inconsistency is found, the value of one of the elements is reduced or increased, seeking to improve the consistency rate. Initially, the reduction of values is done through the reduce() function.  If, after the reduction, the convergence rate is still greater than the tolerance, the increment of values is made through the increase() function.
+
+\begin{algorithm}
+\caption{consistency checking}\label{alg:consistencyCheck}
+	\begin{algorithmic}
+	\Require $M[m_{ij}]$
+	
+	\If{$m_{\{sz\}j} * m_{jk} = m_{\{sz\}k}$}
+		\State $consistent \gets 1$ \Comment{values are consistent}
+	\Else
+		\State $consistent \gets 0$ \Comment{values are not consistent}
+	\EndIf
+	
+	\State \textbf{return} $consistent$
+	
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{topLeftCorner( $CR, tol, M[m_{ij}]$)}\label{alg:topLeftCorner}
+	\begin{algorithmic}
+	\Require $CR, tol, M[m_{ij}]$
+	
+	\If{$CR \ge tol$}
+		\For{$sz \gets 3, n $}
+			\For{$j \gets 0, n-1 $}
+				\For{$k \gets j+1, n $}
+					\State $g \gets 0$
+					\State $s \gets 0$
+					\If{$m_{\{sz\}j}*m_{jk} > m_{\{sz\}k}$}
+						\State $g \gets j$
+						\State $s \gets k$
+					\ElsIf{$m_{\{sz\}j}*m_{jk} < m_{\{sz\}k}$}
+						\State $g \gets k$
+						\State $s \gets j$
+					\EndIf
+					
+					\If{$g > 0 \textrm{ or } s > 0$}
+						
+						\State reduce($CR, tol, sz, g, s, M[m_{ij}]$)
+						
+						\If{$CR \le tol$}
+							\State \textbf{break}
+						\ElsIf{$m_{\{sz\}g} > m_{\{sz\}s}$}
+							\State increase(sz,g,s)
+							\If{$CR \le tol$}
+								\State \textbf{break}
+							\EndIf
+						\EndIf
+					\EndIf
+				\EndFor
+				\If{$CR \le tol$}
+					\State \textbf{break}
+				\EndIf
+			\EndFor
+				\If{$CR \le tol$}
+					\State \textbf{break}
+				\EndIf	
+		\EndFor
+	\EndIf
+	
+	\State \textbf{return} $CR, tol, M[m_{ij}]$
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{reduce($CR, tol, n, g, s, M[m_{ij}]$)}\label{alg:reduce}
+	\begin{algorithmic}
+	\Require $CR, tol, n, g, s, M[m_{ij}]$
+	
+	\While{$m_{ng}*m_{gs} > m_{ns} \textrm{ and } m_{ng} \neq 0$}
+		\State $auxCR \gets CR$
+		\State $m_{ng} ++$
+		\State $m_{gn} --$
+		
+		\State $CR \gets$ consistencyRate($M[m_{ij}]$)
+		
+		\If{$CR > auxCR$}
+			\State $m_{ng} --$
+			\State $m_{gn} ++$
+			\State $CR \gets$ consistencyRate($M[m_{ij}]$)
+			\State \textbf{break}
+			
+		\ElsIf{$CR <= tol$}
+			\State \textbf{break}
+		\EndIf
+\EndWhile
+
+\State \textbf{return} $CR, tol, M[m_{ij}]$	
+	
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{increase($CR, tol, n, g, s, M[m_{ij}], it(M[m_{ij}])$)}\label{alg:increase}
+	\begin{algorithmic}
+	\Require $CR, tol, n, g, s, M[m_{ij}], it(M[m_{ij}])$
+	
+	\While{$m_{ng}*m_{gs} < m_{ns} \textrm{ and } it(m_{ng}) \neq n-1$}
+		\State $auxCR \gets CR$
+		\State $m_{ns} ++$
+		\State $m_{sn} --$
+		
+		\State $CR \gets$ consistencyRate($M[m_{ij}]$)
+		
+		\If{$CR > auxCR$}
+			\State $m_{ns} --$
+			\State $m_{sn} ++$
+			\State $CR \gets$ consistencyRate($M[m_{ij}]$)
+			\State \textbf{break}
+			
+		\ElsIf{$CR <= tol$}
+			\State \textbf{break}
+		\EndIf
+\EndWhile
+
+\State \textbf{return} $CR, tol, M[m_{ij}]$	
+	
+\end{algorithmic}
+\end{algorithm}
+
+The bottomLeftCorner() function is similar to the topLeftCorner() function. In the topLeftCorner() function, the peer-to-peer comparison starts with the elements of the third row ($M[m_{\{sz\}j}]_{sz=3}$), and then the elements of the next rows are evaluated, following the order from top to bottom. In the case of the bottomLeftCorner() function, on the other hand, the pair-by-pair comparison is made starting with the elements of the anti-penultimate row ($sz = n-3$), then the elements of the previous rows are evaluated, following the order from bottom to top.
+
+\begin{algorithm}
+\caption{bottomLeftCorner( $CR, tol, M[m_{ij}]$)}\label{alg:bottomLeftCorner}
+	\begin{algorithmic}
+	\Require $CR, tol, M[m_{ij}]$
+	
+	\If{$CR \ge tol$}
+		\For{$sz \gets n-2, 1 $}
+			\For{$j \gets 0, n-3 $}
+				\For{$k \gets j+1, n-2 $}
+					\State $g \gets 0$
+					\State $s \gets 0$
+					\If{$m_{\{sz-1\}j}*m_{jk} > m_{\{sz-1\}k}$}
+						\State $g \gets j$
+						\State $s \gets k$
+					\ElsIf{$m_{\{sz-1\}j}*m_{jk} < m_{\{sz-1\}k}$}
+						\State $g \gets k$
+						\State $s \gets j$
+					\EndIf
+					
+					\If{$g > 0 \textrm{ or } s > 0$}
+						
+						\State reduce(sz-1,g,s)
+						
+						\If{$CR <= tol$}
+							\State \textbf{break}
+						\ElsIf{$m_{\{sz-1\}g} > m_{\{sz-1\}s}$}
+							encrease(sz-1,g,s)
+							\If{$CR <= tol$}
+								\State \textbf{break}
+							\EndIf
+						\EndIf
+					\EndIf
+				\EndFor
+				\If{$CR <= tol$}
+					\State \textbf{break}
+				\EndIf
+			\EndFor
+				\If{$CR <= tol$}
+					\State \textbf{break}
+				\EndIf	
+		\EndFor
+	\EndIf
+	
+	\State \textbf{return} $CR, tol, M[m_{ij}]$
+
+\end{algorithmic}
+\end{algorithm}
+    
     \section{ON MULTICRITERIA ABC CLASSIFICATION}
 
 As discussed earlier, in our study, we observed that one of the crucial points for correctly applying multicriteria ABC classification is correctly attributing the weights for the initial ABC classification.
@@ -95,7 +288,7 @@ Make a multicriteria classification for the billing and lead time criteria based
 	 
 	The problem with this normalization method is that the largest values of the different criteria will have exactly the same weight. In the case of the companies studied, this may not correspond to the assessment of experts. 
 	
-	The solution that we adopted in this work for multicriteria classification with lead time and billing criteria, was inspired on the work of Willians. A single measure was adopted for these two criteria (lead time billing  weight) dividing the billing weight by the complement of the lead time weight.
+	The solution that we adopted in this work for multicriteria classification with lead time and billing criteria, was inspired on the work of Willians. A single measure was adopted for these two criteria (lead time billing  weight) dividing the billing by the complement of the lead time for each product and then normalizing the weights.
 
 In the case of qualitative criteria, the initial ABC classification was made using three weights, one weight assigned to products A, pa, a second weight assigned to products B, pb, and a third weight assigned to products C, pc, where pa > pb > pc. For qualitative criteria, pa, pb and pc must be assigned using the following steps:
 	
@@ -107,11 +300,16 @@ In the case of qualitative criteria, the initial ABC classification was made usi
 \item assign to pa and pb the value of the lead time billing of the product with corresponding importance.
 \end{itemize}	
 
-Equation (\ref{eq:weight}) can be used for calculation of multicriteria classification weights of each product, $\rho_{p}$:
+Equations (\ref{eq:leadTimeBillingWeight}) and (\ref{eq:weight}) can be used for calculation of multicriteria classification weights of each product, $\rho_{p}$:
+
+\begin{equation}
+	\label{eq:leadTimeBillingWeight}
+	LtBW(p) = \frac{\frac{b_p}{1 + (lt^{\max} - lt_p)}}{\sum_{p=1}^{\textrm{NP}}{ \{ \frac{b_p}{1 + (lt^{\max} - lt_p)} \} }}, \quad p= 1,...,\textrm{NP}
+\end{equation}
 
 \begin{equation}
 	\label{eq:weight}
-	\rho_{p} = (wb + wlt) * \frac{b_p}{1 + (lt^{\max} - lt_p)} + \sum_{q=1}^{\textrm{NQ}}{w_{\sigma_q}*\frac{b_{e_{p\sigma_q}}}{1 + (lt^{\max} - lt_{e_{p\sigma_q}})}} + \sum_{b=1}^{\textrm{NB}}{w_{\beta_b}*w_{p\beta_b}}, \quad p= 1,...,\textrm{NP}
+	\rho_{p} = (wb + wlt) * LtBW(p) + \sum_{q=1}^{\textrm{NQ}}{w_{\sigma_q}* LtBW(e_{p\sigma_q})} + \sum_{b=1}^{\textrm{NB}}{w_{\beta_b}*w_{p\beta_b}}, \quad p= 1,...,\textrm{NP}
 \end{equation}
 
 where:
@@ -128,23 +326,21 @@ $\textrm{B}$ is the set of binary criteria, \quad $\textrm{B} = \{\beta_b\}_{b=1
 
 $p$ is the index used to represent each product, \quad $p= 1,...,\textrm{NP}$;
 
-$e_{p\sigma_q}$ is the product lead time billing weight percentage complement equivalent to product $p$ on the criterion $\sigma_q$;
-
 $c$ is the index used to represent each criterion of qualitative or binary type , \quad $c \in \Sigma \cup \textrm{B}$;
+
+$LtBW(p)$ is the lead time billing weight of product $p$;
  
-$b_p$ is the billing weight percentage of product $p$;
+$b_p$ is the billing of product $p$;
 
-$lt_p$ is the lead time weight percentage of product $p$;
+$lt_p$ is the of product $p$;
 
-$\frac{b_p}{1 + (lt^{\max} - lt_p)}$ is the lead time billing weight percentage complement for product $p$;
+$wb$ is the multicriteria weight of criterion billing.
+
+$wlt$ is the multicriteria weight of criterion lead time.
+
+$w_{c}$ is the multicriteria weight of criterion $c$.
 
 $w_{pc}$ is the weight percentage of the product $p$ according to criterion $c$;
-
-$wb$ is the weight percentage of criterion billing.
-
-$wlt$ is the weight percentage of criterion lead time.
-
-$w_{c}$ is the weight percentage of criterion $c$.
 
     
     \section{RESULTS AND DISCUSSIONS}
