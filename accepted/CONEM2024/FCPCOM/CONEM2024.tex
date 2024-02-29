@@ -32,7 +32,7 @@
     \vspace{-.6cm}
     %
     % Digitar o título
-    \title{CONEM2024-0025\\ ABC  MULTICRITERIA CLASSIFICATION WITH ANALYTICAL HIERARCHY PROCESS: HOW TO FORCE CONSISTENCY OF PAIRWISE COMPARISONS MATRIX} 
+    \title{CONEM2024-0025\\ NEW ABC  MULTICRITERIA CLASSIFICATION WITH ANALYTICAL HIERARCHY PROCESS: HOW TO ATTRIBUTE WEIGHTS AND FORCE CONSISTENCY OF PAIRWISE COMPARISONS MATRIX} 
     %
     \end{center}
 	%
@@ -45,7 +45,7 @@
     \\
     %
     % Digitar o resumo
-    \abstract{\textbf{Resumo:} Multicriteria classification is usually a crucial step in the decision-making in the manufacturing and purchasing management process. For such classification, the attribution of weights to the criteria, as well as the attribution of weights to the products according to each criterion, strongly influences the coherence of the categorization. Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria. AHP's logic is not complicated at all. However, since criteria's pairwise comparison matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. This paper presents a constructive algorithm that can adjust inconsistent matrices, forcing such matrices to have a better consistency rate and a new procedure and equation for ABC multicriteria classification. We tested the proposed solutions by applying the AHP method for ABC multicriteria classification to companies in three sectors. As a result, we observed that the algorithm for forcing consistency adjusts the pairwise matrices in just a few seconds, avoiding the manual work of several hours and that the procedures developed for multicriteria classification provided consistent results according to the analysis of company managers, showing to be essential resources for applying the AHP and ABC multicriteria classification methods.}\\
+    \abstract{\textbf{Resumo:} Multicriteria classification is usually a crucial step in the decision-making in the manufacturing and purchasing management process. For such classification, the attribution of weights to the criteria, as well as the attribution of weights to the products according to each criterion, strongly influences the coherence of the categorization. Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria. AHP's logic is not complicated at all. However, since criteria's pairwise comparison matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. This paper presents a constructive algorithm that can adjust inconsistent matrices, forcing such matrices to have a better consistency rate and a new procedure and equation for ABC multicriteria classification. We tested the proposed solutions by applying the AHP method for ABC multicriteria classification to companies in three sectors. As a result, we observed that the algorithm for forcing consistency adjusts the pairwise matrices in just a few seconds, avoiding the manual work of several hours and that the new solution method developed for multicriteria classification provided consistent results according to the analysis of company managers, showing to be essential resources for applying the AHP and ABC multicriteria classification methods.}\\
     %
     % Digitar as palavras-chave
    \\
@@ -353,6 +353,8 @@ $w_{pc}$ is the weight percentage of the product $p$ according to criterion $c$;
             \begin{center}
                 \caption{\textbf{Pairwise comparisons matrix and consistency rate changes for three companies 					(results found by COPSolver) - legend: sb = substitutability; lt = lead-time; rp = repairability; cr = criticality; ob = obsolescence; bl = billing; cm = commonality; CR = consistence rate; w = normalized weights vector.}}
                     \begin{tabular}[l]{p{0.4cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm}}
+                    	\multicolumn{7}{c}{original data} & & \multicolumn{7}{c}{adjusted} \\
+   						\cline {1-15} \\
 						\multicolumn{14}{l}{car mechanics company} \\
 						\cline {1-15} \\
 						& \multicolumn{7}{c | }{CR = 0.216}  & \multicolumn{7}{c}{CR = 0.085} \\
@@ -368,17 +370,17 @@ $w_{pc}$ is the weight percentage of the product $p$ according to criterion $c$;
 						\cline {1-15} \\
 						\multicolumn{14}{l}{furniture trades company} \\
 						\cline {1-15} \\
-  						& \multicolumn{7}{c | }{CR = 0.151}  & \multicolumn{7}{c}{CR = 0.096} \\
-  						& \multicolumn{7}{c | }{$w=(0.05, 0.10, 0.14, 0.21, 0.02, 0.45, 0.02\underline{})$}  & \multicolumn{7}{c}{$w = (0.07, 0.16, 0.25, 0.20, 0.02, 0.26, 0.03)$} \\
-   						& lt & sb & rp & cr & cm & bl & ob & lt & sb & rp & cr & cm & np & ob \\
-						lt & 1.00 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.20 & 7.00 & \cellcolor[HTML]{ACE600} 0.11 & 5.00 & 1.00 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 7.00 & \cellcolor[HTML]{ACE600} 0.20 & 5.00 \\
-						sb & 5.00 & 1.00 & 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 5.00 &\cellcolor[HTML]{ACE600}  0.14 & 7.00 & 5.00 & 1.00 & 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 5.00 & \cellcolor[HTML]{ACE600} 0.33 & 7.00 \\
-						rp & 7.00 & 3.00 & 1.00 & \cellcolor[HTML]{ACE600} 0.33 & 5.00 & \cellcolor[HTML]{ACE600} 0.14 & 3.00 & 7.00 & 3.00 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 7.00 & \cellcolor[HTML]{ACE600} 1.00 & 3.00 \\
-						cr & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]		{ACE600} 3.00 & 1.00 & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 0.33 & 9.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 \\
-						cm & 0.14 & 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.11 & 1.00 & 0.11 & 1.00 & 0.14 & 0.20 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 0.14 & 1.00 & 0.11 & 1.00 \\
-						np & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 & 1.00 & 9.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 & 1.00 & 9.00 \\
-						ob & 0.20 & 0.14 & 0.33 & 0.11 & 1.00 & 0.11 & 1.00 & 0.20 & 0.14 & 0.33 & 0.11 & 1.00 & 0.11 & 1.00 \\
+  						& \multicolumn{7}{c | }{CR = 0.136}  & \multicolumn{7}{c}{CR = 0.096} \\
+  						& \multicolumn{7}{c | }{$w=(0.07, 0.13, 0.26, 0.03, 0.48, 0.03)$}  & \multicolumn{7}{c}{$w = (0.09, 0.16, 0.35, 0.03, 0.35, 0.03)$} \\
+   						& lt & rp & cr & cm & bl & ob & & lt & rp & cr & cm & bl & ob \\
+						lt & 1.00 & 0.20 & 0.14 & 7.00 & \cellcolor[HTML]{ACE600} 0.11 & 5.00 & & 1.00 & 0.20 & 0.14 & 7.00 & \cellcolor[HTML]{ACE600} 0.14 & 5.00 \\
+						rp & 5.00 & 1.00 & 0.33 & 5.00 & \cellcolor[HTML]{ACE600} 0.14 & 3.00 & & 5.00 & 1.00 & 0.33 & 5.00 & \cellcolor[HTML]{ACE600} 0.33 & 3.00 \\
+						cr & 7.00 & 3.00 & 1.00 & 9.00 & \cellcolor[HTML]{ACE600} 0.33 & 9.00 & & 7.00 & 3.00 & 1.00 & 9.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 \\
+						cm & 0.14 & 0.20 & 0.11 & 1.00 & 0.11 & 1.00 & & 0.14 & 0.20 & 0.11 & 1.00 & 0.11 & 1.00 \\
+						bl & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 & 1.00 & 9.00 & & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 & 1.00 & 9.00 \\
+						ob & 0.20 & 0.33 & 0.11 & 1.00 & 0.11 & 1.00 & & 0.20 & 0.33 & 0.11 & 1.00 & 0.11 & 1.00 \\
 						\cline {1-15} \\
+						
 						\multicolumn{14}{l}{plastic packaging manufacturing company} \\
 						\cline {1-15} \\
    						& \multicolumn{7}{c | }{CR = 0.625}  & \multicolumn{7}{c}{CR = 0.085} \\
@@ -394,98 +396,140 @@ $w_{pc}$ is the weight percentage of the product $p$ according to criterion $c$;
             \end{center}
 	\end{table}
 
-As we can see in this table, the pairwise comparison weights are adjusted primarily according to the weights assigned to the first three criteria. Thus, although there is a change in the pairwise comparison weights, which may be significant, the weights assigned to the first three criteria are preserved. The algorithm will change the weights of the other criteria to force the consistency of the pairwise comparisons matrix. Another significant observation is that the algorithm stops when it reaches the desired consistency rate. So, it is more likely that the algorithm changes the weights related to the fourth criterion and the next ones. Therefore, the ordering of criteria in the matrix must follow the following rules:
+As we can see in this table, the pairwise comparison weights are adjusted primarily according to the weights assigned to the first three criteria. Thus, although there is a change in the pairwise comparison weights, which may be significant, the weights assigned to the first three criteria are preserved. The algorithm will change the weights of the other criteria to force the consistency of the pairwise comparisons matrix. Another significant observation is that the algorithm stops when it reaches the desired consistency rate. So, it is more likely that the algorithm changes the weights related to the fourth criterion and the next ones. Therefore, in the preparation of the input file the data of the criteria must be informed in such a way that the criteria are ordered in descending order according to their respective relevance.
 
-\begin{itemize}
-\item the three most relevant criteria for the company are among the first;
-\item the other criteria are ordered from the last to fourth position, in descending order of relevance.
-\end{itemize}
+For the data presented in Table \ref{tab:pairwiseMatrix}, there was no concern with the correct ordering of the criteria. Based on the results and previous observations, we have reordered the criteria using their respective weights, initially defined by the normalized eigenvector of the original pairwise comparisons matrix ($w$ in Tab. \ref{tab:pairwiseMatrix}). Table \ref{tab:pairwiseMatrixReordered} presents the modification of results after altering the criteria ordination on the input data.
 
-For the data presented in Table 1, there was no concern with the correct ordering of the criteria. Based on the results and previous observations,  we requested the criteria classification according to its relevance to each company. Table 2 presents the modification of results after altering the criteria ordination on the input data.
+\begin{table}[ht]
+            \begin{center}
+                \caption{\textbf{Pairwise comparisons matrix and consistency rate changes for three companies 					(results found by COPSolver) - legend: sb = substitutability; lt = lead-time; rp = repairability; cr = criticality; ob = obsolescence; bl = billing; cm = commonality; CR = consistence rate; w = normalized weights vector.}}
+                    \begin{tabular}[l]{p{0.4cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm}}
+   						\multicolumn{7}{c}{original data reordered} & & \multicolumn{7}{c}{adjusted} \\
+   						\cline {1-15} \\
+						\multicolumn{14}{l}{car mechanics company} \\
+						\cline {1-15} \\
+						& \multicolumn{7}{c | }{CR = 0.216}  & \multicolumn{7}{c}{CR = 0.085} \\
+						& \multicolumn{7}{c | }{$w=(0.35, 0.26, 0.18, 0.11, 0.05, 0.03, 0.01)$}  & \multicolumn{7}{c}{$w = (0.37, 0.26, 0.12, 0.12, 0.06, 0.05, 0.02)$} \\
+   						& sb & lt & rp & cr & ob & bl & cm & sb & lt & rp & cr & ob & co & cm \\
+						sb & 1.00 & 3.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 7.00 & 9.00 & 9.00 & 1.00 & 3.00 								& 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 7.00 & 9.00 & 9.00 \\
+						lt & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 7.00 & 9.00 & 9.00 & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 9.00 \\
+						rp & 0.33 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 9.00 & 9.00 & 0.33 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 \\
+						cr & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 9.00 & 9.00 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 \\
+						ob & 0.14 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 0.14 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 \\
+						np & 0.11 & 0.11 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & 9.00 & 0.11 & 0.11 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 9.00 \\
+						cm & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 1.00 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 1.00 \\
+						\cline {1-15} \\
+						\multicolumn{14}{l}{furniture trades company} \\
+						\cline {1-15} \\
+  						& \multicolumn{7}{c | }{CR = 0.136}  & \multicolumn{7}{c}{CR = 0.082} \\
+  						& \multicolumn{7}{c | }{$w=(0.48, 0.26, 0.13, 0.07, 0.03, 0.03)$}  & \multicolumn{7}{c}{$w = (0.49, 0.27, 0.11, 0.06, 0.05, 0.03)$} \\
+   						& bl & cr & rp & lt & ob & cm & & bl & cr & rp & lt & ob & cm \\        
+						bl & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 & & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 \\
+						cr & 0.33 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & & 0.33 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 \\
+						rp & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & 3.00 & 5.00 & & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & 3.00 & 5.00 \\
+						lt & 0.11 & 0.14 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & 7.00 & & 0.11 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 7.00 \\
+						ob & 0.11 & 0.11 & 0.33 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & & 0.11 & 0.11 & 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 \\
+						sb & 0.11 & 0.11 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & & 0.11 & 0.11 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 \\
+						\cline {1-15} \\
+						
+						\multicolumn{14}{l}{plastic packaging manufacturing company} \\
+						\cline {1-15} \\
+   						& \multicolumn{7}{c | }{CR = 0.625}  & \multicolumn{7}{c}{CR = 0.094} \\
+   						& \multicolumn{7}{c | }{$w=(0.40, 0.22, 0.12, 0.07, 0.10, 0.10)$}  & \multicolumn{7}{c}{$w = (0.56, 0.21, 0.08, 0.07, 0.07, 0.02)$} \\
+   						& bl & lt & sb & rp & ob & cr & & bl & lt & sb & rp & ob & cr & \\
+						bl & 1.00 & 7.00 & 5.00 & \cellcolor[HTML]{ACE600} 5.00 & 7.00 & \cellcolor[HTML]{ACE600} 3.00 & & 1.00 & 7.00 & 5.00 & \cellcolor[HTML]{ACE600} 9.00 & 7.00 & \cellcolor[HTML]{ACE600} 9.00 \\
+						lt & 0.14 & 1.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 7.00 & 5.00 & \cellcolor[HTML]{ACE600} 0.33 & & 0.14 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 5.00 & \cellcolor[HTML]{ACE600} 9.00 \\
+						sb & 0.20 & \cellcolor[HTML]{ACE600} 0.14 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 5.00 & & 0.20 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 5.00 \\
+						rp & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 0.33 & 5.00 & & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 5.00 \\
+						ob & 0.14 & 0.20 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 3.00 & 1.00 & 5.00 & & 0.14 & 0.20 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 5.00 \\
+						cr & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 3.00 & 0.20 & 0.20 & 0.20 & 1.00 & & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.11 & 0.20 & 0.20 & 0.20 & 1.00 \\
+				\end{tabular} \label{tab:pairwiseMatrixReordered}
+            \end{center}
+\end{table}
+	
+a Tab. \ref{tab:pairwiseMatrixAdjusted} apresenta uma comparação dos resultados usando diferentes métodos. Na matrix PCM 02, o método para forçar consistência foi aplicado antes da reordenação dos critérios antes. Já no caso da matrix PCM 03, o método para forçar consistência foi aplicado após a reordenação dos critérios. Esta tabela também mostra a matrix PCM 04 com os ajustes realizados pelo dono da empresa na matrix PCM 01 após verificar os resultados encontrados pelo COPSolver. Conforme podemos verificar, o software COPSolver provê uma importante ajuda na elaboração de tabelas de comparação por pares consistentes. Verificamos também que é importante realizar a ordenação dos critérios antes de ajustar a matriz buscando uma melhor consistência, pois os pesos atribuídos para os critérios mais relevantes devem ser preferencialmente mantidos. Finalmente, observamos que a ordenação dos critérios também ajuda no ajuste manual das matrizes de comparação por pares, já que a apresentação destas tabelas com os critérios ordenados facilita a análise dos pesos.  Para classificação multicritério dos itens foi utilizada a matriz de comparação por pares PCM 04, tendo em vista a importância da avaliação final realizada pelo funcionário responsável ou dono da empresa.
+	
+\begin{table}[ht]
+            \begin{center}
+                \caption{\textbf{Pairwise comparisons matrix and consistency rate changes for three companies 					(results found by COPSolver) - legend: sb = substitutability; lt = lead-time; rp = repairability; cr = criticality; ob = obsolescence; bl = billing; cm = commonality; CR = consistence rate; w = normalized weights vector.}}
+                    \begin{tabular}[l]{p{0.4cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm}}
+                        \\
+   						\multicolumn{14}{c}{furniture trades company} \\
+   						\cline {1-15} \\
+   						\multicolumn{7}{l}{PCM 01 - original data reordered} & & \multicolumn{7}{l}{PCM 02 - PCM 01 adjusted and than reordered} \\
+						\cline {1-15} \\
+  						& \multicolumn{7}{c | }{CR = 0.136}  & \multicolumn{7}{c}{CR = 0.096} \\
+  						& \multicolumn{7}{c | }{$w=(0.48, 0.26, 0.13, 0.07, 0.03, 0.03)$}  & \multicolumn{7}{c}{$w = (0.35, 0.35, 0.16, 0.09, 0.03, 0.03)$} \\
+   						& bl & cr & rp & lt & ob & cm & & bl & cr & rp & lt & ob & cm \\        
+						bl & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 & & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 7.00 & 9.00 & 9.00 \\
+						cr & 0.33 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 \\
+						rp & 0.14 & 0.33 & 1.00 & 5.00 & 3.00 & 5.00 & & \cellcolor[HTML]{ACE600} 0.33 & 0.33 & 1.00 & 5.00 & 3.00 & 5.00 \\
+						lt & 0.11 & 0.14 & 0.20 & 1.00 & 5.00 & 7.00 & & \cellcolor[HTML]{ACE600} 0.14 & 0.14 & 0.20 & 1.00 & 5.00 & 7.00 \\
+						ob & 0.11 & 0.11 & 0.33 & 0.20 & 1.00 & 1.00 & & 0.11 & 0.11 & 0.33 & 0.20 & 1.00 & 1.00 \\
+						sb & 0.11 & 0.11 & 0.20 & 0.14 & 1.00 & 1.00 & & 0.11 & 0.11 & 0.20 & 0.14 & 1.00 & 1.00 \\
+						\cline {1-15} \\
+						\multicolumn{7}{l}{PCM 03 - PCM 01 reordered and than adjusted} & & \multicolumn{7}{l}{PCM 01 - manually adjusted based on COPSolver results} \\
+						\cline {1-15} \\
+  						& \multicolumn{7}{c | }{CR = 0.082}  & \multicolumn{7}{c}{CR = 0.082} \\
+  						& \multicolumn{7}{c | }{$w=(0.49, 0.27, 0.11, 0.06, 0.05, 0.03)$}  & \multicolumn{7}{c}{$w = (0.50, 0.25, 0.12, 0.08, 0.03, 0.03)$} \\
+   						& bl & cr & rp & lt & ob & cm & & bl & cr & rp & lt & ob & cm \\        
+						bl & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 & & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 \\
+						cr & 0.33 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 9.00 \\
+						rp & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & 3.00 & 5.00 & & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 5.00 \\
+						lt & 0.11 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 7.00 & & 0.11 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & 5.00 & \cellcolor[HTML]{ACE600} 5.00 \\
+						ob & 0.11 & 0.11 & 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & & 0.11 & 0.11 & \cellcolor[HTML]{ACE600}  0.20 & 0.20 & 1.00 & 1.00 \\
+						sb & 0.11 & 0.11 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & & 0.11 & 0.11 & 0.20 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & 1.00 \\
+						\cline {1-15} \\
+				\end{tabular} \label{tab:pairwiseMatrixAdjusted}
+            \end{center}
+	\end{table}
 
 Speaking about the CR, Tab. 1 clearly shows the inconsistencies before the modification and how the weight modifications made by the algorithm reflect the adjustments
 of these inconsistencies. For example, in the case of the plastic bag manufacturing company, the billing criterion is more important than the criticality criterion and much more valuable than the lead time criterion. Also, the criticality criterion is more important than the lead time criterion. These statements are coherent. However, the vector of the weights of this matrix clearly shows that the criticality criterion is less relevant than the lead time criterion, which is inconsistent with the two first statements. The assignment of the other weights related to criteria criticality and lead time causes this inconsistency. We can see from the input data matrix that the obsolescence, replaceability, and repairability criteria are more important than the criticality criterion but less valuable than the lead-time criterion. According to the initial statement (that criticality is more relevant than lead time), this new statement generates the inconsistency of the pairwise comparisons matrix. As we can see in the adjusted matrix, the algorithm quickly corrects these inconsistencies and then the weight vector.
 
+\subsection{Analysis on the New ABC Multicriteria Classification Method}
+
+\begin{table}[h!]
+\begin{center}
+\begin{small}
+\begin{tabular}[c]{l r r | l r r r r}
+\multicolumn{8}{l}{car mechanics company} \\
+\cline {1-8} \\
+\multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern classification}\\
+\multicolumn{3}{c |}{cutoff}  & \multicolumn{5}{c}{75 sales between October 2020 and July 2023} \\
+\multicolumn{3}{c |}{0.35 \%; 0.70 \%} & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
+A &  10 & 23.81 \% & smooth & 18.75 \% &  20.00 \% & 16.67 \% & 0 \%\\
+B &  15 & 35.71 \% & slow-moving & 6.25 \% & 10.00 \% & 0.00 \% & 0 \%\\
+C &  17 & 40.48 \% & sporadic & 75.00 \% & 70.00 \% & 83.33 \% & 0 \% \\
+\cline {1-8} \\
+\multicolumn{8}{l}{furniture trades company} \\
+\cline {1-8} \\
+\multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern classification}\\
+\multicolumn{3}{c |}{cutoff:} &\\
+\multicolumn{3}{c |}{0.35 \%; 0.70 \%}& & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
+A &  26 & 10.24 \% & smooth & 31.58 \% &  73.08 \% & 30.00 \% & 24.82 \%\\
+B &  80 & 31.50 \% & slow-moving & 18.62 \% & 19.23 \% & 33.75 \% & 9.93 \%\\
+C & 148 & 58.27 \% & sporadic & 49.80 \% & 7.69 \% & 36.25 \% & 65.25 \% \\
+\cline {1-8} \\
+ \multicolumn{8}{l}{plastic packaging manufacturing company}\\
+\cline {1-8} \\
+\multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern classification}\\
+\multicolumn{3}{c |}{cutoff:} & \multicolumn{5}{c}{5,967 sales between November 2019 and February 2023}\\
+\multicolumn{3}{c |}{0.35 \%; 0.70 \%} & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
+A &   128 &  5.49 \% & smooth & 15.31 \% & 22.66 \% & 23.97 \% & 10.42 \%\\
+B &   726 & 31.12 \% & slow-moving & 5.53 \% & 1.56 \% & 8.68 \% & 4.33 \%\\
+C & 1,479 & 63.39 \% & sporadic & 79.16 \% & 75.78 \% & 67.36 \% & 85.25 \% \\
+\cline {1-8} \\
+
+\end{tabular}
+\caption{ABC multicriteria and demand pattern classifications for three companies (results found by COPSolver)}
+\label{tab:results}
+\end{small}
+\end{center}
+\end{table} 
+
 	\section{DISCUSSION AND FINAL REMARKS}
-
-
-    \section{REFERENCES}
     
-    \section{INTRODUÇÃO}
-        
-        O objetivo destas instruções é servir de guia para a formatação dos trabalhos a serem publicados nos anais. Os anais do XII CONEM serão publicados no formato Adobe$^{\small{TM}}$ PDF.
-
-        Os artigos \textcolor{red}{\underline{\textbf{DEVEM}}} ser formatados de acordo com estas instruções. O presente arquivo pode ser usado como modelo por usuários do \LaTeX. Além disso, pode ser usado como um guia de formatação para usuários de outros processadores de texto.
-
-        Os trabalhos (\textit{draft} e \textit{final paper}) estão limitados a no mínimo \textcolor{red}{\underline{\textbf{6 páginas}}} e no máximo \textcolor{red}{\underline{\textbf{10 páginas}}}, incluindo tabelas e figuras. O arquivo final em formato PDF não deve exceder 2 MB.
-
-        A língua oficial do congresso é o português; entretanto serão aceitos manuscritos em espanhol ou em inglês. Se o trabalho não for escrito em inglês, o autor deverá incluir o título, os nomes dos autores e afiliações, o resumo e as palavras-chave, traduzidos para o inglês, após a lista de referências, no fim do artigo.
-
-
-    \section{FORMATO DO TEXTO}
-        
-        O artigo deve ser digitado no \textit{template} ``CONEM2024.tex'' e as principais configurações (ex.: formato do papel, tipo e tamanho da fonte do título/Seção/Subseção, espaços, margens, alinhamentos, indentação, etc.) já estão previamente configuradas no arquivo ``abcm.sty''. Título, nomes dos autores, instituição, endereço, resumo e palavras-chave devem ser recuados 0,1 cm da margem esquerda e marcados por uma linha preta na borda esquerda com largura de 2$\frac{1}{4}$ pontos.
-        
-        Informações suficientes devem ser fornecidas diretamente no texto, ou por referência a trabalhos publicados disponíveis. Notas de rodapé devem ser evitadas. 
-        
-        Todos os símbolos e notações devem ser definidos no texto. As grandezas físicas devem ser expressas no Sistema Internacional de Unidades. Os símbolos matemáticos que aparecem no texto devem ser digitados em itálico. As unidades devem ser digitadas no estilo romano (ex.: kg, m, MJ, kW/m$^2$, em vez de $kg$, $m$, $MJ$, $kW/m^2$).
-        
-        As referências bibliográficas devem ser citadas no texto dando o sobrenome do(s) autor(es) e o ano de publicação, conforme os seguintes exemplos: ``... conforme apresentado \citep{MinwooShamim13}.'' ou ``Recentemente, \citet{MinwooShamim13} demonstraram que …''. No caso de três ou mais autores, deve ser utilizada a expressão ``\textit{et al.}'', como segue: ``... conforme já relatado \citep{Bordalo89}'' e ``Recentemente, \citet{Bordalo89} demonstraram que …''. Duas ou mais referências com os mesmos autores e ano de publicação devem ser distinguidas acrescentando ``a'', ``b'', etc., ao ano de publicação. No caso da necessidade de citar vários trabalhos em uma mesma chamada, o seguinte formato pode ser utilizado: ``...já se encontra consolidado na literatura (\citeauthor{Coimbra78}, \citeyear{Coimbra78}; \citeauthor{Clark86}, \citeyear{Clark86} e \citeauthor{Sparrow80},  \citeyear{Sparrow80})''.  
-        
-        As referências devem ser listadas no final do manuscrito de acordo com as instruções fornecidas na Seção 4.
-
-
-        \textbf{\textcolor[rgb]{0.98,0.00,0.00}{\underline{NÃO NUMERAR AS PÁGINAS.}}}
-
-    \subsection{Títulos e Subtítulos das Seções }
-
-        Os títulos das seções são com letras maiúsculas (Exemplo: \textbf{MODELO MATEMÁTICO}), enquanto os subtítulos só têm as primeiras letras maiúsculas de cada palavra (Exemplo: \textbf{Modelo Matemático}). Eles devem ser numerados, usando numerais arábicos separados por pontos, até o máximo de 3 subníveis. Uma linha em branco de espaçamento simples deve ser incluída acima e abaixo de cada título ou subtítulo.
-
-    \subsection{Corpo do Texto}
-
-        Conforme já se encontra definido no arquivo ``abcm.sty'', o corpo do texto é justificado e com espaçamento simples. A primeira linha de cada parágrafo tem recuo de 0,5 cm a partir da margem esquerda.
-
-        As equações matemáticas são alinhadas à esquerda com recuo de 0,5 cm.  Elas são referidas como ``Eq. (\ref{eq:equation1})'' no meio de uma frase, ou ``Equação (\ref{eq:equation1})'' quando usada no início de uma sentença. Os números das equações são numerais arábicos colocados entre parênteses, e alinhados à direita, como mostrado na Eq. (\ref{eq:equation1}). Os símbolos usados nas equações devem ser definidos imediatamente antes ou depois de sua primeira ocorrência no texto.
-
-        O tamanho da fonte usado nas equações deve ser compatível com o utilizado no texto. Todas as grandezas físicas devem ter suas unidades expressas no Sistema Internacional de Unidades, como já mencionado.
-
-        \begin{equation}
-        \sigma = E \cdot \epsilon. \label{eq:equation1}
-        \end{equation}
-    
-    	\noindent
-    	onde: $\sigma$ é a tensão, $E$ é o módulo de elasticidade longitudinal (ou Módulo de Young) e $\epsilon$ é a deformação longitudinal.
-
-        As figuras e tabelas devem ser colocadas no texto o mais próximo possível do ponto em que foram mencionadas pela primeira vez e devem ser numeradas consecutivamente em algarismos arábicos. As tabelas devem ser centralizadas e referidas por ``Tab. \ref{tab:tabexemplo}'' no meio de uma frase, ou por ``Tabela \ref{tab:tabexemplo}'' quando usada no início de uma sentença. Uma linha em branco, em espaço simples, deve ser introduzida entre a tabela e o texto subsequente.
-        
-        Anotações e valores numéricos incluídos na tabela devem ter tamanhos compatíveis com a fonte usada no texto do trabalho e todas as unidades devem ser expressas no Sistema Internacional de Unidades. As unidades são incluídas apenas na primeira linha ou primeira coluna de cada tabela, conforme for apropriado. O estilo de borda é livre. As explicações, se houver, devem ser fornecidas ao pé das tabelas e não dentro das mesmas.
-
-        \begin{table}[ht]
-            \begin{center}
-                \caption{\textbf{Exemplo de tabela.}}
-                    \begin{tabular}{c|c|c}
-                    \hline
-                    Propriedades do compósito       & CFRC-TWILL        & CFRC-4HS         \\
-                    \hline
-                    Resistência à Flexão  (MPa)     & 209.0 $\pm$ 10.0       & 180.0 $\pm$  15.0    \\
-                    \hline
-                    Módulo de Flexão  (GPa)         & 57.0 $\pm$ 2.8    & 18.0 $\pm$  1.3  \\
-                    \hline
-                    \end{tabular} \label{tab:tabexemplo}
-            \end{center}
-        \end{table}
-
-        As figuras devem ser centralizadas. Elas são referenciadas por ``Fig. \ref{fig:figexemplo}'' no meio de uma frase ou por ``Figura \ref{fig:figexemplo}'' quando usada no início de uma sentença. Sua legenda deve ser centralizada e localizada imediatamente abaixo da figura. As anotações e numerações devem ter tamanhos compatíveis com a fonte usada no texto e todas as unidades devem ser expressas no Sistema Internacional de Unidades. As figuras devem ser colocadas o mais próximo possível de sua primeira citação no texto. Deve ser deixada uma linha em branco, de espaçamento simples, entre a figura e o texto subsequente.
-    
-        \begin{figure}[h]
-            \begin{center}
-                \includegraphics[angle=0, scale=.8]{figura.png}
-            \end{center}
-            \caption{\textbf{Exemplo de figura.}}
-            \label{fig:figexemplo}
-        \end{figure}
-
-        Figuras coloridas e fotografias de alta qualidade podem ser incluídas no trabalho. Para reduzir o tamanho do arquivo e preservar a resolução gráfica, os arquivos das imagens podem ser convertidos para o formato GIF (para figuras com até 16 cores) ou para o formato JPEG (alta densidade de cores), antes de serem inseridos no trabalho.
 
     \section{AGRADECIMENTOS}
     
@@ -493,7 +537,7 @@ of these inconsistencies. For example, in the case of the plastic bag manufactur
 
 
     % REFERÊNCIAS
-    \section{REFERÊNCIAS}
+    \section{REFERENCES}
     
          %   \citet{key} ==>>                Jones et al. (1990)
          %   \citet*{key} ==>>               Jones, Baker, and Smith (1990)
@@ -505,45 +549,19 @@ of these inconsistencies. For example, in the case of the plastic bag manufactur
          %   \citeauthor{key} ==>>           Jones et al.
          %   \citeauthor*{key} ==>>          Jones, Baker, and Smith
          %   \citeyear{key} ==>>             1990
-    
-        Referências aceitas incluem: artigos de periódicos, dissertações, teses, artigos publicados em anais de congressos, livros, comunicações privadas e artigos submetidos e aceitos (com fonte identificada) e citações a páginas da internet.
-
-        A lista de referências deve ser uma seção específica denominada Referências, localizada no fim do artigo.
-
-        A primeira linha de cada referência deve ser alinhada à esquerda, sendo que as demais terão recuo já configurado a partir da margem esquerda. Todas as referências incluídas na lista devem aparecer como citações no texto do trabalho.
-
-        As referências devem ser postas em ordem alfabética, usando o último nome do primeiro autor, seguida do ano da publicação. Exemplo da lista de referências é apresentado abaixo.
         
         \bibliographystyle{abcm}
         \bibliography{bibliografia}
+        
+        \section{CRediT authorship contribution statement} 
+		\label{sec:contributions}
+
+		T.B. Fraga: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data Curation, Writing – original draft, Writing – review \& editing, Supervision, Project administration. B.M. Cavalcanti: Investigation. A.M.D.Silva: Investigation. E.L.R. Silva: Investigation. 
 
     \section{RESPONSABILIDADE AUTORAIS}
 
         Os trabalhos escritos em português ou espanhol devem incluir (após direitos autorais) título, os nomes dos autores e afiliações, o resumo e as palavras-chave, traduzidos para o inglês e a declaração a seguir, devidamente adaptada para o número de autores.
     
         O(s) autor(es) é(são) o(s) único(s) responsável(is) pelo conteúdo deste trabalho.
-
- % RESUMO EM INGLES
-
-\noindent{
-   \\ 
-    \begin{tabular}{||p{\textwidth}}
-    \begin{center}
-    \vspace{-.6cm}
-    \title{AFTER FULL PAPER IN PORTUGUESE OR SPANISH, IT IS NECESSARY THE ABSTRACT IN ENGLISH}
-    \end{center}
-    \authors{First Author’s Name, e-mail1$^1$} \\
-    \authors{Second Author’s Name, e-mail$^2$} \\
-    \authors{Third Author’s Name, e-mail$^2$} \\\\
-    \institution{$^1$Institution and address for first author} \\
-    \institution{$^2$Institution and address for second and third authors} \\
-    \\
-    \authors{\textcolor[rgb]{0.98,0.00,0.00}{Same format for other authors and institutions, if any. (\textit{This guidance should be removed from the final paper.})}} \\
-    \\
-    \abstract{\textbf{Abstract:} The purpose of these instructions is to serve as a guide for formatting papers to be published in the Proceedings of the XII CONEM. The abstract must describe the objectives, methodology and main conclusions of the article, containing between 300 and 400 words in a single paragraph.  It should not contain either formulae or bibliographic references. The full paper will be published in the proceedings of the event.}\\
-    \\
-    \keywords{\textbf{Keywords:} keyword 1, keyword 2, keyword 3 (up to 5 keywords) }\\
-    \end{tabular}
-}
 
 \end{document}
