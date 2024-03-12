@@ -58,7 +58,7 @@
 	"Manufacturing decisions can be classified into three categories: strategic, tactical and operational ... Operational decisions pertaining to issues such as order processing, detailed production scheduling, follow
 up, maintenance routines, and inventory control rules, drive the day to day activities" \citep{Singhal2013}. Manufacturing decisions are closely related to sales decisions. "In today’s competitive market the diversity in customer’s need have resulted in a high level of variability in the products which have to be manufactured" \citep{Ebrahimi2014} or acquired from other companies. Such diversity brings to light the need for the use of complex techniques for purchasing / production management, especially at the operational decision level \citep{Kiran2019}. In such a scenario, prior optimized operational planning becomes impressible for better use of the productive capacity and to avoid investment losses in unnecessary or unprofitable material. And, given the wide variety of products, it is crucial to start any planning by understanding the importance of all products marked by the company. 
 
-	One of the approaches that widely applied to clustering products according to their importance is the multicriteria ABC classification. The scientific literature broadly emphasizes the value of multicriteria ABC classification for inventory management and presents several multicriteria methods. The Analytical Hierarchy Process is one of the most common techniques applied for this purpose \citep{Flores1992, AltayGuvenir1998, Lolli2014, Balaji2014}. Some recent studies also emphasize the importance of applying multicriteria analysis to strategic planning \citep[\emph{e.g.},][]{BarbosaDePaula2022, Pereira2023, MarianoRibeiro2023}. \citet{Odu2019} emphasizes that, when applying some multicriteria methods, it is crucial to pay particular attention to the objectivity factors of criteria weights. The author provides a detailed overview of different weighting methods applicable to multicriteria techniques.
+	One of the approaches that is widely applied to clustering products according to their importance is the multicriteria ABC classification. The scientific literature broadly emphasizes the value of multicriteria ABC classification for inventory management and presents several multicriteria methods. The Analytical Hierarchy Process is one of the most common techniques applied for this purpose \citep{Flores1992, AltayGuvenir1998, Lolli2014, Balaji2014}. Some recent studies also emphasize the importance of applying multicriteria analysis to strategic planning \citep[\emph{e.g.},][]{BarbosaDePaula2022, Pereira2023, MarianoRibeiro2023}. \citet{Odu2019} emphasizes that, when applying some multicriteria methods, it is crucial to pay particular attention to the objectivity factors of criteria weights. The author provides a detailed overview of different weighting methods applicable to multicriteria techniques.
 	
 		In this work, we present a study with three companies from three different sectors, which market a wide variety of products, in some cases, highly personalized products. The interest of this study is to identify the principal products, that is, the products that each company must prioritize so that this information can guide the optimized operational planning. We opted for the method ABC for multicriteria classification and adopted the Analytic Hierarchy Process (AHP) \citep{Saaty1987} to assign the weights to the different criteria. It is important to note that the Analytic Hierarchy Process derives the weights of each criterion based on the eigenvector of a pairwise comparison matrix, which is constructed manually according to an empirical evaluation. According to \cite{Saaty1987}, this matrix must be antisymmetric and have a consistency rate of less than 0.1.  The author reports that a software package supporting the AHP, called Expert Choice, for the IBM PC, was used in his work for making eigenvector calculations and guiding the decision maker to improve matrix inconsistency if needed. During the execution of the work we present in this paper, we found that there is a substantial difficulty in the calculation of the eigenvector, as well as in the construction of consistent pairwise comparison matrices. Since we had no access to the Expert Choice software package, we developed an open-source COPSolver library for the Analytic Hierarchy Process and multicriteria ABC classification based on a simple algorithm for forcing the consistency of such matrices. We present this algorithm in this paper. We coupled the Eigen library from eigen.tuxfamily.org to COPSolver for the eigenvectors calculation of the matrices. Also, we identified that it is possible to use different criteria types (cumulative sum, qualitative, and binary) when assigning weights to ABC classification, depending on each specific criterion chosen, and we observed that such an assignment generates a bias in the multicriteria ABC classification. Therefore, we also developed a new methodology for assigning weights in a balanced way for ABC classification, and we proposed a new multicriteria weighting equation for the multicriteria classification COPSolver library. We also present both propositions in this paper, as well as an in-depth analysis of the results found by the new library developed for COPSolver.
 		
@@ -208,7 +208,7 @@ The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-p
 \end{algorithmic}
 \end{algorithm}
 
-The bottomLeftCorner() function is similar to the topLeftCorner() function. In the topLeftCorner() function, the peer-to-peer comparison starts with the elements of the third row ($M[m_{\{sz\}j}]_{sz=3}$), and then the elements of the next rows are evaluated, following the order from top to bottom. In the case of the bottomLeftCorner() function, on the other hand, the pair-by-pair comparison is made starting with the elements of the anti-penultimate row ($sz = n-3$), then the elements of the previous rows are evaluated, following the order from bottom to top.
+The bottomLeftCorner() function is similar to the topLeftCorner() function. In the topLeftCorner() function, the peer-to-peer comparison starts with the elements of the third row ($M[m_{\{sz\}j}]_{sz=3}$), and then the elements of the next rows are evaluated, following the order from top to bottom. In the case of the bottomLeftCorner() function, on the other hand, the pair-by-pair comparison is made starting with the elements of the anti-penultimate row ($sz = n-2$), then the elements of the previous rows are evaluated, following the order from bottom to top.
 
 \begin{algorithm}
 \caption{bottomLeftCorner()}\label{alg:bottomLeftCorner}
@@ -260,7 +260,7 @@ The bottomLeftCorner() function is similar to the topLeftCorner() function. In t
     
     \section{ON MULTICRITERIA ABC CLASSIFICATION}
 
-As discussed earlier, in our study, we observed that one of the crucial points for correctly applying multicriteria ABC classification is correctly attributing the weights for the initial ABC classification.
+As discussed earlier, in our study, we observed that one of the crucial points for correctly applying multicriteria ABC classification is correctly attributing the weights for the initial ABC classification, that is, assign weights to each product according to each criterion.
 
 When we built the input data file, we considered three types of criteria for ABC analysis, cumulative sum (for billing and lead time criteria), qualitative, and binary criteria. While we were testing the solver, we noticed that an incorrect assignment of the weights can generate a strong bias in the multicriteria classification, since the criterion with the top percentage difference will always be dominant.
 
@@ -288,19 +288,19 @@ Make a multicriteria classification for the billing and lead time criteria based
 	 
 	The problem with this normalization method is that the largest values of the different criteria will have exactly the same weight. In the case of the companies studied, this may not correspond to the assessment of experts. 
 	
-	The solution that we adopted in this work for multicriteria classification with lead time and billing criteria, was inspired on the work of Willians. A single measure was adopted for these two criteria (lead time billing  weight) dividing the billing by the complement of the lead time for each product and then normalizing the weights.
+The solution that we adopted in this work for multicriteria classification with lead time and billing criteria, was inspired on the work of \cite{Williams1984}. A single measure was adopted for these two criteria (lead time billing  weight) dividing the billing by the complement of the lead time for each product and then normalizing the weights.
 
-In the case of qualitative criteria, the initial ABC classification was made using three weights, one weight assigned to products A, pa, a second weight assigned to products B, pb, and a third weight assigned to products C, pc, where pa > pb > pc. For qualitative criteria, pa, pb and pc must be assigned using the following steps:
+In the case of qualitative criteria, the initial ABC classification was made using three weights, one weight assigned to group A products, $w(A)$, a second weight assigned to group B products, $w(B)$, and a third weight assigned to products C, $w(C)$, where $w(A) > w(B) > w(C)$. For qualitative criteria, $w(A)$, $w(B)$ and $w(C)$ must be assigned using the following steps:
 	
 \begin{itemize}
 \item order the products, in descending order, according to their respective values for lead time billing;
 \item classify products into three groups, A, B and C, for each qualitative criterion;
-\item do pc = 0 for all group C products, for each qualitative criterion;
-\item for each qualitative criterion, do peer-to-peer comparison with the groups A and B and the products ordered according to the lead time billing criterion, answering the following question: the degree of importance of the products of this group to the qualitative criterion is equivalent to what degree of importance of the other product evaluated according to the lead time billing criterion ?;
-\item assign to pa and pb the value of the lead time billing of the product with corresponding importance.
+\item do $w(C)$ = 0 for all group C products, for each qualitative criterion;
+\item for each qualitative criterion, do peer-to-peer comparison with the groups A and B products and the products ordered according to the lead time billing criterion, answering the following question: the degree of importance of the products of this group to the qualitative criterion is equivalent to what degree of importance of the other product evaluated according to the lead time billing criterion ?;
+\item assign to $w(A)$ and $w(B)$ the value of the lead time billing of the product with corresponding importance; 
 \end{itemize}	
 
-Equations (\ref{eq:leadTimeBillingWeight}) and (\ref{eq:weight}) can be used for calculation of multicriteria classification weights of each product, $\rho_{p}$:
+After the correct assignment of the weights for each product according to each criterion, Eqs. (\ref{eq:leadTimeBillingWeight}) and (\ref{eq:weight}) can be used for calculation of multicriteria classification weights of each product, $\rho_{p}$:
 
 \begin{equation}
 	\label{eq:leadTimeBillingWeight}
@@ -340,7 +340,7 @@ $wlt$ is the multicriteria weight of criterion lead time.
 
 $w_{c}$ is the multicriteria weight of criterion $c$.
 
-$w_{pc}$ is the weight percentage of the product $p$ according to criterion $c$;
+$w_{pc}$ is the normalized weight percentage of the product $p$ according to criterion $c$;
 
     
     \section{RESULTS AND DISCUSSIONS}
@@ -348,6 +348,8 @@ $w_{pc}$ is the weight percentage of the product $p$ according to criterion $c$;
     \subsection{Analysis on the Algorithm for Adjusting Inconsistencies}
     
     Table \ref{tab:pairwiseMatrix} presents the modifications made by the software 'COPSolver: library for solving the multicriteria classification problem' in the pairwise comparisons matrix and the consequent changes in the consistency rate (CR) for the data collected from the three companies selected for this study.
+    
+    Speaking about the CR, Tab. 1 clearly shows the inconsistencies before the modification and how the weight modifications made by the algorithm reflect the adjustments of these inconsistencies. For example, in the case of the plastic bag manufacturing company, the billing criterion is more important than the criticality criterion and much more valuable than the lead time criterion. Also, the criticality criterion is more important than the lead time criterion. These statements are coherent. However, the vector of the weights of this matrix clearly shows that the criticality criterion is less relevant than the lead time criterion, which is inconsistent with the two first statements. The assignment of the other weights related to criteria criticality and lead time causes this inconsistency. We can see from the input data matrix that the obsolescence, replaceability, and repairability criteria are more important than the criticality criterion but less valuable than the lead-time criterion. According to the initial statement (that criticality is more relevant than lead time), this new statement generates the inconsistency of the pairwise comparisons matrix. As we can see in the adjusted matrix, the algorithm quickly corrects these inconsistencies and then the weight vector.
 
 	\begin{table}[ht]
             \begin{center}
@@ -396,9 +398,11 @@ $w_{pc}$ is the weight percentage of the product $p$ according to criterion $c$;
             \end{center}
 	\end{table}
 
-As we can see in this table, the pairwise comparison weights are adjusted primarily according to the weights assigned to the first three criteria. Thus, although there is a change in the pairwise comparison weights, which may be significant, the weights assigned to the first three criteria are preserved. The algorithm will change the weights of the other criteria to force the consistency of the pairwise comparisons matrix. Another significant observation is that the algorithm stops when it reaches the desired consistency rate. So, it is more likely that the algorithm changes the weights related to the fourth criterion and the next ones. Therefore, in the preparation of the input file the data of the criteria must be informed in such a way that the criteria are ordered in descending order according to their respective relevance.
+As we can see in Tab. \ref{tab:pairwiseMatrix}, the pairwise comparison weights are adjusted primarily according to the weights assigned to the first three criteria. Thus, although there is a change in the pairwise comparison weights, which may be significant, the weights assigned to the first three criteria are preserved. The algorithm will change the weights of the other criteria to force the consistency of the pairwise comparisons matrix. Another significant observation is that the algorithm stops when it reaches the desired consistency rate. So, it is more likely that the algorithm changes the weights related to the fourth criterion and the next ones. Therefore, in the preparation of the input file the data of the criteria must be informed in such a way that the criteria are ordered in descending order according to their respective relevance.
 
 For the data presented in Table \ref{tab:pairwiseMatrix}, there was no concern with the correct ordering of the criteria. Based on the results and previous observations, we have reordered the criteria using their respective weights, initially defined by the normalized eigenvector of the original pairwise comparisons matrix ($w$ in Tab. \ref{tab:pairwiseMatrix}). Table \ref{tab:pairwiseMatrixReordered} presents the modification of results after altering the criteria ordination on the input data.
+
+
 
 \begin{table}[ht]
             \begin{center}
@@ -446,20 +450,20 @@ For the data presented in Table \ref{tab:pairwiseMatrix}, there was no concern w
 				\end{tabular} \label{tab:pairwiseMatrixReordered}
             \end{center}
 \end{table}
-	
-a Tab. \ref{tab:pairwiseMatrixAdjusted} apresenta uma comparação dos resultados usando diferentes métodos. Na matrix PCM 02, o método para forçar consistência foi aplicado antes da reordenação dos critérios antes. Já no caso da matrix PCM 03, o método para forçar consistência foi aplicado após a reordenação dos critérios. Esta tabela também mostra a matrix PCM 04 com os ajustes realizados pelo dono da empresa na matrix PCM 01 após verificar os resultados encontrados pelo COPSolver. Conforme podemos verificar, o software COPSolver provê uma importante ajuda na elaboração de tabelas de comparação por pares consistentes. Verificamos também que é importante realizar a ordenação dos critérios antes de ajustar a matriz buscando uma melhor consistência, pois os pesos atribuídos para os critérios mais relevantes devem ser preferencialmente mantidos. Finalmente, observamos que a ordenação dos critérios também ajuda no ajuste manual das matrizes de comparação por pares, já que a apresentação destas tabelas com os critérios ordenados facilita a análise dos pesos.  Para classificação multicritério dos itens foi utilizada a matriz de comparação por pares PCM 04, tendo em vista a importância da avaliação final realizada pelo funcionário responsável ou dono da empresa.
+
+Table 3 presents a comparison of the results using different methods on the data provided by the furniture trading company. In matrix PCM 02, the method used to force consistency was applied before the reordering of the criteria. In the case of matrix PCM 03, the same method was applied after reordering the criteria. This table also shows the matrix PCM 04 with adjustments made manually to the matrix PCM 01 after verifying the results found by COPSolver. As we can see, the COPSolver software provides an important help in the preparation of consistent pairwise comparison matrices. We also found that it is important to perform the ordering of the criteria before adjusting the matrix seeking better consistency, since the weights assigned to the most relevant criteria should preferably be maintained. It is possible to verify in these tables that the reordering before the application of the method to force consistency causes the changes to be more distributed and are carried out in the weights relative to the least important criteria. Finally, we observe that the ordering of the criteria also helps in the manual adjustment of the pairwise comparison matrices, since the presentation of these tables with the ordered criteria facilitates the analysis of the weights.  For multicriteria classification of items, the pairwise comparison matrix PCM 03 was used. However, in practical cases it is important to have a final assessment of the responsible employee and the matrix used for ABC classification can be a final matrix manually updated by the employee based on the results found by COPSolver.
 	
 \begin{table}[ht]
             \begin{center}
                 \caption{\textbf{Pairwise comparisons matrix and consistency rate changes for three companies 					(results found by COPSolver) - legend: sb = substitutability; lt = lead-time; rp = repairability; cr = criticality; ob = obsolescence; bl = billing; cm = commonality; CR = consistence rate; w = normalized weights vector.}}
-                    \begin{tabular}[l]{p{0.4cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm}}
+                    \begin{tabular}[l]{p{0.4cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.1cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm}}
                         \\
    						\multicolumn{14}{c}{furniture trades company} \\
-   						\cline {1-15} \\
-   						\multicolumn{7}{l}{PCM 01 - original data reordered} & & \multicolumn{7}{l}{PCM 02 - PCM 01 adjusted and than reordered} \\
-						\cline {1-15} \\
-  						& \multicolumn{7}{c | }{CR = 0.136}  & \multicolumn{7}{c}{CR = 0.096} \\
-  						& \multicolumn{7}{c | }{$w=(0.48, 0.26, 0.13, 0.07, 0.03, 0.03)$}  & \multicolumn{7}{c}{$w = (0.35, 0.35, 0.16, 0.09, 0.03, 0.03)$} \\
+   						\cline {1-14} \\
+   						& \multicolumn{6}{l}{PCM 01 - original data reordered} & & \multicolumn{6}{l}{PCM 02 - PCM 01 adjusted and than reordered} \\
+						\cline {1-14} \\
+  						& \multicolumn{6}{c}{CR = 0.136}  & & \multicolumn{6}{c}{CR = 0.096} \\
+  						& \multicolumn{6}{c}{$w=(0.48, 0.26, 0.13, 0.07, 0.03, 0.03)$} & & \multicolumn{6}{c}{$w = (0.35, 0.35, 0.16, 0.09, 0.03, 0.03)$} \\
    						& bl & cr & rp & lt & ob & cm & & bl & cr & rp & lt & ob & cm \\        
 						bl & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 & & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 7.00 & 9.00 & 9.00 \\
 						cr & 0.33 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 \\
@@ -467,11 +471,11 @@ a Tab. \ref{tab:pairwiseMatrixAdjusted} apresenta uma comparação dos resultado
 						lt & 0.11 & 0.14 & 0.20 & 1.00 & 5.00 & 7.00 & & \cellcolor[HTML]{ACE600} 0.14 & 0.14 & 0.20 & 1.00 & 5.00 & 7.00 \\
 						ob & 0.11 & 0.11 & 0.33 & 0.20 & 1.00 & 1.00 & & 0.11 & 0.11 & 0.33 & 0.20 & 1.00 & 1.00 \\
 						sb & 0.11 & 0.11 & 0.20 & 0.14 & 1.00 & 1.00 & & 0.11 & 0.11 & 0.20 & 0.14 & 1.00 & 1.00 \\
-						\cline {1-15} \\
-						\multicolumn{7}{l}{PCM 03 - PCM 01 reordered and than adjusted} & & \multicolumn{7}{l}{PCM 01 - manually adjusted based on COPSolver results} \\
-						\cline {1-15} \\
-  						& \multicolumn{7}{c | }{CR = 0.082}  & \multicolumn{7}{c}{CR = 0.082} \\
-  						& \multicolumn{7}{c | }{$w=(0.49, 0.27, 0.11, 0.06, 0.05, 0.03)$}  & \multicolumn{7}{c}{$w = (0.50, 0.25, 0.12, 0.08, 0.03, 0.03)$} \\
+						\cline {1-14} \\
+						& \multicolumn{6}{l}{PCM 03 - PCM 01 reordered and than adjusted} & & \multicolumn{6}{l}{PCM 01 - manually adjusted based on COPSolver results} \\
+						\cline {1-14} \\
+  						& \multicolumn{6}{c}{CR = 0.082}  & & \multicolumn{6}{c}{CR = 0.082} \\
+  						& \multicolumn{6}{c}{$w=(0.49, 0.27, 0.11, 0.06, 0.05, 0.03)$} & & \multicolumn{6}{c}{$w = (0.50, 0.25, 0.12, 0.08, 0.03, 0.03)$} \\
    						& bl & cr & rp & lt & ob & cm & & bl & cr & rp & lt & ob & cm \\        
 						bl & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 & & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 \\
 						cr & 0.33 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 9.00 \\
@@ -479,52 +483,52 @@ a Tab. \ref{tab:pairwiseMatrixAdjusted} apresenta uma comparação dos resultado
 						lt & 0.11 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 7.00 & & 0.11 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & 5.00 & \cellcolor[HTML]{ACE600} 5.00 \\
 						ob & 0.11 & 0.11 & 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & & 0.11 & 0.11 & \cellcolor[HTML]{ACE600}  0.20 & 0.20 & 1.00 & 1.00 \\
 						sb & 0.11 & 0.11 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & & 0.11 & 0.11 & 0.20 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & 1.00 \\
-						\cline {1-15} \\
+						\cline {1-14} \\
 				\end{tabular} \label{tab:pairwiseMatrixAdjusted}
             \end{center}
 	\end{table}
 
-Speaking about the CR, Tab. 1 clearly shows the inconsistencies before the modification and how the weight modifications made by the algorithm reflect the adjustments
-of these inconsistencies. For example, in the case of the plastic bag manufacturing company, the billing criterion is more important than the criticality criterion and much more valuable than the lead time criterion. Also, the criticality criterion is more important than the lead time criterion. These statements are coherent. However, the vector of the weights of this matrix clearly shows that the criticality criterion is less relevant than the lead time criterion, which is inconsistent with the two first statements. The assignment of the other weights related to criteria criticality and lead time causes this inconsistency. We can see from the input data matrix that the obsolescence, replaceability, and repairability criteria are more important than the criticality criterion but less valuable than the lead-time criterion. According to the initial statement (that criticality is more relevant than lead time), this new statement generates the inconsistency of the pairwise comparisons matrix. As we can see in the adjusted matrix, the algorithm quickly corrects these inconsistencies and then the weight vector.
-
-\subsection{Analysis on the New ABC Multicriteria Classification Method}
+\subsection{Analysis On The New ABC Multicriteria Classification Method}
 
 \begin{table}[h!]
 \begin{center}
-\begin{small}
-\begin{tabular}[c]{l r r | l r r r r}
-\multicolumn{8}{l}{car mechanics company} \\
-\cline {1-8} \\
-\multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern classification}\\
-\multicolumn{3}{c |}{cutoff}  & \multicolumn{5}{c}{75 sales between October 2020 and July 2023} \\
-\multicolumn{3}{c |}{0.35 \%; 0.70 \%} & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
-A &  10 & 23.81 \% & smooth & 18.75 \% &  20.00 \% & 16.67 \% & 0 \%\\
-B &  15 & 35.71 \% & slow-moving & 6.25 \% & 10.00 \% & 0.00 \% & 0 \%\\
-C &  17 & 40.48 \% & sporadic & 75.00 \% & 70.00 \% & 83.33 \% & 0 \% \\
-\cline {1-8} \\
-\multicolumn{8}{l}{furniture trades company} \\
-\cline {1-8} \\
-\multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern classification}\\
-\multicolumn{3}{c |}{cutoff:} &\\
-\multicolumn{3}{c |}{0.35 \%; 0.70 \%}& & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
-A &  26 & 10.24 \% & smooth & 31.58 \% &  73.08 \% & 30.00 \% & 24.82 \%\\
-B &  80 & 31.50 \% & slow-moving & 18.62 \% & 19.23 \% & 33.75 \% & 9.93 \%\\
-C & 148 & 58.27 \% & sporadic & 49.80 \% & 7.69 \% & 36.25 \% & 65.25 \% \\
-\cline {1-8} \\
- \multicolumn{8}{l}{plastic packaging manufacturing company}\\
-\cline {1-8} \\
-\multicolumn{3}{l |}{multc. ABC clssf.} & \multicolumn{5}{c}{demand pattern classification}\\
-\multicolumn{3}{c |}{cutoff:} & \multicolumn{5}{c}{5,967 sales between November 2019 and February 2023}\\
-\multicolumn{3}{c |}{0.35 \%; 0.70 \%} & & \multicolumn{1}{c}{total} & \multicolumn{1}{c}{A} & \multicolumn{1}{c}{B} & \multicolumn{1}{c}{C}\\
-A &   128 &  5.49 \% & smooth & 15.31 \% & 22.66 \% & 23.97 \% & 10.42 \%\\
-B &   726 & 31.12 \% & slow-moving & 5.53 \% & 1.56 \% & 8.68 \% & 4.33 \%\\
-C & 1,479 & 63.39 \% & sporadic & 79.16 \% & 75.78 \% & 67.36 \% & 85.25 \% \\
-\cline {1-8} \\
+\begin{tabular}[c]{c r r r}
+\multicolumn{4}{c}{new ABC Multcriteria Classification with AHP} \\
+\\
+\multicolumn{4}{l}{car mechanics company} \\
+\cline {1-4} \\
+\multicolumn{4}{c}{75 sales between October 2020 and July 2023} \\
+\\
+  &  \multicolumn{1}{c}{quant.} & \multicolumn{1}{c}{\%} & \multicolumn{1}{c}{cutoff} \\
+A &  10 & 23.81 \% &  80 \% \\
+B &  15 & 35.71 \% &  95 \% \\
+C &  17 & 40.48 \% & 100 \% \\
+\cline {1-4} \\
+\multicolumn{4}{l}{furniture trades company} \\
+\cline {1-4} \\
+\multicolumn{4}{c}{254 sales between } \\
+\\
+ &  \multicolumn{1}{c}{quant.} & \multicolumn{1}{c}{\%} & \multicolumn{1}{c}{cutoff} \\
+
+A &  59 & 23.23 \% &  79.78 \%  \\
+B &  56 & 22.05 \% &  94.81 \% \\
+C & 139 & 54.72 \% & 100.00 \% \\
+\cline {1-4} \\
+
+ \multicolumn{4}{l}{plastic packaging manufacturing company}\\
+\cline {1-4} \\
+\multicolumn{4}{c}{5,967 sales between November 2019 and February 2023} \\
+\\
+ &  \multicolumn{1}{c}{quant.} & \multicolumn{1}{c}{\%} & \multicolumn{1}{c}{cutoff} \\
+
+A &   128 &  5.49 \% & \\
+B &   726 & 31.12 \% & \\
+C & 1,479 & 63.39 \% & \\
+\cline {1-4} \\
 
 \end{tabular}
-\caption{ABC multicriteria and demand pattern classifications for three companies (results found by COPSolver)}
+\caption{ABC multicriteria classifications for three companies (results found by COPSolver)}
 \label{tab:results}
-\end{small}
 \end{center}
 \end{table} 
 
@@ -553,15 +557,13 @@ C & 1,479 & 63.39 \% & sporadic & 79.16 \% & 75.78 \% & 67.36 \% & 85.25 \% \\
         \bibliographystyle{abcm}
         \bibliography{bibliografia}
         
-        \section{CRediT authorship contribution statement} 
+        \section{CRediT AUTHORSHIP CONTRIBUTION STATEMENT} 
 		\label{sec:contributions}
 
 		T.B. Fraga: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data Curation, Writing – original draft, Writing – review \& editing, Supervision, Project administration. B.M. Cavalcanti: Investigation. A.M.D.Silva: Investigation. E.L.R. Silva: Investigation. 
 
     \section{RESPONSABILIDADE AUTORAIS}
-
-        Os trabalhos escritos em português ou espanhol devem incluir (após direitos autorais) título, os nomes dos autores e afiliações, o resumo e as palavras-chave, traduzidos para o inglês e a declaração a seguir, devidamente adaptada para o número de autores.
     
-        O(s) autor(es) é(são) o(s) único(s) responsável(is) pelo conteúdo deste trabalho.
+        Os autores são os únicos responsávelis pelo conteúdo deste trabalho.
 
 \end{document}
