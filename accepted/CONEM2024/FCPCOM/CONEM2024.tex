@@ -20,6 +20,10 @@
 \usepackage{verbatim}
 \usepackage{etoolbox}
 
+\usepackage{pdfpages}
+
+\usepackage{graphicx}
+
 \makeatletter
 \patchcmd{\verbatim@input}{\@verbatim}{\scriptsize\@verbatim}{}{}
 \makeatother
@@ -41,7 +45,7 @@
     \vspace{-.6cm}
     %
     % Digitar o título
-    \title{CONEM2024-0025\\ NEW ABC  MULTICRITERIA CLASSIFICATION WITH ANALYTICAL HIERARCHY PROCESS: HOW TO ATTRIBUTE WEIGHTS AND FORCE CONSISTENCY OF PAIRWISE COMPARISONS MATRIX} 
+    \title{CONEM2024-0025\\ NEW ABC MULTICRITERIA CLASSIFICATION WITH ANALYTICAL HIERARCHY PROCESS: HOW TO ATTRIBUTE WEIGHTS AND FORCE CONSISTENCY OF PAIRWISE COMPARISONS MATRIX} 
     %
     \end{center}
 	%
@@ -510,20 +514,37 @@ Table 3 presents a comparison of the results using different methods on the data
 
 For analysis of the proposed new methodology for ABC muticriteria classification, we will be focusing on the presentation and analysis of the data provided by the furniture trades company. 
 
-The Tab. 2 presents a comparison of the results obtained for the data described above, by ABC classification for the criteria billing and lead time billing. Appendice A presents the file AHP\_Solution.txt, that presents the results found by the module 'COPSolver: library for solving the multicriteria classification problem' - the results generated from the new ABC multicriteria classification with Analitic Hierarch Process and compare it to the ABC classifications of each criterion, for the items ordered in descending order according to the ABC multicriteria classification. 
+Figure \ref{fig:results} presents part of a comparison of the results obtained for the data described above, by ABC classification for the criteria billing and the new ABC multicriteria with Analytic Hierarch Process. Appendice A shows the file AHP\_Solution.txt, that presents the complete results found by the module 'COPSolver: library for solving the multicriteria classification problem'.
 
-Based on the results presented in these tables, we can verify that the ABC classification, considering only the billing criterion, does not follow the normal pattern defined by the Pareto rule. However, when we use the lead time add-on billing criterion, it is possible to verify that the values are close to what is expected. It is also possible to verify in a very clear way that the approach used to measure the weights of the products produces much more relevant results than the simple random assignment of weights. This approach reduces the viez effect caused by the imbalance of weights and makes the final result carry important qualitative information provided by the responsible official, assigning the appropriate relevance of the different products, as well as the criteria analyzed.
+\begin{figure}[ht]
+	\includegraphics[width=\linewidth]{files/0001.jpg}
+  	\caption{Comparison between the ABC classification for the billing criterion and the ABC multicriteria classification}
+  	\label{fig:results}
+\end{figure} 
+
+Based on the results found by COPSolver, we can verify that the ABC classification, considering only the billing criterion, does not follow the normal pattern defined by the Pareto's rule. However, when we use the new ABC multicriteria classification, it is possible to verify that the values are close to what is expected. It is also possible to verify in a very clear way that the approach used to measure the weights of the products produces much more relevant results than the simple random assignment of weights. This approach reduces the viez effect caused by the imbalance of weights and makes the final result carry important qualitative information provided by the responsible official, assigning the appropriate relevance of the different products, as well as the criteria analyzed.
 
 Based on an evaluation of the final results by the participating company, it was possible to verify that these results were very coherent, offering the company very relevant information for the identification of products whose inventory must be maintained, receiving greater attention from the company, as well as for the adoption of more appropriate procedures for the correct control of the different items marketed by the company.
 
-	\section{DISCUSSION AND FINAL REMARKS}
+	\section{CONCLUSIONS AND FURTHER WORK}
     
+    In this article we present a new methodology for multicriteria ABC classification as an analytical hierarchy process which includes a procedure to force the consitences of the pairwise comparison matrices, as well as a procedure for assigning weights to the products evaluated according to qualitative criteria and a new equation for calculating the weights of the products in the multicriteria classification. This methodology was tested using data provided by three companies, from three different sectors. As a result, we verified the importance and efficiency of the method developed to force the consistency of the Matrix. We also verified that the new methodology proposed for multicriteria ABC classification generated very coherent results, giving the appropriate importance to the products, according to all the evaluated criteria. 
+
+The methodologies developed and results found will be used as a basis for building a portfolio with the identification of product demand pattern and, subsequently, for the development of a combined methodology for demand forecasting. These will be the next works that we will be developing.
 
     \section{AGRADECIMENTOS}
     
         Se houver, esta seção deve ser colocada antes da lista de referências.
+        
+        \section{CRediT AUTHORSHIP CONTRIBUTION STATEMENT} 
+		\label{sec:contributions}
 
+		T.B. Fraga: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data Curation, Writing – original draft, Writing – review \& editing, Supervision, Project administration. B.M. Cavalcanti: Investigation. A.M.D.Silva: Investigation. E.L.R. Silva: Investigation. 
 
+    \section{COPYRIGHT LIABILITY}
+    
+        The authors are uniquely responsible for the content of this work.
+        
     % REFERÊNCIAS
     \section{REFERENCES}
     
@@ -541,15 +562,7 @@ Based on an evaluation of the final results by the participating company, it was
         \bibliographystyle{abcm}
         \bibliography{bibliografia}
         
-        \section{CRediT AUTHORSHIP CONTRIBUTION STATEMENT} 
-		\label{sec:contributions}
-
-		T.B. Fraga: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data Curation, Writing – original draft, Writing – review \& editing, Supervision, Project administration. B.M. Cavalcanti: Investigation. A.M.D.Silva: Investigation. E.L.R. Silva: Investigation. 
-
-    \section{RESPONSABILIDADE AUTORAIS}
-    
-        Os autores são os únicos responsávelis pelo conteúdo deste trabalho.
-        
+        \newpage
         \begin{appendices}
 		\setcounter{section}{0}
 		\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
