@@ -361,7 +361,7 @@ $w_{pc}$ is the normalized weight percentage of the product $p$ according to cri
     
     \subsection{Data Collected}
     
-    To test the methodology proposed in this article, data were collected for constriction of the pairwise comparison matrix and for ABC classification, using the billing (bl) criterion and other criteria suggested by \cite{FloresWhybark1986}: lead-time (lt); criticality (cr); obsolescence (ob); commonality (cm); substitutability (sb); and repairability (rp). To collect the data, we partnered with three companies from three different sectors: car mechanics; furniture trades; and plastic packaging manufacturing. Based on the data collected, three benchmarks were developed. The date.txt files corresponding to these three benchmarks are available at https://tbfraga.github.io/COPSolver/ benchmarks/.
+    To test the methodology proposed in this article, data were collected for constriction of the pairwise comparison matrix and for ABC classification, using the billing (bl) criterion and other criteria suggested by \cite{FloresWhybark1986}: lead-time (lt); criticality (cr); obsolescence (ob); commonality (cm); substitutability (sb); and repairability (rp). To collect the data, we partnered with three companies from three different sectors: car mechanics; furniture trades; and plastic packaging manufacturing. Based on the data collected, three benchmarks were developed. The date.txt files corresponding to these three benchmarks are available at https://tbfraga.github.io/COPSolver/ benchmarks/. Appendice A presents the data.txt file elaborated with the data provided by the furniture trades company.
     
     \subsection{Analysis on the Algorithm for Adjusting Inconsistencies}
     
@@ -516,48 +516,6 @@ Based on the results presented in these tables, we can verify that the ABC class
 
 Based on an evaluation of the final results by the participating company, it was possible to verify that these results were very coherent, offering the company very relevant information for the identification of products whose inventory must be maintained, receiving greater attention from the company, as well as for the adoption of more appropriate procedures for the correct control of the different items marketed by the company.
 
-\begin{table}[h!]
-\begin{center}
-\begin{tabular}[c]{c r r r}
-\multicolumn{4}{c}{new ABC Multcriteria Classification with AHP} \\
-\\
-\multicolumn{4}{l}{car mechanics company} \\
-\cline {1-4} \\
-\multicolumn{4}{c}{75 sales between October 2020 and July 2023} \\
-\\
-  &  \multicolumn{1}{c}{quant.} & \multicolumn{1}{c}{\%} & \multicolumn{1}{c}{cutoff} \\
-A &  10 & 23.81 \% &  80 \% \\
-B &  15 & 35.71 \% &  95 \% \\
-C &  17 & 40.48 \% & 100 \% \\
-\cline {1-4} \\
-\multicolumn{4}{l}{furniture trades company} \\
-\cline {1-4} \\
-\multicolumn{4}{c}{254 sales between } \\
-\\
- &  \multicolumn{1}{c}{quant.} & \multicolumn{1}{c}{\%} & \multicolumn{1}{c}{cutoff} \\
-
-A &  59 & 23.23 \% &  79.78 \%  \\
-B &  56 & 22.05 \% &  94.81 \% \\
-C & 139 & 54.72 \% & 100.00 \% \\
-\cline {1-4} \\
-
- \multicolumn{4}{l}{plastic packaging manufacturing company}\\
-\cline {1-4} \\
-\multicolumn{4}{c}{5,967 sales between November 2019 and February 2023} \\
-\\
- &  \multicolumn{1}{c}{quant.} & \multicolumn{1}{c}{\%} & \multicolumn{1}{c}{cutoff} \\
-
-A &   128 &  5.49 \% & \\
-B &   726 & 31.12 \% & \\
-C & 1,479 & 63.39 \% & \\
-\cline {1-4} \\
-
-\end{tabular}
-\caption{ABC multicriteria classifications for three companies (results found by COPSolver)}
-\label{tab:results}
-\end{center}
-\end{table} 
-
 	\section{DISCUSSION AND FINAL REMARKS}
     
 
@@ -600,7 +558,10 @@ C & 1,479 & 63.39 \% & \\
 		\begingroup
 		\let\protect\l@section\protect\l@subsection
 }
+	\section{data.txt}
 
+	\verbatiminput{files/data.txt}
+	
 	\section{AHP\_solution.txt}
 
 	\verbatiminput{files/AHP_solution.txt}
