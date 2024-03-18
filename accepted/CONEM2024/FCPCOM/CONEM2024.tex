@@ -98,7 +98,7 @@
 \end{algorithmic}
 \end{algorithm}
 
-The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-peer comparison of each element of the pairwise matrix starting from the fourth row, $M[m_{\{sz\}j}]_{sz=4}^{n}$, with each element of the matrix $M[m_{jk}]_{j=1, k=j+1 \land k \neq sz}^{n-1,n}$. In this comparison, the consistency of each pair is verified according to Alg. (\ref{alg:consistencyCheck}). If any inconsistency is found, the value of one of the elements is reduced or increased, seeking to improve the consistency rate. Initially, the reduction of values is done through the reduce() function.  If, after the reduction, the convergence rate is still greater than the tolerance, the increment of values is made through the increase() function.
+The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-peer comparison of each element of the pairwise matrix starting from the fourth row, $M[m_{\{sz\}j}]_{sz=4}$, with each element of the matrix $M[m_{jk}]_{j=1, k=j+1 \land k \neq sz}^{n-1,n}$. In this comparison, the consistency of each pair is verified according to Alg. (\ref{alg:consistencyCheck}). If any inconsistency is found, the value of one of the elements is reduced or increased, seeking to improve the consistency rate. Initially, the reduction of values is done through the reduce() function.  If, after the reduction, the convergence rate is still greater than the tolerance, the increment of values is made through the increase() function.
 
 \begin{algorithm}
 \caption{consistency checking}\label{alg:consistencyCheck}
