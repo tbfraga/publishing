@@ -4,8 +4,8 @@
 %
 \documentclass[10pt,fleqn,a4paper,twoside]{article}
 \usepackage{abcm}
-\def\shortauthor{P. Autor, S. Autor e T. Autor \textcolor[rgb]{0.98,0.00,0.00}{(Atualize o cabeçalho de acordo)}}
-\def\shorttitle{Versão Reduzida do Título do Artigo \textcolor[rgb]{0.98,0.00,0.00}{(Letras Iniciais em Caixa Alta, certifique que não ultrapasse uma linha)}}
+\def\shortauthor{T.B. Fraga, I.R.B. de Aquino and R.C.S. Menêzes}
+\def\shorttitle{An Exact Method for the Multi-product P-batch Processing Time Maximization Problem}
 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -68,7 +68,7 @@ The scientific literature address many different problems related to such indust
 
 Since a single batch is processed at a time, it is necessary that the batches are dimensioned in such a way that the quantity produced of each product is sufficient to meet the demand during the period in which other batches are being processed \citep{Eilon1985}. This problem is named multi-product batch sizing. \cite{Eilon1985} gives a detailed explanation of the inadequacy of the use of the well-know EBQ (economic batch quantity) square-root formula for multi-product batch production, and \cite{LiuEtAl2020} present a mixed-integer quadratic programming model and an exact optimization algorithm for a multi-stage multi-product serial batching sizing problem in a divergent networked plant of a steel industry (Fig. \ref{fig:networkdPlantSteelIndustry}). 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \label{fig:networkdPlantSteelIndustry}
 \begin{center}
 \begin{tikzpicture}[font=\sffamily,every label/.append style={font=\small\sffamily,align=center}]
@@ -115,7 +115,7 @@ Since a single batch is processed at a time, it is necessary that the batches ar
 
 \end{tikzpicture}
 \end{center}
-\caption{Multi-product serial batching divergent networked plant of a steel industry. Source: adapted from \cite{LiuEtAl2020} * stage $(i, j)$ means stage $j$ of production line $i$.}
+\caption{\textbf{Multi-product serial batching divergent networked plant of a steel industry. Source: adapted from \cite{LiuEtAl2020} * stage $(i, j)$ means stage $j$ of production line $i$.}}
 \end{figure}
 
 In multi-product batch scheduling (MBS) problems it is necessary to determine the ideal batch size for each product and also the production sequence of the batches based on the known demand. Here, the solution must be determined in such a way that both setup and storage costs are minimized \citep{Eilon1985, Omega1993, LiuEtAl2020}. Some cientific works impose additional constraints on the MBS problem - such as release times and due dates for each batch, and sequencing constraints due to mismatched product colors sequences - and focus on other goals - such as optimize customer satisfaction and/or the plant performance \citep{MendezEtAll2000, ShiEtAll2017}. Also, some cientific works consider MBS problems within different layouts as well as dinamic and multiperiod scenarios. In parallel MBS as well as in networked processes, it can also be necessary to define in which units each batch will be processed, and constraints that limit the units that can process each batch can also be imposed. Many cientifc works propose mixed-integer linear programming (MILP) formulations to solve MBS problems. As example, we can mention the work of \cite{MendezEtAll2000} that presents a MILP continuous-time model and a two-step systematic methodology for a single stage multi-product batch scheduling problem with different due-dates. Later, \cite{MendezCerda2003} also proposed another MILP formulation for reactive scheduling. As observerd by \cite{HeHui2008}, with the problem size increasing, the computational effort of MILP increases greatly so it is very difﬁcult for MILP to obtain acceptable solutions to large-size problems within reasonable time. Citing some works that use other approaches, \cite {KimEtAl1996} propose a Gantt chart mapping method and a modified genetic algorithm for solving a networked flowshop multi-product batch scheduling problem as well as a rule-based reactive rescheduling scheme for dinamicaly overcoming in-process deviation from the initial optimized schedule and \cite{HeHui2008} present a rule-based genetic algorithm for the scheduling of single stage multi-product batch plants with parallel units.
@@ -142,10 +142,12 @@ In short, based on the bibliographic survey conducted for the preparation of thi
 
 So, to describe a speciﬁc multi-product batch problem, we propose the notation $\sigma|\lambda|\mu|\pi|\eta|\gamma|\iota|\delta|\rho$. Some of the multi-product batch problems and solution approaches discussed in the references cited in this paper are summarized in Tab. \ref{tab:review}.
 
-\begin{table}[h!]
+\begin{table}[ht]
 \begin{center}
+\caption{\textbf{Some contributions on the multi-product batch problems.}}
 \begin{small}
 \begin{tabular}[c]{l l l}
+\\
 reference & problem & contributions  \\
 \cline {1-3} \\
 \cite{Eilon1985} & $SS|SU|s\textrm{-}batch|Sc|SP$ &  analysis of the effect\\
@@ -180,7 +182,6 @@ Cerdá (2003) &$wE/T|RT, DD, SDST$ & a rescheduling algorithm\\
  & & system based algorithm \\ 
 \cline {1-3} \\
 \end{tabular}
-\caption{Some contributions on the multi-product batch problems}
 \label{tab:review}
 \end{small}
 \end{center}
@@ -553,9 +554,11 @@ To test the developed model and analytical solution method, we created a solver 
 \end{equation}
 
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{center}
+\caption{\textbf{Benchmark MBPTM 2.}}
 \begin{tabular}[c]{c r r r}
+\\
 $i$ & 1 & 2 & total \\
 \cline {1-4} \\
 $\textrm{p}_i$ & 60 & 40 & \\
@@ -565,14 +568,15 @@ $\textrm{UI}_i$ & 3000 & 2000 & 3000 \\
 \cline {1-4} \\
 & & $\textrm{Z}$ & 100 \\
 \end{tabular}
-\caption{Benchmark MBPTM 2}
 \label{tab:MBPTMP001}
 \end{center}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{center}
+\caption{\textbf{Benchmark MBPTM 3.}}
 \begin{tabular}[c]{c r r r r}
+\\
 $i$ & 1 & 2 & 3 & total \\
 \cline {1-5} \\
 $\textrm{p}_i$ & 60 & 40 & 50 \\
@@ -582,15 +586,16 @@ $\textrm{UI}_i$ & 3000 & 2000 & 1000 & 3500 \\
 \cline {1-5} \\
 & & & $\textrm{Z}$ & 100 \\
 \end{tabular}
-\caption{Benchmark MBPTM 3}
 \label{tab:MBPTMP002}
 \end{center}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{center}
+\caption{\textbf{Benchmark MBPTM 10.}}
 \begin{small}
 \begin{tabular}[c]{c r r r r r r r r r r r }
+\\
 $i$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & total \\
 \cline {1-12} \\
 $\textrm{p}_i$ & 60 & 40 & 50 & 40 & 30 & 50 & 60 & 10 & 20 & 40\\
@@ -600,7 +605,6 @@ $\textrm{UI}_i$ & 3000 & 2000 & 1000 & 800 & 3000 & 1000 & 400 & 300 & 200 & 0 &
 \cline {1-12} \\
 & & & & & & & & & & $\textrm{Z}$ & 100 \\
 \end{tabular}
-\caption{Benchmark MBPTM 10}
 \label{tab:MBPTMP003}
 \end{small}
 \end{center}
@@ -610,10 +614,12 @@ Randomly generated benchmarks were named RMBPTM $\textrm{N}$, being $\textrm{N}$
 
 Table \ref{tab:results} presents the results obtained by applying the analytical method (COPSolver) and the LINGO solver for the solution of the previously presented benchmarks.
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{center}
+\caption{\textbf{Results obtained with the LINGO solver and the analytical method.}}
 \begin{footnotesize}
 \begin{tabular}[c]{l r r r r}
+\\
 problem & LINGO solver & time (s) & analytical method & time (s) \\
 \cline {1-5} \\
 MBPTM 2 & 55 & 0.03 & 55 & $<$ 0.01 \\
@@ -628,7 +634,6 @@ RMBPTM 5,000 & 70 & 15.12 & 70 & $<$ 0.02 \\
 RMBPTM 10,000 & 70 & 55.19 & 70 & $<$ 0.04 \\
 \cline {1-5} \\
 \end{tabular}
-\caption{Results obtained with the LINGO solver and the analytical method}
 \label{tab:results}
 \end{footnotesize}
 \end{center}
@@ -636,10 +641,12 @@ RMBPTM 10,000 & 70 & 55.19 & 70 & $<$ 0.04 \\
 
 Tables (\ref{tab:compResultsMBPTMP2}) and (\ref{tab:compResultsMBPTMP3}) shows the production distribution for MBPTM 3 and 10 found by both COPSolver and LINGO solver. Files containing all results can be found at github.com/tbfraga/COPSolver.
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{center}
+\caption{\textbf{Results obtained with the LINGO solver and COPSolver for the MBPTM 3.}}
 \begin{footnotesize}
 \begin{tabular}[c]{l r r r r}
+\\
 product & production & delivered (s) & send to outlets & stocked in factory \\
 \cline {1-5} \\
 P1 & 2,880 & 1,000 & 300 & 1,580 \\
@@ -647,16 +654,17 @@ P2 & 1,920 & 500 & 600 & 820 \\
 P3 & 2,400 & 800 & 600 & 1,000 \\
 \cline {1-5} \\
 \end{tabular}
-\caption{Results obtained with the LINGO solver and COPSolver for the MBPTM 3}
 \label{tab:compResultsMBPTMP2}
 \end{footnotesize}
 \end{center}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[ht]
 \begin{center}
+\caption{\textbf{Results obtained with the LINGO solver and COPSolver for the MBPTM 10.}}
 \begin{footnotesize}
 \begin{tabular}[c]{l r r r r}
+\\
 product & production & delivered (s) & send to outlets & stocked in factory \\
 \cline {1-5} \\
 P1 & 1,800 & 1,000 & 400 & 400 \\
@@ -671,7 +679,6 @@ P9 & 600 & 500 & 0 & 100 \\
 P10 & 1,200 & 1000 & 200 & 0 \\
 \cline {1-5} \\
 \end{tabular}
-\caption{Results obtained with the LINGO solver and COPSolver for the MBPTM 10}
 \label{tab:compResultsMBPTMP3}
 \end{footnotesize}
 \end{center}
@@ -696,78 +703,8 @@ T.B. Fraga: Conceptualization, Methodology, Software, Validation, Formal analysi
 
 We are enormously grateful to Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (CAPES) and to Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) for the financial support provided to our projects. We also thank LINDO systems team for the LINGO software license, without which this work would not have been possible and the to the owner of the company in the plastics sector, who allowed us to learn about his company's production process. Finally, we would like to thank Pró-reitoria de Extensão e Cultura da UFPE (PROExC) and the Research Director of Propesqi (Pró-reitoria de Pesquisa e Inovação da UFPE) for their support and recognition of our work, and dear Professors Antônio José da Silva Neto and João Flávio Vieira de Vasconcellos from IPRJ/UERJ, who contributed significantly to the formation of essential skills for the development of our projects. We also thank my co-worker Marcos Luiz Henrique, for having helped by evaluating the mathematical model and solution method proposed in this paper.
 
-    \section{FORMATO DO TEXTO}
-        
-        O artigo deve ser digitado no \textit{template} ``CONEM2024.tex'' e as principais configurações (ex.: formato do papel, tipo e tamanho da fonte do título/Seção/Subseção, espaços, margens, alinhamentos, indentação, etc.) já estão previamente configuradas no arquivo ``abcm.sty''. Título, nomes dos autores, instituição, endereço, resumo e palavras-chave devem ser recuados 0,1 cm da margem esquerda e marcados por uma linha preta na borda esquerda com largura de 2$\frac{1}{4}$ pontos.
-        
-        Informações suficientes devem ser fornecidas diretamente no texto, ou por referência a trabalhos publicados disponíveis. Notas de rodapé devem ser evitadas. 
-        
-        Todos os símbolos e notações devem ser definidos no texto. As grandezas físicas devem ser expressas no Sistema Internacional de Unidades. Os símbolos matemáticos que aparecem no texto devem ser digitados em itálico. As unidades devem ser digitadas no estilo romano (ex.: kg, m, MJ, kW/m$^2$, em vez de $kg$, $m$, $MJ$, $kW/m^2$).
-        
-        As referências bibliográficas devem ser citadas no texto dando o sobrenome do(s) autor(es) e o ano de publicação, conforme os seguintes exemplos: ``... conforme apresentado \citep{MinwooShamim13}.'' ou ``Recentemente, \citet{MinwooShamim13} demonstraram que …''. No caso de três ou mais autores, deve ser utilizada a expressão ``\textit{et al.}'', como segue: ``... conforme já relatado \citep{Bordalo89}'' e ``Recentemente, \citet{Bordalo89} demonstraram que …''. Duas ou mais referências com os mesmos autores e ano de publicação devem ser distinguidas acrescentando ``a'', ``b'', etc., ao ano de publicação. No caso da necessidade de citar vários trabalhos em uma mesma chamada, o seguinte formato pode ser utilizado: ``...já se encontra consolidado na literatura (\citeauthor{Coimbra78}, \citeyear{Coimbra78}; \citeauthor{Clark86}, \citeyear{Clark86} e \citeauthor{Sparrow80},  \citeyear{Sparrow80})''.  
-        
-        As referências devem ser listadas no final do manuscrito de acordo com as instruções fornecidas na Seção 4.
-
-
-        \textbf{\textcolor[rgb]{0.98,0.00,0.00}{\underline{NÃO NUMERAR AS PÁGINAS.}}}
-
-    \subsection{Títulos e Subtítulos das Seções }
-
-        Os títulos das seções são com letras maiúsculas (Exemplo: \textbf{MODELO MATEMÁTICO}), enquanto os subtítulos só têm as primeiras letras maiúsculas de cada palavra (Exemplo: \textbf{Modelo Matemático}). Eles devem ser numerados, usando numerais arábicos separados por pontos, até o máximo de 3 subníveis. Uma linha em branco de espaçamento simples deve ser incluída acima e abaixo de cada título ou subtítulo.
-
-    \subsection{Corpo do Texto}
-
-        Conforme já se encontra definido no arquivo ``abcm.sty'', o corpo do texto é justificado e com espaçamento simples. A primeira linha de cada parágrafo tem recuo de 0,5 cm a partir da margem esquerda.
-
-        As equações matemáticas são alinhadas à esquerda com recuo de 0,5 cm.  Elas são referidas como ``Eq. (\ref{eq:equation1})'' no meio de uma frase, ou ``Equação (\ref{eq:equation1})'' quando usada no início de uma sentença. Os números das equações são numerais arábicos colocados entre parênteses, e alinhados à direita, como mostrado na Eq. (\ref{eq:equation1}). Os símbolos usados nas equações devem ser definidos imediatamente antes ou depois de sua primeira ocorrência no texto.
-
-        O tamanho da fonte usado nas equações deve ser compatível com o utilizado no texto. Todas as grandezas físicas devem ter suas unidades expressas no Sistema Internacional de Unidades, como já mencionado.
-
-        \begin{equation}
-        \sigma = E \cdot \epsilon. \label{eq:equation1}
-        \end{equation}
-    
-    	\noindent
-    	onde: $\sigma$ é a tensão, $E$ é o módulo de elasticidade longitudinal (ou Módulo de Young) e $\epsilon$ é a deformação longitudinal.
-
-        As figuras e tabelas devem ser colocadas no texto o mais próximo possível do ponto em que foram mencionadas pela primeira vez e devem ser numeradas consecutivamente em algarismos arábicos. As tabelas devem ser centralizadas e referidas por ``Tab. \ref{tab:tabexemplo}'' no meio de uma frase, ou por ``Tabela \ref{tab:tabexemplo}'' quando usada no início de uma sentença. Uma linha em branco, em espaço simples, deve ser introduzida entre a tabela e o texto subsequente.
-        
-        Anotações e valores numéricos incluídos na tabela devem ter tamanhos compatíveis com a fonte usada no texto do trabalho e todas as unidades devem ser expressas no Sistema Internacional de Unidades. As unidades são incluídas apenas na primeira linha ou primeira coluna de cada tabela, conforme for apropriado. O estilo de borda é livre. As explicações, se houver, devem ser fornecidas ao pé das tabelas e não dentro das mesmas.
-
-        \begin{table}[ht]
-            \begin{center}
-                \caption{\textbf{Exemplo de tabela.}}
-                    \begin{tabular}{c|c|c}
-                    \hline
-                    Propriedades do compósito       & CFRC-TWILL        & CFRC-4HS         \\
-                    \hline
-                    Resistência à Flexão  (MPa)     & 209.0 $\pm$ 10.0       & 180.0 $\pm$  15.0    \\
-                    \hline
-                    Módulo de Flexão  (GPa)         & 57.0 $\pm$ 2.8    & 18.0 $\pm$  1.3  \\
-                    \hline
-                    \end{tabular} \label{tab:tabexemplo}
-            \end{center}
-        \end{table}
-
-        As figuras devem ser centralizadas. Elas são referenciadas por ``Fig. \ref{fig:figexemplo}'' no meio de uma frase ou por ``Figura \ref{fig:figexemplo}'' quando usada no início de uma sentença. Sua legenda deve ser centralizada e localizada imediatamente abaixo da figura. As anotações e numerações devem ter tamanhos compatíveis com a fonte usada no texto e todas as unidades devem ser expressas no Sistema Internacional de Unidades. As figuras devem ser colocadas o mais próximo possível de sua primeira citação no texto. Deve ser deixada uma linha em branco, de espaçamento simples, entre a figura e o texto subsequente.
-    
-        \begin{figure}[h]
-            \begin{center}
-                \includegraphics[angle=0, scale=.8]{figura.png}
-            \end{center}
-            \caption{\textbf{Exemplo de figura.}}
-            \label{fig:figexemplo}
-        \end{figure}
-
-        Figuras coloridas e fotografias de alta qualidade podem ser incluídas no trabalho. Para reduzir o tamanho do arquivo e preservar a resolução gráfica, os arquivos das imagens podem ser convertidos para o formato GIF (para figuras com até 16 cores) ou para o formato JPEG (alta densidade de cores), antes de serem inseridos no trabalho.
-
-    \section{AGRADECIMENTOS}
-    
-        Se houver, esta seção deve ser colocada antes da lista de referências.
-
-
     % REFERÊNCIAS
-    \section{REFERÊNCIAS}
+   \section{REFERENCES}
     
          %   \citet{key} ==>>                Jones et al. (1990)
          %   \citet*{key} ==>>               Jones, Baker, and Smith (1990)
@@ -780,44 +717,12 @@ We are enormously grateful to Coordenação de Aperfeiçoamento de Pessoal de N�
          %   \citeauthor*{key} ==>>          Jones, Baker, and Smith
          %   \citeyear{key} ==>>             1990
     
-        Referências aceitas incluem: artigos de periódicos, dissertações, teses, artigos publicados em anais de congressos, livros, comunicações privadas e artigos submetidos e aceitos (com fonte identificada) e citações a páginas da internet.
-
-        A lista de referências deve ser uma seção específica denominada Referências, localizada no fim do artigo.
-
-        A primeira linha de cada referência deve ser alinhada à esquerda, sendo que as demais terão recuo já configurado a partir da margem esquerda. Todas as referências incluídas na lista devem aparecer como citações no texto do trabalho.
-
-        As referências devem ser postas em ordem alfabética, usando o último nome do primeiro autor, seguida do ano da publicação. Exemplo da lista de referências é apresentado abaixo.
         
         \bibliographystyle{abcm}
         \bibliography{bibliografia}
 
-    \section{RESPONSABILIDADE AUTORAIS}
-
-        Os trabalhos escritos em português ou espanhol devem incluir (após direitos autorais) título, os nomes dos autores e afiliações, o resumo e as palavras-chave, traduzidos para o inglês e a declaração a seguir, devidamente adaptada para o número de autores.
+\section{COPYRIGHT LIABILITY}
     
-        O(s) autor(es) é(são) o(s) único(s) responsável(is) pelo conteúdo deste trabalho.
-
- % RESUMO EM INGLES
-
-\noindent{
-   \\ 
-    \begin{tabular}{||p{\textwidth}}
-    \begin{center}
-    \vspace{-.6cm}
-    \title{AFTER FULL PAPER IN PORTUGUESE OR SPANISH, IT IS NECESSARY THE ABSTRACT IN ENGLISH}
-    \end{center}
-    \authors{First Author’s Name, e-mail1$^1$} \\
-    \authors{Second Author’s Name, e-mail$^2$} \\
-    \authors{Third Author’s Name, e-mail$^2$} \\\\
-    \institution{$^1$Institution and address for first author} \\
-    \institution{$^2$Institution and address for second and third authors} \\
-    \\
-    \authors{\textcolor[rgb]{0.98,0.00,0.00}{Same format for other authors and institutions, if any. (\textit{This guidance should be removed from the final paper.})}} \\
-    \\
-    \abstract{\textbf{Abstract:} The purpose of these instructions is to serve as a guide for formatting papers to be published in the Proceedings of the XII CONEM. The abstract must describe the objectives, methodology and main conclusions of the article, containing between 300 and 400 words in a single paragraph.  It should not contain either formulae or bibliographic references. The full paper will be published in the proceedings of the event.}\\
-    \\
-    \keywords{\textbf{Keywords:} keyword 1, keyword 2, keyword 3 (up to 5 keywords) }\\
-    \end{tabular}
-}
+        The authors are uniquely responsible for the content of this work.
 
 \end{document}
