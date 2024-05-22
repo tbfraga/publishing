@@ -3,9 +3,6 @@
 % Date: January 12, 2024
 %
 \documentclass[10pt,fleqn,a4paper,twoside]{article}
-\usepackage{abcm}
-\def\shortauthor{T.B. Fraga, I.R.B. de Aquino and R.C.S. Menêzes}
-\def\shorttitle{An Exact Method for the Multi-product P-batch Processing Time Maximization Problem}
 
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -22,6 +19,10 @@
 \usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric,shapes.misc,shapes.symbols,arrows.meta,graphs,fit,positioning,shadows}
+
+\usepackage{abcm}
+\def\shortauthor{T.B. Fraga, I.R.B. de Aquino and R.C.S. Menêzes}
+\def\shorttitle{An Exact Method for the Multi-product P-batch Processing Time Maximization Problem}
 
 \begin{document}
     
@@ -51,12 +52,12 @@
     \\
     %
     % Digitar o resumo
-    \abstract{\textbf{Resumo:} Among the most complex multi-product batch problems are the multi-product p-batch scheduling (MPBS) problems, where jobs must be scheduled on parallel batch processing machines. When applying some local search heuristics to solve a MPBS problem, it can be necessary to iteratively solve a single stage multi-product p-batch sizing problem with different processing rates for different products, limited capacity units, and storage capacity defined both for each product and for all products. In this paper we name this problem multi-product p-batch processing time maximization (MPBPTM) problem. Once a MPBPTM problem needs to be solved in each iteration, the efficiency of the method developed for solving it has a huge impact on the computational cost of the local search algorithm used to solve some MPBS problems. In addition, for some industries, efficiently solving a MPBPTM problem can have a significant impact on storage costs and customer satisfaction. In this paper we present a mathematical model and an exact method with polynomial time complexity for the MBPTM problem. We developed a LINGO solver for solving the mathematic model, and a C ++ solver for application of the proposed exact method. We tested both solvers, comparing the results for a series of benchmarks with sizes varying between small and very large. As result, we find that the exact method can obtain optimal solutions in a very short time (just few seconds), even when solving very large instances.}\\
+    \abstract{\textbf{Resumo:} Among the most complex multi-product batch problems are the multi-product p-batch scheduling (MPBS) problems, where jobs must be scheduled on parallel batch processing machines. When applying some local search heuristics to solve a MPBS problem, it can be necessary to iteratively solve a single stage multi-product p-batch sizing problem with different processing rates for different products, limited capacity units, and storage capacity defined both for each product and for all products. We name this problem multi-product p-batch processing time maximization (MPBPTM) problem. Once a MPBPTM problem needs to be solved in each iteration, the efficiency of the method developed for solving it has a huge impact on the computational cost of the local search algorithm used to solve some MPBS problems. In addition, for some industries, efficiently solving a MPBPTM problem can have a significant impact on storage costs and customer satisfaction. In this paper we present a mathematical model and an exact method with polynomial time complexity for the MPBPTM problem. We developed a LINGO solver for solving the mathematic model, and a C++ solver for application of the proposed exact method. We tested both solvers, comparing the results for a series of benchmarks with sizes varying between small and very large. As result, we find that the exact method can obtain optimal solutions in a very short time (just few seconds), even when solving very large instances.}\\
     %
     % Digitar as palavras-chave
    \\
-    \keywords{\textbf{Palavras-chave:} palavra 1, palavra 2, palavra 3 (até 5 palavras, separadas  por vírgulas) }\\
-    %
+    \keywords{\textbf{Palavras-chave:} multi-product p-batch problem, processing time maximization, integer programming model, analytical solution, COPSolver}\\
+
     \end{tabular}
     
     \section{INTRODUCTION}
@@ -137,7 +138,7 @@ In short, based on the bibliographic survey conducted for the preparation of thi
 \item \textbf{scenario ($\gamma$)}: static ($St$) or dynamic ($Dn$);
 \item \textbf{input ($\iota$)}: deterministic ($Dt$) and/or stochastic ($St$);
 \item \textbf{performance measure ($\delta$)}: capital cost ($C$), setup cost ($SC$), holding cost ($HC$), work-in-process cost ($WIPC$), net profit ($NP$), makespan ($C_{max}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness (TT), total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$), weighted $E/T$ ($wE/T$), customer satisfaction($CS$), plant performance ($PP$) and/or processing time ($PT$);
-\item \textbf{others ($\rho$)}: limited capacity units ($LCU$), storage capacity by product ($PSC$), storage capacity ($SC$), work-in-process storage ($WIP$), release time ($RT$), due dates ($DD$), incompatible families ($IF$), different processing rates ($DPR$), sequence-dependent setup times ($SDST$), sequencing constraints($SqC$).
+\item \textbf{others ($\rho$)}: limited capacity units ($LCU$), storage capacity by product ($PSC$), storage capacity ($SC$), work-in-process storage ($WIP$), release time ($RT$), due dates ($DD$), incompatible families ($IF$), different processing rates ($DPR$), sequence-dependent setup times ($SDST$), sequencing constraints ($SqC$).
 \end{enumerate}
 
 So, to describe a speciﬁc multi-product batch problem, we propose the notation $\sigma|\lambda|\mu|\pi|\eta|\gamma|\iota|\delta|\rho$. Some of the multi-product batch problems and solution approaches discussed in the references cited in this paper are summarized in Tab. \ref{tab:review}.
@@ -187,21 +188,21 @@ Cerdá (2003) &$wE/T|RT, DD, SDST$ & a rescheduling algorithm\\
 \end{center}
 \end{table} 
 
-\subsection{Contributions of this Paper}
+\subsection{Contributions of this Article}
 
-In this work we are interested in the multiperiod multi-product batch scheduling problem that arises in a networked plant of a plastic bag industry. The industrial plant of this company is very similar to the multi-product s-batch networked plant of the steel industry presented by \cite{LiuEtAl2020} (Fig. \ref{fig:networkdPlantSteelIndustry}), however, the production process in this plastic bags industry begins in extruders, which are production units capable of processing different batches simultaneously. Therefore the problem we are interested is a multi-product \emph{p-batch} \emph{s-batch} problem in a networked plant close to the problem addressed by \cite{LiEtAl2022}. Thus, part of the problem solving process consists of solving a multi-product p-batch scheduling problem into extruders. Also, in the problem we study, in addition to demand, we must consider the factory and outlets' storage capacity, which is individually defined for products, but also for the set of products.
+The work presented in this article is part of a project in which we propose the modeling and solution of a multiperiod multi-product batch scheduling problem that arises in a networked plant of a plastic bag industry. The industrial plant of this company is very similar to the multi-product s-batch networked plant of the steel industry presented by \cite{LiuEtAl2020} and illustrated in Fig. (\ref{fig:networkdPlantSteelIndustry} ), however, the production process in this plastic bags industry begins in extruders, which are production units capable of processing different batches simultaneously. Therefore the problem we are interested is a multi-product \emph{p-batch} \emph{s-batch} problem in a networked plant close to the problem addressed by \cite{LiEtAl2022}. Thus, part of the problem solving process consists of solving a multi-product p-batch scheduling problem into extruders. Also, in the problem we study, in addition to demand, we must consider the factory and outlets' storage capacity, which is individually defined for products, but also for the set of products.
 
-When we began to propose an algorithm to solve the studied problem through a local search method, we identified the need to determine, at each iteration, a maximum processing time for predefined multi-product p-batches, based on known restrictions, so that the new solution built was a feasible solution and at the same time with the best fitness. Using the notation presented before, this problem can be classified as a multi-product $SS|SU|p\textrm{-}batch|Sz|SP|St|Dt|PT|LCU, PSC, SC, DPR$ problem. For simplification purposes, we named this problem multi-product p-batch processing time maximization (MBPTM) problem.
+When we began to propose an algorithm to solve the studied problem through a local search method, we identified the need to determine, at each iteration, a maximum processing time for predefined multi-product p-batches, based on known restrictions, so that the new solution built was a feasible solution and at the same time with the best fitness. Using the notation presented before, this problem can be classified as a multi-product $SS|SU|p\textrm{-}batch|Sz|SP|St|Dt|PT|LCU,$ $PSC, SC, DPR$ problem. For simplification purposes, we named this problem multi-product p-batch processing time maximization (MPBPTM) problem.
 
-It is important to note that, since the MBPTM problem need to be solved at each iteration, it has a direct impact on the overall efficiency of the local search method proposed for solving the multi-product p-batch s-batch problem in the plastic bag networked plant of the industry studied. In a future work, we intend to present the mathematical model and a Particle Collison based solution algorithm we are developing for this last problem. As scientific contributions of this paper, we present a mathematical model and a very efficient polynomial optmization method for solving the MBPTM problem.
+It is important to note that, since the MPBPTM problem need to be solved at each iteration, it has a direct impact on the overall efficiency of the local search method proposed for solving the multi-product p-batch s-batch problem in the plastic bag networked plant of the industry studied. In a future work, we intend to present the mathematical model and a Particle Collison based solution algorithm we are developing for this last problem. As scientific contributions of this paper, we present a mathematical model and a very efficient polynomial optmization method for solving the MPBPTM problem.
 
-The rest of the paper is organized as follows. In the next sections, the MBPTM problem is presented. Section \ref{sec:mathModel} presents an interger mathematical model for the problem and section \ref{sec:analyticalSol} presents an analytical method for its solution. Section \ref{sec:results} presents the tests and results obtained by a solver in C++ applying the analytical solution and a solver developed in LINGO to new proposed benchmarks. Section \ref{sec:conclusions} presents the paper's conclusions and suggestions for future works. Finally, in sections \ref{sec:contributions} and \ref{sec:acknowledgments}, the contributions to this work are informed and acknowledgments are given, respectively.
+The rest of the paper is organized as follows. In the next sections, the MPBPTM problem is introduced. Section 2.1 describes an interger mathematical model for the problem and section 3 shows an analytical method for its solution. Section 4 displays the tests and results obtained by a solver in C++ applying the analytical solution and a solver developed in LINGO to new proposed benchmarks. Section 5 presents the paper's conclusions and suggestions for future works. Finally, in sections 6 and 7, the contributions to this work are informed and acknowledgments are given, respectively.
 
 
 \section{MULTI-PRODUCT P-BATCH PROCESSING TIME MAXIMIZATION PROBLEM}
 \label{sec:MBPTMP}
 
-The multi-product p-batch processing time maximization problem arises when a set of different products are processed simultaneously in a same production batch. In this problem, it is considered that the quantity produced of each product is directly proportional to the processing time, however, with a different constant of proportionality (production rate) for each product. In addition, there is a maximum quantity allowed for the production of batch products, defined both individually and for the set. The production quantity of each product is mainly defined according to the demand for the product. However, it is still possible to stock the products and/or send them to the outlets. In both cases, there is a stocking/shipping limit for each product and a stocking/shipping limit for the set of products in the batch. Also, there is a time limit available for processing the batch. About the production, the industry manager has as priority to meet demand and he prefer to send the remaining production to outlets rather then stock it in the factory. 
+The multi-product p-batch processing time maximization problem arises when a set of different products are processed simultaneously in a same production batch. In this problem, it is considered that the quantity produced of each product is directly proportional to the processing time, however, with a different constant of proportionality (production rate) for each product. In addition, there is a maximum quantity allowed for the production of batch products, defined both individually and for the set. The production quantity of each product is mainly defined according to the demand for the product. However, it is still possible to stock the products and / or send them to the outlets. In both cases, there is a stocking / shipping limit for each product and a stocking / shipping limit for the set of products in the batch. Also, there is a time limit available for processing the batch. About the production, the industry manager has as priority to meet demand and he prefer to send the remaining production to outlets rather then stock it in the factory. 
 
 \subsection{Mathematical Model}
 \label{sec:mathModel}
@@ -230,7 +231,7 @@ $O_i$ amount of product $i$ shipped to factory outlets;
 
 $I_i$ is the amount of product $i$ that will be stored at the factory;
 
-$T$ is the batch processing time;
+$T$ is the batch processing time; \\
 
 We have the problem:
 
@@ -287,14 +288,12 @@ T \leq \textrm{Z}
 T, D_i, O_i, I_i \in  \mathbb{Z}^ + \quad \forall i
 \end{equation}
 
-where:
-
-Constraints in (2) relate the quantity produced, $P_i$, to batch processing time $T$. Constraints in (3) calculate the quantity produced, $P_i$, as a function of the primary variables, $D_i$, $O_i$ and $I_i$. Constraints in (4), (5), and (7) state that the quantity delivered to demand, the quantity shipped to the outlets, and the factory-stocked quantity of each product must be less than their respective known limits. Constraints (6) and (8) state that both the sum of product quantities sent to the outlets and the sum of product quantities stocked in the factory must be less than their respective maximum allowed values. The restriction in (9) establishes that there is a batch processing time limit, $\textrm{Z}$, that must be respected. Equations in (10) and (11) define the production distribution priority. And finally, the constraints in (12) inform the nature of the decision variables.
+where constraints in (2) relate the quantity produced, $P_i$, to batch processing time $T$. Constraints in (3) calculate the quantity produced, $P_i$, as a function of the primary variables, $D_i$, $O_i$ and $I_i$. Constraints in (4), (5), and (7) state that the quantity delivered to demand, the quantity shipped to the outlets, and the factory-stocked quantity of each product must be less than their respective known limits. Constraints (6) and (8) state that both the sum of product quantities sent to the outlets and the sum of product quantities stocked in the factory must be less than their respective maximum allowed values. The restriction in (9) establishes that there is a batch processing time limit, $\textrm{Z}$, that must be respected. Equations in (10) and (11) define the production distribution priority. And finally, the constraints in (12) inform the nature of the decision variables.
 
 \section{ANALYTICAL SOLUTION}
 \label{sec:analyticalSol}
 
-The method proposed in this paper for solution of the MBPTM problem is composed of two distinct parts, which are: a) calculation of the maximum processing time of the predefined multi-product p-batch; and b) calculation of the part of the production used to meet demand, the part of the production sent to outlets and the part of the production stocked in factory. Next, we explain each of these parts in detail. \\
+The method proposed in this paper for solution of the MPBPTM problem is composed of two distinct parts, which are: a) calculation of the maximum processing time of the predefined multi-product p-batch; and b) calculation of the part of the production used to meet demand, the part of the production sent to outlets and the part of the production stocked in factory. Next, we explain each of these parts in detail. \\
 
 \noindent \emph{Calculation of maximum p-batch processing time:} \\
 
@@ -515,7 +514,7 @@ Therefore it is possible to meet the restrictions by applying the Agorithm (\ref
 \section{TESTS AND RESULTS}
 \label{sec:results}
 
-To test the developed model and analytical solution method, we created a solver in C++ named COPSolver: library for solving the multi-product p-batch processing time maximization problem and also a solver in LINGO named MBPTM.lng both available at codeocean and GitHub \citep{COPSolver2023}. A brief explanation of the software can be found in the paper of \cite{Fraga2023}. The tests were performed on a notebook with an Intel i7 processor. We tested the solvers developed for the benchmarks presented on Tables \ref{tab:MBPTMP001}, \ref{tab:MBPTMP002} and \ref{tab:MBPTMP003}, and for randon benchmarks generated by the following functions: \\
+To test the developed model and analytical solution method, we created a solver in C++ named COPSolver: library for solving the multi-product p-batch processing time maximization problem and also a solver in LINGO named MBPTM.lng both available at codeocean and GitHub. A brief explanation of the software and links for downloads can be found in the paper of \cite{Fraga2023}. The tests were performed on a notebook with an Intel i7 processor. We tested the solvers developed for the benchmarks presented on Tables \ref{tab:MBPTMP001}, \ref{tab:MBPTMP002} and \ref{tab:MBPTMP003}, and for randon benchmarks generated by the following functions: \\
 
 \begin{equation}
 \textrm{p}_i = \textrm{rand}()\%30 + 10
@@ -556,7 +555,7 @@ To test the developed model and analytical solution method, we created a solver 
 
 \begin{table}[ht]
 \begin{center}
-\caption{\textbf{Benchmark MBPTM 2.}}
+\caption{\textbf{Benchmark MPBPTM 2.}}
 \begin{tabular}[c]{c r r r}
 \\
 $i$ & 1 & 2 & total \\
@@ -574,7 +573,7 @@ $\textrm{UI}_i$ & 3000 & 2000 & 3000 \\
 
 \begin{table}[ht]
 \begin{center}
-\caption{\textbf{Benchmark MBPTM 3.}}
+\caption{\textbf{Benchmark MPBPTM 3.}}
 \begin{tabular}[c]{c r r r r}
 \\
 $i$ & 1 & 2 & 3 & total \\
@@ -592,7 +591,7 @@ $\textrm{UI}_i$ & 3000 & 2000 & 1000 & 3500 \\
 
 \begin{table}[ht]
 \begin{center}
-\caption{\textbf{Benchmark MBPTM 10.}}
+\caption{\textbf{Benchmark MPBPTM 10.}}
 \begin{small}
 \begin{tabular}[c]{c r r r r r r r r r r r }
 \\
@@ -610,7 +609,7 @@ $\textrm{UI}_i$ & 3000 & 2000 & 1000 & 800 & 3000 & 1000 & 400 & 300 & 200 & 0 &
 \end{center}
 \end{table}
 
-Randomly generated benchmarks were named RMBPTM $\textrm{N}$, being $\textrm{N}$ the number of products. Seeking to enable the reproduction of the results, in the computational construction of the benchmarks we used the function srand((unsigned) source), where source is a defined value. To build the results presented in this work, we used source=0. The benchmarks used for the tests performed can be consulted at github.com/tbfraga/COPSolver.
+Randomly generated benchmarks were named RMPBPTM $\textrm{N}$, being $\textrm{N}$ the number of products. Seeking to enable the reproduction of the results, in the computational construction of the benchmarks we used the function srand((unsigned) source), where source is a defined value. To build the results presented in this work, we used source=0. The benchmarks used for the tests performed can be consulted at github.com/tbfraga/COPSolver.
 
 Table \ref{tab:results} presents the results obtained by applying the analytical method (COPSolver) and the LINGO solver for the solution of the previously presented benchmarks.
 
@@ -622,16 +621,16 @@ Table \ref{tab:results} presents the results obtained by applying the analytical
 \\
 problem & LINGO solver & time (s) & analytical method & time (s) \\
 \cline {1-5} \\
-MBPTM 2 & 55 & 0.03 & 55 & $<$ 0.01 \\
-MBPTM 3 & 48 & 0.03 & 48 & $<$ 0.01 \\
-MBPTM 10 & 30 & 0.05 & 30 & $<$ 0.01 \\
-RMBPTM 20 & 100 & 0.06 & 100 & $<$ 0.01 \\
-RMBPTM 50 & 98 & 0.08 & 98 & $<$ 0.01 \\
-RMBPTM 100 & 98 & 0.11 & 98 & $<$ 0.01 \\
-RMBPTM 1,000 & 78 & 1.20 & 78 & $<$ 0.01 \\
-RMBPTM 2,000 & 70 & 3.25 & 70 & $<$ 0.01 \\
-RMBPTM 5,000 & 70 & 15.12 & 70 & $<$ 0.02 \\
-RMBPTM 10,000 & 70 & 55.19 & 70 & $<$ 0.04 \\
+MPBPTM 2 & 55 & 0.03 & 55 & $<$ 0.01 \\
+MPBPTM 3 & 48 & 0.03 & 48 & $<$ 0.01 \\
+MPBPTM 10 & 30 & 0.05 & 30 & $<$ 0.01 \\
+RMPBPTM 20 & 100 & 0.06 & 100 & $<$ 0.01 \\
+RMPBPTM 50 & 98 & 0.08 & 98 & $<$ 0.01 \\
+RMPBPTM 100 & 98 & 0.11 & 98 & $<$ 0.01 \\
+RMPBPTM 1,000 & 78 & 1.20 & 78 & $<$ 0.01 \\
+RMPBPTM 2,000 & 70 & 3.25 & 70 & $<$ 0.01 \\
+RMPBPTM 5,000 & 70 & 15.12 & 70 & $<$ 0.02 \\
+RMPBPTM 10,000 & 70 & 55.19 & 70 & $<$ 0.04 \\
 \cline {1-5} \\
 \end{tabular}
 \label{tab:results}
@@ -643,7 +642,7 @@ Tables (\ref{tab:compResultsMBPTMP2}) and (\ref{tab:compResultsMBPTMP3}) shows t
 
 \begin{table}[ht]
 \begin{center}
-\caption{\textbf{Results obtained with the LINGO solver and COPSolver for the MBPTM 3.}}
+\caption{\textbf{Results obtained with the LINGO solver and COPSolver for the MPBPTM 3.}}
 \begin{footnotesize}
 \begin{tabular}[c]{l r r r r}
 \\
@@ -659,9 +658,9 @@ P3 & 2,400 & 800 & 600 & 1,000 \\
 \end{center}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[h!]
 \begin{center}
-\caption{\textbf{Results obtained with the LINGO solver and COPSolver for the MBPTM 10.}}
+\caption{\textbf{Results obtained with the LINGO solver and COPSolver for the MPBPTM 10.}}
 \begin{footnotesize}
 \begin{tabular}[c]{l r r r r}
 \\

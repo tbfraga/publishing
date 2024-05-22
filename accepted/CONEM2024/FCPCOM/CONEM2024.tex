@@ -58,7 +58,7 @@
     \\
     %
     % Digitar o resumo
-    \abstract{\textbf{Resumo:} Multicriteria classification is usually a crucial step in the decision-making in the manufacturing and purchasing management process. For such classification, the attribution of weights to the criteria, as well as the attribution of weights to the products according to each criterion, strongly influences the coherence of the categorization. Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria. AHP's logic is not complicated at all. However, since criteria's pairwise comparisons matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. This paper presents a constructive algorithm that can adjust inconsistent matrices, forcing such matrices to have a better consistency rate and a new procedure and equation for ABC multicriteria classification. We tested the proposed solutions by applying the AHP method for ABC multicriteria classification to companies in three sectors. As a result, we observed that the algorithm for forcing consistency adjusts the pairwise matrices in just a few seconds, avoiding the manual work of several hours and that the new solution method developed for multicriteria classification provided consistent results according to the analysis of company managers, both showing to be essential resources for applying the AHP and ABC multicriteria classification methods.}\\
+    \abstract{\textbf{Resumo:} Currently, most companies produce and market a wide variety of products. Because of this, clustering items has become a crucial step in the decision-making for manufacturing and purchasing management processes. ABC multicriteria classification is a technique commonly used for clustering items. For such classification, the attribution of weights to the criteria, as well as the attribution of weights to the products according to each criterion, strongly influences the coherence of the categorization. Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria, and so it is broadly used in multicriteria classification. AHP's logic is not complicated at all. However, since criteria's pairwise comparison matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. The attribution of weights to the products according to each criterion is also a difficult task cause there is a need for balancing all the quantitative values and the empirical values defined for the qualitative criteria. This paper presents a constructive algorithm that can adjust inconsistent pairwise comparison matrices, forcing such matrices to have a better consistency rate, and a balancing procedure for attributing weights to the products according to qualitative criteria as well as a new equation for ABC multicriteria classification. We developed a new library for the COPSolver software by applying this new AHP method for the ABC multicriteria classification. We tested the proposed solutions to companies in three sectors. As a result, we observed that the algorithm for forcing consistency adjusts the pairwise matrices in just a few seconds, avoiding the manual work of several hours and that the new solution method developed for multicriteria classification provided consistent results according to the analysis of company managers, both showing to be essential resources for applying the AHP and ABC multicriteria classification methods.}\\
     %
     % Digitar as palavras-chave
    \\
@@ -521,9 +521,9 @@ As further works, the methodologies developed and results found will be used as 
 
     \section{ACKNOWLEDGEMENTS}
     
-Huge thanks to the teams responsible for developing elementary OS, CodeBlocks, git, GitHub, gcc, Eigen library, TeXLive libraries, duckduckgo, gummi, Yandex translator, and Grammarly. Without the availability of these tools, this paper and the "COPSolver's library for solving the multicriteria classification problem" could never have been developed. I am also very grateful to my co-workers Regilda da Costa e Silva Menêzes and Marcos Luiz Henrique for their constant support for my projects and to my dear advisees Betriz Marinho Cavalcanti, Alexia Maria Duque Silva and Erika Leticia Rodrigues Silva for having participated so enthusiastically in this project, in particular for having made such effort to collect all the necessary data for this study. I would also like to thank the three companies that provided all the essential information we needed for the correct development of this work. \\
+Huge thanks to the teams responsible for developing elementary OS, CodeBlocks, git, GitHub, gcc, Eigen library, TeXLive libraries, duckduckgo, gummi, Yandex translator, and Grammarly. Without the availability of these tools, this paper and the "COPSolver's library for solving the multicriteria classification problem" could never have been developed. I am also very grateful to my co-workers Regilda da Costa e Silva Menêzes and Marcos Luiz Henrique for their constant support for my projects and to my dear advisees Betriz Marinho Cavalcanti, Alexia Maria Duque Silva and Erika Leticia Rodrigues Silva for having participated so enthusiastically in this project, in particular for having made such effort to collect all the necessary data for this study. I would also like to thank the three companies that provided all the essential information we needed for the correct development of this work.
         
-        \section{CRediT AUTHORSHIP CONTRIBUTION STATEMENT} 
+        \section{CREDIT AUTHORSHIP CONTRIBUTION STATEMENT} 
 		\label{sec:contributions}
 
 		T.B. Fraga: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data Curation, Writing – original draft, Writing – review \& editing, Supervision, Project administration. B.M. Cavalcanti: Investigation. A.M.D.Silva: Investigation. E.L.R. Silva: Investigation. 
@@ -548,25 +548,5 @@ Huge thanks to the teams responsible for developing elementary OS, CodeBlocks, g
         
         \bibliographystyle{abcm}
         \bibliography{bibliografia}
-        
-        \newpage
-        \begin{appendices}
-		\setcounter{section}{0}
-		\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
-		\makeatletter
-		\addtocontents{toc}{%
-		\begingroup
-		\let\protect\l@section\protect\l@subsection
-}
-	\section{data.txt}
-
-	\verbatiminput{files/data.txt}
-	
-	\section{AHP\_solution.txt}
-
-	\verbatiminput{files/AHP_solution.txt}
-
-	\addtocontents{toc}{\endgroup}
-	\end{appendices}
 
 \end{document}
