@@ -45,7 +45,7 @@
     \vspace{-.6cm}
     %
     % Digitar o título
-    \title{CONEM2024-0025\\ A NEW EFFECTIVE ABC MULTICRITERIA CLASSIFICATION WITH ANALYTICAL HIERARCHY PROCESS: HOW TO ATTRIBUTE WEIGHTS AND FORCE CONSISTENCY OF PAIRWISE COMPARISONS MATRIX} 
+    \title{CONEM2024-0025\\ A NEW EFFECTIVE ABC MULTICRITERIA CLASSIFICATION WITH ANALYTIC HIERARCHY PROCESS: HOW TO ATTRIBUTE WEIGHTS AND FORCE CONSISTENCY OF PAIRWISE COMPARISONS MATRIX} 
     %
     \end{center}
 	%
@@ -58,7 +58,7 @@
     \\
     %
     % Digitar o resumo
-    \abstract{\textbf{Resumo:} Currently, most companies produce and market a wide variety of products. Because of this, clustering items has become a crucial step in the decision-making for manufacturing and purchasing management processes. ABC multicriteria classification is a technique commonly used for clustering items. For such classification, the attribution of weights to the criteria, as well as the attribution of weights to the products according to each criterion, strongly influences the coherence of the categorization. Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria, and so it is broadly used in multicriteria classification. AHP's logic is not complicated at all. However, since criteria's pairwise comparison matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. The attribution of weights to the products according to each criterion is also a difficult task cause there is a need for balancing all the quantitative values and the empirical values defined for the qualitative criteria. This paper presents a constructive algorithm that can adjust inconsistent pairwise comparison matrices, forcing such matrices to have a better consistency rate, and a balancing procedure for attributing weights to the products according to qualitative criteria as well as a new equation for ABC multicriteria classification. We developed a new library for the COPSolver software by applying this new AHP method for the ABC multicriteria classification. We tested the proposed solutions to companies in three sectors. As a result, we observed that the algorithm for forcing consistency adjusts the pairwise matrices in just a few seconds, avoiding the manual work of several hours and that the new solution method developed for multicriteria classification provided consistent results according to the analysis of company managers, both showing to be essential resources for applying the AHP and ABC multicriteria classification methods.}\\
+    \abstract{\textbf{Resumo:} Currently, most companies produce and market a wide variety of products. Because of this, clustering items has become a crucial step in the decision-making for manufacturing and purchasing management processes, making it possible to apply different policies to each product's group, reducing the cost necessary for managing inventory. ABC multicriteria classification is a technique commonly used for clustering items. For such classification, the attribution of weights to the criteria, as well as the attribution of weights to the products according to each criterion, strongly influences the coherence of the categorization. Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria, and so it is broadly used in multicriteria classification. AHP's logic is not complicated at all. However, since criteria's pairwise comparison matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. The attribution of weights to the products according to each criterion is also a difficult task cause there is a need to balance all the quantitative values and the empirical values defined for the qualitative criteria. This paper presents a constructive algorithm that can adjust inconsistent pairwise comparison matrices, forcing such matrices to have a better consistency rate, a balancing procedure for attributing weights to the products according to qualitative criteria, and a new equation for ABC multicriteria classification. We developed a new library for the COPSolver software by applying this new AHP method for the ABC multicriteria classification. We tested the proposed solutions to companies in three sectors. As a result, we observed that the algorithm for forcing consistency adjusts the pairwise matrices in just a few seconds, avoiding the manual work of several hours and that the new solution method developed for multicriteria classification provided consistent results according to the analysis of company managers, both showing to be essential resources for applying the AHP and ABC multicriteria classification methods.}\\
     %
     % Digitar as palavras-chave
    \\
@@ -70,7 +70,7 @@
     
 	According to \cite{Singhal2013}, the manufacturing decisions can be classified into three categories: strategic, tactical and operational. As explained by the authors, the operational decisions pertaining to issues such as order processing, detailed production scheduling, follow up, maintenance routines, and inventory control rules, drive the day to day activities. Manufacturing decisions are closely related to sales decisions. \cite{Ebrahimi2014} warn that in today’s competitive market the diversity in customer’s need have resulted in a high level of variability in the products which have to be manufactured and this statement is also valid for the products acquired from other companies. Such complication brings to light the need for the use of complex techniques for purchasing / production management, especially at the operational decision level \citep{Kiran2019}. In such a scenario, prior optimized operational planning becomes impressible for better use of the productive capacity and to avoid investment losses in unnecessary or unprofitable material. And, given the wide variety of products, it is crucial to start any planning by understanding the importance of all products marked by the company. 
 
-	One of the approaches that is widely applied to clustering products according to their importance is the multicriteria ABC classification. The scientific literature broadly emphasizes the value of multicriteria ABC classification for inventory management and presents several multicriteria methods. The Analytical Hierarchy Process is one of the most common techniques applied for this purpose \citep{Flores1992, AltayGuvenir1998, Lolli2014, Balaji2014}. Some recent studies also emphasize the importance of applying multicriteria analysis to strategic planning \citep[\emph{e.g.},][]{BarbosaDePaula2022, Pereira2023, MarianoRibeiro2023}. \citet{Odu2019} emphasizes that, when applying some multicriteria methods, it is crucial to pay particular attention to the objectivity factors of criteria weights. The author provides a detailed overview of different weighting methods applicable to multicriteria techniques.
+	One of the approaches that is widely applied to clustering products according to their importance is the multicriteria ABC classification. The scientific literature broadly emphasizes the value of multicriteria ABC classification for inventory management and presents several multicriteria methods. The Analytic Hierarchy Process is one of the most common techniques applied for this purpose \citep{Flores1992, AltayGuvenir1998, Lolli2014, Balaji2014}. Some recent studies also emphasize the importance of applying multicriteria analysis to strategic planning \citep[\emph{e.g.},][]{BarbosaDePaula2022, Pereira2023, MarianoRibeiro2023}. \citet{Odu2019} emphasizes that, when applying some multicriteria methods, it is crucial to pay particular attention to the objectivity factors of criteria weights. The author provides a detailed overview of different weighting methods applicable to multicriteria techniques.
 	
 		In this work, we present a study with three companies from three different sectors, which market a wide variety of products, in some cases, highly personalized products. The interest of this study is to identify the principal products, that is, the products that each company must prioritize so that this information can guide the optimized operational planning. We opted for the method ABC for multicriteria classification and adopted the Analytic Hierarchy Process (AHP) \citep{Saaty1987} to assign the weights to the different criteria. It is important to note that the AHP derives the weights of each criterion based on the eigenvector of a pairwise comparisons matrix, which is constructed manually according to an empirical evaluation. According to \cite{Saaty1987}, this matrix must be positive reciprocal and have a consistency rate of less than 0.1.  The author reports that a software package supporting the AHP, called Expert Choice, for the IBM PC, was used in his work for making eigenvector calculations and guiding the decision maker to improve matrix inconsistency if needed. During the execution of the work we present in this paper, we found that there is a substantial difficulty in the calculation of the eigenvector, as well as in the construction of consistent pairwise comparisons matrices. Since we had no access to the Expert Choice software package, we developed an open-source COPSolver's library for solving the multicriteria classification problem, which applies a simple algorithm for forcing the consistency of such matrices when applying the AHP. We present this algorithm in this paper. We coupled the Eigen library from eigen.tuxfamily.org to COPSolver for the eigenvectors calculation of the matrices. Also, we identified that it is possible to use different criteria types (cumulative sum, qualitative, and binary) when assigning weights to ABC classification, depending on each specific criterion chosen, and we observed that such an assignment generates a bias in the multicriteria ABC classification. Therefore, we also developed a new methodology for assigning weights in a balanced way for ABC classification, and we proposed a new multicriteria weighting equation for the multicriteria classification COPSolver's library. We also present both propositions in this paper, as well as an in-depth analysis of the results found by the new library developed for COPSolver.
 		
@@ -85,8 +85,7 @@
 	\begin{algorithmic}
 	\Require $tol, M[m_{ij}]$
 	\Ensure $CR < tol$
-		
-	\State $n \gets size(M[m_{ij}])$
+	
 	\State $CR \gets$ consistencyRate($M[m_{ij}]$)
 	
 	\State topLeftCorner( $CR, tol, M[m_{ij}]$)
@@ -98,23 +97,7 @@
 \end{algorithmic}
 \end{algorithm}
 
-The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-peer comparison of each element of the pairwise matrix starting from the fourth row, $M[m_{\{sz\}j}]_{sz=4}$, with each element of the matrix $M[m_{jk}]_{j=1, k=j+1 \land k \neq sz}^{n-1,n}$. In this comparison, the consistency of each pair is verified according to Alg. (\ref{alg:consistencyCheck}). If any inconsistency is found, the value of one of the elements is reduced or increased, seeking to improve the consistency rate. Initially, the reduction of values is done through the reduce() function.  If, after the reduction, the convergence rate is still greater than the tolerance, the increment of values is made through the increase() function.
-
-\begin{algorithm}
-\caption{consistency checking}\label{alg:consistencyCheck}
-	\begin{algorithmic}
-	\Require $M[m_{ij}]$
-	
-	\If{$m_{\{sz\}j} * m_{jk} = m_{\{sz\}k}$}
-		\State $consistent \gets 1$ \Comment{values are consistent}
-	\Else
-		\State $consistent \gets 0$ \Comment{values are not consistent}
-	\EndIf
-	
-	\State \textbf{return} $consistent$
-	
-\end{algorithmic}
-\end{algorithm}
+The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-peer comparison of each element of the pairwise matrix starting from the fourth row, $M[m_{\{sz\}j}]_{sz=4}$, with each element of the matrix $M[m_{jk}]_{j=1, k=j+1 \land k \neq sz}^{n-1,n}$. In this comparison, the consistency of each pair is verified according to Alg. (\ref{alg:consistencyCheck}). If any inconsistency is found, the value of one of the elements is reduced or increased, seeking to improve the consistency rate. Initially, the reduction of values is done through the reduce() function.  If, after the reduction, the convergence rate is still greater than the tolerance, the increment of values is made through the increase() function. The bottomLeftCorner() function is similar to the topLeftCorner() function. In the topLeftCorner() function, the peer-to-peer comparison starts with the elements of the fourth row ($M[m_{\{sz\}j}]_{sz=4}^{n}$), and then the elements of the next rows are evaluated, following the order from top to bottom. In the case of the bottomLeftCorner() function, on the other hand, the pair-by-pair comparison is made starting with the elements of the anti-penultimate row ($sz = n-2$), then the elements of the previous rows are evaluated, following the order from bottom to top.
 
 \begin{algorithm}
 \caption{topLeftCorner()}\label{alg:topLeftCorner}
@@ -272,7 +255,21 @@ The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-p
 \end{algorithmic}
 \end{algorithm}
 
-The bottomLeftCorner() function is similar to the topLeftCorner() function. In the topLeftCorner() function, the peer-to-peer comparison starts with the elements of the fourth row ($M[m_{\{sz\}j}]_{sz=4}^{n}$), and then the elements of the next rows are evaluated, following the order from top to bottom. In the case of the bottomLeftCorner() function, on the other hand, the pair-by-pair comparison is made starting with the elements of the anti-penultimate row ($sz = n-2$), then the elements of the previous rows are evaluated, following the order from bottom to top.
+\begin{algorithm}
+\caption{consistency checking}\label{alg:consistencyCheck}
+	\begin{algorithmic}
+	\Require $M[m_{ij}]$
+	
+	\If{$m_{\{sz\}j} * m_{jk} = m_{\{sz\}k}$}
+		\State $consistent \gets 1$ \Comment{values are consistent}
+	\Else
+		\State $consistent \gets 0$ \Comment{values are not consistent}
+	\EndIf
+	
+	\State \textbf{return} $consistent$
+	
+\end{algorithmic}
+\end{algorithm}
     
     \section{ON MULTICRITERIA ABC CLASSIFICATION}
 
@@ -334,7 +331,7 @@ $e_{p\sigma_q}$ is the product lead time billing equivalent of product $p$ for c
  
 $b_p$ is the billing of product $p$;
 
-$lt_p$ is the of product $p$;
+$lt_p$ is the lead time of product $p$;
 
 $wb$ is the multicriteria weight of criterion billing.
 
@@ -354,7 +351,7 @@ $w_{pc}$ is the normalized weight percentage of the product $p$ according to cri
     
     \subsection{Data Collected}
     
-    To test the methodology proposed in this article, data were collected for construction of the pairwise comparisons matrix and for ABC classification, using the billing (bl) criterion and other criteria suggested by \cite{FloresWhybark1986}: lead-time (lt); criticality (cr); obsolescence (ob); commonality (cm); substitutability (sb); and repairability (rp). To collect the data, we partnered with three companies from three different sectors: car mechanics; furniture trades; and plastic packaging manufacturing. Based on the data collected, three benchmarks were developed. The date.txt files corresponding to these three benchmarks are available at https://tbfraga.github.io/COPSolver/ benchmarks/. Appendice A presents the data.txt file elaborated with the data provided by the furniture trades company.
+    To test the methodology proposed in this article, data were collected for construction of the pairwise comparisons matrix and for ABC classification, using the billing (bl) criterion and other criteria suggested by \cite{FloresWhybark1986}: lead-time (lt); criticality (cr); obsolescence (ob); commonality (cm); substitutability (sb); and repairability (rp). To collect the data, we partnered with three companies from three different sectors: car mechanics; furniture trades; and plastic packaging manufacturing. Based on the data collected, three benchmarks were developed. The date.txt files corresponding to these three benchmarks are available at https://tbfraga.github.io/COPSolver/ benchmarks/.
     
     \subsection{Analysis on the Algorithm for Adjusting Inconsistencies}
     
@@ -499,9 +496,9 @@ Table 3 presents a comparison of the results using different methods on the data
 
 \subsection{Analysis On The New ABC Multicriteria Classification Method}
 
-For analysis of the proposed new methodology for ABC muticriteria classification, we will be focusing on the presentation and analysis of the data provided by the furniture trades company. 
+After an extensive search of the scientific literature, we did not find benchmarks or numerical tests considering binary and qualitative criteria in the literature. Then, for analyzing the proposed new methodology for ABC multicriteria classification, we will focus on the presentation and analysis of the data provided by the furniture trades company. 
 
-Figure \ref{fig:results} presents part of a comparison of the results obtained for the data described above, by ABC classification for the criteria billing and the new ABC multicriteria with Analytic Hierarch Process. Appendice A shows the file AHP\_Solution.txt, that presents the complete results found by the module 'COPSolver: library for solving the multicriteria classification problem'. We can see in this figure that the multicriteria classification includes in the group A all products previously classified as A according to the billing criterion, however the order of relevance of the products is changed. Additionally, we can verify that other products, previously classified as C and B were included in the list of group A products because it is necessary to give due attention also to these products, due to their relevance according to other criteria. As an example, we can cite the product 2500, which is a 30-centimeter fan. In the evaluated period, this product had a turnover of 1,620.00 reais. Although the billing of this product was not significant when compared to the billing of the other products classified as A, this is a product that is hardly repairable, with high obsolescence and that serves several purposes. Therefore, in the multicriteria rating, this product took 13th place in terms of importance, therefore it is classified as A. This change shows the importance of the multicriteria classification.
+Figure \ref{fig:results} presents part of a comparison of the results obtained for the data described above, by ABC classification for the criteria billing and the new ABC multicriteria with Analytic Hierarch Process. The file AHP\_Solution.txt, that presents the complete results found by the module 'COPSolver: library for solving the multicriteria classification problem' can be found at https://tbfraga.github.io/COPSolver/benchmarks/clssp/alexia/adjusted-data/results/AHP\_solution.txt. We can see in this figure that the multicriteria classification includes in the group A all products previously classified as A according to the billing criterion, however the order of relevance of the products is changed. Additionally, we can verify that other products, previously classified as C and B were included in the list of group A products because it is necessary to give due attention also to these products, due to their relevance according to other criteria. As an example, we can cite the product 2500, which is a 30-centimeter fan. In the evaluated period, this product had a turnover of 1,620.00 reais. Although the billing of this product was not significant when compared to the billing of the other products classified as A, this is a product that is hardly repairable, with high obsolescence and that serves several purposes. Therefore, in the multicriteria rating, this product took 13th place in terms of importance, therefore it is classified as A. This change shows the importance of the multicriteria classification.
 
 \begin{figure}[ht]
 	\includegraphics[width=\linewidth]{files/0001.jpg}
@@ -515,7 +512,7 @@ Based on an evaluation of the final results by the participating company, it was
 
 	\section{CONCLUSIONS AND FURTHER WORKS}
     
-    In this article we present a new methodology for multicriteria ABC classification with Analytical Hierarchy Process which includes a procedure to force the consitences of the pairwise comparisons matrices, as well as a procedure for assigning weights to the products evaluated according to qualitative criteria and a new equation for calculating the weights of the products in the multicriteria classification. This methodology was tested using data provided by three companies, from three different sectors. As a result, we verified the importance and efficiency of the method developed to force the matrices consistency. We also verified that the new methodology proposed for multicriteria ABC classification generated very coherent results, giving the appropriate importance to the products, according to all the evaluated criteria. 
+    In this article we present a new methodology for multicriteria ABC classification with Analytic Hierarchy Process which includes a procedure to force the consitences of the pairwise comparisons matrices, as well as a procedure for assigning weights to the products evaluated according to qualitative criteria and a new equation for calculating the weights of the products in the multicriteria classification. This methodology was tested using data provided by three companies, from three different sectors. As a result, we verified the importance and efficiency of the method developed to force the matrices consistency. We also verified that the new methodology proposed for multicriteria ABC classification generated very coherent results, giving the appropriate importance to the products, according to all the evaluated criteria. 
 
 As further works, the methodologies developed and results found will be used as a basis for building a portfolio with the identification of product demand patterns and, subsequently, for the development of a combined methodology for demand forecasting in small companies. 
 
