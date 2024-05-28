@@ -67,7 +67,57 @@ The term multi-product batch production is usually applied to designate an inter
 
 The scientific literature address many different problems related to such industrial enviroment, including the design, planning, sizing, scheduling and balancing problems. The multi-product batch plant design problem is concerned to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998). The configuration of the plant basically consists of defining the number of stages, the number of units and their capacity per stage, and the capacity for intermediate storages, as well as the best factory layout. The multi-product batch planning problem is basically determining the quantities to be produced, the number of batches and their sizes, the needs of materials and the total sales during each time period \citep{FumeroEtAl2016}.
 
-Since a single batch is processed at a time, it is necessary that the batches are dimensioned in such a way that the quantity produced of each product is sufficient to meet the demand during the period in which other batches are being processed \citep{Eilon1985}. This problem is named multi-product batch sizing. \cite{Eilon1985} gives a detailed explanation of the inadequacy of the use of the well-know EBQ (economic batch quantity) square-root formula for multi-product batch production, and \cite{LiuEtAl2020} present a mixed-integer quadratic programming model and an exact optimization algorithm for a multi-stage multi-product serial batching sizing problem in a divergent networked plant of a steel industry.
+Since a single batch is processed at a time, it is necessary that the batches are dimensioned in such a way that the quantity produced of each product is sufficient to meet the demand during the period in which other batches are being processed \citep{Eilon1985}. This problem is named multi-product batch sizing. \cite{Eilon1985} gives a detailed explanation of the inadequacy of the use of the well-know EBQ (economic batch quantity) square-root formula for multi-product batch production, and \cite{LiuEtAl2020} present a mixed-integer quadratic programming model and an exact optimization algorithm for a multi-stage multi-product serial batching sizing problem in a divergent networked plant of a steel industry (Fig. \ref{fig:networkdPlantSteelIndustry}). 
+
+\begin{figure}[ht]
+\label{fig:networkdPlantSteelIndustry}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily,every label/.append style={font=\small\sffamily,align=center}]
+
+\node[cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIP00){};
+\node[rectangle, draw, right=0.5cm of WIP00, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unit00){};
+\node[draw,dashed,rounded corners,fit=(WIP00) (unit00),inner sep=25pt,label={above:{stage (0,0)}}](stage00){};
+
+\node[above right=2cm and 4cm of WIP00, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIP11){};
+\node[rectangle, draw, right=0.5cm of WIP11, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unit11){};
+\node[draw,dashed,rounded corners,fit=(WIP11) (unit11),inner sep=25pt,label={above:{stage (1,1)}}](stage11){};
+
+\draw[-latex] (stage00.east) -- (stage11.west);
+
+\node[right=2.5cm of stage00, minimum width=1cm, minimum height=1.4cm](WIP1){.....};
+
+\node[right=0.3cm of WIP1, minimum width=1cm, minimum height=1.4cm](WIP1a){};
+
+\draw[-latex] (stage00.east) -- (WIP1.west);
+
+\node[below right=2cm and 4cm of WIP00, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIPp1){};
+\node[rectangle, draw, right=0.5cm of WIPp1, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unitp1){};
+\node[draw,dashed,rounded corners,fit=(WIPp1) (unitp1),inner sep=25pt,label={above:{stage (p,1)}}](stagep1){};
+
+\draw[-latex] (stage00.east) -- (stagep1.west);
+
+\node[right=4cm of WIP11, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIP1m){};
+\node[rectangle, draw, right=0.5cm of WIP1m, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unit1m){};
+\node[draw,dashed,rounded corners,fit=(WIP1m) (unit1m),inner sep=25pt,label={above:{stage (1,m$_1$)}}](stage1m){};
+
+\draw[-latex] (stage11.east) -- (stage1m.west);
+
+\node[right=4cm of WIPp1, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIPpm){};
+\node[rectangle, draw, right=0.5cm of WIPpm, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unitpm){};
+\node[draw,dashed,rounded corners,fit=(WIPpm) (unitpm),inner sep=25pt,label={above:{stage (p,m$_p$)}}](stagepm){};
+
+\draw[-latex] (stagep1.east) -- (stagepm.west);
+
+\node[right=3.5cm of WIP1, minimum width=1cm, minimum height=1.4cm](WIPm){.....};
+
+\node[left=0.5cm of WIPm, minimum width=1cm, minimum height=1.4cm](WIPma){};
+
+\draw[-latex] (WIP1a.east) -- (WIPma.west);
+
+\end{tikzpicture}
+\end{center}
+\caption{\textbf{Multi-product serial batching divergent networked plant of a steel industry. Source: adapted from \cite{LiuEtAl2020} * stage $(i, j)$ means stage $j$ of production line $i$.}}
+\end{figure}
 
 In multi-product batch scheduling (MBS) problems it is necessary to determine the ideal batch size for each product and also the production sequence of the batches based on the known demand. Here, the solution must be determined in such a way that both setup and storage costs are minimized \citep{Eilon1985, Omega1993, LiuEtAl2020}. Some cientific works impose additional constraints on the MBS problem - such as release times and due dates for each batch, and sequencing constraints due to mismatched product colors sequences - and focus on other goals - such as optimize customer satisfaction and/or the plant performance \citep{MendezEtAll2000, ShiEtAll2017}. Also, some cientific works consider MBS problems within different layouts as well as dinamic and multiperiod scenarios. In parallel MBS as well as in networked processes, it can also be necessary to define in which units each batch will be processed, and constraints that limit the units that can process each batch can also be imposed. Many cientifc works propose mixed-integer linear programming (MILP) formulations to solve MBS problems. As example, we can mention the work of \cite{MendezEtAll2000} that presents a MILP continuous-time model and a two-step systematic methodology for a single stage multi-product batch scheduling problem with different due-dates. Later, \cite{MendezCerda2003} also proposed another MILP formulation for reactive scheduling. As observerd by \cite{HeHui2008}, with the problem size increasing, the computational effort of MILP increases greatly so it is very difﬁcult for MILP to obtain acceptable solutions to large-size problems within reasonable time. Citing some works that use other approaches, \cite {KimEtAl1996} propose a Gantt chart mapping method and a modified genetic algorithm for solving a networked flowshop multi-product batch scheduling problem as well as a rule-based reactive rescheduling scheme for dinamicaly overcoming in-process deviation from the initial optimized schedule and \cite{HeHui2008} present a rule-based genetic algorithm for the scheduling of single stage multi-product batch plants with parallel units.
 
