@@ -148,8 +148,8 @@ It is important to note that, since the MPBPTM problem need to be solved at each
 
 The rest of the paper is organized as follows. In the next sections, the MPBPTM problem is introduced. Section 2.1 describes an interger mathematical model for the problem and section 3 shows an analytical method for its solution. Section 4 displays the tests and results obtained by a solver in C++ applying the analytical solution and a solver developed in LINGO to new proposed benchmarks. Section 5 presents the paper's conclusions and suggestions for future works. Finally, in sections 6 and 7, the contributions to this work are informed and acknowledgments are given, respectively.
 
-
-\section{MULTI-PRODUCT P-BATCH PROCESSING TIME MAXIMIZATION PROBLEM}
+\section{MATERIALS AND METHODS}
+\subsection{Multi-product p-Batch Processing Time Maximization Problem}
 \label{sec:MBPTMP}
 
 The multi-product p-batch processing time maximization problem arises when a set of different products are processed simultaneously in a same production batch. In this problem, it is considered that the quantity produced of each product is directly proportional to the processing time, however, with a different constant of proportionality (production rate) for each product. In addition, there is a maximum quantity allowed for the production of batch products, defined both individually and for the set. The production quantity of each product is mainly defined according to the demand for the product. However, it is still possible to stock the products and / or send them to the outlets. In both cases, there is a stocking / shipping limit for each product and a stocking / shipping limit for the set of products in the batch. Also, there is a time limit available for processing the batch. About the production, the industry manager has as priority to meet demand and he prefer to send the remaining production to outlets rather then stock it in the factory. 
@@ -240,7 +240,7 @@ T, D_i, O_i, I_i \in  \mathbb{Z}^ + \quad \forall i
 
 where constraints in (2) relate the quantity produced, $P_i$, to batch processing time $T$. Constraints in (3) calculate the quantity produced, $P_i$, as a function of the primary variables, $D_i$, $O_i$ and $I_i$. Constraints in (4), (5), and (7) state that the quantity delivered to demand, the quantity shipped to the outlets, and the factory-stocked quantity of each product must be less than their respective known limits. Constraints (6) and (8) state that both the sum of product quantities sent to the outlets and the sum of product quantities stocked in the factory must be less than their respective maximum allowed values. The restriction in (9) establishes that there is a batch processing time limit, $\textrm{Z}$, that must be respected. Equations in (10) and (11) define the production distribution priority. And finally, the constraints in (12) inform the nature of the decision variables.
 
-\section{ANALYTICAL SOLUTION}
+\subsection{Analytical Solution}
 \label{sec:analyticalSol}
 
 The method proposed in this paper for solution of the MPBPTM problem is composed of two distinct parts, which are: a) calculation of the maximum processing time of the predefined multi-product p-batch; and b) calculation of the part of the production used to meet demand, the part of the production sent to outlets and the part of the production stocked in factory. Next, we explain each of these parts in detail. \\
@@ -390,9 +390,9 @@ This simplification of the method demonstrates that the value calculated to $T$ 
 
 We can determine now the values of $D_i$, $O_i$ and $I_i$, $\forall i$, simply attending the priorities for distribution. The following three algorithms can be used to find a complete solution.
 
-The Algorithm (\ref{alg:part01}) is used for finding an optimimal value for $T$.
+The Algorithm (\ref{alg:part01}) is used for finding an optimimal value for $T$. Then an initial production distribution can be done by the Algorithm (\ref{alg:part02}). This distribution is made without considering the restrictions defined for the set of products. $SO$ and $SI$ represent, respectively, the total amount that can be sent to the outlets and the total amount that can be stocked in factory after the initial distribution. If this values are negative, this indicates that the proposed initial distribution is not a feasible distribution.
 
-\begin{algorithm}
+\begin{algorithm}[h!]
 \caption{Solving MBPTM problem | Part 01 - find an optimal $T$ to the problem defined in (\ref{MBPTMP01}) to (\ref{MBPTMP10}).}\label{alg:part01}
 \begin{algorithmic}
 	\Require $\textrm{UD}_i, \textrm{UO}_i, \textrm{UI}_i, \textrm{p}_i, \forall i, \textrm{O}, \textrm{I}, \textrm{Z}$
@@ -401,8 +401,6 @@ The Algorithm (\ref{alg:part01}) is used for finding an optimimal value for $T$.
 \State \textbf{Return:} $T$.
 \end{algorithmic}
 \end{algorithm}
-
-Then an initial production distribution can be done by the Algorithm (\ref{alg:part02}). This distribution is made without considering the restrictions defined for the set of products. $SO$ and $SI$ represent, respectively, the total amount that can be sent to the outlets and the total amount that can be stocked in factory after the initial distribution. If this values are negative, this indicates that the proposed initial distribution is not a feasible distribution.
 
 \begin{algorithm}
 \caption{Solving MBPTM problem | Part 02 - calculate $D_i$, $O_i$ and $I_i$, $\forall i$, ignoring the restrictions for the set of products of the batch.}\label{alg:part02}
@@ -424,15 +422,15 @@ Then an initial production distribution can be done by the Algorithm (\ref{alg:p
 \end{algorithmic}
 \end{algorithm}
 
-So, after applying Algorithm (\ref{alg:part02}), if $SO \geq 0$ and $SI \geq 0$, solution found is an optimal solution. However, if $SO < 0$ or $SI <0$, solution is not yet feasible. But as the solution found to $T$ is feasible to the problem defined in (\ref{MBPTMP01}) to (\ref{MBPTMP10}), we have the following statements:
+So, after applying Algorithm (\ref{alg:part02}), if $SO \geq 0$ and $SI \geq 0$, solution found is an optimal solution. However, if $SO < 0$ or $SI <0$, solution is not yet feasible. But as the solution found to $T$ is feasible to the problem defined in (\ref{MBPTMP01}) to (\ref{MBPTMP10}), we have the following statements: \\
 
-$if \quad SO < 0 \quad then \quad SI > 0 \quad and  \quad |SO| < SI$
+$if \quad SO < 0 \quad then \quad SI > 0 \quad and  \quad |SO| < SI$ \\
 
-$if \quad SI < 0 \quad then \quad SO > 0 \quad and  \quad |SI| < SO$
+$if \quad SI < 0 \quad then \quad SO > 0 \quad and  \quad |SI| < SO$ \\
 
 Therefore it is possible to meet the restrictions by applying the Agorithm (\ref{alg:part03}). This algorithm redistributes the production of factory's stock to the outlets or vice versa, respectively, due to having a $SI$ or $SO$ negative.
 
-\begin{algorithm}
+\begin{algorithm}[h!]
 \caption{Solving MBPTM problem | Part 03: redistribute production to comply with limitation restrictions for the batch set.}\label{alg:part03}
 \begin{algorithmic}
 \Require $O_i, I_i, \textrm{UO}_i, \textrm{UI}_i, \forall i, SO, SI$.
@@ -461,7 +459,7 @@ Therefore it is possible to meet the restrictions by applying the Agorithm (\ref
 \end{algorithmic}
 \end{algorithm}
 
-\section{TESTS AND RESULTS}
+\section{RESULTS AND DISCUSSION}
 \label{sec:results}
 
 To test the developed model and analytical solution method, we created a solver in C++ named COPSolver: library for solving the multi-product p-batch processing time maximization problem and also a solver in LINGO named MBPTM.lng both available at codeocean and GitHub. A brief explanation of the software and links for downloads can be found in the paper of \cite{Fraga2023}. The tests were performed on a notebook with an Intel i7 processor. We tested the solvers developed for the benchmarks presented on Tables \ref{tab:MBPTMP001}, \ref{tab:MBPTMP002} and \ref{tab:MBPTMP003}, and for randon benchmarks generated by the following functions: \\
