@@ -140,11 +140,14 @@ Cerdá (2003) &$wE/T|RT, DD, SDST$ & a rescheduling algorithm\\
 
 \subsection{Contributions of this Article}
 
-The work presented in this article is part of a project in which we propose the modeling and solution of a multiperiod multi-product batch scheduling problem that arises in a networked plant of a plastic bag industry. The industrial plant of this company is very similar to the multi-product s-batch networked plant of the steel industry presented by \cite{LiuEtAl2020}, however, the production process in this plastic bags industry begins in extruders, which are production units capable of processing different batches simultaneously. Therefore the problem we are interested is a multi-product \emph{p-batch} \emph{s-batch} problem in a networked plant close to the problem addressed by \cite{LiEtAl2022}. Thus, part of the problem solving process consists of solving a multi-product p-batch scheduling problem into extruders. Also, in the problem we study, in addition to demand, we must consider the factory and outlets' storage capacity, which is individually defined for products, but also for the set of products. When we began to propose an algorithm to solve the studied problem through a local search method, we identified the need to determine, at each iteration, a maximum processing time for predefined multi-product p-batches, based on known restrictions, so that the new solution built was a feasible solution and at the same time with the best fitness. Using the notation presented before, this problem can be classified as a multi-product $SS|SU|p\textrm{-}batch|Sz|SP|St|Dt|PT|LCU,$ $PSC, SC, DPR$ problem. For simplification purposes, we named this problem multi-product p-batch processing time maximization (MPBPTM) problem. It is important to note that, since the MPBPTM problem need to be solved at each iteration, it has a direct impact on the overall efficiency of the local search method proposed for solving the multi-product p-batch s-batch problem in the plastic bag networked plant of the industry studied. In a future work, we intend to present the mathematical model and a Particle Collison based solution algorithm we are developing for this last problem. As scientific contributions of this paper, we present a mathematical model and a very efficient polynomial optmization method for solving the MPBPTM problem.
+The work presented in this article is part of a project in which we propose the modeling and solution of a multiperiod multi-product batch scheduling problem that arises in a networked plant of a plastic bag industry. The industrial plant of this company is very similar to the multi-product s-batch networked plant of the steel industry presented by \cite{LiuEtAl2020}, however, the production process in this plastic bags industry begins in extruders, which are production units capable of processing different batches simultaneously. Therefore the problem we are interested is a multi-product \emph{p-batch} \emph{s-batch} problem in a networked plant close to the problem addressed by \cite{LiEtAl2022}. Thus, part of the problem solving process consists of solving a multi-product p-batch scheduling problem into extruders. Also, in the problem we study, in addition to demand, we must consider the factory and outlets' storage capacity, which is individually defined for products, but also for the set of products. When we began to propose an algorithm to solve the studied problem through a local search method, we identified the need to determine, at each iteration, a maximum processing time for predefined multi-product p-batches, based on known restrictions, so that the new solution built was a feasible solution and at the same time with the best fitness. Using the notation presented before, this problem can be classified as a multi-product $SS|SU|p\textrm{-}batch|Sz|SP|St|Dt|PT|LCU,$ $PSC, SC, DPR$ problem. For simplification purposes, we named this problem multi-product p-batch processing time maximization (MPpBPTM) problem. It is important to note that, since the MPBPTM problem need to be solved at each iteration, it has a direct impact on the overall efficiency of the local search method proposed for solving the multi-product p-batch s-batch problem in the plastic bag networked plant of the industry studied. In a future work, we intend to present the mathematical model and a Particle Collison based solution algorithm we are developing for this last problem. As scientific contributions of this paper, we present a mathematical model and a very efficient polynomial optmization method for solving the MPpBPTM problem.
 
-The rest of the paper is organized as follows. In the next sections, the MPBPTM problem is introduced. Section 2.1 describes an interger mathematical model for the problem and section 3 shows an analytical method for its solution. Section 4 displays the tests and results obtained by a solver in C++ applying the analytical solution and a solver developed in LINGO to new proposed benchmarks. Section 5 presents the paper's conclusions and suggestions for future works. Finally, in sections 6 and 7, the contributions to this work are informed and acknowledgments are given, respectively.
+The rest of the paper is organized as follows. In the next sections, the MPpBPTM problem is introduced. Section 2.1 describes an interger mathematical model for the problem and section 3 shows an analytical method for its solution. Section 4 displays the tests and results obtained by a solver in C++ applying the analytical solution and a solver developed in LINGO to new proposed benchmarks. Section 5 presents the paper's conclusions and suggestions for future works. Finally, in sections 6 and 7, the contributions to this work are informed and acknowledgments are given, respectively.
 
 \section{MATERIALS AND METHODS}
+
+The method applied in this work consists of identifying new optimization problems, and mathematically modeling as well as proposing a new solution methodology for the identified problems. The material used basically consists of information collected, such as information about the production process studied and information collected in scientific material, as cited in this article. The following sections present the new interger programming problem identified (MPpBPTM) and an exact analytical method developed for solving it.
+
 \subsection{Multi-product p-Batch Processing Time Maximization Problem}
 \label{sec:MBPTMP}
 
@@ -454,7 +457,7 @@ Therefore it is possible to meet the restrictions by applying the Agorithm (\ref
 \section{RESULTS AND DISCUSSION}
 \label{sec:results}
 
-To test the developed model and analytical solution method, we created a solver in C++ named COPSolver: library for solving the multi-product p-batch processing time maximization problem and also a solver in LINGO named MBPTM.lng both available at codeocean and GitHub. A brief explanation of the software and links for downloads can be found in the paper of \cite{Fraga2023}. The tests were performed on a notebook with an Intel i7 processor. We tested the solvers developed for the benchmarks presented on Tab. \ref{tab:MBPTMP001}, \ref{tab:MBPTMP002} and \ref{tab:MBPTMP003}, and for randon benchmarks generated by the following functions: \\
+To test the developed model and analytical solution method, we created a solver in LINGO named MBPTM.lng and also a solver in C++ named COPSolver: library for solving the multi-product p-batch processing time maximization problem, both available at codeocean and GitHub. A brief explanation of the software and links for downloads can be found in the paper of \cite{Fraga2023}. The tests were performed on a notebook with an Intel i7 processor. We tested the solvers developed for the benchmarks presented on Tab. \ref{tab:MBPTMP001}, \ref{tab:MBPTMP002} and \ref{tab:MBPTMP003}, and for randon benchmarks generated by the following functions: \\
 
 \begin{equation}
 \textrm{p}_i = \textrm{rand}()\%30 + 10
@@ -494,7 +497,7 @@ To test the developed model and analytical solution method, we created a solver 
 
 \begin{table}[ht]
 \begin{center}
-\caption{\textbf{Benchmark MPBPTM 2.}}
+\caption{\textbf{Benchmark MPpBPTM 2.}}
 \begin{tabular}[c]{c r r r}
 \\
 $i$ & 1 & 2 & total \\
@@ -512,7 +515,7 @@ $\textrm{UI}_i$ & 3000 & 2000 & 3000 \\
 
 \begin{table}[ht]
 \begin{center}
-\caption{\textbf{Benchmark MPBPTM 3.}}
+\caption{\textbf{Benchmark MPpBPTM 3.}}
 \begin{tabular}[c]{c r r r r}
 \\
 $i$ & 1 & 2 & 3 & total \\
@@ -530,7 +533,7 @@ $\textrm{UI}_i$ & 3000 & 2000 & 1000 & 3500 \\
 
 \begin{table}[ht]
 \begin{center}
-\caption{\textbf{Benchmark MPBPTM 10.}}
+\caption{\textbf{Benchmark MPpBPTM 10.}}
 \begin{small}
 \begin{tabular}[c]{c r r r r r r r r r r r }
 \\
@@ -548,9 +551,9 @@ $\textrm{UI}_i$ & 3000 & 2000 & 1000 & 800 & 3000 & 1000 & 400 & 300 & 200 & 0 &
 \end{center}
 \end{table}
 
-Randomly generated benchmarks were named RMPBPTM $\textrm{N}$, being $\textrm{N}$ the number of products. Seeking to enable the reproduction of the results, in the computational construction of the benchmarks we used the function srand((unsigned) source), where source is a defined value. To build the results presented in this work, we used source=0. The benchmarks used for the tests performed can be consulted at github.com/tbfraga/COPSolver.
+Randomly generated benchmarks were named RMPpBPTM $\textrm{N}$, being $\textrm{N}$ the number of products. Seeking to enable the reproduction of the results, in the computational construction of the benchmarks we used the function srand((unsigned) source), where source is a defined value. To build the results presented in this work, we used source=0. Files containing benchmarks used for the tests performed and all results can be found at tbfraga.github.io/COPSolver/benchmarks.
 
-Table \ref{tab:results} presents the results obtained by applying the analytical method (COPSolver) and the LINGO solver for the solution of the previously presented benchmarks. Tables (\ref{tab:compResultsMBPTMP2}) and (\ref{tab:compResultsMBPTMP3}) shows the production distribution for MBPTM 3 and 10 found by both COPSolver and LINGO solver. Files containing all results can be found at github.com/tbfraga/COPSolver. It is important to point out that the LINGO solver was developed with the purpose of validating the results found by the proposed analytical method. It is possible to verify that both solvers are capable of finding optimal solutions for the proposed benchmarks very quickly, even for very large-scale problems. However, as the analytical method is a polynomial time complexity method, it is much more efficient. In addition, the modular structure of the library developed for COPSolver allows the easy application of the proposed solution method when developing new heuristics for solving MPpBS problems, making this tool a significant technological contribution to the production management of some industries as well as for researchers in the area. Since we have considered here a static problem, in a future work we will study the complexities of solving the problem dynamically and try to propose new solution methods if needed. 
+Table \ref{tab:results} presents the results obtained by applying the analytical method (COPSolver) and the LINGO solver for the solution of the previously presented benchmarks. Tables (\ref{tab:compResultsMBPTMP2}) and (\ref{tab:compResultsMBPTMP3}) shows the production distribution for MPpBPTM 3 and 10 found by both COPSolver and LINGO solver. It is important to point out that the LINGO solver was developed with the purpose of validating the results found by the proposed analytical method. It is possible to verify that both solvers are capable of finding optimal solutions for the proposed benchmarks very quickly, even for very large-scale problems. However, as the analytical method is a polynomial time complexity method, it is much more efficient. In addition, the modular structure of the library developed for COPSolver allows the easy application of the proposed solution method when developing new heuristics for solving MPpBS problems, making this tool a significant technological contribution to the production management of some industries as well as for researchers in the area. Since we have considered here a static problem, in a future work we will study the complexities of solving the problem dynamically and try to propose new solution methods if needed. 
 
 \begin{table}[ht]
 \begin{center}
@@ -560,16 +563,16 @@ Table \ref{tab:results} presents the results obtained by applying the analytical
 \\
 problem & LINGO solver & time (s) & analytical method & time (s) \\
 \cline {1-5} \\
-MPBPTM 2 & 55 & 0.03 & 55 & $<$ 0.01 \\
-MPBPTM 3 & 48 & 0.03 & 48 & $<$ 0.01 \\
-MPBPTM 10 & 30 & 0.05 & 30 & $<$ 0.01 \\
-RMPBPTM 20 & 100 & 0.06 & 100 & $<$ 0.01 \\
-RMPBPTM 50 & 98 & 0.08 & 98 & $<$ 0.01 \\
-RMPBPTM 100 & 98 & 0.11 & 98 & $<$ 0.01 \\
-RMPBPTM 1,000 & 78 & 1.20 & 78 & $<$ 0.01 \\
-RMPBPTM 2,000 & 70 & 3.25 & 70 & $<$ 0.01 \\
-RMPBPTM 5,000 & 70 & 15.12 & 70 & $<$ 0.02 \\
-RMPBPTM 10,000 & 70 & 55.19 & 70 & $<$ 0.04 \\
+MPpBPTM 2 & 55 & 0.03 & 55 & $<$ 0.01 \\
+MPpBPTM 3 & 48 & 0.03 & 48 & $<$ 0.01 \\
+MPpBPTM 10 & 30 & 0.05 & 30 & $<$ 0.01 \\
+RMPpBPTM 20 & 100 & 0.06 & 100 & $<$ 0.01 \\
+RMPpBPTM 50 & 98 & 0.08 & 98 & $<$ 0.01 \\
+RMPpBPTM 100 & 98 & 0.11 & 98 & $<$ 0.01 \\
+RMPpBPTM 1,000 & 78 & 1.20 & 78 & $<$ 0.01 \\
+RMPpBPTM 2,000 & 70 & 3.25 & 70 & $<$ 0.01 \\
+RMPpBPTM 5,000 & 70 & 15.12 & 70 & $<$ 0.02 \\
+RMPpBPTM 10,000 & 70 & 55.19 & 70 & $<$ 0.04 \\
 \cline {1-5} \\
 \end{tabular}
 \label{tab:results}
@@ -579,11 +582,11 @@ RMPBPTM 10,000 & 70 & 55.19 & 70 & $<$ 0.04 \\
 
 \begin{table}[ht]
 \begin{center}
-\caption{\textbf{Results obtained with the LINGO solver and COPSolver for the MPBPTM 3.}}
+\caption{\textbf{Results obtained with the LINGO solver and COPSolver for the MPpBPTM 3.}}
 \begin{footnotesize}
 \begin{tabular}[c]{l r r r r}
 \\
-product & production & delivered (s) & send to outlets & stocked in factory \\
+product & production & delivered & send to outlets & stocked in factory \\
 \cline {1-5} \\
 P1 & 2,880 & 1,000 & 300 & 1,580 \\
 P2 & 1,920 & 500 & 600 & 820 \\
@@ -597,11 +600,11 @@ P3 & 2,400 & 800 & 600 & 1,000 \\
 
 \begin{table}[h!]
 \begin{center}
-\caption{\textbf{Results obtained with the LINGO solver and COPSolver for the MPBPTM 10.}}
+\caption{\textbf{Results obtained with the LINGO solver and COPSolver for the MPpBPTM 10.}}
 \begin{footnotesize}
 \begin{tabular}[c]{l r r r r}
 \\
-product & production & delivered (s) & send to outlets & stocked in factory \\
+product & production & delivered & send to outlets & stocked in factory \\
 \cline {1-5} \\
 P1 & 1,800 & 1,000 & 400 & 400 \\
 P2 & 1,200 & 500 & 600 & 100 \\
@@ -623,7 +626,7 @@ P10 & 1,200 & 1000 & 200 & 0 \\
 \section{CONCLUSIONS AND SUGGESTIONS FOR FUTURE WORKS}
 \label{sec:conclusions}
 
-In this paper we presented the multi-product p-batch processing time maximization problem, as well as a mathematical model and an exact analytical solution method for this problem. The mathematical model and analytical method were tested, respectively, by a solver developed with the LINGO software, from LINDO Systems, and with a solver developed in C++ language. Optimum results were found for all proposed benchmarks, very quickly, even in the case of very large problems, which demonstrates the efficiency of the proposed method. As in this paper we considered a static problem, in a future work we will study the complexities that arise when considering the same problem in a dinamic scenario. We will also verify if there is the possibility of extending the proposed analytical method to solve a class of integer programming problems with similar characteristics to the studied problem.
+In this paper we presented the multi-product p-batch processing time maximization problem, as well as a mathematical model and an exact analytical solution method for this problem. The mathematical model and analytical method were tested, respectively, by a solver developed with the LINGO software, from LINDO Systems, and with a solver developed in C++ language. Optimum results were found for all proposed benchmarks, very quickly, even in the case of very large-scale problems, which demonstrates the efficiency of the proposed method. As in this paper we considered a static problem, in a future work we will study the complexities that arise when considering the same problem in a dinamic scenario. We will also verify if there is the possibility of extending the proposed analytical method to solve a class of integer programming problems with similar characteristics to the studied problem.
 
 \section{CREDIT AUTHORSHIP CONTRIBUTION STATEMENT} 
 \label{sec:contributions}
