@@ -151,7 +151,7 @@ The method applied in this work consists of identifying new optimization problem
 \subsection{Multi-product p-Batch Processing Time Maximization Problem}
 \label{sec:MBPTMP}
 
-The multi-product p-batch processing time maximization problem arises when a set of different products are processed simultaneously in a same production batch. In this problem, it is considered that the quantity produced of each product is directly proportional to the processing time, however, with a different constant of proportionality (production rate) for each product. In addition, there is a maximum quantity allowed for the production of batch products, defined both individually and for the set. The production quantity of each product is mainly defined according to the demand for the product. However, it is still possible to stock the products and / or send them to the outlets. In both cases, there is a stocking / shipping limit for each product and a stocking / shipping limit for the set of products in the batch. Also, there is a time limit available for processing the batch. About the production, the industry manager has as priority to meet demand and he prefer to send the remaining production to outlets rather then stock it in the factory. 
+The MPpBPTM problem arises when a set of different products are processed simultaneously in a same production batch. In this problem, it is considered that the quantity produced of each product is directly proportional to the processing time, however, with a different constant of proportionality (production rate) for each product. In addition, there is a maximum quantity allowed for the production of batch products, defined both individually and for the set. The production quantity of each product is mainly defined according to the demand for the product. However, it is still possible to stock the products and / or send them to the outlets. In both cases, there is a stocking / shipping limit for each product and a stocking / shipping limit for the set of products in the batch. Also, there is a time limit available for processing the batch. About the production, the industry manager has as priority to meet demand and he prefer to send the remaining production to outlets rather then stock it in the factory. The problem is to identify the maximum feasible time for the multi-product p-batch processing. 
 
 \subsection{Mathematical Model}
 \label{sec:mathModel}
@@ -242,7 +242,7 @@ where constraints in Eq. (2) relate the quantity produced, $P_i$, to batch proce
 \subsection{Analytical Solution}
 \label{sec:analyticalSol}
 
-The method proposed in this paper for solution of the MPBPTM problem is composed of two distinct parts, which are: a) calculation of the maximum processing time of the predefined multi-product p-batch; and b) calculation of the part of the production used to meet demand, the part of the production sent to outlets and the part of the production stocked in factory. Next, we explain each of these parts in detail. \\
+The method proposed in this paper for solution of the MPpBPTM problem is composed of two distinct parts, which are: a) calculation of the maximum processing time of the predefined multi-product p-batch; and b) calculation of the part of the production used to meet demand, the part of the production sent to outlets and the part of the production stocked in factory. Next, we explain each of these parts in detail. \\
 
 \noindent \emph{Calculation of maximum p-batch processing time:} \\
 
@@ -394,7 +394,7 @@ $if \quad SO < 0 \quad then \quad SI > 0 \quad and  \quad |SO| < SI$ \\
 $if \quad SI < 0 \quad then \quad SO > 0 \quad and  \quad |SI| < SO$ \\
 
 \begin{algorithm}[h!]
-\caption{Solving MBPTM problem | Part 01 - find an optimal $T$ to the problem defined in (\ref{MBPTMP01}) to (\ref{MBPTMP10}).}\label{alg:part01}
+\caption{Solving MPpBPTM problem | Part 01 - find an optimal $T$ to the problem defined in (\ref{MBPTMP01}) to (\ref{MBPTMP10}).}\label{alg:part01}
 \begin{algorithmic}
 	\Require $\textrm{UD}_i, \textrm{UO}_i, \textrm{UI}_i, \textrm{p}_i, \forall i, \textrm{O}, \textrm{I}, \textrm{Z}$
 	\State $T^* \gets \lfloor{\min \{\min_{i} \{(\textrm{UO}_i + \textrm{UI}_i + \textrm{UD}_i) / \textrm{p}_i\},(\textrm{O} + \textrm{I} + \sum_i \textrm{UD}_i) / \sum_i {\textrm{p}_i}\}}\rfloor$
@@ -404,7 +404,7 @@ $if \quad SI < 0 \quad then \quad SO > 0 \quad and  \quad |SI| < SO$ \\
 \end{algorithm}
 
 \begin{algorithm}
-\caption{Solving MBPTM problem | Part 02 - calculate $D_i$, $O_i$ and $I_i$, $\forall i$, ignoring the restrictions for the set of products of the batch.}\label{alg:part02}
+\caption{Solving MPpBPTM problem | Part 02 - calculate $D_i$, $O_i$ and $I_i$, $\forall i$, ignoring the restrictions for the set of products of the batch.}\label{alg:part02}
 \begin{algorithmic}
 	\Require $\textrm{UD}_i, \textrm{UO}_i, \textrm{UI}_i, \textrm{p}_i, \forall i, \textrm{O}, \textrm{I}, \textrm{Z}, T$.
 	\For{all i}
@@ -426,7 +426,7 @@ $if \quad SI < 0 \quad then \quad SO > 0 \quad and  \quad |SI| < SO$ \\
 Therefore it is possible to meet the restrictions by applying the Agorithm (\ref{alg:part03}). This algorithm redistributes the production of factory's stock to the outlets or vice versa, respectively, due to having a $SI$ or $SO$ negative.
 
 \begin{algorithm}[h!]
-\caption{Solving MBPTM problem | Part 03: redistribute production to comply with limitation restrictions for the batch set.}\label{alg:part03}
+\caption{Solving MPpBPTM problem | Part 03: redistribute production to comply with limitation restrictions for the batch set.}\label{alg:part03}
 \begin{algorithmic}
 \Require $O_i, I_i, \textrm{UO}_i, \textrm{UI}_i, \forall i, SO, SI$.
 \If{$SO < 0$}
@@ -457,7 +457,7 @@ Therefore it is possible to meet the restrictions by applying the Agorithm (\ref
 \section{RESULTS AND DISCUSSION}
 \label{sec:results}
 
-To test the developed model and analytical solution method, we created a solver in LINGO named MBPTM.lng and also a solver in C++ named COPSolver: library for solving the multi-product p-batch processing time maximization problem, both available at codeocean and GitHub. A brief explanation of the software and links for downloads can be found in the paper of \cite{Fraga2023}. The tests were performed on a notebook with an Intel i7 processor. We tested the solvers developed for the benchmarks presented on Tab. \ref{tab:MBPTMP001}, \ref{tab:MBPTMP002} and \ref{tab:MBPTMP003}, and for randon benchmarks generated by the following functions: \\
+To test the developed model and analytical solution method, we created a solver in LINGO named MPpBPTM.lng and also a solver in C++ named COPSolver: library for solving the multi-product p-batch processing time maximization problem, both available at codeocean and GitHub. A brief explanation of the software and links for downloads can be found in the paper of \cite{Fraga2023}. The tests were performed on a notebook with an Intel i7 processor. We tested the solvers developed for the benchmarks presented on Tab. \ref{tab:MBPTMP001}, \ref{tab:MBPTMP002} and \ref{tab:MBPTMP003}, and for randon benchmarks generated by the following functions:
 
 \begin{equation}
 \textrm{p}_i = \textrm{rand}()\%30 + 10
@@ -495,7 +495,9 @@ To test the developed model and analytical solution method, we created a solver 
 \textrm{Z} = 100;
 \end{equation}
 
-\begin{table}[ht]
+Randomly generated benchmarks were named RMPpBPTM $\textrm{N}$, being $\textrm{N}$ the number of products. Seeking to enable the reproduction of the results, in the computational construction of the benchmarks we used the function srand((unsigned) source), where source is a defined value. To build the results presented in this work, we used source=0. Files containing benchmarks used for the tests performed and all results can be found at tbfraga.github.io/COPSolver/benchmarks.
+
+\begin{table}[h!]
 \begin{center}
 \caption{\textbf{Benchmark MPpBPTM 2.}}
 \begin{tabular}[c]{c r r r}
@@ -513,7 +515,7 @@ $\textrm{UI}_i$ & 3000 & 2000 & 3000 \\
 \end{center}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[h!]
 \begin{center}
 \caption{\textbf{Benchmark MPpBPTM 3.}}
 \begin{tabular}[c]{c r r r r}
@@ -531,7 +533,7 @@ $\textrm{UI}_i$ & 3000 & 2000 & 1000 & 3500 \\
 \end{center}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[h!]
 \begin{center}
 \caption{\textbf{Benchmark MPpBPTM 10.}}
 \begin{small}
@@ -551,11 +553,9 @@ $\textrm{UI}_i$ & 3000 & 2000 & 1000 & 800 & 3000 & 1000 & 400 & 300 & 200 & 0 &
 \end{center}
 \end{table}
 
-Randomly generated benchmarks were named RMPpBPTM $\textrm{N}$, being $\textrm{N}$ the number of products. Seeking to enable the reproduction of the results, in the computational construction of the benchmarks we used the function srand((unsigned) source), where source is a defined value. To build the results presented in this work, we used source=0. Files containing benchmarks used for the tests performed and all results can be found at tbfraga.github.io/COPSolver/benchmarks.
-
 Table \ref{tab:results} presents the results obtained by applying the analytical method (COPSolver) and the LINGO solver for the solution of the previously presented benchmarks. Tables (\ref{tab:compResultsMBPTMP2}) and (\ref{tab:compResultsMBPTMP3}) shows the production distribution for MPpBPTM 3 and 10 found by both COPSolver and LINGO solver. It is important to point out that the LINGO solver was developed with the purpose of validating the results found by the proposed analytical method. It is possible to verify that both solvers are capable of finding optimal solutions for the proposed benchmarks very quickly, even for very large-scale problems. However, as the analytical method is a polynomial time complexity method, it is much more efficient. In addition, the modular structure of the library developed for COPSolver allows the easy application of the proposed solution method when developing new heuristics for solving MPpBS problems, making this tool a significant technological contribution to the production management of some industries as well as for researchers in the area. Since we have considered here a static problem, in a future work we will study the complexities of solving the problem dynamically and try to propose new solution methods if needed. 
 
-\begin{table}[ht]
+\begin{table}[h!]
 \begin{center}
 \caption{\textbf{Results obtained with the LINGO solver and the analytical method.}}
 \begin{footnotesize}
@@ -580,7 +580,7 @@ RMPpBPTM 10,000 & 70 & 55.19 & 70 & $<$ 0.04 \\
 \end{center}
 \end{table}
 
-\begin{table}[ht]
+\begin{table}[h!]
 \begin{center}
 \caption{\textbf{Results obtained with the LINGO solver and COPSolver for the MPpBPTM 3.}}
 \begin{footnotesize}
