@@ -1,0 +1,89 @@
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+
+\documentclass[
+  fontsize=11pt,
+  paper=a4,
+  parskip=half,
+  enlargefirstpage=on,    % More space on first page
+  fromalign=right,        % PLacement of name in letter head
+  fromphone=off,          % Turn on phone number of sender
+  fromrule=aftername,     % Rule after sender name in letter head
+  addrfield=on,           % Adress field for envelope with window
+  backaddress=on,         % Sender address in this window
+  subject=beforeopening,  % Placement of subject
+  locfield=narrow,        % Additional field for sender
+  foldmarks=on,           % Print foldmarks
+]{scrlttr2}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{blindtext}
+
+\setkomafont{fromname}{\sffamily \LARGE}
+\setkomafont{fromaddress}{\sffamily}%% statt \small
+\setkomafont{pagenumber}{\sffamily}
+\setkomafont{subject}{\bfseries}
+\setkomafont{backaddress}{\mdseries}
+
+\LoadLetterOption{DIN}
+\setkomavar{fromname}{Tatiana Balbi Fraga}
+\setkomavar{fromaddress}{Avenida Marielle Franco, Bairro Nova Caruaru, Caruaru, PE, Brazil}
+\setkomavar{fromphone}{+55 (81)  9\,8947\,9100}
+\setkomavar{fromemail}{tatiana.balbi@ufpe.br}
+\setkomavar{backaddressseparator}{\enspace\textperiodcentered\enspace}
+\setkomavar{signature}{Tatiana Balbi Fraga \\ 
+Founding leader of the Systems Analysis, Modeling and Optimization Group \\
+and Professor of the Production Engineering Course \\
+at the Academic Center of Agreste - Federal University of Pernambuco}
+\setkomavar{place}{Caruaru}
+\setkomavar{date}{\today}
+\setkomavar{enclseparator}{: }
+
+\begin{document}
+
+\begin{letter}{Computers \& Industrial Engineering}
+    \setkomavar{subject}{Cover letter}
+    \opening{Dear editor,}
+
+	Along with this letter, I am sending a paper in which I present the Multi-product Batch Processing Time Maximization (MBPTM) problem, as well as a mathematical model and an analytical solution method with polynomial time complexity.
+	
+MBPTM is a combinatorial optimization problem. The complexity of MBPTM is mainly attributed to the fact that there is a production limit for the set of products and not just for each product. This restriction causes the problem to be defined as a non-polynomial problem.
+
+The problem was identified by me during the development of a solver for production planning in extruders. As I am applying a local search heuristic, at each iteration I need to generate a new solution, and therefore I need to solve the MBPTM problem.
+
+However, MBPTM is also a practical problem and its solution directly influences the efficiency of inventory control in some industries, as is the case of industries in the plastic bag sector.
+
+As is widely known, there are few combinatorial optimization problems that can be solved using exact methods. In this paper we present an exact optimization method for solving the MBPTM problem, based on the idea of partitioning the problem into two smaller problems.
+
+I had a vague idea about the proposed method while I was presenting the problem to my co-workers, and I managed to develop the method the same day before going to sleep, as I was really engaged about the idea of the method and about the impact that this method would generate for the performance of the solver I'm developing for production planning in extruders.
+
+According to the bibliographic research carried out by the authors, the problem and exact method proposed in this paper has not yet been presented in the scientific literature.
+
+Also, the language used in the paper is simple, so that many researchers can easily understand the work.
+
+I am then waiting for your final decision with great expectation of approval of the work for publication in this journal.	
+    \closing{Sincerely,}
+  \end{letter}
+\end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-harv.tex'.

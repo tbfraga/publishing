@@ -1,0 +1,884 @@
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+
+\documentclass[authoryear,manuscript,12pt]{elsarticle}
+\usepackage{setspace}
+\doublespacing
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{rotating}
+\usepackage{multirow}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\usepackage{enumitem}
+
+\usepackage{array, makecell}
+
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,shapes.misc,shapes.symbols,arrows.meta,graphs,fit,positioning,shadows}
+
+
+
+%% The `ecrc' package must be called to make the CRC functionality available
+%\usepackage{ecrc}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+\journal{XXX}
+
+\begin{document}
+
+\begin{frontmatter}
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \affiliation for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \affiliation{organization={},
+%%            addressline={}, 
+%%            city={},
+%%            postcode={}, 
+%%            state={},
+%%            country={}}
+%% \fntext[label3]{}
+
+\title{Um novo modelo de avaliação para o curso de Engenharia de Produção}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \affiliation[label1]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%
+%% \affiliation[label2]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+
+%\author{Tatiana Balbi Fraga, Ítalo Ruan Barbosa de Aquino and Regilda da Costa e Silva Menêzes}
+
+%\author{Tatiana Balbi Fraga\corref{cor1}\fnref{label1}}
+%\ead{tatiana.balbi@ufpe.br}
+%\cortext[cor1]{corresponding author}
+
+%\author{Ítalo Ruan Barbosa de Aquino\fnref{label1}}
+%\ead{italo_ruan_@hotmail.com}
+
+%\author{Regilda da Costa e Silva Menêzes\fnref{label1}}
+%\ead{regilda.smenezes@ufpe.br}
+
+%\affiliation[label1]{
+%			 organization={Centro Acadêmico do Agreste - Universidade Federal de Pernambuco},
+%             addressline={Avenida Marielle Franco, Bairro Nova Caruaru},
+%             city={Caruaru},
+%             postcode={55014-900},
+%             state={PE},
+%             country={Brasil} }
+
+%\affiliation[label1]{
+%		   organization={Agreste Academic Center - Federal University of Pernambuco},%Department and Organization
+%           addressline={Avenida Marielle Franco, Nova Caruaru}, 
+%           city={Caruaru},
+%           postcode={55014-900}, 
+%           state={PE},
+%           country={Brazil}}
+
+\begin{abstract} 
+Este artigo apresenta um modelo de avaliação semestral baseado no processo seletivo de empresas multinacionais a na abordagem metodologica Aprendizado Baseado na Prática. 
+\end{abstract}
+%%Graphical abstract
+%\begin{graphicalabstract}
+%\end{graphicalabstract}
+
+%%Research highlights
+\begin{highlights}
+\item xxx
+\end{highlights}
+
+\begin{keyword}
+multi-product batch problem\sep p-batch problem \sep processing time maximization \sep integer programming model \sep analytical solution \sep LINGO
+\end{keyword}
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+\section{Introduction}
+\label{sec:intro}
+
+The term multi-product batch production is usually applied to designate an intermittent production system in which batches of different products and sizes are processed one at a time, sharing the same production facilities. A multi-product batch plant basically consists of one or more production units, grouped into one or more stages, and possibly, intermediate storage locations. At each stage some distinct operations are performed and the batches are processed sequentially over the stages (serial batching). As stated by \cite{PetkovMaranas1998} the batch plant can operate under a single-product campaign (SPC) production mode, where all the batches of a given product are manufactured before production of the next product begins, or under mixed-product campaign (MPC) production modes where more batches are produced per unit time at the expense of increased changeover times and cleanup costs. Also the plant layout can take on different formats, such as: single unit, where all operations needed to process the batches are performed by a single processor; serial flowshop plant, in which all products follow the same linear flow through the production stages; parallel plants in which production units of the same type are arranged in parallel, forming each production stage \citep{ShiEtAll2017}; and convergent and/or divergent networked processes, in which units are not arranged in lines, and the connection between the units may or may not exist so that the production paths in the flowshop network can be different for each product and the passing of previous batch can be possible so that the final sequence of the production at the last stage units can be different from the initial sequence \citep{KimEtAl1996}.
+
+The scientific literature address many different problems related to such industrial enviroment, including the design, planning, sizing, scheduling and balancing problems. The multi-product batch plant design problem is concerned to obtain the configuration of the plant and the equipment that minimize the capital cost of all the equipment items needed to fulfill the production requirements (Ravemark and Rippin, 1998). The configuration of the plant basically consists of defining the number of stages, the number of units and their capacity per stage, and the capacity for intermediate storages, as well as the best factory layout. The multi-product batch planning problem is basically determining the quantities to be produced, the number of batches and their sizes, the needs of materials and the total sales during each time period \citep{FumeroEtAl2016}.
+
+Since a single batch is processed at a time, it is necessary that the batches are dimensioned in such a way that the quantity produced of each product is sufficient to meet the demand during the period in which other batches are being processed \citep{Eilon1985}. This problem is named multi-product batch sizing. \cite{Eilon1985} gives a detailed explanation of the inadequacy of the use of the well-know EBQ (economic batch quantity) square-root formula for multi-product batch production, and \cite{LiuEtAl2020} present a mixed-integer quadratic programming model and an exact optimization algorithm for a multi-stage multi-product serial batching sizing problem in a divergent networked plant of a steel industry (Fig. \ref{fig:networkdPlantSteelIndustry}). 
+
+\begin{figure}[h]
+\label{fig:networkdPlantSteelIndustry}
+\begin{center}
+\begin{tikzpicture}[font=\sffamily,every label/.append style={font=\small\sffamily,align=center}]
+
+\node[cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIP00){};
+\node[rectangle, draw, right=0.5cm of WIP00, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unit00){};
+\node[draw,dashed,rounded corners,fit=(WIP00) (unit00),inner sep=25pt,label={above:{stage (0,0)}}](stage00){};
+
+\node[above right=2cm and 4cm of WIP00, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIP11){};
+\node[rectangle, draw, right=0.5cm of WIP11, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unit11){};
+\node[draw,dashed,rounded corners,fit=(WIP11) (unit11),inner sep=25pt,label={above:{stage (1,1)}}](stage11){};
+
+\draw[-latex] (stage00.east) -- (stage11.west);
+
+\node[right=2.5cm of stage00, minimum width=1cm, minimum height=1.4cm](WIP1){.....};
+
+\node[right=0.3cm of WIP1, minimum width=1cm, minimum height=1.4cm](WIP1a){};
+
+\draw[-latex] (stage00.east) -- (WIP1.west);
+
+\node[below right=2cm and 4cm of WIP00, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIPp1){};
+\node[rectangle, draw, right=0.5cm of WIPp1, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unitp1){};
+\node[draw,dashed,rounded corners,fit=(WIPp1) (unitp1),inner sep=25pt,label={above:{stage (p,1)}}](stagep1){};
+
+\draw[-latex] (stage00.east) -- (stagep1.west);
+
+\node[right=4cm of WIP11, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIP1m){};
+\node[rectangle, draw, right=0.5cm of WIP1m, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unit1m){};
+\node[draw,dashed,rounded corners,fit=(WIP1m) (unit1m),inner sep=25pt,label={above:{stage (1,m$_1$)}}](stage1m){};
+
+\draw[-latex] (stage11.east) -- (stage1m.west);
+
+\node[right=4cm of WIPp1, cylinder, cylinder uses custom fill, minimum width=0.8cm, minimum height=1.4cm, shape border rotate=90, aspect=0.5, draw, label={below:{work-in-progress}}](WIPpm){};
+\node[rectangle, draw, right=0.5cm of WIPpm, minimum width=1cm, minimum height=1cm, label={above:{unit}}](unitpm){};
+\node[draw,dashed,rounded corners,fit=(WIPpm) (unitpm),inner sep=25pt,label={above:{stage (p,m$_p$)}}](stagepm){};
+
+\draw[-latex] (stagep1.east) -- (stagepm.west);
+
+\node[right=3.5cm of WIP1, minimum width=1cm, minimum height=1.4cm](WIPm){.....};
+
+\node[left=0.5cm of WIPm, minimum width=1cm, minimum height=1.4cm](WIPma){};
+
+\draw[-latex] (WIP1a.east) -- (WIPma.west);
+
+\end{tikzpicture}
+\end{center}
+\caption{Multi-product serial batching divergent networked plant of a steel industry. Source: adapted from \cite{LiuEtAl2020} * stage $(i, j)$ means stage $j$ of production line $i$.}
+\end{figure}
+
+In multi-product batch scheduling (MBS) problems it is necessary to determine the ideal batch size for each product and also the production sequence of the batches based on the known demand. Here, the solution must be determined in such a way that both setup and storage costs are minimized \citep{Eilon1985, Omega1993, LiuEtAl2020}. Some cientific works impose additional constraints on the MBS problem - such as release times and due dates for each batch, and sequencing constraints due to mismatched product colors sequences - and focus on other goals - such as optimize customer satisfaction and/or the plant performance \citep{MendezEtAll2000, ShiEtAll2017}. Also, some cientific works consider MBS problems within different layouts as well as dinamic and multiperiod scenarios. In parallel MBS as well as in networked processes, it can also be necessary to define in which units each batch will be processed, and constraints that limit the units that can process each batch can also be imposed. Many cientifc works propose mixed-integer linear programming (MILP) formulations to solve MBS problems. As example, we can mention the work of \cite{MendezEtAll2000} that presents a MILP continuous-time model and a two-step systematic methodology for a single stage multi-product batch scheduling problem with different due-dates. Later, \cite{MendezCerda2003} also proposed another MILP formulation for reactive scheduling. As observerd by \cite{HeHui2008}, with the problem size increasing, the computational effort of MILP increases greatly so it is very difﬁcult for MILP to obtain acceptable solutions to large-size problems within reasonable time. Citing some works that use other approaches, \cite {KimEtAl1996} propose a Gantt chart mapping method and a modified genetic algorithm for solving a networked flowshop multi-product batch scheduling problem as well as a rule-based reactive rescheduling scheme for dinamicaly overcoming in-process deviation from the initial optimized schedule and \cite{HeHui2008} present a rule-based genetic algorithm for the scheduling of single stage multi-product batch plants with parallel units.
+
+It is importante to note that some production units are capable of processing multiple jobs at the same time. In such a case batches of different products and sizes can be grouped and processed by these units as a single batch. It is therefore necessary to determine the set of "batches" that each new compounded batch will contain. The multi-product balancing problem consists of determining these groupings, seeking to minimize the overall makespan. \cite{KashanOzturk2022} name this problem \emph{p-batch} (parallel batching) in contradiction with the \emph{s-batch} (serial batching) problem where jobs are processed one by one over production facilities, as described before.  \cite{FowlerMonch2022} present a taxonomy and an extensive literature review for the p-batch problems. According to the authors, a p-batch problem can be classified as compatible setting - where there is no restriction on which jobs can be used to form a batch - and incompatible family case - where only jobs belonging to the same family can be used to form a batch. Not mentioned by \cite{FowlerMonch2022}, \cite{LiEtAl2022} deal with a multi-product p-batch problem involving identical parallel units, capacity constraints, and incompatible families with different job sizes. 
+
+In a real production environment, some of these problems arise in a connected way, so many cientific works adress mixed multi-product batch problems. As example, \cite{FumeroEtAl2016} developed a multi-period mixed-integer linear programming model for MPCs multistage multi-product batch problems, which integrates design, production planning, and scheduling decisions. Also, the work of \cite{MendezEtAll2000}, previously mentioned, considers planning as an integrated part of solution in real-world multi-product batch plant scheduling and therefore includes the product batching problem in its proposed MILP continuous-time models and two-step systematic methodology.
+
+\subsection{Taxonomy and notation}
+
+In short, based on the bibliographic survey conducted for the preparation of this paper, we identify that the multi-product batch problems can differentiate with the following aspects:
+
+\begin{enumerate}[label=\arabic*)]
+\item \textbf{number of stages ($\sigma$)}: single stage ($SS$) or multistage ($MS$);
+\item \textbf{layout($\lambda$)}: single unit ($SU$), flowshop ($Fl$), parallel ($Pl$), or networked ($Nt$) (convergent ($CNt$) and /or divergent ($DNt$));
+\item \textbf{production mode ($\mu$)}: single-product campaing ($SPC$), mixed-product campaign ($MPC$), serial batching ($s\textrm{-}batch$) and/or parallel batching ($p\textrm{-}batch$);
+\item \textbf{problem:($\pi$)}  : design ($D$), planning ($P$), sizing ($Sz$), scheduling ($Sc$) and/or balancing ($B$); 
+\item \textbf{time horizon ($\eta$)}: single period ($SP$), multiperiod ($MP$) or cyclic ($Cc$);
+\item \textbf{scenario ($\gamma$)}: static ($St$) or dynamic ($Dn$);
+\item \textbf{input ($\iota$)}: deterministic ($Dt$) and/or stochastic ($St$);
+\item \textbf{performance measure ($\delta$)}: capital cost ($C$), setup cost ($SC$), holding cost ($HC$), work-in-process cost ($WIPC$), net profit ($NP$), makespan ($C_{max}$), total completion time ($TC$), weighted completion time ($TWC$), maximum lateness ($L_{max}$), maximal tardiness ($T_{max}$), total tardiness (TT), total weighted tardiness ($TWT$), the number of tardy jobs ($NTJ$), weighted number of tardy jobs ($WNTJ$), earliness/tardiness ($E/T$), weighted $E/T$ ($wE/T$), customer satisfaction($CS$), plant performance ($PP$) and/or processing time ($PT$);
+\item \textbf{others ($\rho$)}: limited capacity units ($LCU$), storage capacity by product ($PSC$), storage capacity ($SC$), work-in-process storage ($WIP$), release time ($RT$), due dates ($DD$), incompatible families ($IF$), different processing rates ($DPR$), sequence-dependent setup times ($SDST$), sequencing constraints($SqC$).
+\end{enumerate}
+
+So, to describe a speciﬁc multi-product batch problem, we propose the notation $\sigma|\lambda|\mu|\pi|\eta|\gamma|\iota|\delta|\rho$. Some of the multi-product batch problems and solution approaches discussed in the references cited in this paper are summarized in Tab. \ref{tab:review}.
+
+\begin{table}[h!]
+\begin{center}
+\begin{small}
+\begin{tabular}[c]{l l l}
+reference & problem & contributions  \\
+\cline {1-3} \\
+\cite{Eilon1985} & $SS|SU|s\textrm{-}batch|Sc|SP$ &  analysis of the effect\\
+& $St|Dt|SC, HC|-$  & of splitting batches \\
+\cline {1-3} \\
+Ravemark and & $MS|Pl|SPC|D|Cc|$ & convex MILP model \\
+Rippin (1998) & $St|Dt|C|WIP$ & solved with DICOPT++ \\
+\cline {1-3} \\
+Petkov and & $MS|Pl|SPC|D|Cc|$ & exact method\\
+Maranas (1998)  & $St|St|NP|-$ & \\
+\cline {1-3} \\
+\cite{MendezEtAll2000} & $SS|Pl|MPC|P,Sc|SP|St|$ & MILP continuous-time  \\
+& $Dt|WIPC|RT, DD$ & model and a two-step  \\
+& & systematic methodology \\
+\cline {1-3} \\
+Méndez and & $SS|Pl|MPC|Sc|SP|Dn|Dt|$ & MIPL model and \\
+Cerdá (2003) &$wE/T|RT, DD, SDST$ & a rescheduling algorithm\\
+\cline {1-3} \\
+\cite{HeHui2008} & $SS|Pl|MPC|Sc|SP|$ & rule-based genetic \\
+& $St|Dt|C_{max}, TT|LCU, DD$ & algorithm \\
+\cline {1-3} \\
+\cite{FumeroEtAl2016} & $MS|Pl|MPC|D,P,Sc|Cc|$ & MILP model \\
+& $St|Dt|NP|LCU,USC$ & solved with CPLEX \\
+\cline {1-3} \\
+\cite{LiuEtAl2020} & $MS|DNt|s\textrm{-}batch|Sz|MP|St|$ & mixed-integer quadratic \\
+& $Dt|SC,WIPC|LCU,WIP$ & programming model  \\
+& & and exact algorithm \\
+\cline {1-3} \\
+\cite{LiEtAl2022} & $SS|Pl|p\textrm{-}batch|Sc,B|SP|$ & MILP model \\
+& $St|Dt|C_{max}|LCU, RT, IF$ & and a constraint-guided \\
+ & & artificial immune \\
+ & & system based algorithm \\ 
+\cline {1-3} \\
+\end{tabular}
+\caption{Some contributions on the multi-product batch problems}
+\label{tab:review}
+\end{small}
+\end{center}
+\end{table} 
+
+\subsection{Contributions of this paper}
+
+In this work we are interested in the multiperiod multi-product batch scheduling problem that arises in a networked plant of a plastic bag industry. The industrial plant of this company is very similar to the multi-product s-batch networked plant of the steel industry presented by \cite{LiuEtAl2020} (Fig. \ref{fig:networkdPlantSteelIndustry}), however, the production process in this plastic bags industry begins in extruders, which are production units capable of processing different batches simultaneously. Therefore the problem we are interested is a multi-product \emph{p-batch} \emph{s-batch} problem in a networked plant close to the problem addressed by \cite{LiEtAl2022}. Thus, part of the problem solving process consists of solving a multi-product p-batch scheduling problem into extruders. Also, in the problem we study, in addition to demand, we must consider the factory and outlets' storage capacity, which is individually defined for products, but also for the set of products.
+
+When we began to propose an algorithm to solve the studied problem through a local search method, we identified the need to determine, at each iteration, a maximum processing time for predefined multi-product p-batches, based on known restrictions, so that the new solution built was a feasible solution and at the same time with the best fitness. Using the notation presented before, this problem can be classified as a multi-product $SS|SU|p\textrm{-}batch|Sz|SP|St|Dt|PT|LCU, PSC, SC, DPR$ problem. For simplification purposes, we named this problem multi-product p-batch processing time maximization (MBPTM) problem.
+
+It is important to note that, since the MBPTM problem need to be solved at each iteration, it has a direct impact on the overall efficiency of the local search method proposed for solving the multi-product p-batch s-batch problem in the plastic bag networked plant of the industry studied. In a future work, we intend to present the mathematical model and a Particle Collison based solution algorithm we are developing for this last problem. As scientific contributions of this paper, we present a mathematical model and a very efficient polynomial optmization method for solving the MBPTM problem.
+
+The rest of the paper is organized as follows. In the next sections, the MBPTM problem is presented. Section \ref{sec:mathModel} presents an interger mathematical model for the problem and section \ref{sec:analyticalSol} presents an analytical method for its solution. Section \ref{sec:results} presents the tests and results obtained by a solver in C++ applying the analytical solution and a solver developed in LINGO to new proposed benchmarks. Section \ref{sec:conclusions} presents the paper's conclusions and suggestions for future works. Finally, in sections \ref{sec:contributions} and \ref{sec:acknowledgments}, the contributions to this work are informed and acknowledgments are given, respectively.
+
+
+\section{Multi-product p-batch processing time maximization problem}
+\label{sec:MBPTMP}
+
+The multi-product p-batch processing time maximization problem arises when a set of different products are processed simultaneously in a same production batch. In this problem, it is considered that the quantity produced of each product is directly proportional to the processing time, however, with a different constant of proportionality (production rate) for each product. In addition, there is a maximum quantity allowed for the production of batch products, defined both individually and for the set. The production quantity of each product is mainly defined according to the demand for the product. However, it is still possible to stock the products and/or send them to the outlets. In both cases, there is a stocking/shipping limit for each product and a stocking/shipping limit for the set of products in the batch. Also, there is a time limit available for processing the batch. About the production, the industry manager has as priority to meet demand and he prefer to send the remaining production to outlets rather then stock it in the factory. 
+
+\section{Mathematical model}
+\label{sec:mathModel}
+
+Given that:
+
+$\textrm{UD}_i$ is the demand for the product $i$;
+
+$\textrm{I}$ is the maximum quantity allowed for additional factory storage of all products in the batch;
+
+$\textrm{UI}_i$ is the maximum quantity allowed for stocking the product $i$ in the factory;
+
+$\textrm{O}$ is the maximum quantity allowed for shipment of all products to outlets;
+
+$\textrm{UO}_i$ is the maximum amount of product $i$ that can be shipped to outlets;
+
+$\textrm{p}_i$ is the production rate of product $i$;
+
+$\textrm{Z}$ is the timeout for batch processing;
+
+$P_i$ is the amount of product $i$ produced;
+
+$D_i$ is the amount of product $i$ delivered for the demand;
+
+$O_i$ amount of product $i$ shipped to factory outlets;
+
+$I_i$ is the amount of product $i$ that will be stored at the factory;
+
+$T$ is the batch processing time;
+
+We have the problem:
+
+\begin{equation}
+\label{MBPTMP01}
+max \quad T
+\end{equation}
+
+$s.t.$
+
+\begin{equation}
+P_i - \textrm{p}_i * T  = 0 \quad \forall i
+\end{equation}
+
+\begin{equation}
+P_i - D_i - O_i - I_i = 0 \quad \forall i
+\end{equation}
+
+\begin{equation}
+\label{MBPTMP04}
+D_i \leq \textrm{UD}_i \quad \forall i
+\end{equation}
+
+\begin{equation}
+O_i \leq \textrm{UO}_i \quad \forall i
+\end{equation}
+
+\begin{equation}
+\sum_i{O_i} \leq \textrm{O}
+\end{equation}
+
+\begin{equation}
+I_i \leq \textrm{UI}_i \quad \forall i
+\end{equation}
+
+\begin{equation}
+\sum_i{I_i} \leq \textrm{I}
+\end{equation}
+
+\begin{equation}
+T \leq \textrm{Z}
+\end{equation}
+
+\begin{equation}
+\min \{\textrm{UD}_i - D_i, O_i + I_i\} = 0 \quad \forall i
+\end{equation}
+
+\begin{equation}
+\min\{\textrm{O} - \sum_i\{ O_i\}, \textrm{UO}_i - O_i, I_i\} = 0 \quad \forall i
+\end{equation}
+
+\begin{equation}
+\label{MBPTMP10}
+T, D_i, O_i, I_i \in  \mathbb{Z}^+ \quad \forall i
+\end{equation}
+
+where:
+
+Constraints in (2) relate the quantity produced, $P_i$, to batch processing time $T$. Constraints in (3) calculate the quantity produced, $P_i$, as a function of the primary variables, $D_i$, $O_i$ and $I_i$. Constraints in (4), (5), and (7) state that the quantity delivered to demand, the quantity shipped to the outlets, and the factory-stocked quantity of each product must be less than their respective known limits. Constraints (6) and (8) state that both the sum of product quantities sent to the outlets and the sum of product quantities stocked in the factory must be less than their respective maximum allowed values. The restriction in (9) establishes that there is a batch processing time limit, $\textrm{Z}$, that must be respected. Equations in (10) and (11) define the production distribution priority. And finally, the constraints in (12) inform the nature of the decision variables.
+
+\section{Analytical solution}
+\label{sec:analyticalSol}
+
+The method proposed in this paper for solution of the MBPTM problem is composed of two distinct parts, which are: a) calculation of the maximum processing time of the predefined multi-product p-batch; and b) calculation of the part of the production used to meet demand, the part of the production sent to outlets and the part of the production stocked in factory. Next, we explain each of these parts in detail. \\
+
+\noindent \emph{Calculation of maximum p-batch processing time:} \\
+
+It is possible to split the batch processing time into two time slots:
+
+\begin{equation}
+T = T' + T''
+\end{equation}
+
+\noindent where $T'$ is the maximum processing time whose production will be used exclusively to meet the demand.
+
+Then, being $D_{i}^{'}$ the quantity produced of the product $i$ after $T'$ units of processing time, we have:
+
+\begin{equation}
+\label{eq:s02}
+D_{i}^{'} - \textrm{p}_i * T'  = 0 \quad \forall i
+\end{equation}
+
+\begin{equation}
+\label{eq:s03}
+D_{i}^{'} \in Z \quad \forall i
+\end{equation}
+
+\noindent and, as $D_{i}^{'} \leq D_i$, $\forall i$, we have:
+
+\begin{equation}
+\label{eq:s04}
+D_{i}^{'} \leq \textrm{UD}_i\quad \forall i
+\end{equation}
+
+From the equations in (\ref{eq:s02}) and the restrictions in (\ref{eq:s03}) and (\ref{eq:s04}), we have:
+
+\begin{equation}
+\label{eq:s05}
+T' \leq \lfloor{\textrm{UD}_i / \textrm{p}_i}\rfloor \quad \forall i
+\end{equation}
+
+And, as we wish maximum value to $T'$, from (\ref{eq:s05}) we have:
+
+\begin{equation}
+\label{eq:s06}
+T' = \min_i\{\lfloor{\textrm{UD}_i / \textrm{p}_i}\rfloor\}
+\end{equation}
+
+Observe that there may be a leftover corresponding to the demand not met by the production in the first part of the processing time, $T'$. This leftover, $S_i$, will be defined according to the equations in (\ref{eq:s07}):
+
+\begin{equation}
+\label{eq:s07}
+S_i = \textrm{UD}_i - D_{i}^{'} \quad \forall i
+\end{equation}
+
+It is also possible to consider that outlets are extensions of the factory stock. Therefore, it is possible to consider the factory stock of product $i$ and the outlets stock $i$ as single stock for the product $i$, $E_i$, so that:
+
+\begin{equation}
+\label{eq:s08}
+E_i = O_i + I_i
+\end{equation}
+
+\begin{equation}
+\label{eq:s09}
+E_i \leq \textrm{UO}_i + \textrm{UI}_i
+\end{equation}
+
+\begin{equation}
+\label{eq:s10}
+\sum_i {E_i} \leq \textrm{O} + \textrm{I}
+\end{equation}
+
+\begin{equation}
+\label{eq:s11}
+E_i \in Z \quad \forall i
+\end{equation}
+
+As the time $T'$ was used only for production that will meet the demand, $T''$  will be the remaining processing time, \emph{i.e.} the maximum processing time used for production that will meet the leftover of demand, sent to the outlets and stored in factory. So we have:
+
+\begin{equation}
+\label{eq:s12}
+E_i + S_i - \textrm{p}_i * T''  = 0 \quad \forall i
+\end{equation}
+
+\noindent Thus, after replacing (\ref{eq:s12}) in (\ref{eq:s09}) and applying some algebra, we have:
+
+\begin{equation}
+\label{eq:s13}
+T''  \leq (\textrm{UO}_i + \textrm{UI}_i + S_i) / \textrm{p}_i \quad \forall i
+\end{equation}
+
+\noindent And, after replacing (\ref{eq:s12}) in (\ref{eq:s10}) and applying some algebra, we have:
+
+\begin{equation}
+\label{eq:s14}
+ T'' \leq (\textrm{O} + \textrm{I} + \sum_i S_i) / \sum_i \textrm{p}_i
+\end{equation}
+
+Finally, as $T''$  is an integer value and we want to maximize this value, then:
+
+\begin{equation}
+\label{eq:s15}
+ T'' = \lfloor\min\{\min_i\{ (\textrm{UO}_i + \textrm{UI}_i + S_i) / \textrm{p}_i\}, (\textrm{O} + \textrm{I} + \sum_i S_i) / \sum_i \textrm{p}_i \}\rfloor
+\end{equation}
+
+So, the analytical method for finding maximum $T$ can be decomposed into 4 steps:
+
+step 1: find $T'$, where:
+\begin{equation}
+T' = \lfloor{\min_{i} \{\textrm{UD}_i / \textrm{p}_i\}}\rfloor
+\end{equation}
+
+step 2: calculate $S_i$ for all products.
+\begin{equation}
+\label{eq:unmet}
+S_i = \textrm{UD}_i - \textrm{p}_i * T' \quad \forall i
+\end{equation}
+
+step 3: find $T''$, where:
+\begin{equation}
+T'' = \lfloor{\min \{\min_{i} \{(\textrm{UO}_i + \textrm{UI}_i + S_i) / \textrm{p}_i\},(\textrm{O} + \textrm{I} + \sum_i {S_i}) / \sum_i {\textrm{p}_i}\}}\rfloor
+\end{equation}
+
+step 4: calculate $T$, where: 
+\begin{equation}
+T^* = T' + T''
+\end{equation}
+\begin{equation}
+T = \min \{T^* , \textrm{Z}\}
+\end{equation}
+
+Note that, as we reduce the value of $T'$, the consequent reduction of $D_{i}^{'}$ will be directly attributed to the leftover of demand $S_i$ and, therefore, there will be no change in the optimal solution if it is considered to $T'$, a value between 0 and the value found in step 1. Thus it is possible to use a simplification of the method presented, making $T' = 0$. In this case $S_i = \textrm{UD}_i, \forall i$. The simplified version of the method is presented below:
+
+step 1: find $T^*$, where:
+\begin{equation}
+T^* = \lfloor{\min \{\min_{i} \{(\textrm{UO}_i + \textrm{UI}_i + \textrm{UD}_i) / \textrm{p}_i\},(\textrm{O} + \textrm{I} + \sum_i \textrm{UD}_i) / \sum_i {\textrm{p}_i}\}}\rfloor
+\end{equation}
+
+step 2: calculate $T$, where: 
+
+\begin{equation}
+T = \min \{T^* , \textrm{Z}\}
+\end{equation}
+
+This simplification of the method demonstrates that the value calculated to $T$ does not depend on the way the production of the product $i$, $P_i$, is distributed between service to demand, $D_i$, outlets, $O_i$, and  factory's stock, $I_i$.
+
+\noindent \emph{Full solution:} 
+
+We can determine now the values of $D_i$, $O_i$ and $I_i$, $\forall i$, simply attending the priorities for distribution. The following three algorithms can be used to find a complete solution.
+
+The Algorithm (\ref{alg:part01}) is used for finding an optimimal value for $T$.
+
+\begin{algorithm}
+\caption{Solving MBPTM problem | Part 01 - find an optimal $T$ to the problem defined in (\ref{MBPTMP01}) to (\ref{MBPTMP10}).}\label{alg:part01}
+\begin{algorithmic}
+	\Require $\textrm{UD}_i, \textrm{UO}_i, \textrm{UI}_i, \textrm{p}_i, \forall i, \textrm{O}, \textrm{I}, \textrm{Z}$
+	\State $T^* \gets \lfloor{\min \{\min_{i} \{(\textrm{UO}_i + \textrm{UI}_i + \textrm{UD}_i) / \textrm{p}_i\},(\textrm{O} + \textrm{I} + \sum_i \textrm{UD}_i) / \sum_i {\textrm{p}_i}\}}\rfloor$
+	\State $T \gets \min \{T^* , \textrm{Z}\}$
+\State \textbf{Return:} $T$.
+\end{algorithmic}
+\end{algorithm}
+
+Then an initial production distribution can be done by the Algorithm (\ref{alg:part02}). This distribution is made without considering the restrictions defined for the set of products. $SO$ and $SI$ represent, respectively, the total amount that can be sent to the outlets and the total amount that can be stocked in factory after the initial distribution. If this values are negative, this indicates that the proposed initial distribution is not a feasible distribution.
+
+\begin{algorithm}
+\caption{Solving MBPTM problem | Part 02 - calculate $D_i$, $O_i$ and $I_i$, $\forall i$, ignoring the restrictions for the set of products of the batch.}\label{alg:part02}
+\begin{algorithmic}
+	\Require $\textrm{UD}_i, \textrm{UO}_i, \textrm{UI}_i, \textrm{p}_i, \forall i, \textrm{O}, \textrm{I}, \textrm{Z}, T$.
+	\For{all i}
+		\State $E_i \gets T * \textrm{p}_i$
+		\State $D_i \gets \min \{\textrm{UD}_i, E_i\}$
+		\State $E_i \gets E_i - D_i$
+		\State $O_i \gets \min \{\textrm{UO}_i, E_i\}$
+		\State $E_i = E_i - O_i$
+		\State $\textrm{UO}_i = \textrm{UO}_i - O_i$
+		\State $I_i = E_i$
+		\State $\textrm{UI}_i = \textrm{UI}_i - I_i$
+	\EndFor
+	\State $SO = \textrm{O} - \sum_i{O_i}$
+	\State $SI = \textrm{I} - \sum_i{I_i}$
+	\State \textbf{Return:} $D_i, O_i, I_i, E_i, \textrm{UO}_i, \textrm{UI}_i, \forall i, SO, SI$.
+\end{algorithmic}
+\end{algorithm}
+
+So, after applying Algorithm (\ref{alg:part02}), if $SO \geq 0$ and $SI \geq 0$, solution found is an optimal solution. However, if $SO < 0$ or $SI <0$, solution is not yet feasible. But as the solution found to $T$ is feasible to the problem defined in (\ref{MBPTMP01}) to (\ref{MBPTMP10}), we have the following statements:
+
+$if \quad SO < 0 \quad then \quad SI > 0 \quad and  \quad |SO| < SI$
+
+$if \quad SI < 0 \quad then \quad SO > 0 \quad and  \quad |SI| < SO$
+
+Therefore it is possible to meet the restrictions by applying the Agorithm (\ref{alg:part03}). This algorithm redistributes the production of factory's stock to the outlets or vice versa, respectively, due to having a $SI$ or $SO$ negative.
+
+\begin{algorithm}
+\caption{Solving MBPTM problem | Part 03: redistribute production to comply with limitation restrictions for the batch set.}\label{alg:part03}
+\begin{algorithmic}
+\Require $O_i, I_i, \textrm{UO}_i, \textrm{UI}_i, \forall i, SO, SI$.
+\If{$SO < 0$}
+\For{all $i$}
+	\State $O_i \gets O_i - \min\{ O_i, UI_i, |SO|\}$
+	\State $I_i \gets I_i + \min\{ O_i, UI_i, |SO|\}$
+	\State $SO \gets SO + \min\{ O_i, UI_i, |SO|\}$
+	\If{$SO = 0$}
+		break looping for;
+	\EndIf
+\EndFor
+\EndIf
+
+\If{$SI < 0$}
+\For{all $i$}
+	\State $I_i \gets I_i - \min\{ I_i, UO_i, |SI|\}$
+	\State $O_i \gets O_i + \min\{ I_i, UO_i, |SI|\}$
+	\State $SI \gets SI + \min\{ I_i, UO_i, |SI|\}$
+	\If{$SI = 0$}
+		break looping for;
+	\EndIf
+\EndFor
+\EndIf
+\State \textbf{Return:} $O_i, I_i, \forall i$.
+\end{algorithmic}
+\end{algorithm}
+
+\section{Tests and results}
+\label{sec:results}
+
+To test the developed model and analytical solution method, we created a solver in C++ named COPSolver: library for solving the multi-product p-batch processing time maximization problem and also a solver in LINGO named MBPTM.lng both available at codeocean and GitHub \citep{COPSolver2023}. A brief explanation of the software can be found in the paper of \cite{Fraga2023}. The tests were performed on a notebook with an Intel i7 processor. We tested the solvers developed for the benchmarks presented on Tables \ref{tab:MBPTMP001}, \ref{tab:MBPTMP002} and \ref{tab:MBPTMP003}, and for randon benchmarks generated by the following functions: \\
+
+\begin{equation}
+\textrm{p}_i = \textrm{rand}()\%30 + 10
+\end{equation}
+
+\begin{equation}
+\textrm{UD}_i = \textrm{rand}()\%3000 + 800;
+\end{equation}
+
+\begin{equation}
+ \textrm{seed1} = \textrm{rand}()\%3000 + 500;
+\end{equation}
+
+\begin{equation}
+\textrm{seed2} = \textrm{rand}()\%5000 + 1000;
+\end{equation}
+
+\begin{equation}
+\textrm{O} = \textrm{N}/2*\textrm{seed1};
+\end{equation}
+
+\begin{equation}
+\textrm{UO}_i = \textrm{rand}()\%(\textrm{seed1}-500) + 500;
+\end{equation}
+
+\begin{equation}
+\textrm{I} = \textrm{N}/2*\textrm{seed2};
+\end{equation}
+
+\begin{equation}
+\textrm{UI}_i = \textrm{rand}()\%(\textrm{seed2}-1000) + 1000;
+\end{equation}
+
+\begin{equation}
+\textrm{Z} = 100;
+\end{equation}
+
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{c r r r}
+$i$ & 1 & 2 & total \\
+\cline {1-4} \\
+$\textrm{p}_i$ & 60 & 40 & \\
+$\textrm{UD}_i$ & 1000 & 500 & \\
+$\textrm{UO}_i$ & 600 & 600 & 1000 \\
+$\textrm{UI}_i$ & 3000 & 2000 & 3000 \\
+\cline {1-4} \\
+& & $\textrm{Z}$ & 100 \\
+\end{tabular}
+\caption{Benchmark MBPTM 2}
+\label{tab:MBPTMP001}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{c r r r r}
+$i$ & 1 & 2 & 3 & total \\
+\cline {1-5} \\
+$\textrm{p}_i$ & 60 & 40 & 50 \\
+$\textrm{UD}_i$ & 1000 & 500 & 800 \\
+$\textrm{UO}_i$ & 600 & 600 & 600 & 1500 \\
+$\textrm{UI}_i$ & 3000 & 2000 & 1000 & 3500 \\
+\cline {1-5} \\
+& & & $\textrm{Z}$ & 100 \\
+\end{tabular}
+\caption{Benchmark MBPTM 3}
+\label{tab:MBPTMP002}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{small}
+\begin{tabular}[c]{c r r r r r r r r r r r }
+$i$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & total \\
+\cline {1-12} \\
+$\textrm{p}_i$ & 60 & 40 & 50 & 40 & 30 & 50 & 60 & 10 & 20 & 40\\
+$\textrm{UD}_i$ & 1000 & 500 & 800 & 500 & 400 & 500 & 2000 & 300 & 500 & 1000 \\
+$\textrm{UO}_i$ & 600 & 600 & 600 & 1500 & 300 & 200 & 500 & 800 & 0 & 200 & 3000 \\
+$\textrm{UI}_i$ & 3000 & 2000 & 1000 & 800 & 3000 & 1000 & 400 & 300 & 200 & 0 & 5000 \\
+\cline {1-12} \\
+& & & & & & & & & & $\textrm{Z}$ & 100 \\
+\end{tabular}
+\caption{Benchmark MBPTM 10}
+\label{tab:MBPTMP003}
+\end{small}
+\end{center}
+\end{table}
+
+Randomly generated benchmarks were named RMBPTM $\textrm{N}$, being $\textrm{N}$ the number of products. Seeking to enable the reproduction of the results, in the computational construction of the benchmarks we used the function srand((unsigned) source), where source is a defined value. To build the results presented in this work, we used source=0. The benchmarks used for the tests performed can be consulted at github.com/tbfraga/COPSolver.
+
+Table \ref{tab:results} presents the results obtained by applying the analytical method (COPSolver) and the LINGO solver for the solution of the previously presented benchmarks.
+
+\begin{table}[h]
+\begin{center}
+\begin{footnotesize}
+\begin{tabular}[c]{l r r r r}
+problem & LINGO solver & time (s) & analytical method & time (s) \\
+\cline {1-5} \\
+MBPTM 2 & 55 & 0.03 & 55 & $<$ 0.01 \\
+MBPTM 3 & 48 & 0.03 & 48 & $<$ 0.01 \\
+MBPTM 10 & 30 & 0.05 & 30 & $<$ 0.01 \\
+RMBPTM 20 & 100 & 0.06 & 100 & $<$ 0.01 \\
+RMBPTM 50 & 98 & 0.08 & 98 & $<$ 0.01 \\
+RMBPTM 100 & 98 & 0.11 & 98 & $<$ 0.01 \\
+RMBPTM 1,000 & 78 & 1.20 & 78 & $<$ 0.01 \\
+RMBPTM 2,000 & 70 & 3.25 & 70 & $<$ 0.01 \\
+RMBPTM 5,000 & 70 & 15.12 & 70 & $<$ 0.02 \\
+RMBPTM 10,000 & 70 & 55.19 & 70 & $<$ 0.04 \\
+\cline {1-5} \\
+\end{tabular}
+\caption{Results obtained with the LINGO solver and the analytical method}
+\label{tab:results}
+\end{footnotesize}
+\end{center}
+\end{table}
+
+Tables (\ref{tab:compResultsMBPTMP2}) and (\ref{tab:compResultsMBPTMP3}) shows the production distribution for MBPTM 3 and 10 found by both COPSolver and LINGO solver. Files containing all results can be found at github.com/tbfraga/COPSolver.
+
+\begin{table}[h]
+\begin{center}
+\begin{footnotesize}
+\begin{tabular}[c]{l r r r r}
+product & production & delivered (s) & send to outlets & stocked in factory \\
+\cline {1-5} \\
+P1 & 2,880 & 1,000 & 300 & 1,580 \\
+P2 & 1,920 & 500 & 600 & 820 \\
+P3 & 2,400 & 800 & 600 & 1,000 \\
+\cline {1-5} \\
+\end{tabular}
+\caption{Results obtained with the LINGO solver and COPSolver for the MBPTM 3}
+\label{tab:compResultsMBPTMP2}
+\end{footnotesize}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{footnotesize}
+\begin{tabular}[c]{l r r r r}
+product & production & delivered (s) & send to outlets & stocked in factory \\
+\cline {1-5} \\
+P1 & 1,800 & 1,000 & 400 & 400 \\
+P2 & 1,200 & 500 & 600 & 100 \\
+P3 & 1,500 & 800 & 600 & 100 \\
+P4 & 1,200 & 500 & 700 & 0 \\
+P5 & 900 & 400 & 300 & 200 \\
+P6 & 1,500 & 500 & 200 & 800 \\
+P7 & 1,800 & 1800 & 0 & 0 \\
+P8 & 300 & 300 & 0 & 0 \\
+P9 & 600 & 500 & 0 & 100 \\
+P10 & 1,200 & 1000 & 200 & 0 \\
+\cline {1-5} \\
+\end{tabular}
+\caption{Results obtained with the LINGO solver and COPSolver for the MBPTM 10}
+\label{tab:compResultsMBPTMP3}
+\end{footnotesize}
+\end{center}
+\end{table}
+
+It is important to point out that the LINGO solver was developed with the purpose of validating the results found by the proposed analytical method. As the analytical method is a polynomial time complexity method, we did not intend to compare computational costs, however it is possible to verify that both solvers are capable of finding optimal solutions for the proposed benchmarks very quickly, even for very large problems.
+
+We have considered here a static problem, so in a future work we will study the complexities of solving the problem dynamically and try to propose new solution methods if needed. 
+
+\section{Conclusions and suggestions for future works}
+\label{sec:conclusions}
+
+In this paper we presented the multi-product p-batch processing time maximization problem, as well as a mathematical model and an exact analytical solution method for this problem. The mathematical model and analytical method were tested, respectively, by a solver developed with the LINGO software, from LINDO Systems, and with a solver developed in C++ language. Optimum results were found for all proposed benchmarks, very quickly, even in the case of very large problems, which demonstrates the efficiency of the proposed method. As in this paper we considered a static problem, in a future work we will study the complexities that arise when considering the same problem in a dinamic scenario. We will also verify if there is the possibility of extending the proposed analytical method to solve a class of integer programming problems with similar characteristics to the studied problem.
+
+\section{CRediT authorship contribution statement} 
+\label{sec:contributions}
+
+Blinded.
+
+%T.B. Fraga: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data Curation, Writing – original draft, Writing – review \& editing, Supervision, Project administration. Í.R.B. Aquino: Investigation. R.C.S. Menêzes: Investigation.
+
+\section{Acknowledgments}
+\label{sec:acknowledgments}
+
+Blinded.
+
+%We are enormously grateful to Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (CAPES) and to Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) for the financial support provided to our projects. We also thank LINDO systems team for the LINGO software license, without which this work would not have been possible and the to the owner of the company in the plastics sector, who allowed us to learn about his company's production process. Finally, we would like to thank Pró-reitoria de Extensão e Cultura da UFPE (PROExC) and the Research Director of Propesqi (Pró-reitoria de Pesquisa e Inovação da UFPE) for their support and recognition of our work, and dear Professors Antônio José da Silva Neto and João Flávio Vieira de Vasconcellos from IPRJ/UERJ, who contributed significantly to the formation of essential skills for the development of our projects. We also thank my co-worker Marcos Luiz Henrique, for having helped by evaluating the mathematical model and solution method proposed in this paper.
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%% \section{}
+%% \label{}
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+%%  \bibliographystyle{elsarticle-harv} 
+%%  \bibliography{<your bibdatabase>}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+
+\begin{thebibliography}{1}
+
+%% \bibitem[Author(year)]{label}
+%% Text of bibliographic item
+
+\bibitem[\protect\citeauthoryear{COPSolver}{2023}]{COPSolver2023}
+Blinded.
+
+%\bibitem[\protect\citeauthoryear{COPSolver}{2023}]{COPSolver2023}
+%COPSolver (2023). COPSolver: open source software for solving combinatorial optimization and other decision problems - library for solving the multi-product p-batch processing time maximization problem. {\it codeocean and GitHub}, codeocean.com/capsule/4837209/tree/v1, github.com/tbfraga/COPSolver/releases/tag/v1.0-1.
+
+\bibitem[\protect\citeauthoryear{Eilon}{1985}]{Eilon1985}
+Eilon. (1985). Multi-product batch production on a single machine - A problem revisited. {\it OMEGA Int. J. of Mgmt Sci.}, Vol. 13 (5), pp. 453--468.
+
+\bibitem[\protect\citeauthoryear{Fowler and Mönch}{2022}]{FowlerMonch2022}
+Fowler, J.W. and Mönch, L. (2022). A survey of scheduling with parallel batch (p-batch) processing. {\it European Journal of Operational Research}, Vol. 298, pp. 1--24.
+
+\bibitem[\protect\citeauthoryear{Fraga}{2023}]{Fraga2023}
+Fraga, T.B. (2023). COPSolver: Open source software for solving combinatorial optimization and other decision problems — Library for solving the multi-product p-batch processing time maximization problem {\it Software Impacts}, invited paper, Vol. 18, pp. 100592.
+
+\bibitem[\protect\citeauthoryear{Fumero \emph{et al.}}{2016}]{FumeroEtAl2016}
+Fumero Y., Moreno M. S., Corsano, G., Montagna, J. M. (2016). A multiproduct batch plant design model incorporating production planning and scheduling decisions under a multiperiod scenario. {\it Applied Mathematical Modelling}, Vol. 40, pp. 3498--3515.
+
+\bibitem[\protect\citeauthoryear{He and Hui}{2008}]{HeHui2008}
+He, Y., Hui, C-W. (2008). A rule-based genetic algorithm for the scheduling of single-stage multi-product batch plants with parallel units. {\it  Computers and Chemical Engineering}, Vol. 32, pp. 3067--3083.
+
+\bibitem[\protect\citeauthoryear{Kashan and Ozturk}{2022}]{KashanOzturk2022}
+Kashan, A. H., and Ozturk, O. (2022). Improved MILP formulation equipped with valid inequalities for scheduling a batch processing machine with non-identical job sizes. {\it  Omega}, Vol. 112, pp. 102673.
+
+\bibitem[\protect\citeauthoryear{Kim \emph{et al.}}{1996}]{KimEtAl1996}
+Kim, M., Jung, J. H. and Lee, I. (1996). Intelligent scheduling and monitoring for multi-product networked batch processes. {\it  Computers chem. Engn}, Vol. 20 (Suppl.), pp. 1149--1154.
+
+\bibitem[\protect\citeauthoryear{Li et al.}{2022}]{LiEtAl2022}
+Li, C., Wang, F., Gupta, J.N.D., Chung, T. (2022). Scheduling identical parallel batch processing machines involving incompatible families with different job sizes and capacity constraints. {\it Computers \& Industrial Engineering}, Vol. 169, pp. 108115.
+
+\bibitem[\protect\citeauthoryear{Liu \emph{et al.}}{2020}]{LiuEtAl2020}
+Liu, G., Li, F., Yang, X., and Qiu. S. (2020). The multi-stage multi-product batch-sizing problem in the steel industry. {\it  Applied Mathematics and Computation}, Vol. 369, 124830.
+
+\bibitem[\protect\citeauthoryear{Méndez \emph{et al.}}{2000}]{MendezEtAll2000}
+Méndez, C.A., Henning, G.P., Cerdá, J. (2000). Optimal scheduling of batch plants satisfying multiple product
+orders with different due-dates. {\it Computers and Chemical Engineering}, Vol. 24, pp. 2223--2245.
+
+\bibitem[\protect\citeauthoryear{Méndez and Cerdá}{2003}]{MendezCerda2003}
+Méndez, C.A., Cerdá, J. (2003). Dynamic scheduling in multiproduct batch plants. {\it Computers and Chemical Engineering}, Vol. 27, pp. 1247--1259.
+
+\bibitem[\protect\citeauthoryear{Omega Journal}{1993}]{Omega1993}
+OMEGA Journal. (1993). Single Machine Multi-product Batch Scheduling: Testing Several Solution Methods. {\it  OMEGA Int. J. of Mgmt Sci.}, Vol. 21 (6), pp. 709--711.
+
+\bibitem[\protect\citeauthoryear{Petkov and Maranas}{1998}]{PetkovMaranas1998}
+Petkov, S. B., and Maranas, C. D. (1998). Design of Single-Product Campaign Batch Plants under Demand Uncertainty. {\it  AIChE Journal}, Vol. 44 (4), pp. 896--911.
+
+\bibitem[\protect\citeauthoryear{Ravemark and Rippin}{1998}]{RavemarkAndRippin1998}
+Ravemark, D. E., and Rippin, D. W. T. (1998). Optimal design of a multi-product batch plant. {\it Computers chem. Engng}, Vol. 22 (1-2), pp. 177--183.
+
+\bibitem[\protect\citeauthoryear{Shi \emph{et al.}}{2017}]{ShiEtAll2017}
+Shi, B., Qian, X., Sun, S., Yan, L. (2017). Rule-based scheduling of multi-stage multi-product batch plants with parallel units. {\it Chinese Journal of Chemical Engineering}, in press.
+
+\end{thebibliography}
+\end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-harv.tex'.
