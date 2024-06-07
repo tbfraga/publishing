@@ -1,0 +1,476 @@
+% MODELO CONEM 2022 - Obs. Adequado para o CONEM 2024.
+%
+% Date: January 12, 2024
+%
+\documentclass[10pt,fleqn,a4paper,twoside]{article}
+\usepackage{abcm}
+\def\shortauthor{T. B. Fraga, B. M. Cavalcanti, A. M. D. Silva e E. L. R. Silva \textcolor[rgb]{0.98,0.00,0.00}}
+\def\shorttitle{A New Effective ABC Multicriteria Classification with AHP: How to Force Consistency of Paiwise Comparisons Matrix. \textcolor[rgb]{0.98,0.00,0.00}}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\usepackage{array, makecell}
+
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,shapes.misc,shapes.symbols,arrows.meta,graphs,fit,positioning,shadows}
+
+\usepackage[toc,page]{appendix}
+\usepackage{verbatim}
+\usepackage{etoolbox}
+
+\usepackage{pdfpages}
+
+\usepackage{graphicx}
+
+\makeatletter
+\patchcmd{\verbatim@input}{\@verbatim}{\scriptsize\@verbatim}{}{}
+\makeatother
+
+
+\begin{document}
+    
+    % CABEÇALHO
+    \thispagestyle{empty}
+    \begin{figure}[h]
+        \begin{center}
+            \includegraphics[angle=0, width=\textwidth]{Logo_template.png}
+        \end{center}
+    \end{figure}
+    \vspace{-.5cm}
+    \hspace{-.8cm}
+    \begin{tabular}{||p{\textwidth}}
+    \begin{center}
+    \vspace{-.6cm}
+    %
+    % Digitar o título
+    \title{CONEM2024-0025\\ A NEW EFFECTIVE ABC MULTICRITERIA CLASSIFICATION WITH ANALYTIC HIERARCHY PROCESS: HOW TO ATTRIBUTE WEIGHTS AND FORCE CONSISTENCY OF PAIRWISE COMPARISONS MATRIX} 
+    %
+    \end{center}
+	%
+	% Digitar os nomes dos autores/instituição
+    \authors{Tatiana Balbi Fraga, tatiana.balbi@ufpe.br$^1$} \\
+    \authors{Beatriz Marinho Cavacanti, beatriz.marinhocavalcanti@ufpe.br$^1$} \\
+    \authors{Alexia Maria Duque Silva, alexia.duque@ufpe.br$^1$} \\
+    \authors{Erika Leticia Rodrigues Silva, erika.leticias@ufpe.br$^1$} \\\\
+    \institution{$^1$Centro Acadêmico do Agreste, Universidade Federal de Pernambuco, Avenida Marielle Franco, Bairro Nova Caruaru, Caruaru, PE, BR, CEP: 55014-900} \\
+    \\
+    %
+    % Digitar o resumo
+    \abstract{\textbf{Resumo:} Most companies produce and market a wide variety of products. Because of this, clustering items has become a crucial step in the decision-making for manufacturing and purchasing management processes, making it possible to apply different policies to each group, reducing the cost necessary for managing inventory. ABC multicriteria classification is a technique commonly used for clustering items. For such classification, the attribution of weights to the criteria, as well as the attribution of weights to the products according to each criterion, strongly influences the coherence of the categorization. Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria, and so it is broadly used in multicriteria classification. AHP's logic is not complicated at all. However, since criteria's pairwise comparison matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. The attribution of weights to the products according to each criterion is also a difficult task cause there is a need to balance all the quantitative values and the empirical values defined for the qualitative criteria. This paper presents a constructive algorithm that can adjust inconsistent pairwise comparison matrices, forcing such matrices to have a better consistency rate, a balancing procedure for attributing weights to the products according to qualitative criteria, and a new equation for ABC multicriteria classification. We developed a new library for the COPSolver software by applying this new ABC multicriteria classification with AHP. We tested the proposed solutions to companies in three sectors. As a result, we observed that the algorithm for forcing consistency adjusts the pairwise matrices in just a few seconds, avoiding the manual work of several hours and that the new solution method developed for multicriteria classification provided consistent results, according to the analysis of the company managers, when compared to the ABC classification using only the billing criterion, showing to be essential resources for applying the AHP and ABC multicriteria classification methods.}\\
+    %
+    % Digitar as palavras-chave
+   \\
+    \keywords{\textbf{Palavras-chave:} ABC multicriteria classification, Analytic Hierarchy Process, consistency rate, multicriteria equation, COPSolver library}\\
+    %
+    \end{tabular}
+    
+    \section{INTRODUCTION}
+    
+	According to \cite{Singhal2013}, the manufacturing decisions can be classified into three categories: strategic, tactical and operational. As explained by the authors, the operational decisions pertaining to issues such as order processing, detailed production scheduling, follow up, maintenance routines, and inventory control rules, drive the day to day activities. Manufacturing decisions are closely related to sales decisions. \cite{Ebrahimi2014} warn that in today’s competitive market the diversity in customer’s need have resulted in a high level of variability in the products which have to be manufactured and this statement is also valid for the products acquired from other companies. Such complication brings to light the need for the use of complex techniques for purchasing / production management, especially at the operational decision level \citep{Kiran2019}. In such a scenario, prior optimized operational planning becomes impressible for better use of the productive capacity and to avoid investment losses in unnecessary or unprofitable material. And, given the wide variety of products, it is crucial to start any planning by understanding the importance of all products marked by the company. 
+
+	One of the approaches that is widely applied to clustering products according to their importance is the multicriteria ABC classification. The scientific literature broadly emphasizes the value of multicriteria ABC classification for inventory management and presents several multicriteria methods. The Analytic Hierarchy Process is one of the most common techniques applied for this purpose \citep{Flores1992, AltayGuvenir1998, Lolli2014, Balaji2014}. Some recent studies also emphasize the importance of applying multicriteria analysis to strategic planning \citep[\emph{e.g.},][]{BarbosaDePaula2022, Pereira2023, MarianoRibeiro2023}. \citet{Odu2019} emphasizes that, when applying some multicriteria methods, it is crucial to pay particular attention to the objectivity factors of criteria weights. The author provides a detailed overview of different weighting methods applicable to multicriteria techniques.
+	
+		In this work, we present a study with three companies from three different sectors, which market a wide variety of products, in some cases, highly personalized products. The interest of this study is to identify the principal products, that is, the products that each company must prioritize so that this information can guide the optimized operational planning. We opted for the method ABC for multicriteria classification and adopted the Analytic Hierarchy Process (AHP) \citep{Saaty1987} to assign the weights to the different criteria. It is important to note that the AHP derives the weights of each criterion based on the eigenvector of a pairwise comparisons matrix, which is constructed manually according to an empirical evaluation. According to \cite{Saaty1987}, this matrix must be positive reciprocal and have a consistency rate of less than 0.1.  The author reports that a software package supporting the AHP, called Expert Choice, for the IBM PC, was used in his work for making eigenvector calculations and guiding the decision maker to improve matrix inconsistency if needed. During the execution of the work we present in this paper, we found that there is a substantial difficulty in the calculation of the eigenvector, as well as in the construction of consistent pairwise comparisons matrices. Since we had no access to the Expert Choice software package, we developed an open-source COPSolver's library for solving the multicriteria classification problem, which applies a simple algorithm for forcing the consistency of such matrices when applying the AHP. We present this algorithm in this paper. We coupled the Eigen library from eigen.tuxfamily.org to COPSolver for the eigenvectors calculation of the matrices. Also, we identified that it is possible to use different criteria types (cumulative sum, qualitative, and binary) when assigning weights to ABC classification, depending on each specific criterion chosen, and we observed that such an assignment generates a bias in the multicriteria ABC classification. Therefore, we also developed a new methodology for assigning weights in a balanced way for ABC classification, and we proposed a new multicriteria weighting equation for the multicriteria classification COPSolver's library. We also present both propositions in this paper, as well as an in-depth analysis of the results found by the new library developed for COPSolver.
+		
+		The rest of this paper is structured as follows. Section 2 presents the algorithm developed to force the consistency of pairwise comparison matrices. Section 3 explains the proposed approach for assigning the weights for the ABC classification and the equation for calculating the weights for the multicriteria classification. Section 4 briefly exhibits COPSolver software and the new library developed for multicriteria classification. Section 5 presents the results and analysis informing about the precautions someone must have when elaborating the COPSolver input file for multicriteria classification. Section 6 reports the credits in carrying out this work. Sections 7 and 8 conclude this article with conclusions and acknowledgments, respectively.
+    
+    \section{ALGORITHM FOR FORCING LOW CONSISTENCY RATE}
+    
+    Algorithm (\ref{alg:forceConsistency}) illustrates the method developed to reduce the consistency rate ($CR$). This algorithm takes as input the pairwise comparisons matrix ($M[m_{ij}]$) and the tolerance ($tol$) defined for the consistency rate and returns the matrix adjusted as well as the $CR$ of this new matrix (see \cite{Saaty1987} for more information on calculating the consistency rate).
+    
+\begin{algorithm}
+\caption{forceConsistency()}\label{alg:forceConsistency}
+	\begin{algorithmic}
+	\Require $tol, M[m_{ij}]$
+	\Ensure $CR < tol$
+
+	
+	\State topLeftCorner( $CR, tol, M[m_{ij}]$)
+	
+	\State bottomLeftCorner( $CR, tol, M[m_{ij}]$)
+	
+	\State \textbf{return} $CR, tol, M[m_{ij}]$
+	
+\end{algorithmic}
+\end{algorithm}
+
+The topLeftCorner() function (alg. \ref{alg:topLeftCorner}) performs a peer-to-peer comparison of each element of the pairwise matrix starting from the fourth row, $M[m_{\{sz\}j}]_{sz=4}^{n}$, with each element of the matrix $M[m_{jk}]_{j=1, k=j+1 \land k \neq sz}^{n-1,n}$. In this comparison, the consistency of each pair is verified. If any inconsistency is found, the value of one of the elements is reduced or increased, seeking to improve the consistency rate. Initially, the reduction of values is done through the reduce() function.  If, after the reduction, the convergence rate is still greater than the tolerance, the increment of values is made through the increase() function. The bottomLeftCorner() function is similar to the topLeftCorner() function. In the topLeftCorner() function, the peer-to-peer comparison starts with the elements of the fourth row, and then the elements of the next rows are evaluated, following the order from top to bottom. In the case of the bottomLeftCorner() function, on the other hand, the pair-by-pair comparison is made starting with the elements of the anti-penultimate row ($sz = n-2$), then the elements of the previous rows are evaluated, following the order from bottom to top.
+
+\begin{algorithm}
+\caption{topLeftCorner()}\label{alg:topLeftCorner}
+	\begin{algorithmic}
+	\Require $CR, tol, M[m_{ij}]$
+	
+	\If{$CR \ge tol$}
+		\For{$sz \gets 4, n $}
+			\For{$j \gets 1, n-1 $}
+				\For{$k \gets j+1, n $}
+					\If{$k \neq sz $}
+						\State $g \gets 0$
+						\State $s \gets 0$
+						\If{$m_{\{sz\}j}*m_{jk} > m_{\{sz\}k}$}
+							\State $g \gets j$
+							\State $s \gets k$
+						\ElsIf{$m_{\{sz\}j}*m_{jk} < m_{\{sz\}k}$}
+							\State $g \gets k$
+							\State $s \gets j$
+						\EndIf
+					
+						\If{$g > 0 \textrm{ or } s > 0$}
+						
+							\State reduce($CR, tol, sz, g, s, M[m_{ij}]$)
+						
+							\If{$CR \le tol$}
+								\State \textbf{break}
+							\ElsIf{$m_{\{sz\}g} > m_{\{sz\}s}$}
+								\State increase(sz,g,s)
+								\If{$CR \le tol$}
+									\State \textbf{break}
+								\EndIf
+							\EndIf
+						\EndIf
+					\EndIf
+				\EndFor
+				\If{$CR \le tol$}
+					\State \textbf{break}
+				\EndIf
+			\EndFor
+				\If{$CR \le tol$}
+					\State \textbf{break}
+				\EndIf	
+		\EndFor
+	\EndIf
+	
+	\State \textbf{return} $CR, tol, M[m_{ij}]$
+
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{reduce()}\label{alg:reduce}
+	\begin{algorithmic}
+	\Require $CR, tol, n, g, s, M[m_{ij}]$
+	
+	\While{$m_{ng}*m_{gs} > m_{ns} \textrm{ and } m_{ng} \neq 0$}
+		\State $auxCR \gets CR$
+		\State $m_{ng} ++$
+		\State $m_{gn} --$
+		
+		\State $CR \gets$ consistencyRate($M[m_{ij}]$)
+		
+		\If{$CR > auxCR$}
+			\State $m_{ng} --$
+			\State $m_{gn} ++$
+			\State $CR \gets$ consistencyRate($M[m_{ij}]$)
+			\State \textbf{break}
+			
+		\ElsIf{$CR <= tol$}
+			\State \textbf{break}
+		\EndIf
+\EndWhile
+
+\State \textbf{return} $CR, tol, M[m_{ij}]$	
+	
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{increase()}\label{alg:increase}
+	\begin{algorithmic}
+	\Require $CR, tol, n, g, s, M[m_{ij}], it(M[m_{ij}])$
+	
+	\While{$m_{ng}*m_{gs} < m_{ns} \textrm{ and } it(m_{ng}) \neq n-1$}
+		\State $auxCR \gets CR$
+		\State $m_{ns} ++$
+		\State $m_{sn} --$
+		
+		\State $CR \gets$ consistencyRate($M[m_{ij}]$)
+		
+		\If{$CR > auxCR$}
+			\State $m_{ns} --$
+			\State $m_{sn} ++$
+			\State $CR \gets$ consistencyRate($M[m_{ij}]$)
+			\State \textbf{break}
+			
+		\ElsIf{$CR <= tol$}
+			\State \textbf{break}
+		\EndIf
+\EndWhile
+
+\State \textbf{return} $CR, tol, M[m_{ij}]$	
+	
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{bottomLeftCorner()}\label{alg:bottomLeftCorner}
+	\begin{algorithmic}
+	\Require $CR, tol, M[m_{ij}]$
+	
+	\If{$CR \ge tol$}
+		\For{$sz \gets n-2, 1 $}
+			\For{$j \gets 1, n-1 $}
+				\For{$k \gets j+1, n $}
+					\If{$sz \neq k $}
+						\State $g \gets 0$
+						\State $s \gets 0$
+						\If{$m_{\{sz-1\}j}*m_{jk} > m_{\{sz-1\}k}$}
+							\State $g \gets j$
+							\State $s \gets k$
+						\ElsIf{$m_{\{sz-1\}j}*m_{jk} < m_{\{sz-1\}k}$}
+							\State $g \gets k$
+							\State $s \gets j$
+						\EndIf
+					
+						\If{$g > 0 \textrm{ or } s > 0$}
+						
+							\State reduce(sz-1,g,s)
+						
+							\If{$CR <= tol$}
+								\State \textbf{break}
+							\ElsIf{$m_{\{sz-1\}g} > m_{\{sz-1\}s}$}
+								encrease(sz-1,g,s)
+								\If{$CR <= tol$}
+									\State \textbf{break}
+								\EndIf
+							\EndIf
+						\EndIf
+					\EndIf
+				\EndFor
+				\If{$CR <= tol$}
+					\State \textbf{break}
+				\EndIf
+			\EndFor
+				\If{$CR <= tol$}
+					\State \textbf{break}
+				\EndIf	
+		\EndFor
+	\EndIf
+	
+	\State \textbf{return} $CR, tol, M[m_{ij}]$
+
+\end{algorithmic}
+\end{algorithm}
+    
+    \section{ON MULTICRITERIA ABC CLASSIFICATION}
+
+As discussed earlier, in our study, we observed that one of the crucial points for correctly applying multicriteria ABC classification is correctly attributing the weights for the initial ABC classification, that is, assign weights to each product according to each criterion. When we built the input data file, we considered three types of criteria for ABC analysis, cumulative sum (for billing and lead time criteria), qualitative, and binary criteria. While we were testing the solver, we noticed that an incorrect assignment of the weights can generate a strong bias in the multicriteria classification, since the criterion with the top percentage difference will always be dominant. Therefore, to assign the weights, three procedures were adopted, according to the different nature of each type of criterion used. In the case of the binary criteria, the choice of a binary parameters (0 and 1) results in a distribution of the percentage among the criteria that are critical. This seems to be consistent with the desired goal. However, in the case of the other criteria types, the consistency is no longer so clear.  We can verify this inconsistency through a brief analysis of the two criteria classified according to the cumulative sum. For the data collected from the furniture trades company, the product with the highest billing (242,280.00 reais) has a billing corresponding to 12\% of the total amount; and a product with a longer lead time (30 days) represents 0.46\% of the total lead time, that is, a percentage 0.25\% higher than products with a lead time of 20 days (0.31\%) and 0.35\% higher than products with a lead time of 7 days (0.11\%). The question is: is the difference between the importance of a product with a 30-day lead time and a product with a 7-day lead time only 0.35\%? This value can only be appreciated when compared with the difference in importance of 12\% between the product with the highest and the product with the lowest billing. Make a multicriteria classification for the billing and lead time criteria based only on the accumulated sum is like calculate a weighted average of the annual sales of vehicles and bananas, hoping that this average will have some meaning. For there to be real meaning in the weighted average found by the multicriteria method, it is necessary to apply some procedure to balance the weights assigned to each criterion.
+	
+	\citet{Odu2019} cites CRITIC as one of the methods applied for weight assignment in multicriteria classification. This method starts with normalizing the weights using the following equations:
+	
+	\begin{equation}
+		\rho_{ij} = \frac{w_{ij} - w_{j}^{\min}}{w_{j}^{\max} - w_{j}^{\min}} \qquad i=1,...,m; j = 1, ..., n \qquad \textrm{for benefit criteria}
+	\end{equation}
+	
+	\begin{equation}
+		\rho_{ij} = \frac{w_{j}^{\max} - w_{ij}}{w_{j}^{\max} - w_{j}^{\min}} \qquad i=1,...,m; j = 1, ..., n \qquad \textrm{for cost criteria}
+	\end{equation}
+	
+	Where $w_{j}^{\min}$ and $w_{j}^{\max}$ are, respectively, the lowest and highest weights assigned to criterion $j$, $w_{ij}$ is the weight and $\rho_{ij}$ is the normalized weight of criteria $j$ for product $i$. The problem with this normalization method is that the largest values of the different criteria will have exactly the same weight. In the case of the companies studied, this may not correspond to the assessment of experts. The solution that we adopted in this work for multicriteria classification with lead time and billing criteria, was inspired on the work of \cite{Williams1984}. A single measure was adopted for these two criteria (lead time billing  weight) dividing the billing by the complement of the lead time for each product and then normalizing the results. In the case of qualitative criteria, the initial ABC classification was made using three weights, one weight assigned to group A products, $w(A)$, a second weight assigned to group B products, $w(B)$, and a third weight assigned to group C products, $w(C)$, where $w(A) > w(B) > w(C)$. For qualitative criteria, $w(A)$, $w(B)$ and $w(C)$ must be assigned using the following steps: i) order the products, in descending order, according to their respective values for lead time billing; ii) classify products into three groups, A, B and C, for each qualitative criterion; iii) do $w(C)$ = 0 for all group C products, for each qualitative criterion; iv) for each qualitative criterion, do peer-to-peer comparison with the groups A and B products and the products ordered according to the lead time billing criterion, answering the following question: the degree of importance of the products of this group to the qualitative criterion is equivalent to what degree of importance of the other product evaluated according to the lead time billing criterion ?; and v) assign to $w(A)$ and $w(B)$ the value of the lead time billing of the product with corresponding importance. After steps (i) to (iv), Eqs (\ref{eq:leadTimeBillingWeight}) and (\ref{eq:weight}) can be used for calculation of multicriteria classification weights of each product, $\rho_{p}$:
+
+\begin{equation}
+	\label{eq:leadTimeBillingWeight}
+	LtBW(p) = \frac{\frac{b_p}{1 + (lt^{\max} - lt_p)}}{\sum_{p=1}^{\textrm{NP}}{ \{ \frac{b_p}{1 + (lt^{\max} - lt_p)} \} }}, \quad p= 1,...,\textrm{NP}
+\end{equation}
+
+\begin{equation}
+	\label{eq:weight}
+	\rho_{p} = (wb + wlt) * LtBW(p) + \sum_{q=1}^{\textrm{NQ}}{w_{\sigma_q}* LtBW(e_{p\sigma_q})} + \sum_{b=1}^{\textrm{NB}}{w_{\beta_b}*w_{p\beta_b}}, \quad p= 1,...,\textrm{NP}
+\end{equation}
+
+Where: $\textrm{NP}$ is the number of products; $\textrm{NQ}$ is the number of qualitative criteria; $\textrm{NB}$ is the number of binary criteria; $\Sigma$ is the set of qualitative criteria, $\Sigma = \{\sigma_q\}_{q=1}^{NQ}$; $\textrm{B}$ is the set of binary criteria, $\textrm{B} = \{\beta_b\}_{b=1}^{NB}$; $p$ is the index used to represent each product, $p= 1,...,\textrm{NP}$; $c$ is the index used to represent each criterion of qualitative or binary type, $c \in \Sigma \cup \textrm{B}$; $LtBW(p)$ is the lead time billing weight of product $p$; $e_{p\sigma_q}$ is the product lead time billing equivalent of product $p$ for criteria $\sigma_q$; $b_p$ is the billing of product $p$; $lt_p$ is the lead time of product $p$; $wb$ is the multicriteria weight of criterion billing; $wlt$ is the multicriteria weight of criterion lead time; $w_{c}$ is the multicriteria weight of criterion $c$; and $w_{pc}$ is the normalized weight percentage of the product $p$ according to criterion $c$.
+
+	\section{COPSOLVER}
+	
+	COPSolver is a software originally developed by \cite{Fraga2023} to solve several decision and optimization problems, especially in the area of combinatorial optimization. The software works with a modular system of libraries, in which each library is developed to solve a single type of a specific problem, which makes the software very efficient and robust. The structure of the software allows high flexibility in the reuse of already developed codes, as is characteristic of the C++ language. The main difference is that in the case of COPSolver, objects are defined as problems, hence the term problem-oriented programming. Currently, the configuration file, config.txt, should be used to define the type of problem and the solution methodology addressed, as well as the values of the parameters that must be informed by the user. COPSolver software libraries usually use two input files which are config.txt and data.txt. For the software to work properly both files must be built following the predefined formats for each specific library. To apply the methodology proposed in this article, the module 'COPSolver: library for solving the multicriteria classification problem' is being developed. In the case of this library, the configuration file must be prepared according to the template available at https://tbfraga.github.io/COPSolver/benchmarks/clssp/config.txt. A model for preparing the data.txt file for this same library is available at https://tbfraga.github.io/COPSolver/benchmarks/clssp/alexia/original-data/data.txt. For more details about this library see \cite{Fraga2024}.
+	
+	\section{RESULTS AND DISCUSSIONS}
+    
+    \subsection{Data Collected}
+    
+    To test the methodology proposed in this article, data were collected for construction of the pairwise comparisons matrix and for ABC classification, using the billing (bl) criterion and other criteria suggested by \cite{FloresWhybark1986}: lead-time (lt); criticality (cr); obsolescence (ob); commonality (cm); substitutability (sb); and repairability (rp). To collect the data, we partnered with three companies from three different sectors: car mechanics; furniture trades; and plastic packaging manufacturing. Based on the data collected, three benchmarks were developed. The date.txt files corresponding to these three benchmarks are available at https://tbfraga.github.io/COPSolver/ benchmarks/.
+    
+    \subsection{Analysis on the Algorithm for Adjusting Inconsistencies}
+    
+    Table \ref{tab:pairwiseMatrix} presents the modifications made by the software 'COPSolver: library for solving the multicriteria classification problem' in the pairwise comparisons matrix and the consequent changes in the consistency rate (CR) for the data collected from the three companies selected for this study. This table clearly shows the inconsistencies before the modification and how the weight modifications made by the algorithm reflect the adjustments of these inconsistencies. For example, in the case of the plastic bag manufacturing company, the billing criterion has moderate importance over criticality criterion and very strong importance over lead time criterion. Also, the criticality criterion has moderate importance over lead time criterion. These statements are coherent. However, the vector of the weights of this matrix clearly shows that the criticality criterion is less relevant than the lead time criterion, which is inconsistent with the two first statements. The assignment of the other weights related to criteria criticality and lead time causes this inconsistency. We can see from the input data matrix that the obsolescence, replaceability, and repairability criteria are more important than the criticality criterion but less valuable than the lead-time criterion. According to the initial statement (that criticality is more relevant than lead time), this new statement generates the inconsistency of the pairwise comparisons matrix. As we can see in the adjusted matrix, the algorithm quickly corrects these inconsistencies and then the weight vector. Also the pairwise comparison weights are adjusted by the solver primarily according to the weights assigned to the first three criteria. Thus, although there is a change in the pairwise comparison weights, which may be significant, the weights assigned to the first three criteria are preserved. The algorithm will change the weights of the other criteria to force the consistency of the pairwise comparisons matrix. Another significant observation is that the algorithm stops when it reaches the desired consistency rate. So, it is more likely that the algorithm changes the weights related to the fourth criterion and the next ones. Therefore, in the preparation of the input file the data of the criteria must be informed in such a way that the criteria are ordered in descending order according to their respective relevance. For the data presented in Tab. \ref{tab:pairwiseMatrix}, with the exception of the car mechanics company, there was no concern with the correct ordering of the criteria. Based on the results and previous observations, we have computationally reordered the criteria using their respective weights, initially defined by the normalized eigenvector of the original pairwise comparisons matrix, $w$. Table \ref{tab:pairwiseMatrixReordered} presents the modification of results after altering the criteria ordination on the input data. Table 3 presents a comparison of the results using different methods on the data provided by the furniture trading company. In matrix PCM 02, the method used to force consistency was applied before the reordering of the criteria. In the case of matrix PCM 03, the same method was applied after reordering the criteria. This table also shows the matrix PCM 04 with adjustments made manually to the matrix PCM 01 after verifying the results found by COPSolver. As we can see, the COPSolver software provides an important help in the preparation of consistent pairwise comparison matrices. We also found that it is important to perform the ordering of the criteria before adjusting the matrix seeking better consistency, since the weights assigned to the most relevant criteria should preferably be maintained. It is possible to verify in these tables that the reordering before the application of the method to force consistency to be carried out in the weights relative to the least important criteria. Finally, we observe that the ordering of the criteria also helps in the manual adjustment of the pairwise comparison matrices, since the presentation of these tables with the ordered criteria facilitates the analysis of the weights. This is because, when ordered according to the relevance of the criteria, the elements of the pairwise comparison matrix have a trend of increasing order from left to right and decreasing order from top to bottom. For multicriteria classification of items, the pairwise comparison matrix PCM 03 was used. However, in practical cases it is important to have a final assessment of the responsible employee and the matrix used for ABC classification can be a final matrix manually updated by the employee based on the results found by COPSolver.
+
+	\begin{table}[ht]
+            \begin{center}
+                \caption{\textbf{Pairwise comparisons matrix and consistency rate changes for three companies 					(results found by COPSolver) - legend: sb = substitutability; lt = lead-time; rp = repairability; cr = criticality; ob = obsolescence; bl = billing; cm = commonality; CR = consistence rate; w = normalized weights vector.}}
+                    \begin{small}
+                    \begin{tabular}[l]{p{0.4cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm}}
+                    	\multicolumn{7}{c}{original data} & & \multicolumn{7}{c}{adjusted} \\
+   						\cline {1-15} \\
+						\multicolumn{14}{l}{car mechanics company} \\
+						\cline {1-15} \\
+						& \multicolumn{7}{c | }{CR = 0.216}  & \multicolumn{7}{c}{CR = 0.085} \\
+						& \multicolumn{7}{c | }{$w=(0.35, 0.26, 0.18, 0.11, 0.05, 0.03, 0.01)$}  & \multicolumn{7}{c}{$w = (0.37, 0.26, 0.12, 0.12, 0.06, 0.05, 0.02)$} \\
+   						& sb & lt & rp & cr & ob & bl & cm & sb & lt & rp & cr & ob & co & cm \\
+						sb & 1.00 & 3.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 7.00 & 9.00 & 9.00 & 1.00 & 3.00 								& 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 7.00 & 9.00 & 9.00 \\
+						lt & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 7.00 & 9.00 & 9.00 & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 9.00 \\
+						rp & 0.33 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 9.00 & 9.00 & 0.33 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 \\
+						cr & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 9.00 & 9.00 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 \\
+						ob & 0.14 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 0.14 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 \\
+						np & 0.11 & 0.11 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & 9.00 & 0.11 & 0.11 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 9.00 \\
+						cm & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 1.00 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 1.00 \\
+						\cline {1-15} \\
+						\multicolumn{14}{l}{furniture trades company} \\
+						\cline {1-15} \\
+  						& \multicolumn{7}{c | }{CR = 0.136}  & \multicolumn{7}{c}{CR = 0.096} \\
+  						& \multicolumn{7}{c | }{$w=(0.07, 0.13, 0.26, 0.03, 0.48, 0.03)$}  & \multicolumn{7}{c}{$w = (0.09, 0.16, 0.35, 0.03, 0.35, 0.03)$} \\
+   						& lt & rp & cr & cm & bl & ob & & lt & rp & cr & cm & bl & ob \\
+						lt & 1.00 & 0.20 & 0.14 & 7.00 & \cellcolor[HTML]{ACE600} 0.11 & 5.00 & & 1.00 & 0.20 & 0.14 & 7.00 & \cellcolor[HTML]{ACE600} 0.14 & 5.00 \\
+						rp & 5.00 & 1.00 & 0.33 & 5.00 & \cellcolor[HTML]{ACE600} 0.14 & 3.00 & & 5.00 & 1.00 & 0.33 & 5.00 & \cellcolor[HTML]{ACE600} 0.33 & 3.00 \\
+						cr & 7.00 & 3.00 & 1.00 & 9.00 & \cellcolor[HTML]{ACE600} 0.33 & 9.00 & & 7.00 & 3.00 & 1.00 & 9.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 \\
+						cm & 0.14 & 0.20 & 0.11 & 1.00 & 0.11 & 1.00 & & 0.14 & 0.20 & 0.11 & 1.00 & 0.11 & 1.00 \\
+						bl & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 & 1.00 & 9.00 & & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 & 1.00 & 9.00 \\
+						ob & 0.20 & 0.33 & 0.11 & 1.00 & 0.11 & 1.00 & & 0.20 & 0.33 & 0.11 & 1.00 & 0.11 & 1.00 \\
+						\cline {1-15} \\
+						
+						\multicolumn{14}{l}{plastic packaging manufacturing company} \\
+						\cline {1-15} \\
+   						& \multicolumn{7}{c | }{CR = 0.625}  & \multicolumn{7}{c}{CR = 0.085} \\
+   						& \multicolumn{7}{c | }{$w=(0.39, 0.10, 0.22, 0.09, 0.12, 0.07)$}  & \multicolumn{7}{c}{$w = (0.50, 0.18, 0.14, 0.06, 0.09, 0.03)$} \\
+   						& bl & cr & lt & ob & sb & rp & & bl & cr & lt & ob & sb & rp & \\
+						bl & 1.00 & 3.00 & 7.00 & \cellcolor[HTML]{ACE600} 7.00 & 5.00 & \cellcolor[HTML]{ACE600} 5.00 & & 1.00 & 3.00 & 7.00 & \cellcolor[HTML]{ACE600} 9.00 & 5.00 & \cellcolor[HTML]{ACE600} 9.00 \\
+						cr & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 5.00 \\
+						lt & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 7.00 & 7.00 & & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 7.00 \\
+						ob & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 0.33 & 3.00 & & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 3.00 \\
+						sb & 0.20 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 3.00 & 1.00 & 3.00 & & 0.20 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 3.00 \\
+						rp & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 5.00 & 0.14 & 0.33 & 0.33 & 1.00 & & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 0.14 & 0.33 & 0.33 & 1.00
+				\end{tabular} \label{tab:pairwiseMatrix}
+				\end{small}
+            \end{center}
+	\end{table}
+
+\begin{table}[ht]
+            \begin{center}
+                \caption{\textbf{Pairwise comparisons matrix and consistency rate changes for three companies 					(results found by COPSolver) - legend: sb = substitutability; lt = lead-time; rp = repairability; cr = criticality; ob = obsolescence; bl = billing; cm = commonality; CR = consistence rate; w = normalized weights vector.}}
+                    \begin{small}
+                    \begin{tabular}[l]{p{0.4cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm}}
+   						\multicolumn{7}{c}{original data reordered} & & \multicolumn{7}{c}{adjusted} \\
+   						\cline {1-15} \\
+						\multicolumn{14}{l}{car mechanics company} \\
+						\cline {1-15} \\
+						& \multicolumn{7}{c | }{CR = 0.216}  & \multicolumn{7}{c}{CR = 0.085} \\
+						& \multicolumn{7}{c | }{$w=(0.35, 0.26, 0.18, 0.11, 0.05, 0.03, 0.01)$}  & \multicolumn{7}{c}{$w = (0.37, 0.26, 0.12, 0.12, 0.06, 0.05, 0.02)$} \\
+   						& sb & lt & rp & cr & ob & bl & cm & sb & lt & rp & cr & ob & co & cm \\
+						sb & 1.00 & 3.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 7.00 & 9.00 & 9.00 & 1.00 & 3.00 								& 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 7.00 & 9.00 & 9.00 \\
+						lt & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 7.00 & 9.00 & 9.00 & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 9.00 \\
+						rp & 0.33 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 9.00 & \cellcolor[HTML]{ACE600} 9.00 & 9.00 & 0.33 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 \\
+						cr & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & \cellcolor[HTML]{ACE600} 9.00 & 9.00 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 9.00 \\
+						ob & 0.14 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 0.14 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 9.00 \\
+						np & 0.11 & 0.11 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & 9.00 & 0.11 & 0.11 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 9.00 \\
+						cm & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 1.00 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 0.11 & 1.00 \\
+						\cline {1-15} \\
+						\multicolumn{14}{l}{furniture trades company} \\
+						\cline {1-15} \\
+  						& \multicolumn{7}{c | }{CR = 0.136}  & \multicolumn{7}{c}{CR = 0.082} \\
+  						& \multicolumn{7}{c | }{$w=(0.48, 0.26, 0.13, 0.07, 0.03, 0.03)$}  & \multicolumn{7}{c}{$w = (0.49, 0.27, 0.11, 0.06, 0.05, 0.03)$} \\
+   						& bl & cr & rp & lt & ob & cm & & bl & cr & rp & lt & ob & cm \\        
+						bl & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 & & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 \\
+						cr & 0.33 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & & 0.33 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 \\
+						rp & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & 3.00 & 5.00 & & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & 3.00 & 5.00 \\
+						lt & 0.11 & 0.14 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 5.00 & 7.00 & & 0.11 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 7.00 \\
+						ob & 0.11 & 0.11 & 0.33 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & & 0.11 & 0.11 & 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 \\
+						sb & 0.11 & 0.11 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & & 0.11 & 0.11 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 \\
+						\cline {1-15} \\
+						
+						\multicolumn{14}{l}{plastic packaging manufacturing company} \\
+						\cline {1-15} \\
+   						& \multicolumn{7}{c | }{CR = 0.625}  & \multicolumn{7}{c}{CR = 0.094} \\
+   						& \multicolumn{7}{c | }{$w=(0.40, 0.22, 0.12, 0.07, 0.10, 0.10)$}  & \multicolumn{7}{c}{$w = (0.56, 0.21, 0.08, 0.07, 0.07, 0.02)$} \\
+   						& bl & lt & sb & rp & ob & cr & & bl & lt & sb & rp & ob & cr & \\
+						bl & 1.00 & 7.00 & 5.00 & \cellcolor[HTML]{ACE600} 5.00 & 7.00 & \cellcolor[HTML]{ACE600} 3.00 & & 1.00 & 7.00 & 5.00 & \cellcolor[HTML]{ACE600} 9.00 & 7.00 & \cellcolor[HTML]{ACE600} 9.00 \\
+						lt & 0.14 & 1.00 & \cellcolor[HTML]{ACE600} 7.00 & \cellcolor[HTML]{ACE600} 7.00 & 5.00 & \cellcolor[HTML]{ACE600} 0.33 & & 0.14 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 5.00 & \cellcolor[HTML]{ACE600} 9.00 \\
+						sb & 0.20 & \cellcolor[HTML]{ACE600} 0.14 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 3.00 & 5.00 & & 0.20 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 5.00 \\
+						rp & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 0.33 & 5.00 & & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 5.00 \\
+						ob & 0.14 & 0.20 & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 3.00 & 1.00 & 5.00 & & 0.14 & 0.20 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 5.00 \\
+						cr & \cellcolor[HTML]{ACE600} 0.33 & \cellcolor[HTML]{ACE600} 3.00 & 0.20 & 0.20 & 0.20 & 1.00 & & \cellcolor[HTML]{ACE600} 0.11 & \cellcolor[HTML]{ACE600} 0.11 & 0.20 & 0.20 & 0.20 & 1.00 \\
+				\end{tabular} \label{tab:pairwiseMatrixReordered}
+				\end{small}
+            \end{center}
+\end{table}
+	
+\begin{table}[ht]
+            \begin{center}
+                \caption{\textbf{Pairwise comparisons matrix and consistency rate changes for furniture trades company (results found by COPSolver) - legend: sb = substitutability; lt = lead-time; rp = repairability; cr = criticality; ob = obsolescence; bl = billing; cm = commonality; CR = consistence rate; w = normalized weights vector.}}
+                    \begin{small}
+                    \begin{tabular}[l]{p{0.4cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.1cm} | p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm} p{0.5cm}}
+                        \\
+   						& \multicolumn{6}{l}{PCM 01 - original data reordered} & & \multicolumn{6}{l}{PCM 02 - PCM 01 adjusted and than reordered} \\
+						\cline {1-14} \\
+  						& \multicolumn{6}{c}{CR = 0.136}  & & \multicolumn{6}{c}{CR = 0.096} \\
+  						& \multicolumn{6}{c}{$w=(0.48, 0.26, 0.13, 0.07, 0.03, 0.03)$} & & \multicolumn{6}{c}{$w = (0.35, 0.35, 0.16, 0.09, 0.03, 0.03)$} \\
+   						& bl & cr & rp & lt & ob & cm & & bl & cr & rp & lt & ob & cm \\        
+						bl & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 & & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 7.00 & 9.00 & 9.00 \\
+						cr & 0.33 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 \\
+						rp & 0.14 & 0.33 & 1.00 & 5.00 & 3.00 & 5.00 & & \cellcolor[HTML]{ACE600} 0.33 & 0.33 & 1.00 & 5.00 & 3.00 & 5.00 \\
+						lt & 0.11 & 0.14 & 0.20 & 1.00 & 5.00 & 7.00 & & \cellcolor[HTML]{ACE600} 0.14 & 0.14 & 0.20 & 1.00 & 5.00 & 7.00 \\
+						ob & 0.11 & 0.11 & 0.33 & 0.20 & 1.00 & 1.00 & & 0.11 & 0.11 & 0.33 & 0.20 & 1.00 & 1.00 \\
+						sb & 0.11 & 0.11 & 0.20 & 0.14 & 1.00 & 1.00 & & 0.11 & 0.11 & 0.20 & 0.14 & 1.00 & 1.00 \\
+						\cline {1-14} \\
+						& \multicolumn{6}{l}{PCM 03 - PCM 01 reordered and than adjusted} & & \multicolumn{6}{l}{PCM 01 - manually adjusted based on COPSolver results} \\
+						\cline {1-14} \\
+  						& \multicolumn{6}{c}{CR = 0.082}  & & \multicolumn{6}{c}{CR = 0.082} \\
+  						& \multicolumn{6}{c}{$w=(0.49, 0.27, 0.11, 0.06, 0.05, 0.03)$} & & \multicolumn{6}{c}{$w = (0.50, 0.25, 0.12, 0.08, 0.03, 0.03)$} \\
+   						& bl & cr & rp & lt & ob & cm & & bl & cr & rp & lt & ob & cm \\        
+						bl & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 & & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & 9.00 \\
+						cr & 0.33 & 1.00 & 3.00 & 7.00 & 9.00 & 9.00 & & 0.33 & 1.00 & 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 9.00 & 9.00 \\
+						rp & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & 3.00 & 5.00 & & 0.14 & 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & \cellcolor[HTML]{ACE600} 5.00 & 5.00 \\
+						lt & 0.11 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & \cellcolor[HTML]{ACE600} 1.00 & 7.00 & & 0.11 & \cellcolor[HTML]{ACE600} 0.20 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & 5.00 & \cellcolor[HTML]{ACE600} 5.00 \\
+						ob & 0.11 & 0.11 & 0.33 & \cellcolor[HTML]{ACE600} 1.00 & 1.00 & \cellcolor[HTML]{ACE600} 3.00 & & 0.11 & 0.11 & \cellcolor[HTML]{ACE600}  0.20 & 0.20 & 1.00 & 1.00 \\
+						sb & 0.11 & 0.11 & 0.20 & 0.14 & \cellcolor[HTML]{ACE600} 0.33 & 1.00 & & 0.11 & 0.11 & 0.20 & \cellcolor[HTML]{ACE600} 0.20 & 1.00 & 1.00 \\
+						\cline {1-14} \\
+				\end{tabular} \label{tab:pairwiseMatrixAdjusted}
+				\end{small}
+            \end{center}
+	\end{table}
+
+\subsection{Analysis On The New ABC Multicriteria Classification Method}
+
+For analyzing the proposed new methodology for ABC multicriteria classification, we will focus on the presentation and analysis of the data provided by the furniture trades company. Figure \ref{fig:results} presents part of a comparison of the results obtained for the data described above, by ABC classification for the criteria billing and the new ABC multicriteria with Analytic Hierarch Process. We can see in this figure that the multicriteria classification includes in the group A all products previously classified as A according to the billing criterion, however the order of relevance of the products is changed. Additionally, we can verify that other products, previously classified as C and B were included in the list of group A products because it is necessary to give due attention also to these products, due to their relevance according to other criteria. As an example, we can cite the product 2500, which is a 30-centimeter fan. In the evaluated period, this product had a turnover of 1,620.00 reais. Although the billing of this product was not significant when compared to the billing of the other products classified as A, this is a product that is hardly repairable, with high obsolescence and that serves several purposes. Therefore, in the multicriteria rating, this product took 13th place in terms of importance, therefore it is classified as A. This change shows the importance of the multicriteria classification. Based on the results found by COPSolver, we can verify that the ABC classification, considering only the billing criterion, does not follow the normal pattern defined by the Pareto's rule (where 20\% of the causes generate around 80\% of the result). However, when we use the new ABC multicriteria classification, the values are close to what is expected. It is also possible to verify in a very clear way that the approach used to measure the weights of the products produces much more relevant results than the simple random assignment of weights. This approach reduces the viez effect caused by the imbalance of weights and makes the final result carry important qualitative information provided by the responsible employee, assigning the appropriate relevance of the different products, as well as the criteria analyzed. Based on an evaluation of the final results by the participating company, it was possible to verify that these results were very coherent, offering the company very relevant information for the identification of products whose inventory must be maintained, receiving greater attention from the company, as well as for the adoption of more appropriate procedures for the correct control of the different items marketed by the company. The file AHP\_Solution.txt, that presents the complete results found by the module 'COPSolver: library for solving the multicriteria classification problem' can be found at tbfraga.github.io/COPSolver/benchmarks/clssp/alexia/adjusted-data/results/AHP\_solution.txt. 
+
+\begin{figure}[ht]
+	\includegraphics[width=\linewidth]{files/0001.jpg}
+  	\caption{\textbf{Comparison between the ABC classification for the billing criterion and the ABC multicriteria classification.}}
+  	\label{fig:results}
+\end{figure} 
+
+	\section{CONCLUSIONS AND FURTHER WORKS}
+    
+    In this article we present a new methodology for multicriteria ABC classification with Analytic Hierarchy Process which includes a procedure to force the consitences of the pairwise comparisons matrices, as well as a procedure for assigning weights to the products evaluated according to qualitative criteria and a new equation for calculating the weights of the products in the multicriteria classification. This methodology was tested using data provided by three companies, from three different sectors. As a result, we verified the importance and efficiency of the method developed to force the matrices consistency. We also verified that the new methodology proposed for multicriteria ABC classification generated very coherent results, giving the appropriate importance to the products, according to all the evaluated criteria. As further works, the methodologies developed and results found will be used as a basis for building a portfolio with the identification of product demand patterns and, subsequently, for the development of a combined methodology for demand forecasting in small companies. 
+
+    \section{ACKNOWLEDGEMENTS}
+    
+Huge thanks to the teams responsible for developing elementary OS, CodeBlocks, git, GitHub, gcc, Eigen library, TeXLive libraries, duckduckgo, gummi, Yandex translator, and Grammarly. Without the availability of these tools, this paper and the "COPSolver's library for solving the multicriteria classification problem" could never have been developed. I am also very grateful to my co-workers Regilda da Costa e Silva Menêzes and Marcos Luiz Henrique for their constant support for my projects and to my dear advisees Betriz Marinho Cavalcanti, Alexia Maria Duque Silva and Erika Leticia Rodrigues Silva for having participated so enthusiastically in this project, in particular for having made such effort to collect all the necessary data for this study. I would also like to thank the three companies that provided all the essential information we needed for the correct development of this work.
+        
+        \section{CREDIT AUTHORSHIP CONTRIBUTION STATEMENT} 
+		\label{sec:contributions}
+
+		T.B. Fraga: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data Curation, Writing – original draft, Writing – review \& editing, Supervision, Project administration. B.M. Cavalcanti: Investigation. A.M.D.Silva: Investigation. E.L.R. Silva: Investigation. 
+        
+    % REFERÊNCIAS
+    \section{REFERENCES}
+    
+         %   \citet{key} ==>>                Jones et al. (1990)
+         %   \citet*{key} ==>>               Jones, Baker, and Smith (1990)
+         %   \citep{key} ==>>                (Jones et al., 1990)
+         %   \citep*{key} ==>>               (Jones, Baker, and Smith, 1990)
+         %   \citep[chap. 2]{key} ==>>       (Jones et al., 1990, chap. 2)
+         %   \citep[e.g.][]{key} ==>>        (e.g. Jones et al., 1990)
+         %   \citep[e.g.][p. 32]{key} ==>>   (e.g. Jones et al., p. 32)
+         %   \citeauthor{key} ==>>           Jones et al.
+         %   \citeauthor*{key} ==>>          Jones, Baker, and Smith
+         %   \citeyear{key} ==>>             1990
+        
+        \bibliographystyle{abcm}
+        \bibliography{bibliografia}
+        
+ \section{COPYRIGHT LIABILITY}
+    
+        The authors are uniquely responsible for the content of this work.
+
+\end{document}
