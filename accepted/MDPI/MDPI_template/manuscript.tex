@@ -111,10 +111,10 @@ $^{4}$ \quad Federal University of Pernambuco; erika.leticias@ufpe.br}
 %\conference{} % An extended version of a conference paper
 
 % Abstract (Do not insert blank lines, i.e. \\) 
-\abstract{Multicriteria classification is usually a crucial step in the decision-making in manufacturing and purchasing management processes. But in such classification, both the attribution of weights to the criteria and the attribution of weights to the products according to each criterion strongly influence the coherence of the categorization.   Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria. Yet, since criteria's pairwise comparison matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. The attribution of weights to the products according to each criterion is also a difficult task cause there is a need to balance all the quantitative values and the empirical values defined for the qualitative criteria. This article presents an efficient algorithm that can adjust inconsistent pairwise comparison matrices, a balancing procedure for attributing weights to the products according to qualitative criteria, and a new equation for ABC multicriteria classification. We tested the proposed solutions to companies in three sectors, demonstrating that this approach provided consistent results, according to the analysis of the company managers, being an essential resource for decision-making.}
+\abstract{Multicriteria classification is usually a crucial step in the decision-making in manufacturing and purchasing management processes. But in such classification, both the attribution of weights to the criteria and the attribution of weights to the products according to each criterion strongly influence the coherence of the categorization. Saaty's Analytic Hierarchy Process (AHP) is an eminent method for assigning weights to multiple criteria. Yet, since criteria's pairwise comparison matrices are usually generated manually and based only on some employee know-how, there is high complexity in elaborating a consistent pairwise matrix, especially when comparing several criteria. The attribution of weights to the products according to each criterion is also a difficult task cause there is a need to balance all the quantitative values and the empirical values defined for the qualitative criteria. This article presents an efficient algorithm that can adjust inconsistent pairwise comparison matrices, a balancing procedure for attributing weights to the products according to qualitative criteria, and a new equation for ABC multicriteria classification. We tested the proposed solutions to companies in three sectors, demonstrating that this approach provided consistent results, according to the analysis of the company managers, being an essential resource for decision-making.}
 
 % Keywords
-\keyword{keyword 1; keyword 2; keyword 3 (List three to ten pertinent keywords specific to the article; yet reasonably common within the subject discipline.)} 
+\keyword{ABC multicriteria classification; Analytic Hierarchy Process; consistency rate; multicriteria equation; COPSolver library.} 
 
 % The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
 %\PACS{J0101}
@@ -165,16 +165,18 @@ $^{4}$ \quad Federal University of Pernambuco; erika.leticias@ufpe.br}
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setcounter{section}{-1} %% Remove this when starting to work on the template.
-\section{How to Use this Template}
-
-The template details the sections that can be used in a manuscript. Note that the order and names of article sections may differ from the requirements of the journal (e.g., the positioning of the Materials and Methods section). Please check the instructions on the authors' page of the journal to verify the correct order and names. For any questions, please contact the editorial office of the journal or support@mdpi.com. For LaTeX-related questions please contact latex@mdpi.com.%\endnote{This is an endnote.} % To use endnotes, please un-comment \printendnotes below (before References). Only journal Laws uses \footnote.
+%\endnote{This is an endnote.} % To use endnotes, please un-comment \printendnotes below (before References). Only journal Laws uses \footnote.
 
 % The order of the section titles is different for some journals. Please refer to the "Instructions for Authors” on the journal homepage.
 
 \section{Introduction}
 
-The introduction should briefly place the study in a broad context and highlight why it is important. It should define the purpose of the work and its significance. The current state of the research field should be reviewed carefully and key publications cited. Please highlight controversial and diverging hypotheses when necessary. Finally, briefly mention the main aim of the work and highlight the principal conclusions. As far as possible, please keep the introduction comprehensible to scientists outside your particular field of research. Citing a journal paper \cite{ref-journal}. Now citing a book reference \cite{ref-book1,ref-book2} or other reference types \cite{ref-unpublish,ref-communication,ref-proceeding}. Please use the command \citep{ref-thesis,ref-url} for the following MDPI journals, which use author--date citation: Administrative Sciences, Arts, Econometrics, Economies, Genealogy, Humanities, IJFS, Journal of Intelligence, Journalism and Media, JRFM, Languages, Laws, Religions, Risks, Social Sciences, Literature.
+According to \cite{Singhal2013}, the manufacturing decisions can be classified into three categories: strategic, tactical and operational. As explained by the authors, the operational decisions pertaining to issues such as order processing, detailed production scheduling, follow up, maintenance routines, and inventory control rules, drive the day to day activities. Manufacturing decisions are closely related to sales decisions. \cite{Ebrahimi2014} warn that in today’s competitive market the diversity in customer’s need have resulted in a high level of variability in the products which have to be manufactured and this statement is also valid for the products acquired from other companies. Such complication brings to light the need for the use of complex techniques for purchasing / production management, especially at the operational decision level \citep{Kiran2019}. In such a scenario, prior optimized operational planning becomes impressible for better use of the productive capacity and to avoid investment losses in unnecessary or unprofitable material. And, given the wide variety of products, it is crucial to start any planning by understanding the importance of all products marked by the company. 
+
+One of the approaches that is widely applied to clustering products according to their importance is the multicriteria ABC classification. The scientific literature broadly emphasizes the value of multicriteria ABC classification for inventory management and presents several multicriteria methods. The Analytic Hierarchy Process is one of the most common techniques applied for this purpose \citep{Flores1992, AltayGuvenir1998, Lolli2014, Balaji2014}. Some recent studies also emphasize the importance of applying multicriteria analysis to strategic planning \citep[\emph{e.g.},][]{BarbosaDePaula2022, Pereira2023, MarianoRibeiro2023}. \citet{Odu2019} emphasizes that, when applying some multicriteria methods, it is crucial to pay particular attention to the objectivity factors of criteria weights. The author provides a detailed overview of different weighting methods applicable to multicriteria techniques.
+	
+In this work, we present a study with three companies from three different sectors, which market a wide variety of products, in some cases, highly personalized products. The interest of this study is to identify the principal products, that is, the products that each company must prioritize so that this information can guide the optimized operational planning. We opted for the method ABC for multicriteria classification and adopted the Analytic Hierarchy Process (AHP) \citep{Saaty1987} to assign the weights to the different criteria. It is important to note that the AHP derives the weights of each criterion based on the eigenvector of a pairwise comparisons matrix, which is constructed manually according to an empirical evaluation. According to \cite{Saaty1987}, this matrix must be positive reciprocal and have a consistency rate of less than 0.1.  The author reports that a software package supporting the AHP, called Expert Choice, for the IBM PC, was used in his work for making eigenvector calculations and guiding the decision maker to improve matrix inconsistency if needed. During the execution of the work we present in this paper, we found that there is a substantial difficulty in the calculation of the eigenvector, as well as in the construction of consistent pairwise comparisons matrices. Since we had no access to the Expert Choice software package, we developed an open-source COPSolver's library for solving the multicriteria classification problem, which applies a simple algorithm for forcing the consistency of such matrices when applying the AHP. We present this algorithm in this paper. We coupled the Eigen library from eigen.tuxfamily.org to COPSolver for the eigenvectors calculation of the matrices. Also, we identified that it is possible to use different criteria types (cumulative sum, qualitative, and binary) when assigning weights to ABC classification, depending on each specific criterion chosen, and we observed that such an assignment generates a bias in the multicriteria ABC classification. Therefore, we also developed a new methodology for assigning weights in a balanced way for ABC classification, and we proposed a new multicriteria weighting equation for the multicriteria classification COPSolver's library. We also present both propositions in this paper, as well as an in-depth analysis of the results found by the new library developed for COPSolver.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Materials and Methods}
 
@@ -459,12 +461,23 @@ All appendix sections must be cited in the main text. In the appendices, Figures
 %=====================================
 % References, variant A: external bibliography
 %=====================================
-%\bibliography{your_external_BibTeX_file}
+%\bibliography{lib.bib}
 
 %=====================================
 % References, variant B: internal bibliography
 %=====================================
 \begin{thebibliography}{999}
+
+% Reference 1
+\bibitem[Singhal et al.(2013)]{Singhal2013}
+Singhal, J.; Bitran, G.R.; Dasu, S. Production Management. In {\em Encyclopedia of Operations Research and Management Science}; Gass, S.I., Fu, M.C., Eds.; Springer US: Boston, United States, 2013; pp. 1173--1182.	
+% Reference 2
+\bibitem[Ebrahimi et al.(2014)]{Ebrahimi2014}
+Ebrahimi, A.H.; Johansson, P.E.C.; Bengtsson, K.; Åkesson, K. Managing Product and Production Variety – A Language Workbench Approach. {\em Procedia CIRP} {\bf 2014}, {\em 17}, 338--344.
+% Reference 3
+\bibitem[Kiran(2019)]{Kiran2019}
+Kiran, D.R. \textit{Production Planning and Control: A Comprehensive Approach}, 1rd ed.; Butterworth-Heinemann: Cambridge, United States, 2019.
+
 % Reference 1
 \bibitem[Author1(year)]{ref-journal}
 Author~1, T. The title of the cited article. {\em Journal Abbreviation} {\bf 2008}, {\em 10}, 142--149.
