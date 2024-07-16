@@ -137,9 +137,30 @@ $\textrm{UI}_{i2}$ & - 200 &  1400 & $\textrm{I}_2$ & -1,000 \\
 \end{center}
 \end{table}
 
-Conforme é possível verificar na Tab. 4, considerando $T_1 = 55$, teríamos um excesso de estoque para o segundo período. Isso conmprova que a determinação do tempo máximo de produção do lote no primeiro período deve levar em conta as informações relativas aos outros períodos. Outra questão relevante a ser considerada é o melhor momento para produção. Isso é válido para todos os períodos considerados. É importante aqui também ressaltar que estoque implica em custos, portanto é sempre melhor produzir no momento mais tarde possível. 
+Conforme é possível verificar na Tab. 4, considerando $T_1 = 55$, teríamos um excesso de estoque para o segundo período. Este resultado comprova que a determinação do tempo máximo de produção do lote no primeiro período deve levar em conta as informações relativas aos outros períodos. É possível demonstrar que isso é válido para todos os períodos considerados. Contudo tal demonstração não será apresentada neste artigo. Tendo em vista que as decisões de produção em cada períodos implicam em restrições de produção para outros períodos, outra questão relevante a ser considerada é o melhor momento para produção. Como estoque implica em custos, consideramos que é sempre melhor produzir no momento mais tarde possível. 
 
-A seção à seguir apresenta uma adaptação do modelo matemático proposto por Fraga(2024), para solução do DMPMPpBPTM.
+O problema DMPMPpBPTM portanto, consiste em definir o tempo máximo de produção para lotes multi-produtos paralelos, para cade período considerado, tendo como base os seguintes aspectos:
+
+\begin{itemize}
+\item são considerados $N$ produtos, $i=1,...,N$, que devem ser processados simultaneamente em um único lote;
+\item cada produto é produzido de acordo com uma taxa de produção conhecida, $p_i$, a qual pode variar de um produto para outro;
+\item é considerado um horizonte de planejamento com $D$ períodos, $d=1,...,D$;
+\item existe uma demanda conhecida para cada produto em cada período, $\textrm{UD}_{id}$;
+\item existe um limite conhecido para a quantidade enviada de cada produto para os outlets, $\textrm{UO}_i$; 
+\item existe um limite conhecido para a quantidade enviada do conjunto de produtos para os outlets, $\textrm{O}$;
+\item as quantidades de cada produto solicitadas diretamente pelos outlets são entendidas como demanda e não influem nos limites anteriormente definidos;
+\item existe um limite conhecido para a quantidade de cada produto que pode ser estocada em fábrica, $\textrm{UI}_{id}$, sendo que estes limites podem variar de um período para outro;
+\item existe um limite conhecido para a quantidade total do conjunto de produtos que pode ser estocada em fábrica, $\textrm{U}_{d}$, sendo que este limite também pode variar de um período para outro;
+\item não é atriuída nenhuma prioridade para quais produtos devem ser estocados em fábrica ou enviados para os outlets;
+\item existe um tempo máximo para processamento do lote, $Z_d$, o qual pode variar de um período para outro;
+\item a produção deve prioritariamente atender à demanda, depois ser enviada para os outlets e, a quantidade restante estocada em fábrica, de acordo com as restrições conhecidas;
+\item deve-se produzir de acordo com a demanda e os limites de estoque e restrições de envio para os outlets, dando prioridade à produção no momento mais tarde possível;
+\item contudo a demanda deve ser atendida tão logo quanto possível;
+\item existe um planejamento prévio, o qual não pode ser alterado, todas as variáveis do problema são definidas como resultados deste planejamento prévio junto com novas informações, a demanda informada é a demanda não atendida pelo planejamento prévio;
+\item o tempo máximo de processamento para o lote de produtos em cada período, $T_d$, deve ser definido de forma que as restrições acima elencadas sejam todas respeitadas.
+\end{itemize}
+
+A seção à seguir um modelo metemático para o problema DMPMPpBPTM.
 
 \subsection{Mathematical Model}
 \label{sec:mathModel}
