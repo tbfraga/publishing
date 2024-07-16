@@ -29,16 +29,16 @@
     
     % CABEÇALHO
 
-\section{Multi-period, Multi-product p-Batch Processing Time Maximization Problem}
+\section{Dinamic Multi-period, Multi-product p-Batch Processing Time Maximization Problem}
 \label{sec:MBPTMP}
 
 The MPpBPTM problem arises when a set of different products are processed simultaneously in a same production batch. In this problem, it is considered that the quantity produced of each product is directly proportional to the processing time, however, with a different constant of proportionality (production rate) for each product. In addition, there is a maximum quantity allowed for the production of batch products, defined both individually and for the set. The production quantity of each product is mainly defined according to the demand for the product. However, it is still possible to stock the products and / or send them to the outlets. In both cases, there is a stocking / shipping limit for each product and a stocking / shipping limit for the set of products in the batch. Also, there is a time limit available for processing the batch. About the production, the industry manager has as priority to meet demand and he prefer to send the remaining production to outlets rather then stock it in the factory. 
 
-The Multi-period, Multi-product p-Batch Processing Time Maximization (MPMPpBPTM) problem é uma versão mais complexa do MPpBPTM na qual considera-se um horizonte de planejamento contendo mais do que um único período (dias, semanas, etc). Neste caso as decisões devem ser tomadas para cada período. 
+The Dinâmic Multi-period, Multi-product p-Batch Processing Time Maximization (DMPMPpBPTM) problem é uma versão mais complexa do MPpBPTM na qual considera-se um horizonte de planejamento contendo mais do que um único período (dias, semanas, etc). Neste caso as decisões devem ser tomadas para cada período. Adicionamente, em um cenário dinâmico, consideramos que já existe um planejamento prévio para produção e entregas. Neste caso o objetivo consiste em definir um encaixe de produção para atender às novas demandas. 
 
-O MPMPpBPTM é mais complexo do que o MPpBPTM porque, no caso do primeiro, a decisão sobre a produção de determinado produto em determinado período pode influir fortemente nos limites permitidos para produção do mesmo produto e de outros produtos em outros períodos. 
+O DMPMPpBPTM é mais complexo do que o MPpBPTM porque, no caso do primeiro, a decisão sobre a produção de determinado produto em determinado período pode influir fortemente nos limites permitidos para produção do mesmo produto e de outros produtos em outros períodos. E o mesmo é válido para os limites de estocagem definidos em cada período.
 
-Para melhor compreensão do problema MPMPpBPTM e de sua complexidade, considere o problema MPpBPTM com dois produtos e um único período de planejamento (1 dia) apresentado na Tab. 1, e o problema MPMPpBPTM com dois produtos e um horizonte de planejamento de dois dias, conforme apresentado na Tab. 2, onde: $\textrm{p}_i$ is the production rate of product $i$; $\textrm{UD}_i$ is the demand for the product $i$; $\textrm{UD}_{id}$ is the demand for the product $i$ on day $d$; $\textrm{UO}_i$ is the maximum amount of product $i$ that can be shipped to outlets; $\textrm{UI}_i$ é o limite de estoque para o produto $i$ in the factory on the first day de planejamento; $\textrm{O}$ is the maximum quantity allowed for shipment of all products to outlets; $\textrm{I}$ é o limite de estoque in the factory para all products in the batch, on the first day de planejamento; $\textrm{Z}$ is the timeout for batch processing; $\textrm{Z}_d$ is the timeout for batch processing on day $d$.
+Para melhor compreensão do problema DMPMPpBPTM e de sua complexidade, considere o problema MPpBPTM com dois produtos e um único período de planejamento (1 dia) apresentado na Tab. 1, e o problema DMPMPpBPTM com dois produtos e um horizonte de planejamento de dois dias, conforme apresentado na Tab. 2, onde: $\textrm{p}_i$ is the production rate of product $i$; $\textrm{UD}_i$ is the demand for the product $i$; $\textrm{UD}_{id}$ is the demand for the product $i$ on day $d$; $\textrm{UO}_i$ is the maximum amount of product $i$ that can be shipped to outlets; $\textrm{UI}_i$ é o limite de estoque para o produto $i$; $\textrm{UI}_{id}$ é o limite de estoque para o produto $i$ no dia $d$; $\textrm{O}$ is the maximum quantity allowed for shipment of all products to outlets; $\textrm{I}$ é o limite de estoque in the factory para all products in the batch, on the first day de planejamento; $\textrm{Z}$ is the timeout for batch processing; $\textrm{Z}_d$ is the timeout for batch processing on day $d$.
 
 \begin{table}[h!]
 \begin{center}
@@ -60,25 +60,26 @@ $\textrm{UI}_i$ & 3000 & 2000 & $\textrm{I}$ & 3000 \\
 
 \begin{table}[h!]
 \begin{center}
-\caption{\textbf{Benchmark MPMPpBPTM 02.}}
+\caption{\textbf{Benchmark DMPMPpBPTM 02.}}
 \begin{tabular}[c]{c r r c r}
 \\
 $i$ & 1 & 2 & & total \\
 \cline {1-5} \\
 $\textrm{p}_i$ & 60 & 40 & \\
 $\textrm{UD}_{i1}$ & 1000 & 500 & \\
-$\textrm{UD}_{i2}$ &  500 & 500 & \\
+$\textrm{UD}_{i2}$ &  200 & 500 & \\
 $\textrm{UO}_i$ & 600 & 600 & $\textrm{O}$ & 1000 \\
-$\textrm{UI}_i$ & 3000 & 2000 & $\textrm{I}$ & 3000 \\
+$\textrm{UI}_{i1}$ & 3000 & 2000 & $\textrm{I}_1$ & 3000 \\
+$\textrm{UI}_{i2}$ & 1500 & 2000 & $\textrm{I}_2$ & 1500 \\
 \cline {1-5} \\
 & & & $\textrm{Z}_1$ & 100 \\
-& & & $\textrm{Z}_1$ &  50 \\
+& & & $\textrm{Z}_2$ &  50 \\
 \end{tabular}
 \label{tab:MBPTMP001}
 \end{center}
 \end{table}
 
-No caso do problema MPpBPTM 02, desejamos encontrar o tempo máximo de planejamento em um único período para o lote contendo os produtos 1 e 2. Neste caso, podemos encontrar T, aplicando as equações matemáticas (\ref{eq:01}) e (\ref{eq:02}) propostas por Fraga (2024) para solução deste problema:
+No caso do problema MPpBPTM 02, desejamos encontrar o tempo máximo de planejamento em um único período, T, para o lote contendo os produtos 1 e 2. Neste caso, podemos encontrar T aplicando as equações matemáticas (\ref{eq:01}) e (\ref{eq:02}) propostas por Fraga (2024) para solução deste problema:
 
 \begin{equation}
 \label{eq:01}
@@ -90,9 +91,55 @@ T^* = \lfloor{\min \{\min_{i} \{(\textrm{UO}_i + \textrm{UI}_i + \textrm{UD}_i) 
 T = \min \{T^* , \textrm{Z}\}
 \end{equation}
 
-Aplicando estas fórmulas, teremos a solução T = 55.
+Aplicando estas fórmulas, teremos a solução T = 55. A produção e a distribuição desta produção para atendimento à demanda, envio para outlets e estoque em fábrica são apresentados na Tab. 3.
 
+\begin{table}[h!]
+\begin{center}
+\caption{\textbf{Results obtained for the MPpBPTM 02.}}
+\begin{footnotesize}
+\begin{tabular}[c]{c r r r r}
+\\
+product & production & delivered & send to outlets & stocked in factory \\
+\cline {1-5} \\
+1 & 3,300 & 1,000 & 400 & 1,900 \\
+2 & 2,200 &   500 & 600 & 1,100 \\
+\cline {1-5} \\
+\end{tabular}
+\label{tab:compResultsMBPTMP2}
+\end{footnotesize}
+\end{center}
+\end{table}
 
+Já no caso do problema DMPMPpBPTM 02, apresentado na Tab. 2, é necessário considerar um planejamento para um segundo período, com nova demanda, novos limites de estocagem, e um novo limite para tempo de processamento do mesmo lote. Ademais, o planejamento de cada período deve ainda considerar o planejamento e as informações referentes aos outros períodos.
+
+Por exemplo, no caso do problema apresentado na Tab. 2, antes de considerar qualquer planejamento, temos um limite de estocagem para o produto 2 de 3000 unidade no primeiro dia. Contudo este limite é reduzido para 1500 unidade no segundo dia. Isso poderia ser justificado, por exemplo, caso houvesse uma produção previamente planejada de 1500 unidados do produto 1 para o segundo dia. 
+
+A Tab. 4 apresenta uma atualização dos dados do problema DMPMPpBPTM 02, após o primeiro período, considerando a solução apresentada para o problema MPpBPTM 02, $T_1 = 55$, e usando a produção do primeiro período para atender a demanda do segundo período. 
+
+\begin{table}[h!]
+\begin{center}
+\caption{\textbf{Atualização das informação do DMPMPpBPTM 02, após primeiro período com $T_1 = 55$.}}
+\begin{tabular}[c]{c r r c r}
+\\
+$i$ & 1 & 2 & & total \\
+\cline {1-5} \\
+$\textrm{p}_i$ & 60 & 40 & \\
+$\textrm{UD}_{i1}$ & 0 & 0 & \\
+$\textrm{UD}_{i2}$ &  0 & 0 & \\
+$\textrm{UO}_i$ & 100 & 100 & $\textrm{O}$ & 0 \\
+$\textrm{UI}_{i1}$ & 1,100 & 900 & $\textrm{I}_1$ & 0 \\
+$\textrm{UI}_{i2}$ & - 200 &  1400 & $\textrm{I}_2$ & -1,000 \\
+\cline {1-5} \\
+& & & $\textrm{T}_1$ &  55 \\
+& & & $\textrm{Z}_2$ &  50 \\
+\end{tabular}
+\label{tab:MBPTMP001}
+\end{center}
+\end{table}
+
+Conforme é possível verificar na Tab. 4, considerando $T_1 = 55$, teríamos um excesso de estoque para o segundo período. Isso conmprova que a determinação do tempo máximo de produção do lote no primeiro período deve levar em conta as informações relativas aos outros períodos. Outra questão relevante a ser considerada é o melhor momento para produção. Isso é válido para todos os períodos considerados. É importante aqui também ressaltar que estoque implica em custos, portanto é sempre melhor produzir no momento mais tarde possível. 
+
+A seção à seguir apresenta uma adaptação do modelo matemático proposto por Fraga(2024), para solução do DMPMPpBPTM.
 
 \subsection{Mathematical Model}
 \label{sec:mathModel}
