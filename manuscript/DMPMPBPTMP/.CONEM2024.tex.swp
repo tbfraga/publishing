@@ -32,7 +32,7 @@
 \section{Dinamic Multi-period, Multi-product p-Batch Processing Time Maximization Problem}
 \label{sec:MBPTMP}
 
-The MPpBPTM problem arises when a set of different products are processed simultaneously in a same production batch. In this problem, it is considered that the quantity produced of each product is directly proportional to the processing time, however, with a different constant of proportionality (production rate) for each product. In addition, there is a maximum quantity allowed for the production of batch products, defined both individually and for the set. The production quantity of each product is mainly defined according to the demand for the product. However, it is still possible to stock the products and / or send them to the outlets. In both cases, there is a stocking / shipping limit for each product and a stocking / shipping limit for the set of products in the batch. Also, there is a time limit available for processing the batch. About the production, the industry manager has as priority to meet demand and he prefer to send the remaining production to outlets rather then stock it in the factory. 
+The Multi-product p-Batch Processing Time Maximization Problem (MPpBPTM) problem arises when a set of different products are processed simultaneously in a same production batch. In this problem, it is considered that the quantity produced of each product is directly proportional to the processing time, however, with a different constant of proportionality (production rate) for each product. In addition, there is a maximum quantity allowed for the production of batch products, defined both individually and for the set. The production quantity of each product is mainly defined according to the demand for the product. However, it is still possible to stock the products and / or send them to the outlets. In both cases, there is a stocking / shipping limit for each product and a stocking / shipping limit for the set of products in the batch. Also, there is a time limit available for processing the batch. About the production, the industry manager has as priority to meet demand and he prefer to send the remaining production to outlets rather then stock it in the factory. 
 
 The Dinâmic Multi-period, Multi-product p-Batch Processing Time Maximization (DMPMPpBPTM) problem é uma versão mais complexa do MPpBPTM na qual considera-se um horizonte de planejamento contendo mais do que um único período (dias, semanas, etc). Neste caso as decisões devem ser tomadas para cada período. Adicionamente, em um cenário dinâmico, consideramos que já existe um planejamento prévio para produção e entregas. Neste caso o objetivo consiste em definir um encaixe de produção para atender às novas demandas. 
 
@@ -139,7 +139,7 @@ $\textrm{UI}_{i2}$ & - 200 &  1400 & $\textrm{I}_2$ & -1,000 \\
 
 Conforme é possível verificar na Tab. 4, considerando $T_1 = 55$, teríamos um excesso de estoque para o segundo período. Este resultado comprova que a determinação do tempo máximo de produção do lote no primeiro período deve levar em conta as informações relativas aos outros períodos. É possível demonstrar que isso é válido para todos os períodos considerados. Contudo tal demonstração não será apresentada neste artigo. Tendo em vista que as decisões de produção em cada períodos implicam em restrições de produção para outros períodos, outra questão relevante a ser considerada é o melhor momento para produção. Como estoque implica em custos, consideramos que é sempre melhor produzir no momento mais tarde possível. 
 
-O problema DMPMPpBPTM portanto, consiste em definir o tempo máximo de produção para lotes multi-produtos paralelos, para cade período considerado, tendo como base os seguintes aspectos:
+O problema DMPMPpBPTM portanto, consiste em definir o tempo máximo de produção para lotes multi-produtos paralelos, para cada período considerado, tendo como base os seguintes aspectos:
 
 \begin{itemize}
 \item são considerados $N$ produtos, $i=1,...,N$, que devem ser processados simultaneamente em um único lote;
@@ -195,7 +195,7 @@ We have the problem:
 
 \begin{equation}
 \label{MBPTMP01}
-max \quad T
+max \sum_{d} {\{T_d} - \{\sum_{i} \textrm{UD}_{id}/ \sum_{i} \textrm{p}_i\} \}\quad 
 \end{equation}
 
 $s.t.$
