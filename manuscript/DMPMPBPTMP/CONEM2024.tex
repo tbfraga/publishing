@@ -109,9 +109,9 @@ product & production & delivered & send to outlets & stocked in factory \\
 \end{center}
 \end{table}
 
-Já no caso do problema DMPMPpBPTM 02, apresentado na Tab. 2, é necessário considerar que existe um planejamento prévio para o segundo período, o qual não pode ser alterado e, portanto, variação nos limites de estocagem. Há ainda uma demanda prevista adicional com previsão de entrega para o segundo período.
+Já no caso do problema DMPMPpBPTM 02, apresentado na Tab. 2, é necessário considerar que existe um planejamento prévio para o segundo período e, portanto, variação nos limites de estocagem. Há ainda uma demanda prevista adicional com previsão de entrega para o segundo período.
 
-Por exemplo, no caso do problema apresentado na Tab. 2, antes de considerar qualquer planejamento, temos um limite de estocagem para o produto 2 de 3000 unidade no primeiro dia. Contudo este limite é reduzido para 1500 unidade no segundo dia. Isso pode ser justificado, por exemplo, com uma produção previamente planejada de 1500 unidados do produto 1 para o segundo período. 
+Por exemplo, no caso do problema apresentado na Tab. 2, antes de considerar qualquer planejamento, temos um limite de estocagem para o produto 2 de 3000 unidade no primeiro dia. Contudo este limite é reduzido para 1500 unidade no segundo dia. Isso pode ser justificado, por exemplo, com uma ordem de produção já lançada 1500 unidados do produto 1 para o segundo período. 
 
 A Tab. 4 apresenta uma atualização dos dados do problema DMPMPpBPTM 02, considerando a solução apresentada para o problema MPpBPTM 02, $T_1 = 55$, e usando a produção do primeiro período para atender a demanda do segundo período. 
 
@@ -138,7 +138,7 @@ $\textrm{UI}_{i2}$ & - 200 &  1400 & $\textrm{I}_2$ & -1,000 \\
 
 Conforme é possível verificar na Tab. 4, considerando $T_1 = 55$, teríamos um excesso de estoque para o segundo período. Este resultado comprova que a determinação do tempo máximo de produção do lote no primeiro período deve levar em conta as informações relativas aos outros períodos. É possível demonstrar que isso é válido para todos os períodos considerados. Contudo tal demonstração não será apresentada neste artigo. 
 
-O problema DMPMPpBPTM portanto, consiste em definir o tempo máximo de produção para um lote multi-produtos paralelos, tendo como base os seguintes aspectos:
+O problema DMPMPpBPTM pode, portanto, ser definido como base os seguintes aspectos:
 
 \begin{itemize}
 \item são considerados $N$ produtos, $i=1,...,N$, que devem ser processados simultaneamente em um único lote;
@@ -154,10 +154,55 @@ O problema DMPMPpBPTM portanto, consiste em definir o tempo máximo de produçã
 \item não é atriuída nenhuma prioridade para quais produtos devem ser estocados em fábrica ou enviados para os outlets;
 \item existe um tempo máximo para processamento do lote, $Z$;
 \item a produção deve prioritariamente atender à demanda, depois ser enviada para os outlets e, a quantidade restante estocada em fábrica, de acordo com as restrições conhecidas;
-\item o tempo máximo de processamento para o lote de produtos em cada período, $T_d$, deve ser definido de forma que as restrições acima elencadas sejam todas respeitadas.
+\item o problema consiste em definir o máximo tempo viável de processamento para o lote, $T$, e a distribuição da produção resultante, entre atendimento à demanda, envio para outlets e estocagem em fábrica, com base nas restrições acima elencadas;
 \end{itemize}
 
 A seção à seguir um modelo metemático para o problema DMPMPpBPTM.
+
+\section{Solving - not finished yet}
+
+No caso de um DMPMPpBPTM, a produção é limitada de acordo com a demanda, o limite da quantidade de cada produto e do cunjunto de produtos que pode ser enviada para os outlets e o limite da quantidade de cada produto e do cunjunto de produtos que pode ser estocada em fábrica.
+
+
+Observe que, no caso de um DMPMPpBPTM, os dados relativos ao primeiro período estipulam um tempo máximo para processamento do lote, o qual não poderá ser ultrapassado, independente das demandas futuras. Isso porque, apesar de existir a possibilidade de atendimento das demandas futuras com a produção do primeiro período, esta produção deverá ser estocada, respeitando os limites definidos.
+
+Portanto, basicamente, a diferença entre o MPpBPTM e o DMPMPpBPTM está no fato de que poderá haver uma redução no limite considerado para estocagem em fábrica no primeiro período.
+
+Observe que, parte da quantidade estocada em fábrica no primeiro período será utilizada para atendimento à demanda no segundo período, e a quantidade restante, se houver, será mantida em estoque no segundo período. Portanto, podemos definir um novo limite para estocagem em fábrica no primeiro período, $UI_{i1}$, usando a equação:
+
+\begin{equation}
+UI_{i1}^* \leq min \{\textrm{UI}_{i1}, \textrm{UI}_{i2} + \textrm{UD}_{i2} \} \quad \forall i
+\end{equation}
+
+No caso de considerarmos um terceiro período, a quantidade limite para estoque em fábrica no segundo período seria também afetada pelo terceiro período, assim, a equação (3) pode ser reescrita como:
+
+\begin{equation}
+UI_{i1}^* \leq min \{\textrm{UI}_{i1},  UI_{i2}^* +  \textrm{UD}_{i2}\} \quad \forall i
+\end{equation}
+
+Estendedo a observação apresentada para um terceiro período, parte da quantidade estocada em fábrica no segundo período será utilizada para atendimento à demanda no terceiro período, e a quantidade restante, se houver, será mantida em estoque no terceiro período. Assim, temos:
+
+\begin{equation}
+UI_{i2}^* \leq min \{\textrm{UI}_{i2}, \textrm{UI}_{i3} + \textrm{UD}_{i3} \} \quad \forall i
+\end{equation}
+
+Substituindo (5) em (4), temos:
+
+\begin{equation}
+UI_{i1}^* \leq min \{\textrm{UI}_{i1},  min \{\textrm{UI}_{i2}, \textrm{UI}_{i3} + \textrm{UD}_{i3} \} +  \textrm{UD}_{i2}\} \quad \forall i
+\end{equation}
+
+Usando um pouco de álgebra, temos:
+
+\begin{equation}
+UI_{i1}^* \leq min \{\textrm{UI}_{i1}, \textrm{UI}_{i2} + \textrm{UD}_{i2}, \textrm{UI}_{i3} + \textrm{UD}_{i3} +  \textrm{UD}_{i2}\} \quad \forall i
+\end{equation}
+
+Assim, generaliznaod para $n$ períodos, teremos a seguinte restrição:
+
+\begin{equation}
+UI_{i1}^* \leq min \{\textrm{UI}_{i1}, \min_{d \in \mathbb{Z} , 1 \leq d \leq n} \{\textrm{UI}_{i1}, \textrm{UI}_{id} + \sum_{k=2}^{d} {\textrm{UD}_{ik}}\} \} \quad \forall i
+\end{equation}
 
 \subsection{Mathematical Model - not finished yet}
 \label{sec:mathModel}
